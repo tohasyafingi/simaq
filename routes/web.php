@@ -1,0 +1,113 @@
+<?php
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiswaController;
+use Illuminate\Support\Facades\Route;
+
+use App\Livewire\Superadmin\Admin\Index as AdminDashboard;
+use App\Livewire\Superadmin\Admin\User\Index as AdminUserIndex;
+use App\Livewire\Superadmin\Admin\Siswa\Index as AdminSiswaIndex;
+use App\Livewire\Superadmin\Admin\Guru\Index as AdminGuruIndex;
+use App\Livewire\Superadmin\Admin\Bendahara\Index as AdminBendaharaIndex;
+use App\Livewire\Superadmin\Admin\TataUsaha\Index as AdminTataUsahaIndex;
+use App\Livewire\Superadmin\Admin\TahunAjaran\Index as AdminTahunAjaranIndex;
+use App\Livewire\Superadmin\Admin\Jurusan\Index as AdminJurusanIndex;
+use App\Livewire\Superadmin\Admin\TingkatKelas\Index as AdminTingkatKelasIndex;
+use App\Livewire\Superadmin\Admin\RuangKelas\Index as AdminRuangKelasIndex;
+use App\Livewire\Superadmin\Admin\WaktuJadwal\Index as AdminJamPelajaranIndex;
+use App\Livewire\Superadmin\Admin\Pelajaran\Index as AdminPelajaranIndex;
+use App\Livewire\Superadmin\Admin\GuruPelajaran\Index as AdminPengajarIndex;
+use App\Livewire\Superadmin\Admin\Modul\Index as AdminModulIndex;
+use App\Livewire\Superadmin\Admin\Rombel\Index as AdminRombelIndex;
+use App\Livewire\Superadmin\Admin\Jadwal\Index as AdminJadwalIndex;
+use App\Livewire\Superadmin\Admin\Profil\Index as AdminProfilIndex;
+use App\Livewire\Superadmin\Admin\Akademik\Index as AdminAkademikIndex;
+use App\Livewire\Superadmin\Admin\Kesiswaan\Index as AdminKesiswaanIndex;
+use App\Livewire\Superadmin\Admin\Ppdb\Index as AdminPpdbIndex;
+use App\Livewire\Superadmin\Admin\Kontak\Index as AdminKontakIndex;
+use App\Livewire\Superadmin\Admin\Berita\Index as AdminBeritaIndex;
+use App\Livewire\Superadmin\Admin\Berita\Create as AdminBeritaCreate;
+use App\Livewire\Superadmin\Admin\KaryaIlmiah\Index as AdminKaryaIlmiahIndex;
+use App\Livewire\Superadmin\Admin\EBook\Index as AdminEBookIndex;
+use App\Livewire\Superadmin\Admin\Download\Index as AdminDownloadIndex;
+use App\Livewire\Superadmin\Admin\Galeri\Index as AdminGaleriIndex;
+use App\Livewire\Superadmin\Admin\KatBerita\Index as AdminKatBeritaIndex;
+use App\Livewire\Superadmin\Admin\KatKaryaIlmiah\Index as AdminKatKaryaIlmiahIndex;
+
+use App\Livewire\Portal\Index as PortalIndex;
+use App\Livewire\Portal\Contact as PortalContact;
+use App\Livewire\Portal\Jurusan as PortalJurusan;
+use App\Livewire\Portal\Ppdb as PortalPpdb;
+use App\Livewire\Portal\Agenda as PortalAgenda;
+use App\Livewire\Portal\DetailAgenda as PortalDetailAgenda;
+use App\Livewire\Portal\Gallery as PortalGallery;
+use App\Livewire\Portal\Sejarah as PortalSejarah;
+use App\Livewire\Portal\VisiMisi as PortalVisiMisi;
+use App\Livewire\Portal\Struktur as PortalStruktur;
+use App\Livewire\Portal\Ekstrakurikuler as PortalEkstrakurikuler;
+use App\Livewire\Portal\Osis as PortalOsis;
+use App\Livewire\Portal\Pramuka as PortalPramuka;
+use App\Livewire\Portal\ProgramTahfidz as PortalProgramTahfidz;
+use App\Livewire\Portal\Artikel as PortalArtikel;
+use App\Livewire\Portal\KaryaIlmiah as PortalKaryaIlmiah;
+use App\Livewire\Portal\Download as PortalDownload;
+
+
+Route::get('/', PortalIndex::class)->name('beranda');
+Route::get('/kontak', PortalContact::class)->name('kontak');
+Route::get('/jurusan', PortalJurusan::class)->name('jurusan');
+Route::get('/ppdb', PortalPpdb::class)->name('ppdb');
+Route::get('/berita-agenda', PortalAgenda::class)->name('berita-agenda');
+Route::get('/berita/{slug}', PortalDetailAgenda::class)->name('detail-berita-agenda');
+Route::get('/galeri', PortalGallery::class)->name('galeri');
+Route::get('/sejarah', PortalSejarah::class)->name('sejarah');
+Route::get('/visi-misi', PortalVisiMisi::class)->name('visi-misi');
+Route::get('/struktur-organisasi', PortalStruktur::class)->name('struktur-organisasi');
+Route::get('/ekstrakurikuler', PortalEkstrakurikuler::class)->name('ekstrakurikuler');
+Route::get('/osis', PortalOsis::class)->name('osis');
+Route::get('/pramuka', PortalPramuka::class)->name('pramuka');
+Route::get('/program-tahfidz', PortalProgramTahfidz::class)->name('program-tahfidz');
+Route::get('/artikel', PortalArtikel::class)->name('artikel');
+Route::get('/karya-ilmiah', PortalKaryaIlmiah::class)->name('karya-ilmiah');
+Route::get('/download', PortalDownload::class)->name('download');
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.admin.')->group(function () {
+    Route::get('/dashboard', AdminDashboard::class)->name('dashboard');
+    Route::get('/data-siswa', AdminSiswaIndex::class)->name('siswa.index');
+    Route::get('/data-guru', AdminGuruIndex::class)->name('guru.index');
+    Route::get('/data-bendahara', AdminBendaharaIndex::class)->name('bendahara.index');
+    Route::get('/data-tata-usaha', AdminTataUsahaIndex::class)->name('tata-usaha.index');
+    Route::get('/tahun-ajaran', AdminTahunAjaranIndex::class)->name('tahun-ajaran.index');
+    Route::get('/tingkat-kelas', AdminTingkatKelasIndex::class)->name('tingkat-kelas.index');
+    Route::get('/jurusan', AdminJurusanIndex::class)->name('jurusan.index');
+    Route::get('/ruang-kelas', AdminRuangKelasIndex::class)->name('ruang-kelas.index');
+    Route::get('/jam-pelajaran', AdminJamPelajaranIndex::class)->name('jam-pelajaran.index');
+    Route::get('/mata-pelajaran', AdminPelajaranIndex::class)->name('pelajaran.index');
+    Route::get('/pengajar', AdminPengajarIndex::class)->name('pengajar.index');
+    Route::get('/modul-pelajaran', AdminModulIndex::class)->name('modul.index');
+    Route::get('/rombel', AdminRombelIndex::class)->name('rombel.index');
+    Route::get('/jadwal', AdminJadwalIndex::class)->name('jadwal.index');
+    Route::get('/user', AdminUserIndex::class)->name('user.index');
+    Route::get('/profil', AdminProfilIndex::class)->name('profil.index');
+    Route::get('/akademik', AdminAkademikIndex::class)->name('akademik.index');
+    Route::get('/kesiswaan', AdminKesiswaanIndex::class)->name('kesiswaan.index');
+    Route::get('/ppdb', AdminPpdbIndex::class)->name('ppdb.index');
+    Route::get('/kontak', AdminKontakIndex::class)->name('kontak.index');
+    Route::get('/berita', AdminBeritaIndex::class)->name('berita.index');
+    Route::get('/berita/tambah', AdminBeritaCreate::class)->name('berita.create');
+    Route::get('/berita/{id}/edit', AdminBeritaCreate::class)->name('berita.edit');
+    Route::get('/kategori-berita', AdminKatBeritaIndex::class)->name('kat-berita.index');
+    Route::get('/karya-ilmiah', AdminKaryaIlmiahIndex::class)->name('karya-ilmiah.index');
+    Route::get('/kategori-karya-ilmiah', AdminKatKaryaIlmiahIndex::class)->name('kat-karya-ilmiah.index');
+    Route::get('/e-book', AdminEBookIndex::class)->name('e-book.index');
+    Route::get('/download', AdminDownloadIndex::class)->name('download.index');
+    Route::get('/galeri', AdminGaleriIndex::class)->name('galeri.index');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

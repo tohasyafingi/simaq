@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Livewire\Superadmin\Admin\Pelajaran;
+
+use App\Models\Pelajaran;
+use App\Models\Jurusan;
+use App\Models\TingkatKelas;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+class Index extends Component
+{
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
+    public $search = '';
+    public $paginate = 10;
+    public $pelajaran_id, $nama, $kd_pelajaran, $jurusan_id, $tingkat_kelas_id, $status;
+    public $isEdit = false;
+
+    public function render()
+    {
+        $pelajarans = Pelajaran::with(['jurusan', 'tingkatKelas'])
+            ->where('nama', 'like', '%' . $this->search . '%')
+            ->orWhere('kd_pelajaran', 'like', '%' . $this->search . '%')
+            ->orderBy('nama')
+            ->paginate($this->paginate);
+
+        return view('livewire.superadmin.admin.pelajaran.index', [
+            'title' => 'Data Mata Pelajaran',
+            'pelajarans' => $pelajarans,
+            'jurusans' => Jurusan::orderBy('nama')->get(),
+            'tingkat_kelas' => TingkatKelas::orderByRaw('CAST(tingkat AS UNSIGNED)')->get(),
+        ])->title('Data Mata Pelajaran');
+    }
+
+    public function create()
+    {
+        $this->resetValidation();
+        $this->resetForm();
+        $this->isEdit = false;
+    }
+
+    public function store()
+    {
+        $this->validate([
+            'kd_pelajaran' => 'required|string|unique:pelajarans,kd_pelajaran',
+            'nama' => 'required|string|max:255',
+            'jurusan_id' => 'required|exists:jurusans,id',
+            'tingkat_kelas_id' => 'required|exists:tingkat_kelas,id',
+            'status' => 'required|boolean',
+        ]);
+
+        Pelajaran::create([
+            'kd_pelajaran' => $this->kd_pelajaran,
+            'nama' => $this->nama,
+            'jurusan_id' => $this->jurusan_id,
+            'tingkat_kelas_id' => $this->tingkat_kelas_id,
+            'status' => $this->status,
+        ]);
+
+        session()->flash('message', 'Pelajaran berhasil ditambahkan.');
+        $this->dispatch('closeCreateModal');
+        $this->resetForm();
+    }
+
+    public function edit($id)
+    {
+        $this->resetValidation();
+        $data = Pelajaran::findOrFail($id);
+
+        $this->pelajaran_id = $data->id;
+        $this->kd_pelajaran = $data->kd_pelajaran;
+        $this->nama = $data->nama;
+        $this->jurusan_id = $data->jurusan_id;
+        $this->tingkat_kelas_id = $data->tingkat_kelas_id;
+        $this->status = $data->status;
+        $this->isEdit = true;
+    }
+
+    public function update()
+    {
+        $data = Pelajaran::findOrFail($this->pelajaran_id);
+
+        $this->validate([
+            'kd_pelajaran' => 'required|string|unique:pelajarans,kd_pelajaran,' . $data->id,
+            'nama' => 'required|string|max:255',
+            'jurusan_id' => 'required|exists:jurusans,id',
+            'tingkat_kelas_id' => 'required|exists:tingkat_kelas,id',
+            'status' => 'required|boolean',
+        ]);
+
+        $data->update([
+            'kd_pelajaran' => $this->kd_pelajaran,
+            'nama' => $this->nama,
+            'jurusan_id' => $this->jurusan_id,
+            'tingkat_kelas_id' => $this->tingkat_kelas_id,
+            'status' => $this->status,
+        ]);
+
+        session()->flash('message', 'Pelajaran berhasil diupdate.');
+        $this->dispatch('closeEditModal');
+        $this->resetForm();
+    }
+
+    public function confirmDelete($id)
+    {
+        $data = Pelajaran::findOrFail($id);
+        $this->pelajaran_id = $data->id;
+        $this->nama = $data->nama;
+    }
+
+    public function destroy()
+    {
+        $data = Pelajaran::findOrFail($this->pelajaran_id);
+        $data->delete();
+
+        session()->flash('message', 'Pelajaran berhasil dihapus.');
+        $this->dispatch('closeDeleteModal');
+        $this->resetForm();
+    }
+
+    public function resetForm()
+    {
+        $this->kd_pelajaran = null;
+        $this->nama = null;
+        $this->jurusan_id = null;
+        $this->tingkat_kelas_id = null;
+        $this->status = null;
+        $this->pelajaran_id = null;
+        $this->isEdit = false;
+    }
+}

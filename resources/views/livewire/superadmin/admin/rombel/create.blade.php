@@ -1,4 +1,5 @@
-<div wire:ignore.self class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +13,8 @@
                         <div class="col-12 col-sm-6 py-2">
                             <div class="form-group local-forms">
                                 <label>Nama Rombel <span class="text-danger">*</span></label>
-                                <input type="text" wire:model="nama" class="form-control" placeholder="Masukkan Nama Rombel" required>
+                                <input type="text" wire:model="nama" class="form-control"
+                                    placeholder="Masukkan Nama Rombel" required>
                                 @error('nama') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -24,7 +26,7 @@
                                 <select wire:model="tingkat_kelas_id" class="form-control" required>
                                     <option value="">Pilih Tingkat Kelas</option>
                                     @foreach($tingkatKelas as $tingkat)
-                                    <option value="{{ $tingkat->id }}">{{ $tingkat->tingkat }}</option>
+                                        <option value="{{ $tingkat->id }}">{{ $tingkat->tingkat }}</option>
                                     @endforeach
                                 </select>
                                 @error('tingkat_kelas_id') <span class="text-danger">{{ $message }}</span> @enderror
@@ -38,7 +40,7 @@
                                 <select wire:model="jurusan_id" class="form-control">
                                     <option value="">Pilih Jurusan</option>
                                     @foreach($jurusans as $jurusan)
-                                    <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                                        <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
                                     @endforeach
                                 </select>
                                 @error('jurusan_id') <span class="text-danger">{{ $message }}</span> @enderror
@@ -52,7 +54,7 @@
                                 <select wire:model="ruang_kelas_id" class="form-control">
                                     <option value="">Pilih Ruang Kelas</option>
                                     @foreach($ruangKelas as $ruang)
-                                    <option value="{{ $ruang->id }}">{{ $ruang->nama }}</option>
+                                        <option value="{{ $ruang->id }}">{{ $ruang->nama }}</option>
                                     @endforeach
                                 </select>
                                 @error('ruang_kelas_id') <span class="text-danger">{{ $message }}</span> @enderror
@@ -64,8 +66,9 @@
                             <div class="form-group local-forms">
                                 <label>Tahun Ajaran Aktif</label>
                                 <input type="text" class="form-control" disabled
-                                    value="{{ $tahunAjaranAktif->tahun ?? 'Tidak Ada Tahun Ajaran Aktif' }} - {{ $tahunAjaranAktif->semester }}">
-                                <input type="hidden" wire:model="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id ?? '' }}">
+                                    value="{{ isset($tahunAjaranAktif) ? ($tahunAjaranAktif->tahun . ' - ' . $tahunAjaranAktif->semester) : 'Tidak Ada Tahun Ajaran Aktif' }}">
+                                <input type="hidden" wire:model="tahun_ajaran_id"
+                                    value="{{ $tahunAjaranAktif->id ?? '' }}">
                             </div>
                         </div>
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rombel extends Model
 {
-    protected $fillable = ['nama', 'tingkat_kelas_id', 'jurusan_id', 'ruang_kelas_id', 'tahun_ajaran_id'];
+    protected $fillable = ['nama', 'tingkat_kelas_id', 'jurusan_id', 'ruang_kelas_id', 'tahun_ajaran_id', 'status'];
 
     public function tingkatKelas()
     {

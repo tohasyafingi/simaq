@@ -9,6 +9,7 @@ use App\Models\Jurusan;
 use App\Models\RuangKelas;
 use App\Models\TahunAjaran;
 use App\Models\Rombel;
+use Illuminate\Support\Facades\Log;
 
 class Index extends Component
 {
@@ -18,162 +19,150 @@ class Index extends Component
 
     public $search = '';
     public $paginate = 10;
-
     public $tahun_ajaran_id;
-    public $guru_id, $pelajaran_id, $pengajar_id;
+    public $tingkat_kelas_id, $jurusan_id, $ruang_kelas_id, $nama;
     public $isEdit = false;
-
-    public $tahunAjaranAktif;
+    public $rombelId;
     public $status = 1;
 
-public function mount()
-{
-    $this->tahunAjaranAktif = \App\Models\TahunAjaran::where('status', true)->first();
-    if ($this->tahunAjaranAktif) {
-        $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
+    public $tahunAjaranAktif;
+
+    public function mount()
+    {
+        $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+
+        if ($this->tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
+        } else {
+            session()->flash('error', 'Tidak ada tahun ajaran aktif.');
+        }
     }
-}
 
     public function render()
     {
-        $tahunAjarans = TahunAjaran::orderByDesc('id')->get();
-
-        $data = GuruPelajaran::with(['guru', 'pelajaran.tingkatKelas', 'pelajaran.jurusan', 'tahunAjaran'])
-            ->when($this->tahun_ajaran_id, function ($query) {
-                $query->where('tahun_ajaran_id', $this->tahun_ajaran_id);
-            })
+        $rombels = Rombel::with(['tingkatKelas', 'jurusan', 'ruangKelas', 'tahunAjaran'])
             ->when($this->search, function ($query) {
-                $query->whereHas('guru', function ($q) {
-                    $q->where('name', 'like', '%' . $this->search . '%');
-                })
-                ->orWhereHas('pelajaran', function ($q) {
-                    $q->where('nama', 'like', '%' . $this->search . '%');
-                })
-                ->orWhereHas('pelajaran.tingkatKelas', function ($q) {
-                    $q->where('tingkat', 'like', '%' . $this->search . '%');
-                })
-                ->orWhereHas('pelajaran.jurusan', function ($q) {
-                    $q->where('nama', 'like', '%' . $this->search . '%');
-                });
+                $query->where('nama', 'like', '%' . $this->search . '%');
             })
-            ->orderByDesc('id')
+            ->where('tahun_ajaran_id', $this->tahun_ajaran_id)
             ->paginate($this->paginate);
 
-        return view('livewire.superadmin.admin.guru-pelajaran.index', [
-            'title' => 'Data Pengajar',
-            'guru_pelajarans' => $data,
-            'gurus' => Guru::where('status', true)->get(),
-            'pelajarans' => Pelajaran::with('jurusan.tingkat')->where('status', true)->get(),
-            'tahunAjarans' => $tahunAjarans,
-            'tahunAjaranAktif' => $this->tahunAjaranAktif,
-        ])->title('Data Pengajar');
+        return view('livewire.superadmin.admin.rombel.index', [
+            'rombels' => $rombels,
+            'tingkatKelas' => TingkatKelas::all(),
+            'jurusans' => Jurusan::all(),
+            'ruangKelas' => RuangKelas::all(),
+            'tahunAjarans' => TahunAjaran::all(),
+            'title' => 'Data Rombel',
+        ])->title('Data Rombel');
     }
 
     public function create()
     {
-        $this->resetValidation();
         $this->resetForm();
         $this->isEdit = false;
+        // Pastikan tahun_ajaran_id di-set ulang ke aktif setelah reset
+        if ($this->tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
+        }
     }
 
     public function store()
     {
+        // Validasi input
         $this->validate([
-            'guru_id' => 'required|exists:gurus,id',
-            'pelajaran_id' => 'required|exists:pelajarans,id',
-            'status' => 'required|boolean',
+            'nama' => 'required|string|max:255',
+            'tingkat_kelas_id' => 'required|exists:tingkat_kelas,id',
+            'jurusan_id' => 'nullable|exists:jurusans,id',
+            'ruang_kelas_id' => 'nullable|exists:ruang_kelas,id',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id',
+            'status' => 'required|in:0,1',  // validasi status (0 atau 1)
         ]);
 
-        if (!$this->tahunAjaranAktif) {
-            session()->flash('message', 'Tidak ada tahun ajaran aktif saat ini.');
-            return;
-        }
-
-        if (GuruPelajaran::where('guru_id', $this->guru_id)
-            ->where('pelajaran_id', $this->pelajaran_id)
-            ->where('tahun_ajaran_id', $this->tahunAjaranAktif->id)
-            ->exists()
-        ) {
-            $this->addError('guru_id', 'Kombinasi guru dan pelajaran sudah terdaftar di tahun ajaran ini.');
-            return;
-        }
-
-        GuruPelajaran::create([
-            'guru_id' => $this->guru_id,
-            'pelajaran_id' => $this->pelajaran_id,
-            'tahun_ajaran_id' => $this->tahunAjaranAktif->id,
+        // Debug: Cek nilai yang akan disimpan
+        Log::debug('Menyimpan data Rombel', [
+            'nama' => $this->nama,
+            'tingkat_kelas_id' => $this->tingkat_kelas_id,
+            'jurusan_id' => $this->jurusan_id,
+            'ruang_kelas_id' => $this->ruang_kelas_id,
+            'tahun_ajaran_id' => $this->tahun_ajaran_id,
             'status' => $this->status,
         ]);
 
-        session()->flash('message', 'Pengajar berhasil ditambahkan.');
+        // Menyimpan data ke dalam database
+        Rombel::create([
+            'nama' => $this->nama,
+            'tingkat_kelas_id' => $this->tingkat_kelas_id,
+            'jurusan_id' => $this->jurusan_id,
+            'ruang_kelas_id' => $this->ruang_kelas_id,
+            'tahun_ajaran_id' => $this->tahun_ajaran_id,
+            'status' => $this->status,
+        ]);
+
+        session()->flash('message', 'Data berhasil ditambahkan!');
         $this->dispatch('closeCreateModal');
-        $this->resetForm();
     }
 
     public function edit($id)
     {
-        $this->resetValidation();
-        $data = GuruPelajaran::findOrFail($id);
-
-        $this->pengajar_id = $data->id;
-        $this->guru_id = $data->guru_id;
-        $this->pelajaran_id = $data->pelajaran_id;
-        $this->status = $data->status;
+        $rombel = Rombel::findOrFail($id);
+        $this->rombelId = $rombel->id;
+        $this->nama = $rombel->nama;
+        $this->tingkat_kelas_id = $rombel->tingkat_kelas_id;
+        $this->jurusan_id = $rombel->jurusan_id;
+        $this->ruang_kelas_id = $rombel->ruang_kelas_id;
+        $this->tahun_ajaran_id = $rombel->tahun_ajaran_id;
+        $this->status = $rombel->status;
         $this->isEdit = true;
     }
 
     public function update()
     {
-        $data = GuruPelajaran::findOrFail($this->pengajar_id);
-
+        // Validasi input
         $this->validate([
-            'guru_id' => 'required|exists:gurus,id',
-            'pelajaran_id' => 'required|exists:pelajarans,id',
+            'nama' => 'required|string|max:255',
+            'tingkat_kelas_id' => 'required|exists:tingkat_kelas,id',
+            'jurusan_id' => 'nullable|exists:jurusans,id',
+            'ruang_kelas_id' => 'nullable|exists:ruang_kelas,id',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id',
+            'status' => 'required|in:0,1',  // validasi status (0 atau 1)
         ]);
 
-        if (GuruPelajaran::where('guru_id', $this->guru_id)
-            ->where('pelajaran_id', $this->pelajaran_id)
-            ->where('tahun_ajaran_id', $data->tahun_ajaran_id)
-            ->where('id', '!=', $this->pengajar_id)
-            ->exists()
-        ) {
-            $this->addError('guru_id', 'Kombinasi guru dan pelajaran sudah terdaftar di tahun ajaran ini.');
-            return;
-        }
-
-        $data->update([
-            'guru_id' => $this->guru_id,
-            'pelajaran_id' => $this->pelajaran_id,
+        // Mengupdate data Rombel
+        $rombel = Rombel::findOrFail($this->rombelId);
+        $rombel->update([
+            'nama' => $this->nama,
+            'tingkat_kelas_id' => $this->tingkat_kelas_id,
+            'jurusan_id' => $this->jurusan_id,
+            'ruang_kelas_id' => $this->ruang_kelas_id,
+            'tahun_ajaran_id' => $this->tahun_ajaran_id,
             'status' => $this->status,
         ]);
 
-        session()->flash('message', 'Pengajar berhasil diupdate.');
+        session()->flash('message', 'Data berhasil diperbarui!');
         $this->dispatch('closeEditModal');
-        $this->resetForm();
     }
 
     public function confirmDelete($id)
     {
-        $data = GuruPelajaran::findOrFail($id);
-        $this->pengajar_id = $data->id;
+        $this->rombelId = $id;
     }
 
     public function destroy()
     {
-        $data = GuruPelajaran::findOrFail($this->pengajar_id);
-        $data->delete();
-
-        session()->flash('message', 'Pengajar berhasil dihapus.');
+        Rombel::findOrFail($this->rombelId)->delete();
+        session()->flash('message', 'Data berhasil dihapus!');
         $this->dispatch('closeDeleteModal');
-        $this->resetForm();
     }
 
     public function resetForm()
     {
-        $this->guru_id = null;
-        $this->pelajaran_id = null;
-        $this->pengajar_id = null;
-        $this->isEdit = false;
-        $this->status = 1;
+        $this->nama = '';
+        $this->tingkat_kelas_id = '';
+        $this->jurusan_id = '';
+        $this->ruang_kelas_id = '';
+        // Jangan reset tahun_ajaran_id, biarkan tetap ke aktif
+        // $this->tahun_ajaran_id = '';
+        $this->status = 1;  // Default status adalah 1 (Aktif)
     }
 }

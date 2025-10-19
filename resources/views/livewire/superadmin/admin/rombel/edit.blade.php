@@ -9,26 +9,54 @@
             <form wire:submit.prevent="update" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row">
-                        <!-- Guru -->
+                        <!-- Nama Rombel -->
                         <div class="col-12 col-sm-6 py-2">
                             <div class="form-group local-forms">
-                                <label>Guru <span class="text-danger">*</span></label>
-                                <select wire:model="" class="form-control">
-                                    <option value="">Pilih Guru</option>
-                                    <option value=""></option>
-                                </select>
+                                <label>Nama Rombel <span class="text-danger">*</span></label>
+                                <input type="text" wire:model="nama" class="form-control" placeholder="Masukkan Nama Rombel" required>
+                                @error('nama') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
-                        <!-- Pelajaran -->
+                        <!-- Tingkat Kelas -->
                         <div class="col-12 col-sm-6 py-2">
                             <div class="form-group local-forms">
-                                <label>Pelajaran <span class="text-danger">*</span></label>
-                                <select wire:model="" class="form-control">
-                                    <option value="">Pilih Pelajaran</option>
-                                    <option value="">
-                                    </option>
+                                <label>Tingkat Kelas <span class="text-danger">*</span></label>
+                                <select wire:model="tingkat_kelas_id" class="form-control" required>
+                                    <option value="">Pilih Tingkat Kelas</option>
+                                    @foreach($tingkatKelas as $tingkat)
+                                    <option value="{{ $tingkat->id }}">{{ $tingkat->tingkat }}</option>
+                                    @endforeach
                                 </select>
+                                @error('tingkat_kelas_id') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <!-- Jurusan -->
+                        <div class="col-12 col-sm-6 py-2">
+                            <div class="form-group local-forms">
+                                <label>Jurusan</label>
+                                <select wire:model="jurusan_id" class="form-control">
+                                    <option value="">Pilih Jurusan</option>
+                                    @foreach($jurusans as $jurusan)
+                                    <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jurusan_id') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <!-- Ruang Kelas -->
+                        <div class="col-12 col-sm-6 py-2">
+                            <div class="form-group local-forms">
+                                <label>Ruang Kelas</label>
+                                <select wire:model="ruang_kelas_id" class="form-control">
+                                    <option value="">Pilih Ruang Kelas</option>
+                                    @foreach($ruangKelas as $ruang)
+                                    <option value="{{ $ruang->id }}">{{ $ruang->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('ruang_kelas_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
@@ -37,7 +65,8 @@
                             <div class="form-group local-forms">
                                 <label>Tahun Ajaran Aktif</label>
                                 <input type="text" class="form-control" disabled
-                                    value="">
+                                    value="{{ $tahunAjaranAktif->tahun ?? 'Tidak Ada Tahun Ajaran Aktif' }} - {{ $tahunAjaranAktif->semester }}">
+                                <input type="hidden" wire:model="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id ?? '' }}">
                             </div>
                         </div>
 
@@ -45,11 +74,12 @@
                         <div class="col-12 col-sm-6 py-2">
                             <div class="form-group local-forms">
                                 <label>Status <span class="text-danger">*</span></label>
-                                <select wire:model="" class="form-control">
+                                <select wire:model="status" class="form-control" required>
                                     <option value="">Pilih Status</option>
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
+                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

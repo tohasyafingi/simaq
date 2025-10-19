@@ -2,7 +2,7 @@
 <div class="app-content">
     <div class="container-fluid">
         <div class="card border-0 shadow-sm rounded-3 p-4 mb-4 text-center">
-            <p class="text-muted mb-3">Waktu Sekarang</p>
+            <p class="text-muted mb-3">Pukul</p>
 
             <!-- Jam Digital LED -->
             <div class="digital-clock" id="digitalClock">00:00:00</div>

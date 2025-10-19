@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('jurusan_id')->nullable()->constrained('jurusans')->onDelete('set null');
             $table->foreignId('ruang_kelas_id')->nullable()->constrained('ruang_kelas')->onDelete('set null');
             $table->foreignId('tahun_ajaran_id')->constrained('tahun_ajarans')->onDelete('restrict');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

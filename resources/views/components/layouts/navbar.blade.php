@@ -22,18 +22,22 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="{{asset('adminlte/dist/assets/img/user2-160x160.jpg')}}" class="user-image rounded-circle"
-                        alt="User Image" />
-                    <span class="d-none d-md-inline">Alexander Pierce</span>
+                    <!-- Menampilkan gambar pengguna yang login atau gambar default jika tidak ada -->
+                    <img src="{{ Auth::user()->img ? asset('storage/' . Auth::user()->img) : asset('path/to/default-image.jpg') }}" class="user-image rounded-circle" alt="User Image" />
+                    <span class="d-none d-md-inline">
+                        <!-- Menampilkan nama pengguna berdasarkan data yang ada di Auth -->
+                        {{ Auth::user()->name }}
+                    </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
-                        <img src="{{asset('adminlte/dist/assets/img/user2-160x160.jpg')}}" class="rounded-circle"
-                            alt="User Image" />
+                        <!-- Menampilkan gambar profil atau gambar default -->
+                        <img src="{{ Auth::user()->img ? asset('storage/' . Auth::user()->img) : asset('path/to/default-image.jpg') }}" class="rounded-circle" alt="User Image" />
                         <p>
-                            Alexander Pierce - Web Developer
-                            <small>Member since Nov. 2023</small>
+                            <!-- Menampilkan nama dan role pengguna -->
+                            {{ Auth::user()->name }} - {{ Auth::user()->role }} <!-- Gantilah 'role' dengan atribut role yang sesuai di model -->
+                            <small>Member since {{ Auth::user()->created_at->format('M Y') }}</small>
                         </p>
                     </li>
                     <!--end::User Image-->

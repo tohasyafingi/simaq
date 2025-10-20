@@ -81,7 +81,7 @@
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="table-group-divider">
                                         @foreach($rombels as $index => $rombel)
                                         <tr>
                                             <td class="text-center">{{ $index + 1 }}</td>
@@ -94,9 +94,10 @@
                                                 <span class="badge bg-success">Aktif</span>
                                             </td>
                                             <td class="text-center">
-                                                <button
-                                                    class="btn btn-sm btn-outline-success">
-                                                    <i class="fa fa-eye"></i>
+                                                <button class="btn btn-sm btn-outline-success">
+                                                    <a wire:navigate href="{{ route('superadmin.admin.detail-rombel.index', $rombel->id) }}" style="text-decoration: none; color: inherit;">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
                                                 </button>
                                                 <button wire:click="edit({{ $rombel->id }})"
                                                     class="btn btn-sm btn-outline-primary" title="Edit"
@@ -109,6 +110,7 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
+
                                         </tr>
                                         @endforeach
 

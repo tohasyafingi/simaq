@@ -44,4 +44,11 @@ class Siswa extends Model
     {
         return $this->hasMany(Absensi::class);
     }
+    
+    public function rombels()
+    {
+        return $this->belongsToMany(Rombel::class, 'rombel_siswa', 'siswa_id', 'rombel_id')
+            ->withPivot('status')
+            ->withTimestamps();
+    }
 }

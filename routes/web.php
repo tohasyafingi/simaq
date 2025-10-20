@@ -19,6 +19,7 @@ use App\Livewire\Superadmin\Admin\Pelajaran\Index as AdminPelajaranIndex;
 use App\Livewire\Superadmin\Admin\GuruPelajaran\Index as AdminPengajarIndex;
 use App\Livewire\Superadmin\Admin\Modul\Index as AdminModulIndex;
 use App\Livewire\Superadmin\Admin\Rombel\Index as AdminRombelIndex;
+use App\Livewire\Superadmin\Admin\DetailRombel\Index as AdminDetailRombelIndex;
 use App\Livewire\Superadmin\Admin\Jadwal\Index as AdminJadwalIndex;
 use App\Livewire\Superadmin\Admin\Profil\Index as AdminProfilIndex;
 use App\Livewire\Superadmin\Admin\Akademik\Index as AdminAkademikIndex;
@@ -86,6 +87,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/pengajar', AdminPengajarIndex::class)->name('pengajar.index');
     Route::get('/modul-pelajaran', AdminModulIndex::class)->name('modul.index');
     Route::get('/rombel', AdminRombelIndex::class)->name('rombel.index');
+    Route::get('/rombel/{rombelId}', AdminDetailRombelIndex::class)->name('detail-rombel.index');
     Route::get('/jadwal', AdminJadwalIndex::class)->name('jadwal.index');
     Route::get('/user', AdminUserIndex::class)->name('user.index');
     Route::get('/profil', AdminProfilIndex::class)->name('profil.index');

@@ -27,4 +27,11 @@ class Rombel extends Model
     {
         return $this->belongsTo(TahunAjaran::class);
     }
+
+    public function siswa()
+    {
+        return $this->belongsToMany(Siswa::class, 'rombel_siswa', 'rombel_id', 'siswa_id')
+            ->withPivot('status')
+            ->withTimestamps();
+    }
 }

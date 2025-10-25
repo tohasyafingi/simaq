@@ -8,107 +8,109 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    
     public $search = '';
-public $paginate = 10;
-public $tahun, $semester = 'Ganjil', $status = 1, $tahunAjaranId;
+    public $paginate = 10;
+    public $tahun, $semester = 'Ganjil', $status = 1, $tahunAjaranId;
 
-public function render()
-{
-    $query = TahunAjaran::query();
+    public function render()
+    {
+        $query = TahunAjaran::query();
 
-    if ($this->search) {
-        $query->where('tahun', 'like', '%' . $this->search . '%')
-              ->orWhere('semester', 'like', '%' . $this->search . '%');
+        if ($this->search) {
+            $query->where('tahun', 'like', '%' . $this->search . '%')
+                ->orWhere('semester', 'like', '%' . $this->search . '%');
+        }
+
+        return view('livewire.superadmin.admin.tahun-ajaran.index', [
+            'title' => 'Data Tahun Ajaran',
+            'tahunAjarans' => $query->orderByDesc('id')->paginate($this->paginate),
+        ])->title('Data Tahun Ajaran');
     }
 
-    return view('livewire.superadmin.admin.tahun-ajaran.index', [
-        'title' => 'Data Tahun Ajaran',
-        'tahunAjarans' => $query->orderByDesc('id')->paginate($this->paginate),
-    ])->title('Data Tahun Ajaran');
-}
-
-public function create()
-{
-    $this->reset(['tahun', 'semester', 'status']);
-}
-
-public function store()
-{
-    $this->validate([
-        'tahun' => 'required|string|max:255',
-        'semester' => 'required|in:Ganjil,Genap',
-        'status' => 'required|boolean',
-    ]);
-
-    // Jika status aktif, nonaktifkan yang lain
-    if ($this->status) {
-        TahunAjaran::query()->update(['status' => false]);
+    public function create()
+    {
+        $this->reset(['tahun', 'semester', 'status']);
     }
 
-    TahunAjaran::create([
-        'tahun' => $this->tahun,
-        'semester' => $this->semester,
-        'status' => $this->status,
-    ]);
+    public function store()
+    {
+        $this->validate([
+            'tahun' => 'required|string|max:255',
+            'semester' => 'required|in:Ganjil,Genap',
+            'status' => 'required|boolean',
+        ]);
 
-    session()->flash('message', 'Tahun Ajaran berhasil ditambahkan.');
+        // Jika status aktif, nonaktifkan yang lain
+        if ($this->status) {
+            TahunAjaran::query()->update(['status' => false]);
+        }
 
-    $this->reset(['tahun', 'semester', 'status']);
+        TahunAjaran::create([
+            'tahun' => $this->tahun,
+            'semester' => $this->semester,
+            'status' => $this->status,
+        ]);
 
-    $this->dispatch('closeCreateModal');
-}
+        session()->flash('message', 'Tahun Ajaran berhasil ditambahkan.');
 
-public function edit($id)
-{
-    $tahunAjaran = TahunAjaran::findOrFail($id);
+        $this->reset(['tahun', 'semester', 'status']);
 
-    $this->tahunAjaranId = $tahunAjaran->id;
-    $this->tahun = $tahunAjaran->tahun;
-    $this->semester = $tahunAjaran->semester;
-    $this->status = $tahunAjaran->status;
-}
-
-public function update()
-{
-    $this->validate([
-        'tahun' => 'required|string|max:255',
-        'semester' => 'required|in:Ganjil,Genap',
-        'status' => 'required|boolean',
-    ]);
-
-    $tahunAjaran = TahunAjaran::findOrFail($this->tahunAjaranId);
-
-    if ($this->status) {
-        TahunAjaran::query()->update(['status' => false]);
+        $this->dispatch('closeCreateModal');
     }
 
-    $tahunAjaran->update([
-        'tahun' => $this->tahun,
-        'semester' => $this->semester,
-        'status' => $this->status,
-    ]);
+    public function edit($id)
+    {
+        $tahunAjaran = TahunAjaran::findOrFail($id);
 
-    session()->flash('message', 'Tahun Ajaran berhasil diperbarui.');
+        $this->tahunAjaranId = $tahunAjaran->id;
+        $this->tahun = $tahunAjaran->tahun;
+        $this->semester = $tahunAjaran->semester;
+        $this->status = $tahunAjaran->status;
+    }
 
-    $this->reset(['tahun', 'semester', 'status', 'tahunAjaranId']);
+    public function update()
+    {
+        $this->validate([
+            'tahun' => 'required|string|max:255',
+            'semester' => 'required|in:Ganjil,Genap',
+            'status' => 'required|boolean',
+        ]);
 
-    $this->dispatch('closeEditModal');
-}
+        $tahunAjaran = TahunAjaran::findOrFail($this->tahunAjaranId);
 
-public function confirmDelete($id)
-{
-    $this->tahunAjaranId = $id;
-}
+        if ($this->status) {
+            TahunAjaran::query()->update(['status' => false]);
+        }
 
-public function destroy()
-{
-    $tahunAjaran = TahunAjaran::findOrFail($this->tahunAjaranId);
-    $tahunAjaran->delete();
+        $tahunAjaran->update([
+            'tahun' => $this->tahun,
+            'semester' => $this->semester,
+            'status' => $this->status,
+        ]);
 
-    session()->flash('message', 'Tahun Ajaran berhasil dihapus.');
+        session()->flash('message', 'Tahun Ajaran berhasil diperbarui.');
 
-    $this->reset('tahunAjaranId');
-    $this->dispatch('closeDeleteModal');
-}
+        $this->reset(['tahun', 'semester', 'status', 'tahunAjaranId']);
 
+        $this->dispatch('closeEditModal');
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->tahunAjaranId = $id;
+    }
+
+    public function destroy()
+    {
+        $tahunAjaran = TahunAjaran::findOrFail($this->tahunAjaranId);
+        $tahunAjaran->delete();
+
+        session()->flash('message', 'Tahun Ajaran berhasil dihapus.');
+
+        $this->reset('tahunAjaranId');
+        $this->dispatch('closeDeleteModal');
+    }
 }

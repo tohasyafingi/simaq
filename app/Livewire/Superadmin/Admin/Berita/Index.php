@@ -9,6 +9,7 @@ use App\Models\Berita;
 class Index extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
     public $paginate = 10;

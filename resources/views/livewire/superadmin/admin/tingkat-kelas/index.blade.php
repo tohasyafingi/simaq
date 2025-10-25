@@ -137,7 +137,6 @@
                 icon: "success"
             });
         });
-
     </script>
     @endscript
     @include('livewire.superadmin.admin.tingkat-kelas.edit')

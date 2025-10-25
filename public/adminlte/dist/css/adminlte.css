@@ -15176,3 +15176,9 @@ html.maximized-card {
 }
 
 /*# sourceMappingURL=adminlte.css.map */
+/* Class untuk background warna absensi */
+.bg-hadir { background-color: #198754 !important; } /* Hijau */
+.bg-izin { background-color: #0d6efd !important; } /* Biru */
+.bg-sakit { background-color: #ffc107 !important; } /* Kuning */
+.bg-alfa { background-color: #dc3545 !important; } /* Merah */
+.bg-none { background-color: #ffffff !important; } /* Putih default */

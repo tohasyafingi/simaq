@@ -22,21 +22,13 @@
     <!--end::App Content Header-->
     <!--begin::App Content-->
     <div class="app-content">
-        <!--begin::Container-->
         <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
                 <div class="col-12">
-                    <!-- Default box -->
                     <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between mb-1">
-                                <div>
-                                </div>
-
-                            </div>
-                        </div>
                         <div class="card-body">
+
+                            <!-- Filter dan Pencarian -->
                             <div class="mb-3">
                                 <div class="row g-2 align-items-end">
 
@@ -53,92 +45,93 @@
 
                                     <!-- Filter Tahun Ajaran -->
                                     <div class="col-md-3">
-                                        <label for="tahun_ajaran_id" class="form-label">Filter Tahun Ajaran</label>
-                                        <select wire:model.live="tahun_ajaran_id" id="tahun_ajaran_id" class="form-select">
+                                        <label>Filter Tahun Ajaran</label>
+                                        <select wire:model.live="tahun_ajaran_id" class="form-select">
                                             <option value="">-- Semua Tahun Ajaran --</option>
                                             @foreach($tahunAjarans as $ta)
-                                            <option value="{{ $ta->id }}">
-                                                {{ $ta->tahun }} - {{ $ta->semester }}
-                                            </option>
+                                            <option value="{{ $ta->id }}">{{ $ta->tahun }} - {{ $ta->semester }}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <!-- Tahun Ajaran Aktif -->
                                     <div class="col-md-3">
-                                        <label class="form-label">Tahun Ajaran Aktif</label>
+                                        <label>Tahun Ajaran Aktif</label>
                                         @if ($tahunAjaranAktif)
                                         <div class="alert alert-success py-2 mb-0">
                                             <strong>{{ $tahunAjaranAktif->tahun }} - {{ $tahunAjaranAktif->semester }}</strong>
                                         </div>
                                         @else
                                         <div class="alert alert-warning py-2 mb-0">
-                                            Tidak ada tahun ajaran aktif saat ini.
+                                            Tidak ada tahun ajaran aktif
                                         </div>
                                         @endif
                                     </div>
 
                                     <!-- Search -->
                                     <div class="col-md-3">
-                                        <label for="search" class="form-label">Cari</label>
+                                        <label>Cari</label>
                                         <div class="input-group">
-                                            <span class="input-group-text">
-                                                <i class="bi bi-search"></i>
-                                            </span>
-                                            <input wire:model.live="search" type="text" id="search" class="form-control"
-                                                placeholder="Nama/pelajaran">
+                                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                            <input type="text" wire:model.live="search" class="form-control" placeholder="Cari pelajaran">
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
 
+                            <!-- Tabel Pelajaran -->
                             <div class="table-responsive">
                                 <table class="table table-hover table-striped table-sm table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No</th>
-                                            <th>Guru</th>
-                                            <th>Jumlah Pelajaran</th>
-                                            <th>Jumlah Kelas</th>
+                                            <th>Kode</th>
+                                            <th>Mata Pelajaran</th>
+                                            <th>Rombel</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
+                                        @forelse ($pelajarans as $index => $item)
                                         <tr>
-                                            <td class="text-center">1</td>
-                                            <td>Ahmad</td>
-                                            <td>10</td>
-                                            <td>3</td>
-
+                                            <td class="text-center">{{ $pelajarans->firstItem() + $index }}</td>
+                                            <td>{{ $item['pelajaran']->kd_pelajaran ?? '-' }}</td>
+                                            <td>{{ $item['pelajaran']->nama ?? '-' }}</td>
+                                            <td>{{ $item['rombel']->nama ?? '-' }}</td>
                                             <td class="text-center">
+                                                @if($item['status'])
                                                 <span class="badge bg-success">Aktif</span>
-                                            </td>
-
-                                            <td class="text-center">
-                                                @if($item->tahun_ajaran_id == ($tahunAjaranAktif->id ?? null))
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button 
-                                                        class="btn btn-sm btn-outline-success">
-                                                        <i class="fa fa-eye">Detail</i>
-                                                    </button>
-                                                </div>
                                                 @else
-                                                <span class="badge bg-secondary">Riwayat</span>
+                                                <span class="badge bg-danger">Tidak Aktif</span>
                                                 @endif
                                             </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center gap-1">
+                                                    <button class="btn btn-sm btn-outline-success">
+                                                        <a wire:navigate href="{{route('superadmin.admin.guru-pengajar.materi.index', ['guruPelajaranId' => $item['guru_pelajaran_id'], 'rombelId' => $item['rombel']->id])}}" style="text-decoration: none; color: inherit;">
+                                                            <i class="fas fa-eye"></i> Detail
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center">Data pelajaran belum tersedia.</td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+
+                                {{ $pelajarans->links() }}
                             </div>
+
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
-            <!--end::Row-->
         </div>
     </div>
     <!--end::App Content-->

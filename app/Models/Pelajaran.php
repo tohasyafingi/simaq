@@ -19,4 +19,9 @@ class Pelajaran extends Model
     {
         return $this->belongsTo(TingkatKelas::class, 'tingkat_kelas_id');
     }
+
+    public function guruPelajarans()
+    {
+        return $this->hasMany(GuruPelajaran::class);
+    }
 }

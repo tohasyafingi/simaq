@@ -12,6 +12,8 @@ class Index extends Component
 {
     use WithPagination;
     use WithFileUploads;
+    
+    protected $paginationTheme = 'bootstrap';
 
     public $title = 'Modul';
     public $paginate = 10, $search;
@@ -19,7 +21,6 @@ class Index extends Component
     public $pelajarans;
     public $pelajaran_nama, $tingkat_nama, $jurusan_nama;
 
-    protected $paginationTheme = 'bootstrap';
 
     public function mount()
     {

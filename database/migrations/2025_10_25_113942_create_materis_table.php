@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('materis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('guru_pelajaran_id')->constrained('guru_pelajarans')->onDelete('cascade');
+            $table->foreignId('rombel_id')->constrained('rombels')->onDelete('cascade');
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->date('tanggal');

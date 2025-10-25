@@ -34,4 +34,11 @@ class Rombel extends Model
             ->withPivot('status')
             ->withTimestamps();
     }
+
+    public function siswaAktif()
+    {
+        return $this->belongsToMany(Siswa::class, 'rombel_siswa', 'rombel_id', 'siswa_id')
+            ->wherePivot('status', true)
+            ->withTimestamps();
+    }
 }

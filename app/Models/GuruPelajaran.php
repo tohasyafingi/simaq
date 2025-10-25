@@ -40,4 +40,10 @@ class GuruPelajaran extends Model
     {
         return $this->hasMany(Penilaian::class, 'guru_pelajaran_id');
     }
+    
+    public function rombels()
+    {
+        return $this->hasMany(Rombel::class, 'tahun_ajaran_id', 'tahun_ajaran_id')
+            ->where('status', 1);
+    }
 }

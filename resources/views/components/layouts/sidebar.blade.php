@@ -163,6 +163,35 @@
                     </ul>
                 </li>
 
+                <!-- GURU -->
+                <li class="nav-header">GURU</li>
+                <li
+                    class="nav-item {{ Request::is('admin/guru-pengajar*') || Request::is('admin/guru-modul*') ? 'menu-open' : '' }}">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>
+                            E-LEARNING GURU
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.guru-pengajar.index')}}"
+                                class="nav-link {{ Request::is('admin/guru-pengajar*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Mata Pelajaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.guru-modul.index')}}"
+                                class="nav-link {{ Request::is('admin/guru-modul*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Modul Pelajaran</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- WEBSITE -->
                 <li class="nav-header">WEBSITE</li>
                 <!-- KONTEN -->

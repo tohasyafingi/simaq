@@ -20,6 +20,8 @@ use App\Livewire\Superadmin\Admin\GuruPelajaran\Index as AdminPengajarIndex;
 use App\Livewire\Superadmin\Admin\Modul\Index as AdminModulIndex;
 use App\Livewire\Superadmin\Admin\Rombel\Index as AdminRombelIndex;
 use App\Livewire\Superadmin\Admin\DetailRombel\Index as AdminDetailRombelIndex;
+use App\Livewire\Superadmin\Admin\GuruPengajar\Index as AdminGuruPengajarIndex;
+use App\Livewire\Superadmin\Admin\DetailGuruPengajar\Index as AdminDetailGuruPengajarIndex;
 use App\Livewire\Superadmin\Admin\Jadwal\Index as AdminJadwalIndex;
 use App\Livewire\Superadmin\Admin\Profil\Index as AdminProfilIndex;
 use App\Livewire\Superadmin\Admin\Akademik\Index as AdminAkademikIndex;
@@ -34,6 +36,15 @@ use App\Livewire\Superadmin\Admin\Download\Index as AdminDownloadIndex;
 use App\Livewire\Superadmin\Admin\Galeri\Index as AdminGaleriIndex;
 use App\Livewire\Superadmin\Admin\KatBerita\Index as AdminKatBeritaIndex;
 use App\Livewire\Superadmin\Admin\KatKaryaIlmiah\Index as AdminKatKaryaIlmiahIndex;
+
+use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Index as GuruMateriIndex;
+use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Create as GuruMateriCreate;
+use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Edit as GuruMateriEdit;
+use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Absensi as GuruMateriAbsensi;
+use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Rekap as GuruMateriRekap;
+
+use App\Livewire\Superadmin\Admin\GuruModul\Index as AdminGuruModulIndex;
+use App\Livewire\Superadmin\Guru\Modul\Index as GuruModulIndex;
 
 use App\Livewire\Portal\Index as PortalIndex;
 use App\Livewire\Portal\Contact as PortalContact;
@@ -88,6 +99,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/modul-pelajaran', AdminModulIndex::class)->name('modul.index');
     Route::get('/rombel', AdminRombelIndex::class)->name('rombel.index');
     Route::get('/rombel/{rombelId}', AdminDetailRombelIndex::class)->name('detail-rombel.index');
+
+    Route::get('/guru-pengajar', AdminGuruPengajarIndex::class)->name('guru-pengajar.index');
+    Route::get('/guru-pengajar/{guruId}', AdminDetailGuruPengajarIndex::class)->name('detail-guru-pengajar.index');
+    Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi', GuruMateriIndex::class)->name('guru-pengajar.materi.index');
+    Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/rekap-absensi', GuruMateriRekap::class)->name('guru-pengajar.materi.rekap');
+    Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi/tambah', GuruMateriCreate::class)->name('guru-pengajar.materi.create');
+    Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi/{materiId}/edit', GuruMateriEdit::class)->name('guru-pengajar.materi.edit');
+    Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi/{materiId}/absensi', GuruMateriAbsensi::class)->name('guru-pengajar.materi.absensi');
+
+    Route::get('/guru-modul', AdminGuruModulIndex::class)->name('guru-modul.index');
+    Route::get('/guru-modul/{gurumodulId}', GuruModulIndex::class)->name('guru-modul.show');
+
     Route::get('/jadwal', AdminJadwalIndex::class)->name('jadwal.index');
     Route::get('/user', AdminUserIndex::class)->name('user.index');
     Route::get('/profil', AdminProfilIndex::class)->name('profil.index');
@@ -112,4 +135,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

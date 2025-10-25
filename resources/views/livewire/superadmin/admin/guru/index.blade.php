@@ -75,7 +75,6 @@
                                             <th>Nama</th>
                                             <th>No.HP</th>
                                             <th>Email</th>
-                                            <th>Pelajaran</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -89,7 +88,7 @@
                                                         <img src="{{ asset('storage/' . $guru->img) }}" alt="Foto Guru"
                                                             width="40" class="rounded-circle">
                                                     @else
-                                                        <img src="{{ asset('images/default-user.jpg') }}" alt="Default"
+                                                        <img src="{{ asset('images/default-image.jpg') }}" alt="Default"
                                                             width="40" class="rounded-circle">
                                                     @endif
                                                 </td>
@@ -97,9 +96,6 @@
                                                 <td>{{ $guru->name }}</td>
                                                 <td>{{ $guru->no_hp }}</td>
                                                 <td>{{ $guru->email }}</td>
-                                                <td>
-                                                    {{ $guru->guruPelajaran->count() }} Mata Pelajaran
-                                                </td>
                                                 <td class="text-center">
                                                     @if($guru->status)
                                                         <span class="badge bg-success">Aktif</span>

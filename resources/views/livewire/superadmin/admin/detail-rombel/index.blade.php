@@ -26,7 +26,12 @@
                     <!-- Pencarian Siswa -->
                     <div class="col-12 col-md-3 mb-3 mb-md-0">
                         <label for="search_siswa" class="form-label">Cari Siswa (Nama atau NIS)</label>
-                        <input wire:model.live="search" type="text" class="form-control" id="search_siswa" placeholder="Cari siswa berdasarkan nama atau NIS">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input wire:model.live="search" type="text" class="form-control" id="search_siswa" placeholder="Cari siswa berdasarkan nama atau NIS">
+                        </div>
                     </div>
 
                     <!-- Dropdown Pilih Siswa -->
@@ -42,7 +47,7 @@
                     </div>
 
                     <!-- Tombol Tambah Siswa -->
-                    <div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center">
+                    <div class="col-12 col-md-2 d-flex justify-content-md-start justify-content-center">
                         <button type="submit" class="btn btn-primary w-100 w-md-auto">Tambah Siswa</button>
                     </div>
                 </div>
@@ -68,7 +73,12 @@
                         </select>
                     </div>
                     <div class="col-12 col-md-4">
-                        <input wire:model.live="searchSiswa" type="text" class="form-control" placeholder="Cari siswa...">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input wire:model.live="searchSiswa" type="text" class="form-control" placeholder="Cari siswa...">
+                        </div>
                     </div>
                 </div>
             </div>

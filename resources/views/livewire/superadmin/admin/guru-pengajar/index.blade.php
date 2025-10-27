@@ -52,12 +52,13 @@
                                     <!-- Filter Tahun Ajaran -->
                                     <div class="col-md-3">
                                         <label for="tahun_ajaran_id" class="form-label">Filter Tahun Ajaran</label>
-                                        <select wire:model.live="tahun_ajaran_id" id="tahun_ajaran_id" class="form-select">
+                                        <select wire:model.live="tahun_ajaran_id" id="tahun_ajaran_id"
+                                            class="form-select">
                                             <option value="">-- Semua Tahun Ajaran --</option>
                                             @foreach($tahunAjarans as $ta)
-                                            <option value="{{ $ta->id }}">
-                                                {{ $ta->tahun }} - {{ $ta->semester }}
-                                            </option>
+                                                <option value="{{ $ta->id }}">
+                                                    {{ $ta->tahun }} - {{ $ta->semester }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -66,13 +67,14 @@
                                     <div class="col-md-3">
                                         <label class="form-label">Tahun Ajaran Aktif</label>
                                         @if ($tahunAjaranAktif)
-                                        <div class="alert alert-success py-2 mb-0">
-                                            <strong>{{ $tahunAjaranAktif->tahun }} - {{ $tahunAjaranAktif->semester }}</strong>
-                                        </div>
+                                            <div class="alert alert-success py-2 mb-0">
+                                                <strong>{{ $tahunAjaranAktif->tahun }} -
+                                                    {{ $tahunAjaranAktif->semester }}</strong>
+                                            </div>
                                         @else
-                                        <div class="alert alert-warning py-2 mb-0">
-                                            Tidak ada tahun ajaran aktif saat ini.
-                                        </div>
+                                            <div class="alert alert-warning py-2 mb-0">
+                                                Tidak ada tahun ajaran aktif saat ini.
+                                            </div>
                                         @endif
                                     </div>
 
@@ -105,32 +107,34 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                         @forelse($gurus as $index => $guru)
-                                        <tr>
-                                            <td class="text-center">{{ $gurus->firstItem() + $index }}</td>
-                                            <td>{{ $guru->name }}</td>
-                                            <td>{{ $guru->guruPelajarans->count() }}</td>
-                                            <td>{{ $guru->rombels->count() }}</td>
-                                            <td class="text-center">
-                                                @if($guru->guruPelajarans->where('tahun_ajaran_id', $tahunAjaranAktif->id ?? 0)->count())
-                                                <span class="badge {{ $guru->status ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ $guru->status ? 'Aktif' : 'Tidak Aktif' }}
-                                                </span>
-                                                @else
-                                                <span class="badge bg-secondary">Riwayat</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-sm btn-outline-success">
-                                                    <a wire:navigate href="{{route('superadmin.admin.detail-guru-pengajar.index', $guru->id)}}" style="text-decoration: none; color: inherit;">
-                                                        <i class="fas fa-eye">Detail</i>
-                                                    </a>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td class="text-center">{{ $gurus->firstItem() + $index }}</td>
+                                                <td>{{ $guru->name }}</td>
+                                                <td>{{ $guru->guruPelajarans->count() }}</td>
+                                                <td>{{ $guru->jumlahRombel }}</td>
+                                                <td class="text-center">
+                                                    @if($guru->guruPelajarans->where('tahun_ajaran_id', $tahunAjaranAktif->id ?? 0)->count())
+                                                        <span class="badge {{ $guru->status ? 'bg-success' : 'bg-danger' }}">
+                                                            {{ $guru->status ? 'Aktif' : 'Tidak Aktif' }}
+                                                        </span>
+                                                    @else
+                                                        <span class="badge bg-secondary">Riwayat</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-outline-success">
+                                                        <a wire:navigate
+                                                            href="{{route('superadmin.admin.detail-guru-pengajar.index', $guru->id)}}"
+                                                            style="text-decoration: none; color: inherit;">
+                                                            <i class="fas fa-eye">Detail</i>
+                                                        </a>
+                                                    </button>
+                                                </td>
+                                            </tr>
                                         @empty
-                                        <tr>
-                                            <td colspan="6" class="text-center">Tidak ada data guru</td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="6" class="text-center">Tidak ada data guru</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

@@ -72,7 +72,6 @@ class Index extends Component
         ]);
     }
 
-
     public function getModulFilePath($modulId)
     {
         $modul = Modul::find($modulId);

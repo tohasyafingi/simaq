@@ -38,20 +38,36 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function render()
-    {
-        $moduls = Modul::with(['pelajaran.jurusan', 'pelajaran.tingkatKelas'])
-            ->when($this->search, fn($q) => $q->where('nama', 'like', '%' . $this->search . '%'))
-            ->orderBy('nama')
-            ->paginate($this->paginate);
+public function render()
+{
+    $moduls = Modul::with(['pelajaran.jurusan', 'pelajaran.tingkatKelas'])
+        ->when($this->search, function ($query) {
+            // Pencarian berdasarkan nama modul
+            $query->where('nama', 'like', '%' . $this->search . '%')
 
-        return view('livewire.superadmin.admin.modul.index', [
-            'moduls' => $moduls,
-            'tahunAjarans' => $this->tahunAjarans,
-            'tahunAjaranAktif' => $this->tahunAjaranAktif,
-            'title' => $this->title
-        ]);
-    }
+                // Pencarian berdasarkan nama pelajaran
+                ->orWhereHas('pelajaran', function ($q2) {
+                    $q2->where('nama', 'like', '%' . $this->search . '%')
+                        // Pencarian berdasarkan tingkat kelas yang terkait dengan pelajaran
+                        ->orWhereHas('tingkatKelas', function ($q3) {
+                            $q3->where('tingkat', 'like', '%' . $this->search . '%');
+                        })
+                        // Pencarian berdasarkan jurusan yang terkait dengan pelajaran
+                        ->orWhereHas('jurusan', function ($q4) {
+                            $q4->where('nama', 'like', '%' . $this->search . '%');
+                        });
+                });
+        })
+        ->orderBy('nama') // Urutkan modul berdasarkan nama
+        ->paginate($this->paginate); // Tentukan jumlah data per halaman
+
+    return view('livewire.superadmin.admin.modul.index', [
+        'moduls' => $moduls,
+        'tahunAjarans' => $this->tahunAjarans,
+        'tahunAjaranAktif' => $this->tahunAjaranAktif,
+        'title' => $this->title
+    ]);
+}
 
     public function resetForm()
     {

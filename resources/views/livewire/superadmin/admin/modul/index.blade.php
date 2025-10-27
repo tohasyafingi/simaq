@@ -85,7 +85,7 @@
                                         <label>Cari</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                            <input type="text" wire:model.live="search" class="form-control" placeholder="Cari materi">
+                                            <input type="text" wire:model.live="search" class="form-control" placeholder="Cari...">
                                         </div>
                                     </div>
 

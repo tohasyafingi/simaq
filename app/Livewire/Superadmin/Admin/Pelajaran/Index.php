@@ -21,21 +21,31 @@ class Index extends Component
     public $pelajaran_id, $nama, $kd_pelajaran, $jurusan_id, $tingkat_kelas_id, $status;
     public $isEdit = false;
 
-    public function render()
-    {
-        $pelajarans = Pelajaran::with(['jurusan', 'tingkatKelas'])
-            ->where('nama', 'like', '%' . $this->search . '%')
-            ->orWhere('kd_pelajaran', 'like', '%' . $this->search . '%')
-            ->orderBy('nama')
-            ->paginate($this->paginate);
+public function render()
+{
+    $pelajarans = Pelajaran::with(['jurusan', 'tingkatKelas'])
+        ->when($this->search, function ($query) {
+            $query->where('nama', 'like', '%' . $this->search . '%')
+                ->orWhere('kd_pelajaran', 'like', '%' . $this->search . '%')
+                // Pencarian berdasarkan nama jurusan yang terkait dengan pelajaran
+                ->orWhereHas('jurusan', function ($q) {
+                    $q->where('nama', 'like', '%' . $this->search . '%');
+                })
+                // Pencarian berdasarkan tingkat kelas yang terkait dengan pelajaran
+                ->orWhereHas('tingkatKelas', function ($q) {
+                    $q->where('tingkat', 'like', '%' . $this->search . '%');
+                });
+        })
+        ->orderBy('nama') // Mengurutkan hasil pencarian berdasarkan nama
+        ->paginate($this->paginate);
 
-        return view('livewire.superadmin.admin.pelajaran.index', [
-            'title' => 'Data Mata Pelajaran',
-            'pelajarans' => $pelajarans,
-            'jurusans' => Jurusan::orderBy('nama')->get(),
-            'tingkat_kelas' => TingkatKelas::orderByRaw('CAST(tingkat AS UNSIGNED)')->get(),
-        ]);
-    }
+    return view('livewire.superadmin.admin.pelajaran.index', [
+        'title' => 'Data Mata Pelajaran',
+        'pelajarans' => $pelajarans,
+        'jurusans' => Jurusan::orderBy('nama')->get(),
+        'tingkat_kelas' => TingkatKelas::orderByRaw('CAST(tingkat AS UNSIGNED)')->get(),
+    ]);
+}
 
     public function create()
     {

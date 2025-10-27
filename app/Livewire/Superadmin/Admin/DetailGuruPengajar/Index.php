@@ -6,12 +6,14 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\GuruPelajaran;
 use App\Models\TahunAjaran;
+use App\Models\Rombel;
 use Livewire\Attributes\Title;
 
 #[Title('Data Mata Pelajaran')]
 class Index extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $guru_id;
@@ -19,16 +21,18 @@ class Index extends Component
     public $tahun_ajaran_id;
     public $paginate = 10;
 
+    public $tahunAjaranAktif;
+
     public function mount($guruId)
     {
         $this->guru_id = $guruId;
 
-        $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
-        if ($tahunAjaranAktif) {
-            $this->tahun_ajaran_id = $tahunAjaranAktif->id;
+        $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+
+        if ($this->tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
         }
     }
-
 
     public function updatedSearch()
     {
@@ -42,49 +46,42 @@ class Index extends Component
 
     public function render()
     {
-        $query = GuruPelajaran::with(['pelajaran', 'rombels', 'tahunAjaran'])
+        // Ambil guru_pelajarans sesuai filter
+        $guruPelajarans = GuruPelajaran::with('pelajaran')
             ->where('guru_id', $this->guru_id)
-            ->when($this->tahun_ajaran_id, function ($q) {
-                $q->where('tahun_ajaran_id', $this->tahun_ajaran_id);
-            })
-            ->whereHas('pelajaran', function ($q) {
-                $q->where('nama', 'like', '%' . $this->search . '%')
-                    ->orWhere('kd_pelajaran', 'like', '%' . $this->search . '%');
-            });
+            ->when($this->tahun_ajaran_id, fn($q) => $q->where('tahun_ajaran_id', $this->tahun_ajaran_id))
+            ->when($this->search, fn($q) => $q->whereHas(
+                'pelajaran',
+                fn($q2) =>
+                $q2->where('nama', 'like', "%{$this->search}%")
+                    ->orWhere('kd_pelajaran', 'like', "%{$this->search}%")
+            ))
+            ->orderBy('tahun_ajaran_id', 'desc')
+            ->paginate($this->paginate);
 
-        $guruPelajarans = $query->get();
+        // Map guru_pelajarans ke rombel yang tepat
+        $pelajarans = $guruPelajarans->map(function ($gp) {
+            // Pastikan rombel hanya yang sama tingkat_kelas dengan pelajaran
+            $rombels = Rombel::where('tingkat_kelas_id', $gp->pelajaran->tingkat_kelas_id)
+                ->when($gp->pelajaran->jurusan_id, fn($q) => $q->where('jurusan_id', $gp->pelajaran->jurusan_id))
+                ->where('tahun_ajaran_id', $gp->tahun_ajaran_id)
+                ->get();
 
-        $pelajarans = collect();
-        foreach ($guruPelajarans as $gp) {
-            foreach ($gp->rombels as $rombel) {
-                $pelajarans->push([
-                    'guru_pelajaran_id' => $gp->id,
-                    'pelajaran' => $gp->pelajaran,
-                    'rombel' => $rombel,
-                    'status' => $gp->status,
-                    'tahun_ajaran_id' => $gp->tahun_ajaran_id, // tambahkan ini
-                ]);
-            }
-        }
+            return [
+                'guru_pelajaran' => $gp,
+                'pelajaran' => $gp->pelajaran,
+                'rombels' => $rombels,
+                'status' => $gp->status,
+            ];
+        });
 
-        $page = request()->get('page', 1);
-        $perPage = $this->paginate;
-        $paginated = new \Illuminate\Pagination\LengthAwarePaginator(
-            $pelajarans->forPage($page, $perPage),
-            $pelajarans->count(),
-            $perPage,
-            $page,
-            ['path' => request()->url(), 'query' => request()->query()]
-        );
-
-        $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
-        $tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
-
-        return view('livewire.superadmin.admin.detail-guru-pengajar.index', [
-            'pelajarans' => $paginated,
-            'tahunAjaranAktif' => $tahunAjaranAktif,
-            'tahunAjarans' => $tahunAjarans,
+        return view('livewire.superadmin.guru.pelajaran.index', [
+            'pelajarans' => $pelajarans,
+            'guruPelajarans' => $guruPelajarans,
+            'tahunAjarans' => TahunAjaran::orderBy('tahun', 'desc')->get(),
+            'tahunAjaranAktif' => $this->tahunAjaranAktif,
             'title' => 'Data Mata Pelajaran',
         ]);
     }
 }
+

@@ -1,12 +1,27 @@
 {{-- SIDEBAR UNTUK GURU --}}
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
-        <a href="{{ route('superadmin.guru.dashboard') }}" class="brand-link">
-            <img src="{{ asset('assets/logo2.webp') }}" alt="AdminLTE Logo"
-                class="brand-image opacity-75" />
-            <span class="brand-text fw-light">AdminLTE 4</span>
+        <!--begin::Brand Link-->
+        <a href="{{ route('superadmin.guru.dashboard') }}" class="brand-link logo-switch">
+            <!--begin::Brand Image Small-->
+            <img src="{{asset('adminlte/dist/assets/img/AdminLTELogo.png')}}" alt="AdminLTE Logo Small"
+                class="brand-image-xl logo-xs opacity-75 shadow" />
+            <!--end::Brand Image Small-->
+            <!--begin::Brand Image Large-->
+            <img src="{{asset('adminlte/dist/assets/img/AdminLTEFullLogo.png')}}" alt="AdminLTE Logo Large"
+                class="brand-image-xs logo-xl opacity-75" />
+            <!--end::Brand Image Large-->
         </a>
+        <!--end::Brand Link-->
     </div>
+    {{-- <div class="sidebar-brand">
+        <a href="{{ route('superadmin.guru.dashboard') }}" class="brand-link">
+            <img src="{{ asset('assets/logo2.webp') }}" alt="SIMAQ" class="brand-image opacity-75" />
+            <span class="brand-text fw-light">SIMAQ</span>
+        </a>
+    </div> --}}
+    <!--end::Sidebar Brand-->
 
     <div class="sidebar-wrapper">
         <nav class="mt-2">

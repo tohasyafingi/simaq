@@ -95,41 +95,43 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                         @forelse ($pelajarans as $index => $item)
-                                        <tr>
-                                            <td class="text-center">{{ $pelajarans->firstItem() + $index }}</td>
-                                            <td>{{ $item['pelajaran']->kd_pelajaran ?? '-' }}</td>
-                                            <td>{{ $item['pelajaran']->nama ?? '-' }}</td>
-                                            <td>{{ $item['rombel']->nama ?? '-' }}</td>
-                                            <td class="text-center">
-                                                @if($item['tahun_ajaran_id'] == ($tahunAjaranAktif->id ?? null))
-                                                <span class="badge {{ $item['status'] ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ $item['status'] ? 'Aktif' : 'Tidak Aktif' }}
-                                                </span>
-                                                @else
-                                                <span class="badge bg-secondary">Riwayat</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button class="btn btn-sm btn-outline-success">
-                                                        <a wire:navigate href="{{routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $item['guru_pelajaran_id'], 'rombelId' => $item['rombel']->id])}}" style="text-decoration: none; color: inherit;">
-                                                            <i class="fas fa-eye"></i> Detail
-                                                        </a>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            @foreach ($item['rombels'] as $rombel)
+                                                <tr>
+                                                    <td class="text-center">{{ $guruPelajarans->firstItem() + $index }}</td>
+                                                    <td>{{ $item['pelajaran']->kd_pelajaran ?? '-' }}</td>
+                                                    <td>{{ $item['pelajaran']->nama ?? '-' }}</td>
+                                                    <td>{{ $rombel->nama ?? '-' }}</td>
+                                                    <td class="text-center">
+                                                        @if($item['status'])
+                                                            <span class="badge bg-success">Aktif</span>
+                                                        @else
+                                                            <span class="badge bg-danger">Tidak Aktif</span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="d-flex justify-content-center gap-1">
+                                                            <button class="btn btn-sm btn-outline-success">
+                                                                <a wire:navigate href="{{ route('superadmin.guru.pelajaran.materi.index', [
+                                                    'guruPelajaranId' => $item['guru_pelajaran']->id,
+                                                    'rombelId' => $rombel->id,
+                                                ]) }}" style="text-decoration: none; color: inherit;">
+                                                                    <i class="fas fa-eye"></i> Detail
+                                                                </a>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @empty
-                                        <tr>
-                                            <td colspan="6" class="text-center">Data pelajaran belum tersedia.</td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="6" class="text-center">Data pelajaran belum tersedia.</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
 
-                                {{ $pelajarans->links() }}
+                                {{ $guruPelajarans->links() }}
                             </div>
-
                         </div>
                     </div>
                 </div>

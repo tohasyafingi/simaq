@@ -106,7 +106,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/rombel/{rombelId}', AdminDetailRombelIndex::class)->name('detail-rombel.index');
 
     Route::get('/guru-pengajar', AdminGuruPengajarIndex::class)->name('guru-pengajar.index');
-    Route::get('/guru-pengajar/{guruId}', AdminDetailGuruPengajarIndex::class)->name('detail-guru-pengajar.index');
+    Route::get('/guru-pengajar/{guruId}', GuruPelajaranIndex::class)->name('detail-guru-pengajar.index');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi', GuruMateriIndex::class)->name('guru-pengajar.pelajaran.materi.index');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/rekap-absensi', GuruMateriRekap::class)->name('guru-pengajar.pelajaran.materi.rekap');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi/tambah', GuruMateriCreate::class)->name('guru-pengajar.pelajaran.materi.create');
@@ -136,7 +136,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
 
 Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('superadmin.guru.')->group(function () {
     Route::get('/dashboard', GuruDashboard::class)->name('dashboard');
-    Route::get('/mata-pelajaran/{guruId}', AdminDetailGuruPengajarIndex::class)->name('pelajaran.index');
+    Route::get('/mata-pelajaran/{guruId}', GuruPelajaranIndex::class)->name('pelajaran.index');
     Route::get('/mata-pelajaran/{guruPelajaranId}/rombel/{rombelId}/materi', GuruMateriIndex::class)->name('pelajaran.materi.index');
     Route::get('/mata-pelajaran/{guruPelajaranId}/rombel/{rombelId}/rekap-absensi', GuruMateriRekap::class)->name('pelajaran.materi.rekap');
     Route::get('/mata-pelajaran/{guruPelajaranId}/rombel/{rombelId}/materi/tambah', GuruMateriCreate::class)->name('pelajaran.materi.create');

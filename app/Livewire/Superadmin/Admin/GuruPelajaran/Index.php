@@ -27,19 +27,20 @@ class Index extends Component
     public $tahunAjaranAktif;
     public $status = 1;
 
-public function mount()
-{
-    $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
-    if ($this->tahunAjaranAktif) {
-        $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
+    public function mount()
+    {
+        $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        if ($this->tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
+        }
     }
-}
 
     public function render()
     {
         $tahunAjarans = TahunAjaran::orderByDesc('id')->get();
 
         $data = GuruPelajaran::with(['guru', 'pelajaran.tingkatKelas', 'pelajaran.jurusan', 'tahunAjaran'])
+            ->join('gurus', 'gurus.id', '=', 'guru_pelajarans.guru_id')  // Join dengan tabel guru
             ->when($this->tahun_ajaran_id, function ($query) {
                 $query->where('tahun_ajaran_id', $this->tahun_ajaran_id);
             })
@@ -47,17 +48,17 @@ public function mount()
                 $query->whereHas('guru', function ($q) {
                     $q->where('name', 'like', '%' . $this->search . '%');
                 })
-                ->orWhereHas('pelajaran', function ($q) {
-                    $q->where('nama', 'like', '%' . $this->search . '%');
-                })
-                ->orWhereHas('pelajaran.tingkatKelas', function ($q) {
-                    $q->where('tingkat', 'like', '%' . $this->search . '%');
-                })
-                ->orWhereHas('pelajaran.jurusan', function ($q) {
-                    $q->where('nama', 'like', '%' . $this->search . '%');
-                });
+                    ->orWhereHas('pelajaran', function ($q) {
+                        $q->where('nama', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('pelajaran.tingkatKelas', function ($q) {
+                        $q->where('tingkat', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('pelajaran.jurusan', function ($q) {
+                        $q->where('nama', 'like', '%' . $this->search . '%');
+                    });
             })
-            ->orderByDesc('id')
+            ->orderBy('gurus.name')  // Urutkan berdasarkan nama guru (A-Z)
             ->paginate($this->paginate);
 
         return view('livewire.superadmin.admin.guru-pelajaran.index', [

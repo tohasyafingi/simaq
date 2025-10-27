@@ -72,7 +72,6 @@ class Index extends Component
         $this->jurusan_id = '';
         $this->ruang_kelas_id = '';
         $this->status = 1;
-        // jangan reset tahun_ajaran_id, tetap ke aktif
     }
 
     public function create()

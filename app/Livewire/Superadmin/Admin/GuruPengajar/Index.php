@@ -5,7 +5,9 @@ namespace App\Livewire\Superadmin\Admin\GuruPengajar;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Guru;
+use App\Models\GuruPelajaran;
 use App\Models\TahunAjaran;
+use App\Models\Rombel;
 use Livewire\Attributes\Title;
 
 #[Title('Data Guru Pengajar')]
@@ -55,6 +57,29 @@ class Index extends Component
 
         $tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
         $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+
+        // Hitung jumlah rombel secara dinamis untuk setiap guru
+        foreach ($gurus as $guru) {
+            $totalRombel = 0;
+
+            foreach ($guru->guruPelajarans as $gp) {
+                if ($this->tahun_ajaran_id && $gp->tahun_ajaran_id != $this->tahun_ajaran_id) continue;
+
+                $tingkatId = $gp->pelajaran->tingkat_kelas_id ?? null;
+                $jurusanId = $gp->pelajaran->jurusan_id ?? null;
+
+                if ($tingkatId) {
+                    $rombels = Rombel::where('tingkat_kelas_id', $tingkatId)
+                        ->when($jurusanId, fn($q) => $q->where('jurusan_id', $jurusanId))
+                        ->where('tahun_ajaran_id', $gp->tahun_ajaran_id)
+                        ->count();
+
+                    $totalRombel += $rombels;
+                }
+            }
+
+            $guru->jumlahRombel = $totalRombel;
+        }
 
         return view('livewire.superadmin.admin.guru-pengajar.index', [
             'title' => 'Data Guru Pengajar',

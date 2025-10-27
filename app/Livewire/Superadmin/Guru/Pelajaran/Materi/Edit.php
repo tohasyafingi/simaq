@@ -6,7 +6,9 @@ use Livewire\Component;
 use App\Models\Materi;
 use App\Models\Rombel;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Title;
 
+#[Title('Edit Materi')]
 class Edit extends Component
 {
     public $materiId;
@@ -80,6 +82,6 @@ class Edit extends Component
         return view('livewire.superadmin.guru.pelajaran.materi.edit', [
             'title' => 'Edit Materi - ' .  ' (Rombel: ' . $rombel->nama . ')',
             'rombel' => $rombel,
-        ])->title('Edit Materi');
+        ]);
     }
 }

@@ -101,16 +101,18 @@
                                             <td>{{ $item['pelajaran']->nama ?? '-' }}</td>
                                             <td>{{ $item['rombel']->nama ?? '-' }}</td>
                                             <td class="text-center">
-                                                @if($item['status'])
-                                                <span class="badge bg-success">Aktif</span>
+                                                @if($item['tahun_ajaran_id'] == ($tahunAjaranAktif->id ?? null))
+                                                <span class="badge {{ $item['status'] ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $item['status'] ? 'Aktif' : 'Tidak Aktif' }}
+                                                </span>
                                                 @else
-                                                <span class="badge bg-danger">Tidak Aktif</span>
+                                                <span class="badge bg-secondary">Riwayat</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-1">
                                                     <button class="btn btn-sm btn-outline-success">
-                                                        <a wire:navigate href="{{route('superadmin.admin.guru-pengajar.materi.index', ['guruPelajaranId' => $item['guru_pelajaran_id'], 'rombelId' => $item['rombel']->id])}}" style="text-decoration: none; color: inherit;">
+                                                        <a wire:navigate href="{{routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $item['guru_pelajaran_id'], 'rombelId' => $item['rombel']->id])}}" style="text-decoration: none; color: inherit;">
                                                             <i class="fas fa-eye"></i> Detail
                                                         </a>
                                                     </button>

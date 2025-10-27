@@ -5,7 +5,9 @@ namespace App\Livewire\Superadmin\Admin\Berita;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Berita;
+use Livewire\Attributes\Title;
 
+#[Title('Berita')]
 class Index extends Component
 {
     use WithPagination;
@@ -31,7 +33,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.berita.index', [
             'title' => 'Data Berita',
             'beritas' => $beritas,
-        ])->title('Berita');
+        ]);
     }
 public function edit($id)
 {

@@ -5,46 +5,42 @@ namespace App\Livewire\Superadmin\Admin\User;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
 
+#[Title('Manajemen User')]  
 class Index extends Component
 {
     use WithPagination, WithFileUploads;
-
     protected $paginationTheme = 'bootstrap';
-
-    public $paginate = '10';
+    public $paginate = 10;  
     public $search = '';
-
-    // Form fields
     public $user_id, $name, $email, $password, $role, $status, $img, $password_confirmation;
-
-
     public $deleteId = null;
-
-protected function rules()
-{
-    return [
-        'name' => 'required|string',
-        'email' => 'required|email|unique:users,email,' . $this->user_id,
-        'password' => $this->user_id ? 'nullable|string|min:6|confirmed' : 'required|string|min:6|confirmed',
-        'password_confirmation' => $this->user_id ? 'nullable' : 'required',
-        'role' => 'required|string',
-        'status' => 'required|boolean',
-        'img' => 'nullable|image|max:2048',
-    ];
-}
-
+    protected function rules()
+    {
+        return [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $this->user_id,
+            'password' => $this->user_id ? 'nullable|string|min:6|confirmed' : 'required|string|min:6|confirmed',
+            'password_confirmation' => $this->user_id ? 'nullable' : 'required',
+            'role' => 'required|string',
+            'status' => 'required|boolean',
+            'img' => 'nullable|image|max:2048',
+        ];
+    }
     public function render()
     {
         $data = [
-            'title' => 'Data User',
-            'user' => User::where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('email', 'like', '%' . $this->search . '%')
-                ->orderBy('name', 'asc')->paginate($this->paginate),
+            'title' => 'Data User',  
+            'user' => User::where(function ($q) {  
+                $q->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('email', 'like', '%' . $this->search . '%');
+            })->orderBy('name', 'asc')->paginate($this->paginate),
         ];
-        return view('livewire.superadmin.admin.user.index', $data)->title('Manajemen User');
+        return view('livewire.superadmin.admin.user.index', $data);
     }
 
     public function resetInputFields()
@@ -99,8 +95,8 @@ protected function rules()
         $user = User::findOrFail($this->user_id);
 
         if ($this->img) {
-            if ($user->img && \Storage::disk('public')->exists($user->img)) {
-                \Storage::disk('public')->delete($user->img);
+            if ($user->img && Storage::disk('public')->exists($user->img)) {
+                Storage::disk('public')->delete($user->img);
             }
             $validatedData['img'] = $this->img->store('users', 'public');
         } else {
@@ -129,8 +125,8 @@ protected function rules()
     {
         $user = User::findOrFail($this->deleteId);
 
-        if ($user->img && \Storage::disk('public')->exists($user->img)) {
-            \Storage::disk('public')->delete($user->img);
+        if ($user->img && Storage::disk('public')->exists($user->img)) {
+            Storage::disk('public')->delete($user->img);
         }
 
         $user->delete();

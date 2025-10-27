@@ -124,15 +124,16 @@
                                             <td>{{ $item->pelajaran->jurusan->nama ?? '-' }}</td>
 
                                             <td class="text-center">
-                                                @if ($item->status)
-                                                <span class="badge bg-success">Aktif</span>
+                                                @if($item->tahun_ajaran_id == ($tahunAjaranAktif->id ?? null))
+                                                <span class="badge {{ $item->status ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $item->status ? 'Aktif' : 'Tidak Aktif' }}
+                                                </span>
                                                 @else
-                                                <span class="badge bg-danger">Tidak Aktif</span>
+                                                <span class="badge bg-secondary">Riwayat</span>
                                                 @endif
                                             </td>
 
                                             <td class="text-center">
-                                                @if($item->tahun_ajaran_id == ($tahunAjaranAktif->id ?? null))
                                                 <div class="d-flex justify-content-center gap-1">
                                                     <button wire:click="edit({{ $item->id }})"
                                                         class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
@@ -145,9 +146,6 @@
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
-                                                @else
-                                                <span class="badge bg-secondary">Riwayat</span>
-                                                @endif
                                             </td>
                                         </tr>
                                         @empty

@@ -5,7 +5,9 @@ namespace App\Livewire\Superadmin\Admin\RuangKelas;
 use App\Models\RuangKelas;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Data Ruang Kelas')]
 class Index extends Component
 {
     use WithPagination;
@@ -26,7 +28,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.ruang-kelas.index', [
             'title' => 'Data Ruang Kelas',
             'ruangKelas' => $ruangKelas,
-        ])->title('Data Ruang Kelas');
+        ]);
     }
 
     public function create()

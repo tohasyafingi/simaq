@@ -6,7 +6,9 @@ use Livewire\Component;
 use App\Models\Rombel;
 use App\Models\Siswa;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Detail Rombel')]
 class Index extends Component
 {
     use WithPagination;
@@ -98,6 +100,6 @@ class Index extends Component
             'rombel' => $this->rombel,
             'siswaList' => $siswaList,
             'siswaInRombel' => $siswaInRombel,
-        ])->title('Detail Rombel');
+        ]);
     }
 }

@@ -6,7 +6,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Guru;
 use App\Models\TahunAjaran;
+use Livewire\Attributes\Title;
 
+#[Title('Data Guru')]
 class Index extends Component
 {
     use WithPagination;
@@ -17,6 +19,15 @@ class Index extends Component
     public $tahun_ajaran_id;
 
     protected $updatesQueryString = ['tahun_ajaran_id', 'search', 'paginate'];
+
+    public function mount()
+    {
+        // Set default tahun ajaran aktif
+        $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        if ($tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $tahunAjaranAktif->id;
+        }
+    }
 
     public function updatingSearch()
     {
@@ -34,12 +45,12 @@ class Index extends Component
         $tahunAjaranAktif = TahunAjaran::where('status', 1)->first();
 
         $gurus = Guru::with(['guruPelajarans'])
-            ->when($this->tahun_ajaran_id, function($query) {
-                $query->whereHas('guruPelajarans', function($q) {
+            ->when($this->tahun_ajaran_id, function ($query) {
+                $query->whereHas('guruPelajarans', function ($q) {
                     $q->where('tahun_ajaran_id', $this->tahun_ajaran_id);
                 });
             })
-            ->when($this->search, function($query) {
+            ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%');
             })
             ->orderBy('name', 'asc')
@@ -50,6 +61,6 @@ class Index extends Component
             'gurus' => $gurus,
             'tahunAjarans' => $tahunAjarans,
             'tahunAjaranAktif' => $tahunAjaranAktif,
-        ])->title('Daftar Guru');
+        ]);
     }
 }

@@ -6,7 +6,9 @@ use Livewire\Component;
 use App\Models\Rombel;
 use App\Models\Absensi as AbsensiModel;
 use App\Models\Materi;
+use Livewire\Attributes\Title;
 
+#[Title('Absensi Siswa')]
 class Absensi extends Component
 {
     public $materiId;
@@ -60,6 +62,6 @@ class Absensi extends Component
         return view('livewire.superadmin.guru.pelajaran.materi.absensi', [
             'rombel' => $rombel,
             'title' => 'Absensi Siswa',
-        ])->title('Absensi Siswa');
+        ]);
     }
 }

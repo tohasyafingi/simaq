@@ -6,7 +6,9 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Berita;
 use App\Models\KatBerita;
+use Livewire\Attributes\Title;
 
+#[Title('Berita')]
 class Create extends Component
 {
     use WithFileUploads;
@@ -37,44 +39,44 @@ class Create extends Component
         }
     }
 
-public function store()
-{
-    $this->validate([
-        'judul' => 'required|string|max:255',
-        'kat_berita_id' => 'required|exists:kat_beritas,id',
-        'isi' => 'required|string',
-        'status' => 'required|boolean',
-        'thumbnail' => $this->beritaId ? 'nullable|image|max:2048' : 'required|image|max:2048',
-    ]);
+    public function store()
+    {
+        $this->validate([
+            'judul' => 'required|string|max:255',
+            'kat_berita_id' => 'required|exists:kat_beritas,id',
+            'isi' => 'required|string',
+            'status' => 'required|boolean',
+            'thumbnail' => $this->beritaId ? 'nullable|image|max:2048' : 'required|image|max:2048',
+        ]);
 
-    $thumbPath = $this->thumbnailUrl; // default pakai thumbnail lama
+        $thumbPath = $this->thumbnailUrl; // default pakai thumbnail lama
 
-    // Simpan thumbnail baru jika ada
-    if ($this->thumbnail) {
-        $thumbPath = $this->thumbnail->store('berita', 'public');
+        // Simpan thumbnail baru jika ada
+        if ($this->thumbnail) {
+            $thumbPath = $this->thumbnail->store('berita', 'public');
+        }
+
+        $data = [
+            'judul' => $this->judul,
+            'thumbnail' => $thumbPath,
+            'kat_berita_id' => $this->kat_berita_id,
+            'status' => $this->status,
+            'isi' => $this->isi,
+        ];
+
+        Berita::updateOrCreate(
+            ['id' => $this->beritaId],
+            $data
+        );
+
+        session()->flash('message', $this->beritaId ? 'Berita diperbarui.' : 'Berita berhasil ditambahkan.');
+        return redirect()->route('superadmin.admin.berita.index');
     }
-
-    $data = [
-        'judul' => $this->judul,
-        'thumbnail' => $thumbPath,
-        'kat_berita_id' => $this->kat_berita_id,
-        'status' => $this->status,
-        'isi' => $this->isi,
-    ];
-
-    Berita::updateOrCreate(
-        ['id' => $this->beritaId],
-        $data
-    );
-
-    session()->flash('message', $this->beritaId ? 'Berita diperbarui.' : 'Berita berhasil ditambahkan.');
-    return redirect()->route('superadmin.admin.berita.index');
-}
 
     public function render()
     {
         return view('livewire.superadmin.admin.berita.create', [
             'title' => $this->beritaId ? 'Edit Berita' : 'Tambah Berita',
-        ])->title('Berita');
+        ]);
     }
 }

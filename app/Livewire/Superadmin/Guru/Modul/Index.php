@@ -6,14 +6,16 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Modul;
 use App\Models\TahunAjaran;
+use Livewire\Attributes\Title;
 
+#[Title('Data Modul Guru')]
 class Index extends Component
 {
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
 
-    public $gurumodulId;  
+    public $gurumodulId;
     public $title = 'Modul Guru';
     public $paginate = 10;
     public $search = '';
@@ -24,6 +26,10 @@ class Index extends Component
     public function mount($gurumodulId)
     {
         $this->gurumodulId = $gurumodulId;
+        $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        if ($tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $tahunAjaranAktif->id;
+        }
     }
 
     public function updatingSearch()
@@ -41,10 +47,13 @@ class Index extends Component
         $tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
         $tahunAjaranAktif = TahunAjaran::where('status', 1)->first();
 
+        // Ambil semua pelajaran yang dia ajar
+        $pelajaranIds = \App\Models\GuruPelajaran::where('guru_id', $this->gurumodulId)
+            ->pluck('pelajaran_id')
+            ->toArray();
+
         $moduls = Modul::with(['pelajaran.jurusan', 'pelajaran.tingkatKelas'])
-            ->whereHas('pelajaran.guruPelajarans', function ($q) {
-                $q->where('guru_id', $this->gurumodulId);
-            })
+            ->whereIn('pelajaran_id', $pelajaranIds)
             ->when($this->tahun_ajaran_id, function ($q) {
                 $q->whereHas('pelajaran.guruPelajarans', function ($q2) {
                     $q2->where('tahun_ajaran_id', $this->tahun_ajaran_id);
@@ -60,8 +69,9 @@ class Index extends Component
             'moduls' => $moduls,
             'tahunAjarans' => $tahunAjarans,
             'tahunAjaranAktif' => $tahunAjaranAktif,
-        ])->title('Modul Guru');
+        ]);
     }
+
 
     public function getModulFilePath($modulId)
     {

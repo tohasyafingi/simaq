@@ -1,12 +1,25 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
-        <a href="#" class="brand-link">
-            <img src="{{ asset('adminlte/dist/assets/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                class="brand-image opacity-75" />
-            <span class="brand-text fw-light">AdminLTE 4</span>
+        <!--begin::Brand Link-->
+        <a href="{{ route('superadmin.admin.dashboard') }}" class="brand-link logo-switch">
+            <!--begin::Brand Image Small-->
+            <img src="{{asset('adminlte/dist/assets/img/AdminLTELogo.png')}}" alt="AdminLTE Logo Small"
+                class="brand-image-xl logo-xs opacity-75 shadow" />
+            <!--end::Brand Image Small-->
+            <!--begin::Brand Image Large-->
+            <img src="{{asset('adminlte/dist/assets/img/AdminLTEFullLogo.png')}}" alt="AdminLTE Logo Large"
+                class="brand-image-xs logo-xl opacity-75" />
+            <!--end::Brand Image Large-->
         </a>
+        <!--end::Brand Link-->
     </div>
+    {{-- <div class="sidebar-brand">
+        <a href="{{ route('superadmin.admin.dashboard') }}" class="brand-link">
+            <img src="{{ asset('assets/logo2.webp') }}" alt="SIMAQ" class="brand-image opacity-75" />
+            <span class="brand-text fw-light">SIMAQ</span>
+        </a>
+    </div> --}}
     <!--end::Sidebar Brand-->
 
     <!--begin::Sidebar Wrapper-->
@@ -205,7 +218,8 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') ? 'menu-open' : '' }}">
+                        <li
+                            class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-circle-fill"></i>
                                 <p>Berita
@@ -229,7 +243,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item {{ Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') ? 'menu-open' : '' }}">
+                        <li
+                            class="nav-item {{ Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-circle-fill"></i>
                                 <p>Karya Ilmiah

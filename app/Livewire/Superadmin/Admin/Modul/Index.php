@@ -7,42 +7,56 @@ use App\Models\Modul;
 use App\Models\Pelajaran;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Models\TahunAjaran;
+use Livewire\Attributes\Title;
 
+#[Title('Modul Pelajaran')]
 class Index extends Component
 {
-    use WithPagination;
-    use WithFileUploads;
-    
+    use WithPagination, WithFileUploads;
+
     protected $paginationTheme = 'bootstrap';
 
     public $title = 'Modul';
-    public $paginate = 10, $search;
-    public $modul_id, $nama, $pelajaran_id, $link, $file, $status;
+    public $paginate = 10;
+    public $search = '';
+    public $modul_id, $nama, $pelajaran_id, $link, $file, $status = 1;
     public $pelajarans;
     public $pelajaran_nama, $tingkat_nama, $jurusan_nama;
-
+    public $tahunAjarans;
+    public $tahunAjaranAktif;
 
     public function mount()
     {
         $this->pelajarans = Pelajaran::where('status', 1)->get();
+        $this->tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
+        $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+    }
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
     }
 
     public function render()
     {
         $moduls = Modul::with(['pelajaran.jurusan', 'pelajaran.tingkatKelas'])
-            ->where('nama', 'like', '%' . $this->search . '%')
+            ->when($this->search, fn($q) => $q->where('nama', 'like', '%' . $this->search . '%'))
             ->orderBy('nama')
             ->paginate($this->paginate);
 
         return view('livewire.superadmin.admin.modul.index', [
             'moduls' => $moduls,
+            'tahunAjarans' => $this->tahunAjarans,
+            'tahunAjaranAktif' => $this->tahunAjaranAktif,
             'title' => $this->title
-        ])->title('Modul Pelajaran');
+        ]);
     }
 
     public function resetForm()
     {
-        $this->reset(['modul_id', 'nama', 'pelajaran_id', 'link', 'file', 'status']);
+        $this->reset(['modul_id', 'nama', 'pelajaran_id', 'link', 'file']);
+        $this->status = 1;
     }
 
     public function create()
@@ -57,14 +71,10 @@ class Index extends Component
             'pelajaran_id' => 'required',
             'link' => 'nullable|url',
             'file' => 'nullable|file',
-            'status' => 'required',
+            'status' => 'required|in:0,1',
         ]);
 
-        if ($this->file) {
-            $filePath = $this->file->store('moduls', 'public'); // simpan di storage/app/public/moduls
-        } else {
-            $filePath = null;
-        }
+        $filePath = $this->file ? $this->file->store('moduls', 'public') : null;
 
         Modul::create([
             'nama' => $this->nama,
@@ -74,7 +84,6 @@ class Index extends Component
             'status' => $this->status,
         ]);
 
-
         session()->flash('message', 'Modul berhasil ditambahkan.');
         $this->dispatch('closeCreateModal');
         $this->resetForm();
@@ -82,11 +91,12 @@ class Index extends Component
 
     public function edit($id)
     {
-        $data = Modul::findOrFail($id);
-        $this->modul_id = $id;
-        $this->nama = $data->nama;
-        $this->pelajaran_id = $data->pelajaran_id;
-        $this->link = $data->link;
+        $modul = Modul::findOrFail($id);
+        $this->modul_id = $modul->id;
+        $this->nama = $modul->nama;
+        $this->pelajaran_id = $modul->pelajaran_id;
+        $this->link = $modul->link;
+        $this->status = $modul->status;
     }
 
     public function update()
@@ -96,18 +106,12 @@ class Index extends Component
             'pelajaran_id' => 'required',
             'link' => 'nullable|url',
             'file' => 'nullable|file',
-            'status' => 'required',
+            'status' => 'required|in:0,1',
         ]);
 
         $modul = Modul::findOrFail($this->modul_id);
 
-        if ($this->file) {
-            // upload file baru
-            $filePath = $this->file->store('moduls', 'public');
-        } else {
-            // jika tidak upload file baru, gunakan file lama
-            $filePath = $modul->file;
-        }
+        $filePath = $this->file ? $this->file->store('moduls', 'public') : $modul->file;
 
         $modul->update([
             'nama' => $this->nama,
@@ -120,13 +124,6 @@ class Index extends Component
         session()->flash('message', 'Modul berhasil diperbarui.');
         $this->dispatch('closeEditModal');
         $this->resetForm();
-    }
-    public function getModulFilePath()
-    {
-        if (!$this->modul_id) return null;
-
-        $modul = Modul::find($this->modul_id);
-        return $modul ? $modul->file : null;
     }
 
     public function confirmDelete($id)
@@ -141,9 +138,7 @@ class Index extends Component
 
     public function destroy()
     {
-        $modul = Modul::findOrFail($this->modul_id);
-        $modul->delete();
-
+        Modul::findOrFail($this->modul_id)->delete();
         session()->flash('message', 'Modul berhasil dihapus.');
         $this->dispatch('closeDeleteModal');
         $this->resetForm();

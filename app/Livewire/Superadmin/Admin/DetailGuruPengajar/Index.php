@@ -4,23 +4,31 @@ namespace App\Livewire\Superadmin\Admin\DetailGuruPengajar;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\GuruPelajaran; 
+use App\Models\GuruPelajaran;
 use App\Models\TahunAjaran;
+use Livewire\Attributes\Title;
 
+#[Title('Data Mata Pelajaran')]
 class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $guru_id;          
-    public $search = '';      
-    public $tahun_ajaran_id;  
+    public $guru_id;
+    public $search = '';
+    public $tahun_ajaran_id;
     public $paginate = 10;
 
     public function mount($guruId)
     {
         $this->guru_id = $guruId;
+
+        $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        if ($tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $tahunAjaranAktif->id;
+        }
     }
+
 
     public function updatedSearch()
     {
@@ -44,7 +52,7 @@ class Index extends Component
                     ->orWhere('kd_pelajaran', 'like', '%' . $this->search . '%');
             });
 
-        $guruPelajarans = $query->get(); 
+        $guruPelajarans = $query->get();
 
         $pelajarans = collect();
         foreach ($guruPelajarans as $gp) {
@@ -54,6 +62,7 @@ class Index extends Component
                     'pelajaran' => $gp->pelajaran,
                     'rombel' => $rombel,
                     'status' => $gp->status,
+                    'tahun_ajaran_id' => $gp->tahun_ajaran_id, // tambahkan ini
                 ]);
             }
         }
@@ -76,6 +85,6 @@ class Index extends Component
             'tahunAjaranAktif' => $tahunAjaranAktif,
             'tahunAjarans' => $tahunAjarans,
             'title' => 'Data Mata Pelajaran',
-        ])->title('Data Mata Pelajaran');
+        ]);
     }
 }

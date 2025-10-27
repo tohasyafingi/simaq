@@ -42,6 +42,7 @@
                             <select wire:model="role" class="form-control">
                                 <option value="">Pilih Role</option>
                                 <option value="admin">Admin</option>
+                                <option value="guru">Guru</option>
                                 <option value="bendahara">Bendahara</option>
                                 <option value="karyawan">Karyawan</option>
                                 <option value="siswa">Siswa</option>

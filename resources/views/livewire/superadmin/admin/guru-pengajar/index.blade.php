@@ -51,36 +51,40 @@
 
                                     <!-- Filter Tahun Ajaran -->
                                     <div class="col-md-3">
-                                        <label>Filter Tahun Ajaran</label>
-                                        <select wire:model.live="tahun_ajaran_id" class="form-select">
+                                        <label for="tahun_ajaran_id" class="form-label">Filter Tahun Ajaran</label>
+                                        <select wire:model.live="tahun_ajaran_id" id="tahun_ajaran_id" class="form-select">
                                             <option value="">-- Semua Tahun Ajaran --</option>
                                             @foreach($tahunAjarans as $ta)
-                                            <option value="{{ $ta->id }}">{{ $ta->tahun }} - {{ $ta->semester }}</option>
+                                            <option value="{{ $ta->id }}">
+                                                {{ $ta->tahun }} - {{ $ta->semester }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <!-- Tahun Ajaran Aktif -->
                                     <div class="col-md-3">
-                                        <label>Tahun Ajaran Aktif</label>
+                                        <label class="form-label">Tahun Ajaran Aktif</label>
                                         @if ($tahunAjaranAktif)
                                         <div class="alert alert-success py-2 mb-0">
                                             <strong>{{ $tahunAjaranAktif->tahun }} - {{ $tahunAjaranAktif->semester }}</strong>
                                         </div>
                                         @else
                                         <div class="alert alert-warning py-2 mb-0">
-                                            Tidak ada tahun ajaran aktif
+                                            Tidak ada tahun ajaran aktif saat ini.
                                         </div>
                                         @endif
                                     </div>
 
                                     <!-- Search -->
-
                                     <div class="col-md-3">
-                                        <label>Cari</label>
+                                        <label for="search" class="form-label">Cari</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                            <input type="text" wire:model.live="search" class="form-control" placeholder="Nama guru">
+                                            <span class="input-group-text">
+                                                <i class="bi bi-search"></i>
+                                            </span>
+                                            <input wire:model.live="search" type="text" id="search" class="form-control"
+                                                placeholder="Nama guru">
                                         </div>
                                     </div>
 

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwals', function (Blueprint $table) {
+        Schema::create('jadwal_pelajarans', function (Blueprint $table) {
             $table->id();
-            $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
-            $table->foreignId('waktu_jadwal_id')->constrained('waktu_jadwals')->onDelete('cascade');
             $table->foreignId('guru_pelajaran_id')->constrained('guru_pelajarans')->onDelete('cascade');
-            $table->foreignId('siswa_kelas_id')->constrained('siswa_kelas')->onDelete('cascade');
+            $table->foreignId('rombel_id')->constrained('rombels')->onDelete('cascade');
+            $table->foreignId('waktu_jadwal_id')->constrained('waktu_jadwals')->onDelete('cascade');
             $table->foreignId('tahun_ajaran_id')->constrained('tahun_ajarans')->onDelete('cascade');
             $table->boolean('status')->default(true);
             $table->timestamps();

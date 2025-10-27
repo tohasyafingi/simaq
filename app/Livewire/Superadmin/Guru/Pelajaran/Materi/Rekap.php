@@ -5,7 +5,9 @@ namespace App\Livewire\Superadmin\Guru\Pelajaran\Materi;
 use Livewire\Component;
 use App\Models\Rombel;
 use App\Models\Materi;
+use Livewire\Attributes\Title;
 
+#[Title('Rekap Absensi')]
 class Rekap extends Component
 {
     public $guruPelajaranId;
@@ -32,6 +34,6 @@ class Rekap extends Component
     {
         return view('livewire.superadmin.guru.pelajaran.materi.rekap', [
             'title' => 'Rekap Absensi',
-        ])->title('Rekap Absensi');
+        ]);
     }
 }

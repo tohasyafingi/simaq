@@ -22,9 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'img',
         'status',
+        'guru_id'
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,5 +48,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'guru_id');
     }
 }

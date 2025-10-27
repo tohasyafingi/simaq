@@ -114,7 +114,7 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                <a wire:navigate href="{{ route('superadmin.admin.guru-modul.show', ['gurumodulId' => $guru->id]) }}" class="btn btn-sm btn-outline-success">
+                                                <a wire:navigate href="{{ route('superadmin.admin.modul.show', ['gurumodulId' => $guru->id]) }}" class="btn btn-sm btn-outline-success">
                                                     <i class="fas fa-eye me-1"></i> Detail
                                                 </a>
                                             </td>

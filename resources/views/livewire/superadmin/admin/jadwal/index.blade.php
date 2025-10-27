@@ -59,34 +59,21 @@
                                             <th>Jam</th>
                                             <th>Mata Pelajaran</th>
                                             <th>Guru</th>
-                                            <th>Kelas</th>
+                                            <th>Rombel</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
-                                        @forelse($jadwals as $index => $item)
                                         <tr>
-                                            <td class="text-center">{{ $jadwals->firstItem() + $index }}</td>
-                                            <td>{{ $item->hari }}</td>
-                                            <td>
-                                                {{ $item->waktuJadwal->jam_mulai ?? '-' }} -
-                                                {{ $item->waktuJadwal->jam_selesai ?? '-' }}
-                                            </td>
-                                            <td>{{ $item->guruPelajaran->pelajaran->nama ?? '-' }}</td>
-                                            <td>{{ $item->guruPelajaran->guru->name ?? '-' }}</td>
-                                            <td>
-                                                {{ $item->siswaKelas->tingkatKelas->nama ?? '' }}
-                                                {{ $item->siswaKelas->jurusan->nama ?? '' }}
-                                                ({{ $item->siswaKelas->ruangKelas->nama ?? '' }})
-                                            </td>
+                                            <td colspan="6" class="text-center">Data tidak ditemukan.</td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit({{ $item->id }})"
+                                                    <button wire:click="edit"
                                                         class="btn btn-sm btn-outline-primary"
                                                         data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <button wire:click="confirmDelete({{ $item->id }})"
+                                                    <button wire:click="confirmDelete"
                                                         class="btn btn-sm btn-outline-danger"
                                                         data-bs-toggle="modal" data-bs-target="#deleteModal" title="Hapus">
                                                         <i class="fa fa-trash"></i>
@@ -94,14 +81,9 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="7" class="text-center">Data tidak ditemukan.</td>
-                                        </tr>
-                                        @endforelse
+                                        
                                     </tbody>
                                 </table>
-                                {{ $jadwals->links() }}
                             </div>
                         </div>
                     </div>

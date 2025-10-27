@@ -1,8 +1,8 @@
 {{-- SIDEBAR UNTUK GURU --}}
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
-        <a href="#" class="brand-link">
-            <img src="{{ asset('adminlte/dist/assets/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+        <a href="{{ route('superadmin.guru.dashboard') }}" class="brand-link">
+            <img src="{{ asset('assets/logo2.webp') }}" alt="AdminLTE Logo"
                 class="brand-image opacity-75" />
             <span class="brand-text fw-light">AdminLTE 4</span>
         </a>
@@ -20,17 +20,19 @@
                 </li>
                 <li class="nav-header">E-LEARNING</li>
                 <li class="nav-item">
-                    <a wire:navigate href="{{route('superadmin.guru.pelajaran.index')}}" class="nav-link {{ Request::is('guru/mata-pelajaran*') ? 'active' : '' }}">
-                        <p><i class="fas fa-user-graduate"></i>
-                            Mata Pelajaran
-                        </p>
+                    <a wire:navigate
+                        href="{{ route('superadmin.guru.pelajaran.index', ['guruId' => auth()->user()->guru->id ?? auth()->id()]) }}"
+                        class="nav-link {{ Request::is('guru/mata-pelajaran*') ? 'active' : '' }}">
+                        <i class="fas fa-user-graduate"></i>
+                        <p>Mata Pelajaran</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a wire:navigate href="{{route('superadmin.guru.modul.index')}}" class="nav-link {{ Request::is('guru/modul-pelajaran*') ? 'active' : '' }}">
-                        <p><i class="fas fa-user-graduate"></i>
-                            Modul Pelajaran
-                        </p>
+                    <a wire:navigate
+                        href="{{ route('superadmin.guru.modul.show', ['gurumodulId' => auth()->user()->guru->id ?? auth()->id()]) }}"
+                        class="nav-link {{ Request::is('guru/modul-pelajaran*') ? 'active' : '' }}">
+                        <i class="fas fa-book"></i>
+                        <p>Modul Pelajaran</p>
                     </a>
                 </li>
                 <!-- Setting -->
@@ -41,7 +43,6 @@
                         <p>Logout</p>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>

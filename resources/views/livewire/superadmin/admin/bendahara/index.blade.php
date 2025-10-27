@@ -88,7 +88,7 @@
                                                         <img src="{{ asset('storage/' . $bendahara->img) }}" alt="Foto Bendahara"
                                                             width="40" class="rounded-circle">
                                                     @else
-                                                        <img src="{{ asset('images/default-user.jpg') }}" alt="Default"
+                                                        <img src="{{ asset('images/default-image.jpg') }}" alt="Default"
                                                             width="40" class="rounded-circle">
                                                     @endif
                                                 </td>

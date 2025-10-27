@@ -9,8 +9,9 @@ use App\Models\Jurusan;
 use App\Models\RuangKelas;
 use App\Models\TahunAjaran;
 use App\Models\Rombel;
-use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\Title;
 
+#[Title('Data Rombel')]
 class Index extends Component
 {
     use WithPagination;
@@ -20,10 +21,13 @@ class Index extends Component
     public $search = '';
     public $paginate = 10;
     public $tahun_ajaran_id;
-    public $tingkat_kelas_id, $jurusan_id, $ruang_kelas_id, $nama;
-    public $isEdit = false;
-    public $rombelId;
+    public $tingkat_kelas_id;
+    public $jurusan_id;
+    public $ruang_kelas_id;
+    public $nama;
     public $status = 1;
+    public $rombelId;
+    public $isEdit = false;
 
     public $tahunAjaranAktif;
 
@@ -38,13 +42,17 @@ class Index extends Component
         }
     }
 
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $rombels = Rombel::with(['tingkatKelas', 'jurusan', 'ruangKelas', 'tahunAjaran'])
-            ->when($this->search, function ($query) {
-                $query->where('nama', 'like', '%' . $this->search . '%');
-            })
-            ->where('tahun_ajaran_id', $this->tahun_ajaran_id)
+            ->when($this->search, fn($q) => $q->where('nama', 'like', '%' . $this->search . '%'))
+            ->when($this->tahun_ajaran_id, fn($q) => $q->where('tahun_ajaran_id', $this->tahun_ajaran_id))
+            ->orderBy('tahun_ajaran_id', 'desc')
             ->paginate($this->paginate);
 
         return view('livewire.superadmin.admin.rombel.index', [
@@ -52,44 +60,38 @@ class Index extends Component
             'tingkatKelas' => TingkatKelas::all(),
             'jurusans' => Jurusan::all(),
             'ruangKelas' => RuangKelas::all(),
-            'tahunAjarans' => TahunAjaran::all(),
+            'tahunAjarans' => TahunAjaran::orderBy('tahun', 'desc')->orderBy('semester', 'desc')->get(),
             'title' => 'Data Rombel',
-        ])->title('Data Rombel');
+        ]);
+    }
+
+    public function resetForm()
+    {
+        $this->nama = '';
+        $this->tingkat_kelas_id = '';
+        $this->jurusan_id = '';
+        $this->ruang_kelas_id = '';
+        $this->status = 1;
+        // jangan reset tahun_ajaran_id, tetap ke aktif
     }
 
     public function create()
     {
         $this->resetForm();
         $this->isEdit = false;
-        // Pastikan tahun_ajaran_id di-set ulang ke aktif setelah reset
-        if ($this->tahunAjaranAktif) {
-            $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
-        }
     }
 
     public function store()
     {
-        // Validasi input
         $this->validate([
             'nama' => 'required|string|max:255',
             'tingkat_kelas_id' => 'required|exists:tingkat_kelas,id',
             'jurusan_id' => 'nullable|exists:jurusans,id',
             'ruang_kelas_id' => 'nullable|exists:ruang_kelas,id',
             'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id',
-            'status' => 'required|in:0,1',  // validasi status (0 atau 1)
+            'status' => 'required|in:0,1',
         ]);
 
-        // Debug: Cek nilai yang akan disimpan
-        Log::debug('Menyimpan data Rombel', [
-            'nama' => $this->nama,
-            'tingkat_kelas_id' => $this->tingkat_kelas_id,
-            'jurusan_id' => $this->jurusan_id,
-            'ruang_kelas_id' => $this->ruang_kelas_id,
-            'tahun_ajaran_id' => $this->tahun_ajaran_id,
-            'status' => $this->status,
-        ]);
-
-        // Menyimpan data ke dalam database
         Rombel::create([
             'nama' => $this->nama,
             'tingkat_kelas_id' => $this->tingkat_kelas_id,
@@ -118,17 +120,15 @@ class Index extends Component
 
     public function update()
     {
-        // Validasi input
         $this->validate([
             'nama' => 'required|string|max:255',
             'tingkat_kelas_id' => 'required|exists:tingkat_kelas,id',
             'jurusan_id' => 'nullable|exists:jurusans,id',
             'ruang_kelas_id' => 'nullable|exists:ruang_kelas,id',
             'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id',
-            'status' => 'required|in:0,1',  // validasi status (0 atau 1)
+            'status' => 'required|in:0,1',
         ]);
 
-        // Mengupdate data Rombel
         $rombel = Rombel::findOrFail($this->rombelId);
         $rombel->update([
             'nama' => $this->nama,
@@ -153,16 +153,5 @@ class Index extends Component
         Rombel::findOrFail($this->rombelId)->delete();
         session()->flash('message', 'Data berhasil dihapus!');
         $this->dispatch('closeDeleteModal');
-    }
-
-    public function resetForm()
-    {
-        $this->nama = '';
-        $this->tingkat_kelas_id = '';
-        $this->jurusan_id = '';
-        $this->ruang_kelas_id = '';
-        // Jangan reset tahun_ajaran_id, biarkan tetap ke aktif
-        // $this->tahun_ajaran_id = '';
-        $this->status = 1;  // Default status adalah 1 (Aktif)
     }
 }

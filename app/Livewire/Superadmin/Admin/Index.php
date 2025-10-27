@@ -4,7 +4,9 @@ namespace App\Livewire\Superadmin\Admin;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
+#[Title('Dashboard Admin')]
 class Index extends Component
 {
     public function render()
@@ -18,6 +20,6 @@ class Index extends Component
         return view('livewire.superadmin.admin.index', [
             'title' => 'Dashboard Admin',
             'waktuSekarang' => $waktuSekarang,
-        ])->title('Dashboard Admin');
+        ]);
     }
 }

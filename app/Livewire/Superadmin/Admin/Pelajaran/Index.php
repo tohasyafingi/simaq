@@ -7,7 +7,9 @@ use App\Models\Jurusan;
 use App\Models\TingkatKelas;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Data Mata Pelajaran')]
 class Index extends Component
 {
     use WithPagination;
@@ -32,7 +34,7 @@ class Index extends Component
             'pelajarans' => $pelajarans,
             'jurusans' => Jurusan::orderBy('nama')->get(),
             'tingkat_kelas' => TingkatKelas::orderByRaw('CAST(tingkat AS UNSIGNED)')->get(),
-        ])->title('Data Mata Pelajaran');
+        ]);
     }
 
     public function create()

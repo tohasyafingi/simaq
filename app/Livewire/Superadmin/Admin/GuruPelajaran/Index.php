@@ -8,7 +8,9 @@ use App\Models\GuruPelajaran;
 use App\Models\Guru;
 use App\Models\Pelajaran;
 use App\Models\TahunAjaran;
+use Livewire\Attributes\Title;
 
+#[Title('Data Pengajar')]
 class Index extends Component
 {
     use WithPagination;
@@ -27,7 +29,7 @@ class Index extends Component
 
 public function mount()
 {
-    $this->tahunAjaranAktif = \App\Models\TahunAjaran::where('status', true)->first();
+    $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
     if ($this->tahunAjaranAktif) {
         $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
     }
@@ -65,7 +67,7 @@ public function mount()
             'pelajarans' => Pelajaran::with('jurusan.tingkat')->where('status', true)->get(),
             'tahunAjarans' => $tahunAjarans,
             'tahunAjaranAktif' => $this->tahunAjaranAktif,
-        ])->title('Data Pengajar');
+        ]);
     }
 
     public function create()

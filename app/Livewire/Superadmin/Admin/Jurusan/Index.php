@@ -6,7 +6,9 @@ use App\Models\Jurusan;
 use App\Models\TingkatKelas;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Data Jurusan')]
 class Index extends Component
 {
     use WithPagination;
@@ -27,7 +29,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.jurusan.index', [
             'title' => 'Data Jurusan',
             'jurusans' => $data,
-        ])->title('Data Jurusan');
+        ]);
     }
 
     public function create()

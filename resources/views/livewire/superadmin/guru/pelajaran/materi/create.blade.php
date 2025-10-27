@@ -4,14 +4,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <a wire:navigate href="{{ route('superadmin.admin.guru-pengajar.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}" class="btn btn-secondary">
+                    <a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item"><a wire:navigate href="{{ route('superadmin.admin.guru-pengajar.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a></li>
+                        <li class="breadcrumb-item">
+                            <a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a>
+                        </li>
                         <li class="breadcrumb-item active" aria-current="page">Tambah</li>
                     </ol>
                 </div>
@@ -88,7 +90,7 @@
 
                         <div class="mt-4 d-flex justify-content-end">
                             @if($materi_id)
-                            <a href="{{ route('superadmin.admin.guru-pengajar.materi.absensi', ['guruPelajaranId' => $guruPelajaranId,'rombelId' => $rombelId,'materiId' => $materi_id]) }}"
+                            <a href="{{ routeGuruOrAdmin('pelajaran.materi.absensi', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId, 'materiId' => $materi_id]) }}"
                                 class="btn btn-success me-2">
                                 <i class="fas fa-file-alt"></i> Absensi
                             </a>

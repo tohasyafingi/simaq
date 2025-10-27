@@ -1,9 +1,9 @@
 <footer class="app-footer">
     <!--begin::Copyright-->
     <strong>
-        Copyright &copy; 2014-2025&nbsp;
-        <a href="#" class="text-decoration-none">AdminLTE.io</a>.
+        Copyright &copy; {{ date('Y') }}&nbsp;
+        <a href="#" class="text-decoration-none">SIMAQ </a>|
     </strong>
-    All rights reserved.
+    Support by <a href="#" class="text-decoration-none"> @tohasyafingi</a>
     <!--end::Copyright-->
 </footer>

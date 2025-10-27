@@ -9,7 +9,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
 
+#[Title('Data Bendahara')]
 class Index extends Component
 {
     use WithPagination, WithFileUploads;
@@ -19,7 +21,6 @@ class Index extends Component
     public $paginate = 10;
     public $search = '';
 
-    // Form fields
     public $bendahara_id, $kd_bendahara, $name, $email, $no_hp, $img, $status;
 
     public $deleteId = null;
@@ -48,7 +49,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.bendahara.index', [
             'title' => 'Data Bendahara',
             'bendaharas' => $bendaharas,
-        ])->title('Data Bendahara');
+        ]);
     }
 
     public function resetInputFields()
@@ -80,6 +81,7 @@ class Index extends Component
             User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
+                'img' => $validatedData['img'],
                 'password' => Hash::make($validatedData['kd_bendahara']),
                 'role' => 'bendahara',
             ]);
@@ -99,6 +101,7 @@ class Index extends Component
         $this->name = $bendahara->name;
         $this->email = $bendahara->email;
         $this->no_hp = $bendahara->no_hp;
+        $this->img = $bendahara->img;
         $this->status = $bendahara->status;
     }
 

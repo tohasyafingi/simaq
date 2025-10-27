@@ -9,7 +9,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
 
+#[Title('Data Tata Usaha')]
 class Index extends Component
 {
     use WithPagination, WithFileUploads;
@@ -48,7 +50,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.tata-usaha.index', [
             'title' => 'Data TataUsaha',
             'tata_usahas' => $tata_usahas,
-        ])->title('Data Tata Usaha');
+        ]);
     }
 
     public function resetInputFields()

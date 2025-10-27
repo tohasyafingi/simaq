@@ -17,8 +17,7 @@
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-
-<body class="sidebar-expand-lg fixed-header sidebar-mini bg-body-tertiary">
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
         <!--begin::Header-->

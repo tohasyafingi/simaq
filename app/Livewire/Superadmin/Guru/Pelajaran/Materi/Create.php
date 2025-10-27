@@ -8,7 +8,9 @@ use App\Models\GuruPelajaran;
 use App\Models\Rombel;
 use App\Models\Absensi;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Title;
 
+#[Title('Tambah Materi')]
 class Create extends Component
 {
     public $guruPelajaranId;
@@ -103,6 +105,6 @@ class Create extends Component
             'title' => 'Tambah Materi - ' . ($guruPelajaran->pelajaran->nama ?? '-') . ' (Rombel: ' . $rombel->nama . ')',
             'guruPelajaran' => $guruPelajaran,
             'rombel' => $rombel, // Pass rombel untuk view
-        ])->title('Tambah Materi');
+        ]);
     }
 }

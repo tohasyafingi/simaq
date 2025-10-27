@@ -43,7 +43,7 @@
                     <!--end::User Image-->
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-sm">
+                        <a wire:navigate href="{{route('profil.show')}}" class="btn btn-sm btn-success">
                             <i class="bi bi-person-fill"></i>
                             Profile
                         </a>

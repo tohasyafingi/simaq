@@ -4,7 +4,9 @@ namespace App\Livewire\Superadmin\Admin\KatBerita;
 
 use Livewire\Component;
 use App\Models\KatBerita;
+use Livewire\Attributes\Title;
 
+#[Title('Berita')]
 class Index extends Component
 {
     public $nama, $slug, $katId;
@@ -16,7 +18,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.kat-berita.index', [
             'title' => 'Data Kategori Berita',
             'kategoris' => $kategoris,
-        ])->title('Kategori Berita');
+        ]);
     }
     public function resetForm()
     {

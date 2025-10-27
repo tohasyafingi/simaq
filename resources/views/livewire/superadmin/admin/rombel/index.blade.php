@@ -33,6 +33,8 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <div class="row g-2 align-items-end">
+
+                                    <!-- Paginate -->
                                     <div class="col-md-3">
                                         <label for="paginate" class="form-label">Tampilkan</label>
                                         <select wire:model.live="paginate" id="paginate" class="form-select">
@@ -43,26 +45,45 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <!-- Filter Tahun Ajaran -->
+                                    <div class="col-md-3">
                                         <label for="tahun_ajaran_id" class="form-label">Filter Tahun Ajaran</label>
                                         <select wire:model.live="tahun_ajaran_id" id="tahun_ajaran_id" class="form-select">
                                             <option value="">-- Semua Tahun Ajaran --</option>
-                                            @foreach($tahunAjarans as $tahun)
-                                            <option value="{{ $tahun->id }}">{{ $tahun->tahun }} - {{ $tahun->semester }}</option>
+                                            @foreach($tahunAjarans as $ta)
+                                            <option value="{{ $ta->id }}">
+                                                {{ $ta->tahun }} - {{ $ta->semester }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <!-- Search (Kanan) -->
-                                    <div class="col-md-5">
+                                    <!-- Tahun Ajaran Aktif -->
+                                    <div class="col-md-3">
+                                        <label class="form-label">Tahun Ajaran Aktif</label>
+                                        @if ($tahunAjaranAktif)
+                                        <div class="alert alert-success py-2 mb-0">
+                                            <strong>{{ $tahunAjaranAktif->tahun }} - {{ $tahunAjaranAktif->semester }}</strong>
+                                        </div>
+                                        @else
+                                        <div class="alert alert-warning py-2 mb-0">
+                                            Tidak ada tahun ajaran aktif saat ini.
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                    <!-- Search -->
+                                    <div class="col-md-3">
                                         <label for="search" class="form-label">Cari</label>
                                         <div class="input-group">
                                             <span class="input-group-text">
                                                 <i class="bi bi-search"></i>
                                             </span>
-                                            <input wire:model.live="search" type="text" id="search" class="form-control" placeholder="Nama Rombel">
+                                            <input wire:model.live="search" type="text" id="search" class="form-control"
+                                                placeholder="Nama rombel">
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -91,7 +112,13 @@
                                             <td>{{ $rombel->ruangKelas ? $rombel->ruangKelas->nama : 'N/A' }}</td>
                                             <td>{{ $rombel->tahunAjaran->tahun }} - {{ $rombel->tahunAjaran->semester }}</td>
                                             <td class="text-center">
-                                                <span class="badge bg-success">Aktif</span>
+                                                @if($rombel->tahun_ajaran_id == ($tahunAjaranAktif->id ?? null))
+                                                <span class="badge {{ $rombel->status ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $rombel->status ? 'Aktif' : 'Tidak Aktif' }}
+                                                </span>
+                                                @else
+                                                <span class="badge bg-secondary">Riwayat</span>
+                                                @endif
                                             </td>
                                             <td class="text-center">
                                                 <button class="btn btn-sm btn-outline-success">

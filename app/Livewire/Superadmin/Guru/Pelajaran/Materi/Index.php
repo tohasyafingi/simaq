@@ -5,9 +5,11 @@ namespace App\Livewire\Superadmin\Guru\Pelajaran\Materi;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Materi;
-use App\Models\GuruPelajaran;
+use App\Models\TahunAjaran;
 use App\Models\Rombel;
+use Livewire\Attributes\Title;
 
+#[Title('Data materi')]
 class Index extends Component
 {
     use WithPagination;
@@ -16,6 +18,7 @@ class Index extends Component
     public $guruPelajaranId;
     public $rombelId;
     public $deleteId;
+    public $tahun_ajaran_id;
     public $search = '';
     public $paginate = 10;
 
@@ -23,9 +26,18 @@ class Index extends Component
     {
         $this->guruPelajaranId = $guruPelajaranId;
         $this->rombelId = $rombelId;
+
+        // Set default tahun ajaran aktif
+        $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        $this->tahun_ajaran_id = $tahunAjaranAktif->id ?? null;
     }
 
     public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedTahunAjaranId()
     {
         $this->resetPage();
     }
@@ -34,11 +46,11 @@ class Index extends Component
     {
         $this->deleteId = $id;
     }
+
     public function destroy()
     {
-        $materis = Materi::findOrFail($this->deleteId);
-
-        $materis->delete();
+        $materi = Materi::findOrFail($this->deleteId);
+        $materi->delete();
 
         $this->dispatch('closeDeleteModal');
         session()->flash('message', 'Materi berhasil dihapus.');
@@ -47,19 +59,38 @@ class Index extends Component
 
     public function render()
     {
-        $query = Materi::with(['guruPelajaran', 'rombel'])
-            ->where('guru_pelajaran_id', $this->guruPelajaranId)
-            ->where('rombel_id', $this->rombelId)
-            ->when($this->search, function ($q) {
-                $q->where('judul', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy('created_at', 'desc'); 
+        $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        $tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
 
-        $materis = $query->paginate($this->paginate);
+        $query = Materi::with(['guruPelajaran', 'rombel']);
+
+        if ($this->guruPelajaranId) {
+            $query->where('guru_pelajaran_id', $this->guruPelajaranId);
+        }
+
+        if ($this->rombelId) {
+            $query->where('rombel_id', $this->rombelId);
+        }
+
+        if ($this->search) {
+            $query->where('judul', 'like', '%' . $this->search . '%');
+        }
+
+        // Filter berdasarkan tahun ajaran
+        $filterTA = $this->tahun_ajaran_id ?? $tahunAjaranAktif->id ?? null;
+        if ($filterTA) {
+            $query->whereHas('guruPelajaran', function ($q) use ($filterTA) {
+                $q->where('tahun_ajaran_id', $filterTA);
+            });
+        }
+
+        $materis = $query->orderBy('created_at', 'desc')->paginate($this->paginate);
 
         return view('livewire.superadmin.guru.pelajaran.materi.index', [
             'materis' => $materis,
-            'title' => 'Data Materi Rombel ' . Rombel::find($this->rombelId)->nama ?? 'Tidak Ditemukan',
-        ])->title('Data Materi');
+            'tahunAjaranAktif' => $tahunAjaranAktif,
+            'tahunAjarans' => $tahunAjarans,
+            'title' => 'Data Materi Rombel ' . (optional(Rombel::find($this->rombelId))->nama ?? 'Tidak Ditemukan'),
+        ]);
     }
 }

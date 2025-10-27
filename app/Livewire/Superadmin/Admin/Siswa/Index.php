@@ -6,7 +6,10 @@ use App\Models\Siswa;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
 
+#[Title('Data Siswa')]
 class Index extends Component
 {
     use WithPagination, WithFileUploads;
@@ -153,7 +156,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.siswa.index', [
             'title' => 'Data Siswa',
             'siswa' => $data,
-        ])->title('Data Siswa');
+        ]);
     }
 
     public function confirmDelete($id)
@@ -168,10 +171,10 @@ class Index extends Component
         $siswa = Siswa::findOrFail($this->siswa_id_delete);
 
         // Optional: hapus file terkait jika diperlukan
-        if ($siswa->kk) \Storage::disk('public')->delete($siswa->kk);
-        if ($siswa->akta) \Storage::disk('public')->delete($siswa->akta);
-        if ($siswa->ijazah_terakhir) \Storage::disk('public')->delete($siswa->ijazah_terakhir);
-        if ($siswa->img) \Storage::disk('public')->delete($siswa->img);
+        if ($siswa->kk) Storage::disk('public')->delete($siswa->kk);
+        if ($siswa->akta) Storage::disk('public')->delete($siswa->akta);
+        if ($siswa->ijazah_terakhir) Storage::disk('public')->delete($siswa->ijazah_terakhir);
+        if ($siswa->img) Storage::disk('public')->delete($siswa->img);
 
         $siswa->delete();
 

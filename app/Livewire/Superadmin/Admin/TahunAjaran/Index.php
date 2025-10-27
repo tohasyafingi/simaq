@@ -5,7 +5,9 @@ namespace App\Livewire\Superadmin\Admin\TahunAjaran;
 use Livewire\Component;
 use App\Models\TahunAjaran;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Data Tahun Ajaran')]
 class Index extends Component
 {
     use WithPagination;
@@ -27,7 +29,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.tahun-ajaran.index', [
             'title' => 'Data Tahun Ajaran',
             'tahunAjarans' => $query->orderByDesc('id')->paginate($this->paginate),
-        ])->title('Data Tahun Ajaran');
+        ]);
     }
 
     public function create()

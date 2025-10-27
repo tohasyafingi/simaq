@@ -41,22 +41,54 @@
                         </div>
                         <div class="card-body">
 
-                            <div class="mb-3 d-flex justify-content-between">
-                                <div class="col-0">
-                                    <select wire:model.live="paginate" id="paginate" class="form-select ">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </div>
-                                <div class="col-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="bi bi-search"></i>
-                                        </span>
-                                        <input wire:model.live="search" type="text" class="form-control" placeholder="Cari dengan nama modul">
+                            <div class="mb-3">
+                                <div class="row g-2 align-items-end">
+
+                                    <!-- Paginate -->
+                                    <div class="col-md-3">
+                                        <label for="paginate" class="form-label">Tampilkan</label>
+                                        <select wire:model.live="paginate" id="paginate" class="form-select">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
                                     </div>
+
+                                    <!-- Filter Tahun Ajaran -->
+                                    <div class="col-md-3">
+                                        <label>Filter Tahun Ajaran</label>
+                                        <select wire:model.live="tahun_ajaran_id" class="form-select">
+                                            <option value="">-- Semua Tahun Ajaran --</option>
+                                            @foreach($tahunAjarans as $ta)
+                                            <option value="{{ $ta->id }}">{{ $ta->tahun }} - {{ $ta->semester }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <!-- Tahun Ajaran Aktif -->
+                                    <div class="col-md-3">
+                                        <label>Tahun Ajaran Aktif</label>
+                                        @if ($tahunAjaranAktif)
+                                        <div class="alert alert-success py-2 mb-0">
+                                            <strong>{{ $tahunAjaranAktif->tahun }} - {{ $tahunAjaranAktif->semester }}</strong>
+                                        </div>
+                                        @else
+                                        <div class="alert alert-warning py-2 mb-0">
+                                            Tidak ada tahun ajaran aktif
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                    <!-- Search -->
+                                    <div class="col-md-3">
+                                        <label>Cari</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                            <input type="text" wire:model.live="search" class="form-control" placeholder="Cari materi">
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -77,46 +109,52 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                         @forelse ($moduls as $index => $item)
-                                            <tr>
-                                                <td class="text-center">{{ $moduls->firstItem() + $index }}</td>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->pelajaran->nama ?? '-' }}</td>
-                                                <td>{{ $item->pelajaran->tingkatKelas->tingkat ?? '-' }}</td>
-                                                <td>{{ $item->pelajaran->jurusan->nama ?? '-' }}</td>
-                                                <td>
-                                                    @if($item->link)
-                                                        <a href="{{ $item->link }}" target="_blank">Lihat Link</a>
-                                                    @else
-                                                        -
-                                                    @endif
-                                                </td>
-                                                <td>{{ $item->file ?? '-' }}</td>
-                                                <td class="text-center">
-                                                    @if($item->status)
-                                                        <span class="badge bg-success">Aktif</span>
-                                                    @else
-                                                        <span class="badge bg-danger">Tidak Aktif</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center gap-1">
-                                                        <button wire:click="edit({{ $item->id }})"
-                                                            class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                                            data-bs-target="#editModal" title="Edit">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button wire:click="confirmDelete({{ $item->id }})"
-                                                            class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                            data-bs-target="#deleteModal" title="Hapus">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td class="text-center">{{ $moduls->firstItem() + $index }}</td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->pelajaran->nama ?? '-' }}</td>
+                                            <td>{{ $item->pelajaran->tingkatKelas->tingkat ?? '-' }}</td>
+                                            <td>{{ $item->pelajaran->jurusan->nama ?? '-' }}</td>
+                                            <td>
+                                                @if($item->link)
+                                                <a href="{{ $item->link }}" target="_blank">Lihat Link</a>
+                                                @else
+                                                -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($item->file)
+                                                <a href="{{ asset('storage/' . $item->file) }}" target="_blank">Lihat File</a>
+                                                @else
+                                                -
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if($item->status)
+                                                <span class="badge bg-success">Aktif</span>
+                                                @else
+                                                <span class="badge bg-danger">Tidak Aktif</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center gap-1">
+                                                    <button wire:click="edit({{ $item->id }})"
+                                                        class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#editModal" title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button wire:click="confirmDelete({{ $item->id }})"
+                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal" title="Hapus">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         @empty
-                                            <tr>
-                                                <td colspan="9" class="text-center">Data modul belum tersedia.</td>
-                                            </tr>
+                                        <tr>
+                                            <td colspan="9" class="text-center">Data modul belum tersedia.</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

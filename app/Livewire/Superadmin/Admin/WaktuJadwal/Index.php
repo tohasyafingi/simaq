@@ -5,7 +5,9 @@ namespace App\Livewire\Superadmin\Admin\WaktuJadwal;
 use App\Models\WaktuJadwal;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Data Jam Pelajaran')]
 class Index extends Component
 {
     use WithPagination;
@@ -27,7 +29,7 @@ class Index extends Component
         return view('livewire.superadmin.admin.waktu-jadwal.index', [
             'title' => 'Data Jam Pelajaran',
             'waktus' => $waktus,
-        ])->title('Data Jam Pelajaran');
+        ]);
     }
 
     public function create()

@@ -1,0 +1,70 @@
+{{-- SIDEBAR UNTUK GURU --}}
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <!--begin::Sidebar Brand-->
+    <div class="sidebar-brand">
+        <!--begin::Brand Link-->
+        <a href="{{ route('superadmin.siswa.dashboard') }}" class="brand-link logo-switch">
+            <!--begin::Brand Image Small-->
+            <img src="{{asset('adminlte/dist/assets/img/AdminLTELogo.png')}}" alt="AdminLTE Logo Small"
+                class="brand-image-xl logo-xs opacity-75 shadow" />
+            <!--end::Brand Image Small-->
+            <!--begin::Brand Image Large-->
+            <img src="{{asset('adminlte/dist/assets/img/AdminLTEFullLogo.png')}}" alt="AdminLTE Logo Large"
+                class="brand-image-xs logo-xl opacity-75" />
+            <!--end::Brand Image Large-->
+        </a>
+        <!--end::Brand Link-->
+    </div>
+    {{-- <div class="sidebar-brand">
+        <a href="{{ route('superadmin.siswa.dashboard') }}" class="brand-link">
+            <img src="{{ asset('assets/logo2.webp') }}" alt="SIMAQ" class="brand-image opacity-75" />
+            <span class="brand-text fw-light">SIMAQ</span>
+        </a>
+    </div> --}}
+    <!--end::Sidebar Brand-->
+
+    <div class="sidebar-wrapper">
+        <nav class="mt-2">
+            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+                <!-- Dashboard -->
+                <li class="nav-item">
+                    <a wire:navigate href="{{ route('superadmin.siswa.dashboard') }}" class="nav-link {{ Request::is('siswa/dashboard*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-header">E-LEARNING</li>
+                <li class="nav-item">
+                    <a wire:navigate
+                        href="{{ route('superadmin.siswa.pelajaran.index', ['siswaId' => auth()->user()->siswa->id ?? auth()->id()]) }}"
+                        class="nav-link {{ Request::is('siswa/mata-pelajaran*') ? 'active' : '' }}">
+                        <i class="fas fa-user-graduate"></i>
+                        <p>Mata Pelajaran</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a wire:navigate
+                        href="{{ route('superadmin.siswa.modul.show', ['siswaId' => auth()->user()->siswa->id ?? auth()->id()]) }}"
+                        class="nav-link {{ Request::is('siswa/modul-pelajaran*') ? 'active' : '' }}">
+                        <i class="fas fa-book"></i>
+                        <p>Modul Pelajaran</p>
+                    </a>
+                </li>
+                <!-- Setting -->
+                <li class="nav-header">SETTING</li>
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>Logout</p>
+                    </a>
+
+                    <!-- Form logout -->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

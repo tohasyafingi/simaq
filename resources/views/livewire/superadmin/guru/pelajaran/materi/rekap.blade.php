@@ -4,14 +4,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}" class="btn btn-secondary">
+                    <a wire:navigate href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item"><a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a></li>
+                        <li class="breadcrumb-item"><a wire:navigate href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Rekap Absensi</li>
                     </ol>
                 </div>

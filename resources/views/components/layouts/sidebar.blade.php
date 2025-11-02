@@ -119,13 +119,13 @@
                                 <p>Ruang Kelas</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a wire:navigate href="{{route('superadmin.admin.jam-pelajaran.index')}}"
                                 class="nav-link {{ Request::is('admin/jam-pelajaran*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle-fill"></i>
                                 <p>Jam Pelajaran</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a wire:navigate href="{{route('superadmin.admin.pelajaran.index')}}"
                                 class="nav-link {{ Request::is('admin/mata-pelajaran*') ? 'active' : '' }}">
@@ -166,13 +166,13 @@
                                 <p>Rombel</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a wire:navigate href="{{route('superadmin.admin.jadwal.index')}}"
                                 class="nav-link {{ Request::is('admin/jadwal*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle-fill"></i>
                                 <p>Jadwal</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
 
@@ -198,6 +198,35 @@
                         <li class="nav-item">
                             <a wire:navigate href="{{route('superadmin.admin.guru-modul.index')}}"
                                 class="nav-link {{ Request::is('admin/guru-modul*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Modul Pelajaran</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- SISWA -->
+                <li class="nav-header">SISWA</li>
+                <li
+                    class="nav-item {{ Request::is('admin/siswa-rombel*') || Request::is('admin/siswa-modul*') ? 'menu-open' : '' }}">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>
+                            E-LEARNING SISWA
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.siswa-rombel.index')}}"
+                                class="nav-link {{ Request::is('admin/siswa-rombel*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Mata Pelajaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.siswa-modul.index')}}"
+                                class="nav-link {{ Request::is('admin/siswa-modul*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle-fill"></i>
                                 <p>Modul Pelajaran</p>
                             </a>

@@ -4,14 +4,18 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}" class="btn btn-secondary">
+                    <a wire:navigate
+                        href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}"
+                        class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item"><a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a></li>
+                        <li class="breadcrumb-item"><a wire:navigate
+                                href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a>
+                        </li>
                         <li class="breadcrumb-item active" aria-current="page">Absensi</li>
                     </ol>
                 </div>
@@ -57,39 +61,38 @@
                                 <tbody class="table-group-divider">
                                     @php $no = 1; @endphp
                                     @foreach($rombel->siswaAktif as $siswa)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $siswa->nis }}</td>
-                                        <td>{{ $siswa->name }}</td>
-                                        <td>{{ $rombel->nama }}</td>
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $siswa->nis }}</td>
+                                            <td>{{ $siswa->name }}</td>
+                                            <td class="text-center">{{ $rombel->nama }}</td>
 
-                                        @foreach(['Hadir','Izin','Sakit','Alfa'] as $statusOption)
-                                        @php
-                                        $isSelected = isset($absensi[$siswa->id]) && $absensi[$siswa->id] === $statusOption;
-                                        $statusClass = $isSelected ? 'bg-' . strtolower($statusOption) : 'bg-none';
-                                        @endphp
+                                            @foreach(['Hadir', 'Izin', 'Sakit', 'Alfa'] as $statusOption)
+                                                @php
+                                                    $isSelected = isset($absensi[$siswa->id]) && $absensi[$siswa->id] === $statusOption;
+                                                    $statusClass = $isSelected ? 'bg-' . strtolower($statusOption) : 'bg-none';
+                                                @endphp
 
-                                        <td class="text-center" style="cursor: pointer;" wire:click="setAbsensi({{ $siswa->id }}, '{{ $statusOption }}')">
-                                            <div class="d-flex justify-content-center">
-                                                <div class="form-check">
-                                                    <input type="radio"
-                                                        name="absensi-{{ $siswa->id }}"
-                                                        id="absensi-{{ $siswa->id }}-{{ $statusOption }}"
-                                                        class="form-check-input d-none"
-                                                        @if($isSelected) checked @endif>
+                                                <td class="text-center" style="cursor: pointer;"
+                                                    wire:click="setAbsensi({{ $siswa->id }}, '{{ $statusOption }}')">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="form-check">
+                                                            <input type="radio" name="absensi-{{ $siswa->id }}"
+                                                                id="absensi-{{ $siswa->id }}-{{ $statusOption }}"
+                                                                class="form-check-input d-none" @if($isSelected) checked @endif>
 
-                                                    <label for="absensi-{{ $siswa->id }}-{{ $statusOption }}"
-                                                        class="border rounded d-flex justify-content-center align-items-center {{ $statusClass }}"
-                                                        style="width:24px; height:24px;">
-                                                        @if($isSelected)
-                                                        <i class="fas fa-check text-white small"></i>
-                                                        @endif
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        @endforeach
-                                    </tr>
+                                                            <label for="absensi-{{ $siswa->id }}-{{ $statusOption }}"
+                                                                class="border rounded d-flex justify-content-center align-items-center {{ $statusClass }}"
+                                                                style="width:24px; height:24px;">
+                                                                @if($isSelected)
+                                                                    <i class="fas fa-check text-white small"></i>
+                                                                @endif
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            @endforeach
+                                        </tr>
                                     @endforeach
 
                                 </tbody>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Superadmin\Guru\Pelajaran\Materi;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Materi;
 use App\Models\Rombel;
 use Illuminate\Support\Facades\DB;
@@ -11,15 +12,17 @@ use Livewire\Attributes\Title;
 #[Title('Edit Materi')]
 class Edit extends Component
 {
+    use WithFileUploads;
+
     public $materiId;
     public $guruPelajaranId;
     public $rombelId;
-    public $materi_id;
     public $judul;
     public $deskripsi;
     public $tanggal;
     public $jam;
-    public $file;
+    public $file; // Bisa file baru diupload
+    public $fileLama; // Menyimpan file lama
     public $status = true;
     public $absensi = [];
     public $successMessage;
@@ -29,7 +32,7 @@ class Edit extends Component
         'deskripsi' => 'nullable|string',
         'tanggal' => 'required|date',
         'jam' => 'required',
-        'file' => 'nullable|string|max:255',
+        'file' => 'nullable|file|mimes:pdf,doc,docx,pptx,jpg,png|max:5120', // max 5MB
         'status' => 'boolean',
     ];
 
@@ -43,7 +46,7 @@ class Edit extends Component
         $this->deskripsi = $materi->deskripsi;
         $this->tanggal = $materi->tanggal;
         $this->jam = $materi->jam;
-        $this->file = $materi->file;
+        $this->fileLama = $materi->file; // simpan file lama
         $this->status = $materi->status;
 
         // Load absensi yang sudah ada
@@ -59,14 +62,24 @@ class Edit extends Component
         try {
             DB::transaction(function () {
                 $materi = Materi::findOrFail($this->materiId);
+
+                $filePath = $this->fileLama;
+
+                // Jika user upload file baru, simpan dan replace file lama
+                if ($this->file) {
+                    $filePath = $this->file->store('materi', 'public');
+                }
+
                 $materi->update([
                     'judul' => $this->judul,
                     'deskripsi' => $this->deskripsi,
                     'tanggal' => $this->tanggal,
                     'jam' => $this->jam,
-                    'file' => $this->file,
+                    'file' => $filePath,
                     'status' => $this->status,
                 ]);
+
+                $this->fileLama = $filePath; // update preview file
             });
 
             $this->successMessage = 'Materi berhasil diperbarui!';
@@ -80,7 +93,7 @@ class Edit extends Component
         $rombel = Rombel::with('siswaAktif')->findOrFail($this->rombelId);
 
         return view('livewire.superadmin.guru.pelajaran.materi.edit', [
-            'title' => 'Edit Materi - ' .  ' (Rombel: ' . $rombel->nama . ')',
+            'title' => 'Edit Materi - (Rombel: ' . $rombel->nama . ')',
             'rombel' => $rombel,
         ]);
     }

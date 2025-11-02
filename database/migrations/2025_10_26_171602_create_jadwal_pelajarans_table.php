@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('jadwal_pelajarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('guru_pelajaran_id')->constrained('guru_pelajarans')->onDelete('cascade');
+            $table->enum('hari', ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu']);
             $table->foreignId('rombel_id')->constrained('rombels')->onDelete('cascade');
+            $table->foreignId('guru_pelajaran_id')->constrained('guru_pelajarans')->onDelete('cascade');
             $table->foreignId('waktu_jadwal_id')->constrained('waktu_jadwals')->onDelete('cascade');
             $table->foreignId('tahun_ajaran_id')->constrained('tahun_ajarans')->onDelete('cascade');
             $table->boolean('status')->default(true);

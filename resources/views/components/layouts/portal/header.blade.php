@@ -59,7 +59,7 @@
         $roleRoutes = [
           'admin' => 'superadmin.admin.dashboard',
           'guru' => 'superadmin.guru.dashboard',
-          'siswa' => 'siswa.dashboard',
+          'siswa' => 'superadmin.siswa.dashboard',
           'karyawan' => 'karyawan.dashboard',
           'bendahara' => 'bendahara.dashboard',
           'alumni' => 'alumni.dashboard',

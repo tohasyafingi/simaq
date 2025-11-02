@@ -22,7 +22,6 @@ class Index extends Component
 
     public function mount()
     {
-        // Set default tahun ajaran aktif
         $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
         if ($tahunAjaranAktif) {
             $this->tahun_ajaran_id = $tahunAjaranAktif->id;
@@ -44,7 +43,7 @@ class Index extends Component
         $tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
         $tahunAjaranAktif = TahunAjaran::where('status', 1)->first();
 
-        $gurus = Guru::with(['guruPelajarans'])
+        $gurus = Guru::with(['guruPelajarans.pelajaran.moduls'])
             ->when($this->tahun_ajaran_id, function ($query) {
                 $query->whereHas('guruPelajarans', function ($q) {
                     $q->where('tahun_ajaran_id', $this->tahun_ajaran_id);
@@ -55,6 +54,17 @@ class Index extends Component
             })
             ->orderBy('name', 'asc')
             ->paginate($this->paginate);
+
+        // Hitung jumlah modul sesuai tahun ajaran per guru
+        foreach ($gurus as $guru) {
+            $jumlahModul = 0;
+            foreach ($guru->guruPelajarans as $gp) {
+                $jumlahModul += $gp->pelajaran->moduls
+                    ->where('tahun_ajaran_id', $this->tahun_ajaran_id)
+                    ->count();
+            }
+            $guru->jumlahModul = $jumlahModul;
+        }
 
         return view('livewire.superadmin.admin.guru-modul.index', [
             'title' => 'Daftar Guru',

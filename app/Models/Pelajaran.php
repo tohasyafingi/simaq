@@ -24,4 +24,8 @@ class Pelajaran extends Model
     {
         return $this->hasMany(GuruPelajaran::class);
     }
+    public function moduls()
+    {
+        return $this->hasMany(Modul::class, 'pelajaran_id', 'id');
+    }
 }

@@ -25,19 +25,14 @@ class Siswa extends Model
         'status'
     ];
 
+        public function user()
+    {
+        return $this->hasOne(User::class, 'siswa_id');
+    }
+
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class);
-    }
-
-    public function kelasAktif()
-    {
-        return $this->hasOne(SiswaKelas::class)->where('status', 'aktif');
-    }
-
-    public function kelas()
-    {
-        return $this->hasMany(SiswaKelas::class);
     }
 
     public function absensi()
@@ -54,5 +49,17 @@ class Siswa extends Model
     public function isInAnyRombel()
     {
         return $this->rombels()->exists();
+    }
+
+    public function moduls()
+    {
+        return $this->hasManyThrough(
+            Modul::class, // model tujuan
+            Rombel::class, // model perantara
+            'id', // foreign key Rombel di modul? → kita sesuaikan
+            'pelajaran_id', // foreign key modul ke pelajaran
+            'id', // local key siswa_id di pivot
+            'id' // local key Rombel
+        );
     }
 }

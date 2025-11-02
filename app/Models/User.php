@@ -23,7 +23,10 @@ class User extends Authenticatable
         'password',
         'role',
         'status',
-        'guru_id'
+        'guru_id',
+        'siswa_id',
+        'bendahara_id',
+        'tata_usaha_id'
     ];
 
 
@@ -54,4 +57,17 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Guru::class, 'guru_id');
     }
+        public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id');
+    }
+    public function bendahara()
+    {
+        return $this->belongsTo(Bendahara::class, 'bendahara_id');
+    }
+    public function tata_usaha()
+    {
+        return $this->belongsTo(TataUsaha::class, 'tata_usaha_id');
+    }
+
 }

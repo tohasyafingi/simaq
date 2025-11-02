@@ -18,75 +18,79 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $title = 'Modul';
+    public $existingFile;
     public $paginate = 10;
     public $search = '';
     public $modul_id, $nama, $pelajaran_id, $link, $file, $status = 1;
-    public $pelajarans;
-    public $pelajaran_nama, $tingkat_nama, $jurusan_nama;
-    public $tahunAjarans;
-    public $tahunAjaranAktif;
+    public $pelajarans, $pelajaran_nama, $tingkat_nama, $jurusan_nama;
+    public $tahunAjarans, $tahunAjaranAktif;
 
+    // Initializing values on component mount
     public function mount()
     {
         $this->pelajarans = Pelajaran::where('status', 1)->get();
         $this->tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
         $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        if ($this->modul_id) {
+            $modul = Modul::find($this->modul_id);
+            $this->existingFile = $modul->file;
+        }
     }
 
+    // Reset pagination when search query changes
     public function updatedSearch()
     {
         $this->resetPage();
     }
 
-public function render()
-{
-    $moduls = Modul::with(['pelajaran.jurusan', 'pelajaran.tingkatKelas'])
-        ->when($this->search, function ($query) {
-            // Pencarian berdasarkan nama modul
-            $query->where('nama', 'like', '%' . $this->search . '%')
+    // Main render method for Livewire
+    public function render()
+    {
+        $moduls = Modul::with(['pelajaran.jurusan', 'pelajaran.tingkatKelas'])
+            ->when($this->search, fn($query) => $this->applySearchFilters($query))
+            ->orderBy('nama')
+            ->paginate($this->paginate);
 
-                // Pencarian berdasarkan nama pelajaran
-                ->orWhereHas('pelajaran', function ($q2) {
-                    $q2->where('nama', 'like', '%' . $this->search . '%')
-                        // Pencarian berdasarkan tingkat kelas yang terkait dengan pelajaran
-                        ->orWhereHas('tingkatKelas', function ($q3) {
-                            $q3->where('tingkat', 'like', '%' . $this->search . '%');
-                        })
-                        // Pencarian berdasarkan jurusan yang terkait dengan pelajaran
-                        ->orWhereHas('jurusan', function ($q4) {
-                            $q4->where('nama', 'like', '%' . $this->search . '%');
-                        });
-                });
-        })
-        ->orderBy('nama') // Urutkan modul berdasarkan nama
-        ->paginate($this->paginate); // Tentukan jumlah data per halaman
+        return view('livewire.superadmin.admin.modul.index', [
+            'moduls' => $moduls,
+            'tahunAjarans' => $this->tahunAjarans,
+            'tahunAjaranAktif' => $this->tahunAjaranAktif,
+            'title' => $this->title
+        ]);
+    }
 
-    return view('livewire.superadmin.admin.modul.index', [
-        'moduls' => $moduls,
-        'tahunAjarans' => $this->tahunAjarans,
-        'tahunAjaranAktif' => $this->tahunAjaranAktif,
-        'title' => $this->title
-    ]);
-}
+    // Extracted search logic to improve readability
+    protected function applySearchFilters($query)
+    {
+        return $query->where('nama', 'like', '%' . $this->search . '%')
+            ->orWhereHas('pelajaran', function ($q2) {
+                $q2->where('nama', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('tingkatKelas', fn($q3) => $q3->where('tingkat', 'like', '%' . $this->search . '%'))
+                    ->orWhereHas('jurusan', fn($q4) => $q4->where('nama', 'like', '%' . $this->search . '%'));
+            });
+    }
 
+    // Reset form fields
     public function resetForm()
     {
         $this->reset(['modul_id', 'nama', 'pelajaran_id', 'link', 'file']);
         $this->status = 1;
     }
 
+    // Show create modal
     public function create()
     {
         $this->resetForm();
     }
 
+    // Store new Modul
     public function store()
     {
         $this->validate([
             'nama' => 'required',
             'pelajaran_id' => 'required',
-            'link' => 'nullable|url',
-            'file' => 'nullable|file',
+            'link' => 'nullable|url|max:255',
+            'file' => 'nullable|file|max:10240',
             'status' => 'required|in:0,1',
         ]);
 
@@ -105,6 +109,7 @@ public function render()
         $this->resetForm();
     }
 
+    // Show edit modal with existing data
     public function edit($id)
     {
         $modul = Modul::findOrFail($id);
@@ -115,18 +120,18 @@ public function render()
         $this->status = $modul->status;
     }
 
+    // Update Modul
     public function update()
     {
         $this->validate([
             'nama' => 'required',
             'pelajaran_id' => 'required',
-            'link' => 'nullable|url',
-            'file' => 'nullable|file',
+            'link' => 'nullable|url|max:255',
+            'file' => 'nullable|file|max:10240',
             'status' => 'required|in:0,1',
         ]);
 
         $modul = Modul::findOrFail($this->modul_id);
-
         $filePath = $this->file ? $this->file->store('moduls', 'public') : $modul->file;
 
         $modul->update([
@@ -142,6 +147,7 @@ public function render()
         $this->resetForm();
     }
 
+    // Show delete confirmation modal
     public function confirmDelete($id)
     {
         $modul = Modul::with(['pelajaran.jurusan', 'pelajaran.tingkatKelas'])->findOrFail($id);
@@ -152,6 +158,7 @@ public function render()
         $this->jurusan_nama = $modul->pelajaran->jurusan->nama ?? '-';
     }
 
+    // Destroy Modul
     public function destroy()
     {
         Modul::findOrFail($this->modul_id)->delete();

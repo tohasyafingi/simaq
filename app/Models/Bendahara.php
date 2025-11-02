@@ -9,4 +9,9 @@ class Bendahara extends Model
 {
     use HasFactory;
     protected $fillable = ['kd_bendahara', 'name', 'email', 'no_hp', 'img', 'status'];
+
+        public function user()
+    {
+        return $this->hasOne(User::class, 'bendahara_id');
+    }
 }

@@ -28,6 +28,8 @@
             @include('components.layouts.sidebar')
         @elseif(Auth::user()->role == 'guru')
             @include('components.layouts.sidebar-guru')
+        @elseif(Auth::user()->role == 'siswa')
+            @include('components.layouts.sidebar-siswa')
         @endif
         {{-- @include('layouts.sidebar') --}}
         <!--end::Sidebar-->

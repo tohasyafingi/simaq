@@ -45,9 +45,9 @@
                             @error('file') <small class="text-danger">{{ $message }}</small> @enderror
 
                             @if ($file)
-                                <div class="mt-2">
-                                    <small class="text-success">File dipilih: {{ $file->getClientOriginalName() }}</small>
-                                </div>
+                                <small class="text-success">File dipilih: {{ $file->getClientOriginalName() }}</small>
+                            @elseif($modul_id && $file === null && $existingFile)
+                                <small class="text-info">File Lama: {{ $existingFile }}</small>
                             @endif
                         </div>
 

@@ -55,7 +55,8 @@
                                         <select wire:model.live="tahun_ajaran_id" class="form-select">
                                             <option value="">-- Semua Tahun Ajaran --</option>
                                             @foreach($tahunAjarans as $ta)
-                                            <option value="{{ $ta->id }}">{{ $ta->tahun }} - {{ $ta->semester }}</option>
+                                                <option value="{{ $ta->id }}">{{ $ta->tahun }} - {{ $ta->semester }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -64,13 +65,14 @@
                                     <div class="col-md-3">
                                         <label>Tahun Ajaran Aktif</label>
                                         @if ($tahunAjaranAktif)
-                                        <div class="alert alert-success py-2 mb-0">
-                                            <strong>{{ $tahunAjaranAktif->tahun }} - {{ $tahunAjaranAktif->semester }}</strong>
-                                        </div>
+                                            <div class="alert alert-success py-2 mb-0">
+                                                <strong>{{ $tahunAjaranAktif->tahun }} -
+                                                    {{ $tahunAjaranAktif->semester }}</strong>
+                                            </div>
                                         @else
-                                        <div class="alert alert-warning py-2 mb-0">
-                                            Tidak ada tahun ajaran aktif
-                                        </div>
+                                            <div class="alert alert-warning py-2 mb-0">
+                                                Tidak ada tahun ajaran aktif
+                                            </div>
                                         @endif
                                     </div>
 
@@ -80,7 +82,8 @@
                                         <label>Cari</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                            <input type="text" wire:model.live="search" class="form-control" placeholder="Nama guru">
+                                            <input type="text" wire:model.live="search" class="form-control"
+                                                placeholder="Nama guru">
                                         </div>
                                     </div>
 
@@ -93,36 +96,40 @@
                                         <tr>
                                             <th class="text-center">No</th>
                                             <th>Guru</th>
-                                            <th>Jumlah Pelajaran</th>
+                                            <th class="text-center">Jumlah Modul</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
                                         @forelse($gurus as $index => $guru)
-                                        <tr>
-                                            <td class="text-center">{{ $gurus->firstItem() + $index }}</td>
-                                            <td>{{ $guru->name }}</td>
-                                            <td class="text-center">{{ $guru->guruPelajarans->count() }}</td>
-                                            <td class="text-center">
-                                                @if($guru->guruPelajarans->where('tahun_ajaran_id', $tahunAjaranAktif->id ?? 0)->count())
-                                                <span class="badge {{ $guru->status ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ $guru->status ? 'Aktif' : 'Tidak Aktif' }}
-                                                </span>
-                                                @else
-                                                <span class="badge bg-secondary">Riwayat</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <a wire:navigate href="{{ route('superadmin.admin.modul.show', ['gurumodulId' => $guru->id]) }}" class="btn btn-sm btn-outline-success">
-                                                    <i class="fas fa-eye me-1"></i> Detail
-                                                </a>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td class="text-center">{{ $gurus->firstItem() + $index }}</td>
+                                                <td>{{ $guru->name }}</td>
+                                                <td class="text-center">
+                                                    {{ $guru->guruPelajarans->where('tahun_ajaran_id', $tahunAjaranAktif->id ?? 0)->sum(fn($gp) => $gp->pelajaran->moduls->count())}}
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($guru->guruPelajarans->where('tahun_ajaran_id', $tahunAjaranAktif->id ?? 0)->count())
+                                                        <span class="badge {{ $guru->status ? 'bg-success' : 'bg-danger' }}">
+                                                            {{ $guru->status ? 'Aktif' : 'Tidak Aktif' }}
+                                                        </span>
+                                                    @else
+                                                        <span class="badge bg-secondary">Riwayat</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <a wire:navigate
+                                                        href="{{ route('superadmin.admin.modul.show', ['gurumodulId' => $guru->id]) }}"
+                                                        class="btn btn-sm btn-outline-success">
+                                                        <i class="fas fa-eye me-1"></i> Detail
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center text-muted">Belum ada guru tersedia.</td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="5" class="text-center text-muted">Belum ada guru tersedia.</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

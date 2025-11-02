@@ -37,13 +37,25 @@
                                         Tambah</button>
                                 </div>
                                 <div>
-                                    <button class="btn btn-md btn-success grid text-center me-0 me-sm-3 mb-3 mb-sm-0"><i
-                                            class="fas fa-file-excel"></i> Import</button>
-                                    <button class="btn btn-md btn-primary grid text-center me-0 me-sm-3 mb-3 mb-sm-0"><i
-                                            class="fas fa-file-export"></i> Export</button>
+                                    <!-- Button Import -->
+                                    <button class="btn btn-md btn-success grid text-center me-0 me-sm-3 mb-3 mb-sm-0"
+                                        data-bs-toggle="modal" data-bs-target="#importModal">
+                                        <i class="fas fa-file-excel"></i> Import
+                                    </button>
+                                    <!-- Button Export -->
+                                    <button wire:click="export"
+                                        class="btn btn-md btn-primary grid text-center me-0 me-sm-3 mb-3 mb-sm-0">
+                                        <i class="fas fa-file-export"></i> Export
+                                    </button>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Modal Import -->
+                        <x-modal-import id="importModal" title="Import Data Excel"
+                            routeImport="{{ route('superadmin.admin.import.guru') }}"
+                            routeTemplate="{{ route('superadmin.admin.download.template.guru') }}" inputName="file" />
+
                         <div class="card-body">
 
                             <div class="mb-3 d-flex justify-content-between">
@@ -137,6 +149,7 @@
             <!--end::Row-->
         </div>
     </div>
+
     @include('livewire.superadmin.admin.guru.create')
     @script
     <script>

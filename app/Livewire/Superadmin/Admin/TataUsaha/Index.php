@@ -5,10 +5,11 @@ namespace App\Livewire\Superadmin\Admin\TataUsaha;
 use App\Models\TataUsaha;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Title;
 
 #[Title('Data Tata Usaha')]
@@ -31,9 +32,14 @@ class Index extends Component
         return [
             'kd_tu' => 'required|string|unique:tata_usahas,kd_tu,' . $this->tata_usaha_id,
             'name' => 'required|string',
-            'email' => 'required|email|unique:tata_usahas,email,' . $this->tata_usaha_id,
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('tata_usahas', 'email')->ignore($this->tata_usaha_id),
+                Rule::unique('users', 'email')->ignore($this->tata_usaha_id ? User::where('tata_usaha_id', $this->tata_usaha_id)->value('id') : null),
+            ],
             'no_hp' => 'required|string',
-            'img' => $this->tata_usaha_id ? 'nullable|image|max:2048' : 'nullable|image|max:2048',
+            'img' => 'nullable|image|max:2048',
             'status' => 'required|boolean',
         ];
     }
@@ -48,7 +54,7 @@ class Index extends Component
             ->paginate($this->paginate);
 
         return view('livewire.superadmin.admin.tata-usaha.index', [
-            'title' => 'Data TataUsaha',
+            'title' => 'Data Tata Usaha',
             'tata_usahas' => $tata_usahas,
         ]);
     }
@@ -71,92 +77,119 @@ class Index extends Component
 
     public function store()
     {
-        $validatedData = $this->validate();
+        try {
+            $validatedData = $this->validate();
 
-        if ($this->img) {
-            $validatedData['img'] = $this->img->store('karyawan', 'public');
-        }
+            if ($this->img) {
+                $validatedData['img'] = $this->img->store('karyawan', 'public');
+            }
 
-        TataUsaha::create($validatedData);
-        if (!User::where('email', $validatedData['email'])->exists()) {
+            $tata_usaha = TataUsaha::create($validatedData);
+
+            // Cek jika email sudah ada di users
+            if (User::where('email', $validatedData['email'])->exists()) {
+                session()->flash('error', 'Email sudah digunakan oleh akun lain.');
+                $tata_usaha->delete();
+                return;
+            }
+
+            // Buat akun user dengan tata_usaha_id
             User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
+                'img' => $validatedData['img'] ?? null,
                 'password' => Hash::make($validatedData['kd_tu']),
-                'role' => 'karyawan',
+                'role' => 'karyawan',  // Tetap 'karyawan' seperti kode asli
+                'tata_usaha_id' => $tata_usaha->id,  // Tambahkan tata_usaha_id
+                'status' => $validatedData['status'],
             ]);
-        }
 
-        $this->dispatch('closeCreateModal');
-        session()->flash('message', 'TataUsaha berhasil ditambahkan.');
-        $this->resetInputFields();
+            $this->dispatch('closeCreateModal');
+            session()->flash('message', 'Tata Usaha berhasil ditambahkan dan akun karyawan dibuat.');
+            $this->resetInputFields();
+        } catch (\Exception $e) {
+            session()->flash('error', 'Terjadi kesalahan saat menyimpan tata usaha.');
+        }
     }
 
     public function edit($id)
     {
-        $karyawan = TataUsaha::findOrFail($id);
+        $tata_usaha = TataUsaha::findOrFail($id);
 
-        $this->tata_usaha_id = $karyawan->id;
-        $this->kd_tu = $karyawan->kd_tu;
-        $this->name = $karyawan->name;
-        $this->email = $karyawan->email;
-        $this->no_hp = $karyawan->no_hp;
-        $this->status = $karyawan->status;
+        $this->tata_usaha_id = $tata_usaha->id;
+        $this->kd_tu = $tata_usaha->kd_tu;
+        $this->name = $tata_usaha->name;
+        $this->email = $tata_usaha->email;
+        $this->no_hp = $tata_usaha->no_hp;
+        $this->img = $tata_usaha->img;
+        $this->status = $tata_usaha->status;
     }
 
     public function update()
     {
-        $validatedData = $this->validate();
+        try {
+            $validatedData = $this->validate();
 
-        $karyawan = TataUsaha::findOrFail($this->tata_usaha_id);
+            $tata_usaha = TataUsaha::findOrFail($this->tata_usaha_id);
 
-        if ($this->img) {
-            if ($karyawan->img && Storage::disk('public')->exists($karyawan->img)) {
-                Storage::disk('public')->delete($karyawan->img);
+            if ($this->img) {
+                if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
+                    Storage::disk('public')->delete($tata_usaha->img);
+                }
+                $validatedData['img'] = $this->img->store('karyawan', 'public');
+            } else {
+                $validatedData['img'] = $tata_usaha->img;
             }
-            $validatedData['img'] = $this->img->store('karyawan', 'public');
-        } else {
-            $validatedData['img'] = $karyawan->img;
+
+            $tata_usaha->update($validatedData);
+
+            // Update user jika ada
+            $user = User::where('tata_usaha_id', $tata_usaha->id)->first();
+            if ($user) {
+                $user->update([
+                    'name' => $validatedData['name'],
+                    'email' => $validatedData['email'],
+                    'img' => $validatedData['img'],
+                    'status' => $validatedData['status'],
+                ]);
+            }
+
+            $this->dispatch('closeEditModal');
+            session()->flash('message', 'Data tata usaha berhasil diperbarui.');
+            $this->resetInputFields();
+        } catch (\Exception $e) {
+            session()->flash('error', 'Terjadi kesalahan saat memperbarui tata usaha.');
         }
-
-        $karyawan->update($validatedData);
-
-        $user = User::where('email', $karyawan->email)->first();
-        if ($user) {
-            $user->status = $validatedData['status'];
-            $user->save();
-        }
-
-        $this->dispatch('closeEditModal');
-        session()->flash('message', 'Data karyawan berhasil diperbarui.');
-        $this->resetInputFields();
     }
 
     public function confirmDelete($id)
     {
         $this->deleteId = $id;
     }
+
     public function destroy()
     {
-        $karyawan = TataUsaha::findOrFail($this->deleteId);
+        try {
+            $tata_usaha = TataUsaha::findOrFail($this->deleteId);
 
-        // Hapus foto jika ada
-        if ($karyawan->img && Storage::disk('public')->exists($karyawan->img)) {
-            Storage::disk('public')->delete($karyawan->img);
+            // Hapus foto jika ada
+            if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
+                Storage::disk('public')->delete($tata_usaha->img);
+            }
+
+            // Hapus user terkait
+            $user = User::where('tata_usaha_id', $tata_usaha->id)->first();
+            if ($user) {
+                $user->delete();
+            }
+
+            $tata_usaha->delete();
+
+            $this->dispatch('closeDeleteModal');
+            session()->flash('message', 'Tata Usaha dan akun user berhasil dihapus.');
+            $this->deleteId = null;
+        } catch (\Exception $e) {
+            session()->flash('error', 'Terjadi kesalahan saat menghapus tata usaha.');
         }
-
-        // Hapus akun user terkait jika ada
-        $user = User::where('email', $karyawan->email)->first();
-        if ($user) {
-            $user->delete();
-        }
-
-        // Hapus data guru
-        $karyawan->delete();
-
-        $this->dispatch('closeDeleteModal');
-        session()->flash('message', 'TataUsaha dan akun user berhasil dihapus.');
-        $this->deleteId = null;
     }
 }
-

@@ -4,14 +4,18 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}" class="btn btn-secondary">
+                    <a wire:navigate
+                        href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}"
+                        class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item"><a wire:navigate href="{{ routeGuruOrAdmin('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a></li>
+                        <li class="breadcrumb-item"><a wire:navigate
+                                href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}">Materi</a>
+                        </li>
                         <li class="breadcrumb-item active" aria-current="page">Tambah</li>
                     </ol>
                 </div>
@@ -24,19 +28,19 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    
+
                     <h5 class="mb-0">{{$title}}</h5>
                 </div>
 
                 <div class="card-body">
                     @if($successMessage)
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ $successMessage }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ $successMessage }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     @endif
                     @if($errors->has('general'))
-                    <div class="alert alert-danger">{{ $errors->first('general') }}</div>
+                        <div class="alert alert-danger">{{ $errors->first('general') }}</div>
                     @endif
 
                     <form wire:submit.prevent="update">
@@ -44,7 +48,8 @@
                             <!-- Judul -->
                             <div class="col-md-6">
                                 <label class="form-label">Judul Materi <span class="text-danger">*</span></label>
-                                <input type="text" wire:model="judul" class="form-control" placeholder="Masukkan judul materi">
+                                <input type="text" wire:model="judul" class="form-control"
+                                    placeholder="Masukkan judul materi">
                                 @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
 
@@ -65,15 +70,31 @@
                             <!-- Deskripsi -->
                             <div class="col-12">
                                 <label class="form-label">Deskripsi</label>
-                                <textarea wire:model="deskripsi" rows="4" class="form-control" placeholder="Tuliskan deskripsi materi (opsional)"></textarea>
+                                <textarea wire:model="deskripsi" rows="4" class="form-control"
+                                    placeholder="Tuliskan deskripsi materi (opsional)"></textarea>
                                 @error('deskripsi') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
 
-                            <!-- File -->
+                            <!-- File Upload -->
                             <div class="col-md-6">
                                 <label class="form-label">File (opsional)</label>
-                                <input type="text" wire:model="file" class="form-control" placeholder="Masukkan URL/file path">
+                                <input type="file" wire:model="file" class="form-control">
                                 @error('file') <small class="text-danger">{{ $message }}</small> @enderror
+
+                                <div wire:loading wire:target="file">Uploading...</div>
+
+                                <!-- Preview file lama / file baru -->
+                                @if($file)
+                                    <p class="mt-2">File baru terpilih: {{ $file->getClientOriginalName() }}</p>
+                                @elseif($fileLama)
+                                    <p class="mt-2">
+                                        File sebelumnya:
+                                        <a href="{{ asset('storage/' . $fileLama) }}" target="_blank"
+                                            class="text-decoration-underline">
+                                            Lihat File
+                                        </a>
+                                    </p>
+                                @endif
                             </div>
 
                             <!-- Status -->
@@ -88,7 +109,7 @@
                         </div>
 
                         <div class="mt-4 d-flex justify-content-end">
-                            <a href="{{ routeGuruOrAdmin('pelajaran.materi.absensi', ['guruPelajaranId' => $guruPelajaranId,'rombelId' => $rombelId,'materiId' => $materiId]) }}"
+                            <a href="{{ routeRoleBased('pelajaran.materi.absensi', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId, 'materiId' => $materiId]) }}"
                                 class="btn btn-success me-2">
                                 <i class="fas fa-file-alt"></i> Absensi
                             </a>

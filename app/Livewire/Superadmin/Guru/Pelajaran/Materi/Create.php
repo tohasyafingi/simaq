@@ -8,11 +8,13 @@ use App\Models\GuruPelajaran;
 use App\Models\Rombel;
 use App\Models\Absensi;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 
 #[Title('Tambah Materi')]
 class Create extends Component
 {
+    use WithFileUploads;
     public $guruPelajaranId;
     public $rombelId;
     public $materi_id;
@@ -30,7 +32,7 @@ class Create extends Component
         'deskripsi' => 'nullable|string',
         'tanggal' => 'required|date',
         'jam' => 'required',
-        'file' => 'nullable|string|max:255',
+        'file' => 'nullable|file|mimes:pdf,doc,docx,pptx,jpg,png|max:5120', // max 5MB
         'status' => 'boolean',
     ];
 
@@ -63,6 +65,11 @@ class Create extends Component
 
         try {
             DB::transaction(function () {
+                $filePath = null;
+                if ($this->file) {
+                    $filePath = $this->file->store('materi', 'public'); 
+                }
+
                 $materi = Materi::create([
                     'guru_pelajaran_id' => $this->guruPelajaranId,
                     'rombel_id' => $this->rombelId,
@@ -70,7 +77,7 @@ class Create extends Component
                     'deskripsi' => $this->deskripsi,
                     'tanggal' => $this->tanggal,
                     'jam' => $this->jam,
-                    'file' => $this->file,
+                    'file' => $filePath, 
                     'status' => $this->status,
                 ]);
 

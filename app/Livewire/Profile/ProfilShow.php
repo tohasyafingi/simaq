@@ -28,29 +28,34 @@ class ProfilShow extends Component
         $user = Auth::user();
         $this->role = $user->role;
 
-        switch ($this->role) {
-            case 'guru':
-                $this->userData = Guru::where('email', $user->email)->first() ?? $user;
-                break;
+        // Fetch user data based on role, and ensure it's always loaded
+        $this->userData = $this->getUserDataByRole($user);
+        $this->mergeUserData($user);
+    }
 
-            case 'bendahara':
-                $this->userData = Bendahara::where('email', $user->email)->first() ?? $user;
-                break;
+    /**
+     * Get user data based on their role.
+     */
+    private function getUserDataByRole($user)
+    {
+        $roleModelMapping = [
+            'guru' => Guru::class,
+            'bendahara' => Bendahara::class,
+            'karyawan' => TataUsaha::class,
+            'siswa' => Siswa::class,
+            'alumni' => Siswa::class, // Assuming alumni is also part of the Siswa model
+        ];
 
-            case 'karyawan':
-                $this->userData = TataUsaha::where('email', $user->email)->first() ?? $user;
-                break;
+        $modelClass = $roleModelMapping[$this->role] ?? User::class; // Default to User model
 
-            case 'siswa':
-            case 'alumni':
-                $this->userData = Siswa::where('email', $user->email)->first() ?? $user;
-                break;
+        return $modelClass::where('email', $user->email)->first() ?? $user;
+    }
 
-            default:
-                $this->userData = $user;
-                break;
-        }
-
+    /**
+     * Merge the user's data with role-specific model data.
+     */
+    private function mergeUserData($user)
+    {
         $this->userData = (object) array_merge(
             $user->toArray(), 
             $this->isEloquentModel($this->userData) ? $this->userData->toArray() : (array) $this->userData
@@ -58,14 +63,16 @@ class ProfilShow extends Component
     }
 
     /**
-     * Check if the given object is an Eloquent model
+     * Check if the given object is an Eloquent model.
      */
     private function isEloquentModel($object)
     {
         return $object instanceof \Illuminate\Database\Eloquent\Model;
     }
 
-
+    /**
+     * Update the user's password.
+     */
     public function updatePassword()
     {
         $this->validate([
@@ -73,18 +80,23 @@ class ProfilShow extends Component
             'password' => 'required|min:6|confirmed',
         ]);
 
+        // Check if current password matches the one stored in the database
         if (!Hash::check($this->current_password, Auth::user()->password)) {
             session()->flash('error', 'Password lama tidak sesuai.');
             return;
         }
 
+        // Update password in the database
         $user = Auth::user();
         $user->password = Hash::make($this->password);
         $user->save();
 
+        // Set success state
         $this->passwordUpdated = true;
 
+        // Clear password fields
         $this->reset(['current_password', 'password', 'password_confirmation']);
+        session()->flash('message', 'Password berhasil diperbarui.');
     }
 
     public function render()

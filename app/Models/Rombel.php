@@ -41,4 +41,10 @@ class Rombel extends Model
             ->wherePivot('status', true)
             ->withTimestamps();
     }
+
+    public function moduls()
+    {
+        return $this->hasMany(Modul::class, 'pelajaran_id', 'tingkat_kelas_id')
+            ->where('status', true);
+    }
 }

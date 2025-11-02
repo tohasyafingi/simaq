@@ -3,8 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ImportsController;
+
 use App\Livewire\Profile\ProfilShow;
-use App\Livewire\Profile\ProfilEdit;
 
 use App\Livewire\Superadmin\Admin\Index as AdminDashboard;
 use App\Livewire\Superadmin\Admin\User\Index as AdminUserIndex;
@@ -39,17 +40,23 @@ use App\Livewire\Superadmin\Admin\Galeri\Index as AdminGaleriIndex;
 use App\Livewire\Superadmin\Admin\KatBerita\Index as AdminKatBeritaIndex;
 use App\Livewire\Superadmin\Admin\KatKaryaIlmiah\Index as AdminKatKaryaIlmiahIndex;
 use App\Livewire\Superadmin\Admin\GuruModul\Index as AdminGuruModulIndex;
+use App\Livewire\Superadmin\Admin\SiswaRombel\Index as AdminSiswaRombelIndex;
+use App\Livewire\Superadmin\Admin\SiswaModul\Index as AdminSiswaModulIndex;
 
 use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Index as GuruMateriIndex;
 use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Create as GuruMateriCreate;
 use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Edit as GuruMateriEdit;
 use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Absensi as GuruMateriAbsensi;
 use App\Livewire\Superadmin\Guru\Pelajaran\Materi\Rekap as GuruMateriRekap;
-
 use App\Livewire\Superadmin\Guru\Modul\Index as GuruModulIndex;
-
 use App\Livewire\Superadmin\Guru\Index as GuruDashboard;
 use App\Livewire\Superadmin\Guru\Pelajaran\Index as GuruPelajaranIndex;
+
+use App\Livewire\Superadmin\Siswa\Index as SiswaDashboard;
+use App\Livewire\Superadmin\Siswa\Pelajaran\Index as SiswaPelajaranIndex;
+use App\Livewire\Superadmin\Siswa\Materi\Index as SiswaMateriIndex;
+use App\Livewire\Superadmin\Siswa\Materi\Absensi as SiswaMateriAbsensi;
+use App\Livewire\Superadmin\Siswa\Modul\Index as SiswaModulIndex;
 
 use App\Livewire\Portal\Index as PortalIndex;
 use App\Livewire\Portal\Contact as PortalContact;
@@ -68,6 +75,8 @@ use App\Livewire\Portal\ProgramTahfidz as PortalProgramTahfidz;
 use App\Livewire\Portal\Artikel as PortalArtikel;
 use App\Livewire\Portal\KaryaIlmiah as PortalKaryaIlmiah;
 use App\Livewire\Portal\Download as PortalDownload;
+
+use App\Livewire\DataImportExport;
 
 
 Route::get('/', PortalIndex::class)->name('beranda');
@@ -106,15 +115,21 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/rombel/{rombelId}', AdminDetailRombelIndex::class)->name('detail-rombel.index');
 
     Route::get('/guru-pengajar', AdminGuruPengajarIndex::class)->name('guru-pengajar.index');
-    Route::get('/guru-pengajar/{guruId}', GuruPelajaranIndex::class)->name('detail-guru-pengajar.index');
+    Route::get('/guru-pengajar/{guruId}', GuruPelajaranIndex::class)->name('guru-pengajar.pelajaran.index');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi', GuruMateriIndex::class)->name('guru-pengajar.pelajaran.materi.index');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/rekap-absensi', GuruMateriRekap::class)->name('guru-pengajar.pelajaran.materi.rekap');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi/tambah', GuruMateriCreate::class)->name('guru-pengajar.pelajaran.materi.create');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi/{materiId}/edit', GuruMateriEdit::class)->name('guru-pengajar.pelajaran.materi.edit');
     Route::get('/guru-pengajar/{guruPelajaranId}/rombel/{rombelId}/materi/{materiId}/absensi', GuruMateriAbsensi::class)->name('guru-pengajar.pelajaran.materi.absensi');
-
     Route::get('/guru-modul', AdminGuruModulIndex::class)->name('guru-modul.index');
     Route::get('/guru-modul/{gurumodulId}', GuruModulIndex::class)->name('modul.show');
+
+    Route::get('/siswa-rombel', AdminSiswaRombelIndex::class)->name('siswa-rombel.index');
+    Route::get('/siswa-rombel/siswa/{siswaId}', SiswaPelajaranIndex::class)->name('siswa-rombel.pelajaran.index');
+    Route::get('/siswa-rombel/siswa/{siswaId}/pelajaran/{pelajaranId}/materi', SiswaMateriIndex::class)->name('siswa-rombel.pelajaran.materi.index');
+    Route::get('/siswa-rombel/siswa/{siswaId}/pelajaran/{pelajaranId}/materi/{materiId}/absensi', SiswaMateriAbsensi::class)->name('siswa-rombel.pelajaran.materi.absensi');
+    Route::get('/siswa-modul', AdminSiswaModulIndex::class)->name('siswa-modul.index');
+    Route::get('/siswa-modul/{siswaId}', SiswaModulIndex::class)->name('siswa-modul.show');
 
     Route::get('/jadwal', AdminJadwalIndex::class)->name('jadwal.index');
     Route::get('/user', AdminUserIndex::class)->name('user.index');
@@ -132,6 +147,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/e-book', AdminEBookIndex::class)->name('e-book.index');
     Route::get('/download', AdminDownloadIndex::class)->name('download.index');
     Route::get('/galeri', AdminGaleriIndex::class)->name('galeri.index');
+
+    Route::get('/data-import-export', DataImportExport::class)->name('data.import.export');
+    Route::post('/import/guru', [ImportsController::class, 'importGuru'])->name('import.guru');
+    Route::get('/download/template/guru', function () {
+        return response()->download(storage_path('app/templates/guru_template.xlsx'));
+    })->name('download.template.guru');
 });
 
 Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('superadmin.guru.')->group(function () {
@@ -145,7 +166,13 @@ Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('superadmin.guru.
     Route::get('/modul-pelajaran/{gurumodulId}', GuruModulIndex::class)->name('modul.show');
 });
 
-
+Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('superadmin.siswa.')->group(function () {
+    Route::get('/dashboard', SiswaDashboard::class)->name('dashboard');
+    Route::get('/mata-pelajaran/{siswaId}', SiswaPelajaranIndex::class)->name('pelajaran.index');
+    Route::get('/mata-pelajaran/{siswaId}/pelajaran/{pelajaranId}/materi', SiswaMateriIndex::class)->name('pelajaran.materi.index');
+    Route::get('/mata-pelajaran/{siswaId}/pelajaran/{pelajaranId}/materi/{materiId}/absensi', SiswaMateriAbsensi::class)->name('pelajaran.materi.absensi');
+    Route::get('/modul-pelajaran/{siswaId}', SiswaModulIndex::class)->name('modul.show');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profil', ProfilShow::class)->name('profil.show');

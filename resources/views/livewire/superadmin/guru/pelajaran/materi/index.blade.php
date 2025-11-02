@@ -27,7 +27,7 @@
                                 <!-- Tombol kiri: Tambah Materi -->
                                 <div>
                                     <a wire:navigate
-                                        href="{{ routeGuruOrAdmin('pelajaran.materi.create', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}"
+                                        href="{{ routeRoleBased('pelajaran.materi.create', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}"
                                         class="btn btn-primary">
                                         <i class="fas fa-plus"></i> Tambah
                                     </a>
@@ -36,7 +36,7 @@
                                 <!-- Tombol kanan: Rekap Absensi -->
                                 <div>
                                     <a wire:navigate
-                                        href="{{ routeGuruOrAdmin('pelajaran.materi.rekap', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}"
+                                        href="{{ routeRoleBased('pelajaran.materi.rekap', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}"
                                         class="btn btn-success">
                                         <i class="fas fa-file-alt"></i> Rekap Absensi
                                     </a>
@@ -139,13 +139,13 @@
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-1">
                                                     <a wire:navigate
-                                                        href="{{ routeGuruOrAdmin('pelajaran.materi.absensi', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId, 'materiId' => $materi->id]) }}"
+                                                        href="{{ routeRoleBased('pelajaran.materi.absensi', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId, 'materiId' => $materi->id]) }}"
                                                         class="btn btn-sm btn-outline-success">
                                                         <i class="fas fa-file-alt"></i>
                                                     </a>
 
                                                     <a wire:navigate
-                                                        href="{{ routeGuruOrAdmin('pelajaran.materi.edit', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId, 'materiId' => $materi->id]) }}"
+                                                        href="{{ routeRoleBased('pelajaran.materi.edit', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId, 'materiId' => $materi->id]) }}"
                                                         class="btn btn-sm btn-outline-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </a>

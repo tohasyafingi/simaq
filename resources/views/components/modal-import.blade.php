@@ -47,6 +47,7 @@
 
 @push('scripts')
 <script>
+    // Function to preview the selected file name
     function previewFileName(modalId) {
         const input = document.querySelector(`#${modalId}Input`);
         const preview = document.querySelector(`#${modalId}FilenamePreview`);
@@ -57,7 +58,7 @@
         }
     }
 
-    // Buka otomatis modal jika ada error validasi
+    // Automatically open the modal if there's a validation error
     document.addEventListener("DOMContentLoaded", function () {
         @if ($errors->has($inputName))
             var modal = new bootstrap.Modal(document.getElementById('{{ $id }}'));

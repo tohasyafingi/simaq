@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -14,7 +15,7 @@ class AuthenticatedSessionController extends Controller
     protected $roleRoutes = [
         'admin' => 'superadmin.admin.dashboard',
         'guru' => 'superadmin.guru.dashboard',
-        'siswa' => 'siswa.dashboard',
+        'siswa' => 'superadmin.siswa.dashboard',
         'karyawan' => 'karyawan.dashboard',
         'bendahara' => 'bendahara.dashboard',
         'alumni' => 'alumni.dashboard',
@@ -38,7 +39,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $route = $this->roleRoutes[$user->role] ?? null;
 
-        if ($route && \Route::has($route)) {
+        if ($route && Route::has($route)) {
             return redirect()->route($route);
         }
 
@@ -59,6 +60,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

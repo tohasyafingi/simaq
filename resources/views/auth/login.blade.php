@@ -4,142 +4,170 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Landify Bootstrap Template</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>Login - SIMAQ</title>
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Disable cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 
-    <!-- Vendor CSS Files -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    {{-- <link href="{{ asset('portal/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> --}}
-    <link href="{{ asset('portal/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-    <link href="{{ asset('portal/assets/vendor/aos/aos.css')}}" rel="stylesheet">
-    <link href="{{ asset('portal/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('portal/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #e0f7f1 100%);
+            position: relative;
+        }
 
-    <!-- Main CSS File -->
-    <link href="{{ asset('portal/assets/css/main.css')}}" rel="stylesheet">
+        .login-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    <!-- =======================================================
-  * Template Name: Landify
-  * Template URL: https://bootstrapmade.com/landify-bootstrap-landing-page-template/
-  * Updated: Aug 04 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+        .login-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            color: #1abc9c;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .login-card .form-control:focus {
+            border-color: #16a085;
+            box-shadow: 0 0 0 0.2rem rgba(22, 160, 133, 0.25);
+        }
+
+        .btn-login {
+            background-color: #1abc9c;
+            border: none;
+            color: white;
+            font-weight: 500;
+            transition: 0.3s;
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-login:hover {
+            background-color: #16a085;
+            color: white;
+        }
+
+        .forgot-password {
+            font-size: 0.9rem;
+        }
+
+        .login-card .logo {
+            width: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: #333333;
+            font-size: 0.9rem;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .copyright a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .copyright a:hover {
+            color: #555555;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+        }
+    </style>
     @livewireStyles
 </head>
 
-<body class="index-page">
+<body>
 
-    <!-- ***** Header Area Start ***** -->
-    @include('components.layouts.portal.header')
-    <!-- ***** Header Area End ***** -->
-    <main class="main">
-        <!-- Login Section -->
-        <section id="login" class="contact section light-background">
-            <div style="padding-top: 30px">
-                <!-- Section Title -->
-                <div class="container section-title text-center">
-                    <span class="description-title">Login</span>
-                    <h2>Welcome Back</h2>
-                    <p>Silakan masuk untuk melanjutkan ke dashboard</p>
+    <div class="login-container">
+
+        <div class="login-card">
+            <!-- Logo -->
+            <img src="{{ asset('images/default-image.jpg') }}" alt="Logo Sekolah" class="logo">
+
+            <h2>Login</h2>
+            <p class="text-muted mb-4">Masuk ke akun Anda untuk melanjutkan</p>
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email Address"
+                        value="{{ old('email') }}" required autofocus>
+                    @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
-            </div>
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-                <div class="row g-5 justify-content-center">
-                    
-                    <div class="col-lg-6">
-                        <div class="contact-form card shadow-sm" data-aos="fade-up" data-aos-delay="300">
-                            <div class="card-body p-4 p-lg-5">
-
-                                <!-- Login Form -->
-                                <form method="POST" action="{{ route('login') }}" data-aos="fade-up"
-                                    data-aos-delay="600">
-                                    @csrf
-
-                                    <div class="row gy-4">
-
-                                        <!-- Email -->
-                                        <div class="col-12">
-                                            <input type="email" name="email" class="form-control"
-                                                placeholder="Email Address" value="{{ old('email') }}" required
-                                                autofocus>
-                                            @error('email')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-
-                                        <!-- Password -->
-                                        <div class="col-12">
-                                            <input type="password" name="password" class="form-control"
-                                                placeholder="Password" required>
-                                            @error('password')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-
-                                        <!-- Remember Me -->
-                                        <div class="col-12 d-flex align-items-center">
-                                            <input id="remember_me" type="checkbox" name="remember"
-                                                class="me-2">
-                                            <label for="remember_me" class="mb-0">Remember me</label>
-                                        </div>
-
-                                        <!-- Button -->
-                                        <div class="col-12 text-center">
-                                            <button type="submit" class="btn btn-submit w-100">Login</button>
-                                        </div>
-
-                                        <!-- Register & Forgot Password -->
-                                        <div class="col-12 text-center mt-3">
-                                                <a href="{{ route('password.request') }}">Forgot your password?</a>
-                                        </div>
-
-                                    </div>
-                                </form>
-                                <!-- End Login Form -->
-
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    @error('password')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
-            </div>
-        </section>
-    </main>
 
-    @include('components.layouts.portal.footer')
+                <div class="form-check mb-3 text-start">
+                    <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
+                    <label class="form-check-label" for="remember_me">Remember me</label>
+                </div>
 
-    <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-login w-100">Login</button>
+                </div>
 
-    <!-- Vendor JS Files -->
-    <script data-navigate-once src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script>
-    {{-- <script data-navigate-once src="{{ asset('portal/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> --}}
-    <script data-navigate-once src="{{ asset('portal/assets/vendor/php-email-form/validate.js')}}"></script>
-    <script data-navigate-once src="{{ asset('portal/assets/vendor/aos/aos.js')}}"></script>
-    <script data-navigate-once src="{{ asset('portal/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-    <script data-navigate-once src="{{ asset('portal/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-    <script data-navigate-once src="{{ asset('portal/assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+                <div>
+                    <a href="{{ route('password.request') }}" class="forgot-password">Forgot your password?</a>
+                </div>
+            </form>
+        </div>
 
-    <!-- Main JS File -->
-    <script src="{{ asset('portal/assets/js/main.js')}}"></script>
+    </div>
+
+    <div class="copyright">
+        <strong>
+            Copyright &copy; {{ date('Y') }}&nbsp;
+            <a href="#">SIMAQ</a> |
+        </strong>
+        Support by <a href="#">@tohasyafingi</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
     @livewireScripts
 </body>
 

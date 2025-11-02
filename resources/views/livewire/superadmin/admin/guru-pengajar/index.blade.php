@@ -124,7 +124,7 @@
                                                 <td class="text-center">
                                                     <button class="btn btn-sm btn-outline-success">
                                                         <a wire:navigate
-                                                            href="{{route('superadmin.admin.detail-guru-pengajar.index', $guru->id)}}"
+                                                            href="{{route('superadmin.admin.guru-pengajar.pelajaran.index', $guru->id)}}"
                                                             style="text-decoration: none; color: inherit;">
                                                             <i class="fas fa-eye">Detail</i>
                                                         </a>

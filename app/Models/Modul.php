@@ -15,4 +15,15 @@ class Modul extends Model
     {
         return $this->belongsTo(Pelajaran::class);
     }
+        public function rombels()
+    {
+        return $this->hasManyThrough(
+            \App\Models\Rombel::class,
+            \App\Models\Pelajaran::class,
+            'id',           // foreign key Pelajaran di Modul (pelajaran_id)
+            'pelajaran_id', // foreign key Pelajaran di Rombel? (sesuaikan)
+            'pelajaran_id', // local key Modul
+            'id'            // local key Pelajaran
+        );
+    }
 }

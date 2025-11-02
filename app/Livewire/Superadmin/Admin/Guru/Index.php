@@ -11,6 +11,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\GuruExport;
 
 #[Title('Data Guru')]
 class Index extends Component
@@ -38,18 +40,24 @@ class Index extends Component
                 Rule::unique('users', 'email')->ignore($this->guru_id ? User::where('guru_id', $this->guru_id)->value('id') : null),
             ],
             'no_hp' => 'required|string',
-            'img' => 'nullable|image|max:2048',  
+            'img' => 'nullable|image|max:2048',
             'status' => 'required|boolean',
         ];
     }
 
+
+    public function export()
+    {
+        return Excel::download(new GuruExport, 'data_guru.xlsx');
+    }
+
     public function render()
     {
-        $gurus = Guru::where(function ($q) {  
+        $gurus = Guru::where(function ($q) {
             $q->where('kd_guru', 'like', '%' . $this->search . '%')
-              ->orWhere('name', 'like', '%' . $this->search . '%')
-              ->orWhere('email', 'like', '%' . $this->search . '%')
-              ->orWhere('no_hp', 'like', '%' . $this->search . '%');
+                ->orWhere('name', 'like', '%' . $this->search . '%')
+                ->orWhere('email', 'like', '%' . $this->search . '%')
+                ->orWhere('no_hp', 'like', '%' . $this->search . '%');
         })->orderBy('name')->paginate($this->paginate);
 
         return view('livewire.superadmin.admin.guru.index', [
@@ -79,7 +87,7 @@ class Index extends Component
         try {
             $validatedData = $this->validate();
 
-            if ($this->img) {  
+            if ($this->img) {
                 $validatedData['img'] = $this->img->store('guru', 'public');
             }
 
@@ -94,11 +102,11 @@ class Index extends Component
             User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
-                'img' => $validatedData['img'] ?? null,  
+                'img' => $validatedData['img'] ?? null,
                 'password' => Hash::make($validatedData['kd_guru']),
                 'role' => 'guru',
                 'guru_id' => $guru->id,
-                'status' => $validatedData['status'],  
+                'status' => $validatedData['status'],
             ]);
 
             $this->dispatch('closeCreateModal');
@@ -118,7 +126,7 @@ class Index extends Component
         $this->name = $guru->name;
         $this->email = $guru->email;
         $this->no_hp = $guru->no_hp;
-        $this->img = null;  
+        $this->img = null;
         $this->status = $guru->status;
     }
 
@@ -129,13 +137,13 @@ class Index extends Component
 
             $guru = Guru::findOrFail($this->guru_id);
 
-            if ($this->img) {  
+            if ($this->img) {
                 if ($guru->img && Storage::disk('public')->exists($guru->img)) {
                     Storage::disk('public')->delete($guru->img);
                 }
-                $validatedData['img'] = $this->img->store('guru', 'public');  
+                $validatedData['img'] = $this->img->store('guru', 'public');
             } else {
-                $validatedData['img'] = $guru->img;  
+                $validatedData['img'] = $guru->img;
             }
 
             $guru->update($validatedData);

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision & Mission - High School Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        :root {
+            --primary-color: #1abc9c;
+            --primary-hover: #16a085;
+        }
+        
+        .navbar-turquoise {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand, .navbar-nav .nav-link {
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #f0f0f0 !important;
+            background-color: var(--primary-hover);
+            border-radius: 5px;
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .page-banner {
+            background: linear-gradient(rgba(26,188,156,0.8), rgba(26,188,156,0.8)), url('https://via.placeholder.com/1920x400/1abc9c/ffffff?text=Vision+and+Mission');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .page-banner h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        .vision-card, .mission-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .vision-card {
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .mission-card {
+            border-left: 5px solid var(--primary-hover);
+        }
+        
+        .value-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+        
+        .value-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        footer a:hover {
+            opacity: 0.8;
+        }
+        
+        .social-links a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-turquoise navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-mortarboard-fill me-2"></i>High School
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile-history.html">History</a></li>
+                            <li><a class="dropdown-item active" href="profile-vision-mission.html">Vision & Mission</a></li>
+                            <li><a class="dropdown-item" href="profile-organizational-structure.html">Organizational Structure</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Academic
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="academic-study-programs.html">Study Programs</a></li>
+                            <li><a class="dropdown-item" href="academic-extracurricular.html">Extracurricular</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Student Affairs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="student-affairs-council.html">Student Council</a></li>
+                            <li><a class="dropdown-item" href="student-affairs-scouts.html">Scouts</a></li>
+                            <li><a class="dropdown-item" href="student-affairs-tahfidz.html">Tahfidz Program</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Public Information
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="public-info-news.html">News</a></li>
+                            <li><a class="dropdown-item" href="public-info-scientific-works.html">Scientific Works</a></li>
+                            <li><a class="dropdown-item" href="public-info-ebook.html">E-Book</a></li>
+                            <li><a class="dropdown-item" href="public-info-download.html">Download</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admission.html">Admission (PPDB)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-light">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Banner -->
+    <div class="page-banner">
+        <div class="container">
+            <h1>Vision & Mission</h1>
+            <p class="lead">Guiding Principles for Educational Excellence</p>
+        </div>
+    </div>
+
+    <!-- Vision & Mission Content -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Vision -->
+            <div class="vision-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 text-center mb-3 mb-lg-0">
+                        <i class="bi bi-eye-fill" style="font-size: 4rem; color: var(--primary-color);"></i>
+                    </div>
+                    <div class="col-lg-10">
+                        <h2 class="mb-3" style="color: var(--primary-color);">Our Vision</h2>
+                        <p class="lead mb-0">To be a leading educational institution that nurtures innovative, ethical, and globally-minded individuals who contribute positively to society and excel in their chosen fields.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission -->
+            <div class="mission-card">
+                <div class="row">
+                    <div class="col-lg-2 text-center mb-3 mb-lg-0">
+                        <i class="bi bi-bullseye" style="font-size: 4rem; color: var(--primary-hover);"></i>
+                    </div>
+                    <div class="col-lg-10">
+                        <h2 class="mb-4" style="color: var(--primary-hover);">Our Mission</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>Academic Excellence:</strong> Provide rigorous, comprehensive education that challenges students to reach their full intellectual potential through innovative teaching methods and cutting-edge curriculum.
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>Character Development:</strong> Foster strong moral values, integrity, and social responsibility through character education programs and community service initiatives.
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>Holistic Growth:</strong> Support the physical, emotional, and spiritual development of students through diverse extracurricular activities, sports programs, and wellness initiatives.
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>Innovation & Technology:</strong> Integrate modern technology and innovative learning approaches to prepare students for the challenges of the 21st century.
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>Global Perspective:</strong> Cultivate cultural awareness, international understanding, and global citizenship through diverse programs and international collaborations.
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <strong>Community Partnership:</strong> Build strong partnerships with parents, alumni, and the broader community to create a supportive learning environment.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Core Values</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="value-item">
+                        <i class="bi bi-lightbulb-fill value-icon"></i>
+                        <h4>Excellence</h4>
+                        <p>We strive for the highest standards in all aspects of education, encouraging students to pursue excellence in academics, character, and personal growth.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="value-item">
+                        <i class="bi bi-heart-fill value-icon"></i>
+                        <h4>Integrity</h4>
+                        <p>We uphold honesty, ethical behavior, and moral principles in all our actions, fostering a culture of trust and accountability.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="value-item">
+                        <i class="bi bi-people-fill value-icon"></i>
+                        <h4>Respect</h4>
+                        <p>We value diversity and treat all members of our community with dignity, promoting an inclusive environment where everyone feels valued.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="value-item">
+                        <i class="bi bi-rocket-takeoff-fill value-icon"></i>
+                        <h4>Innovation</h4>
+                        <p>We embrace creativity and forward-thinking approaches, encouraging students to think critically and solve problems innovatively.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="value-item">
+                        <i class="bi bi-hand-thumbs-up-fill value-icon"></i>
+                        <h4>Responsibility</h4>
+                        <p>We cultivate a sense of personal and social responsibility, preparing students to be active and contributing members of society.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="value-item">
+                        <i class="bi bi-trophy-fill value-icon"></i>
+                        <h4>Perseverance</h4>
+                        <p>We instill resilience and determination, teaching students to overcome challenges and persist in the face of adversity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Join Our Community</h2>
+            <p class="lead mb-4">Be part of an institution that values excellence, integrity, and innovation.</p>
+            <a href="admission.html" class="btn btn-primary btn-lg me-3">Apply Now</a>
+            <a href="contact.html" class="btn btn-outline-primary btn-lg">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">High School</h5>
+                    <p>Empowering students to achieve their full potential through quality education and character development.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="profile-history.html">About Us</a></li>
+                        <li class="mb-2"><a href="academic-study-programs.html">Academic Programs</a></li>
+                        <li class="mb-2"><a href="admission.html">Admission</a></li>
+                        <li class="mb-2"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.3);">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 High School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

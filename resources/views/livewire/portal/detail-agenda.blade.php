@@ -1,100 +1,180 @@
 <div>
-    <!-- Page Title -->
-    <div class="page-title light-background" style="padding-top: 70px">
-        <div class="container">
-            <nav class="breadcrumbs">
-                <a href="{{ route('beranda') }}">Home</a> / <span>{{ $berita->judul }}</span>
-            </nav>
-        </div>
-    </div><!-- End Page Title -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('beranda') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('berita-agenda') }}">News</a></li>
+                        <li class="breadcrumb-item active">{{ $berita->judul }}</li>
+                    </ol>
+                </nav>
 
-    <!-- Service Details Section -->
-    <section id="service-details" class="service-details section">
-        <div class="container">
-            <div class="row gy-5">
-                <div class="col-lg-8 order-lg-1 order-1">
-                    <div class="service-main-content">
-                        <div class="service-header" data-aos="fade-up">
-                            <span class="post-category">{{ $berita->kategori->nama ?? 'Uncategorized' }}</span>
-                            <h1>{{ $berita->judul }}</h1>
-                            <div class="service-meta">
-                                <span><i class="fas fa-user"></i> {{ $berita->author_name ?? 'Admin' }}</span>
-                                <span><i class="bi bi-clock"></i> {{ $berita->created_at->format('d/m/Y') }}</span>
+                <article class="detail-header">
+                    <span class="news-category">{{ $berita->kategori->nama ?? 'Uncategorized' }}</span>
+                    <h1 class="display-5 fw-bold mb-3">{{ $berita->judul }}</h1>
+
+                    <div class="detail-meta">
+                        <div class="detail-meta-item">
+                            <i class="bi bi-calendar3 text-primary"></i>
+                            <span>{{ $berita->created_at->format('d/m/Y') }}</span>
+                        </div>
+                        <div class="detail-meta-item">
+                            <i class="bi bi-person text-primary"></i>
+                            <span>{{ $berita->author_name ?? 'Admin' }}</span>
+                        </div>
+                        <div class="detail-meta-item">
+                            <i class="bi bi-eye text-primary"></i>
+                            <span>1,234 views</span>
+                        </div>
+                        <div class="detail-meta-item">
+                            <i class="bi bi-chat text-primary"></i>
+                            <span>45 comments</span>
+                        </div>
+                    </div>
+
+                    <img src="{{ $berita->thumbnail_url ?? asset('portal/images/default.jpg') }}"
+                        alt="{{ $berita->judul }}" class="detail-image">
+                </article>
+
+                <div class="detail-content">
+                    <p class="lead">
+                        {!! $berita->isi !!}
+                    </p>
+                </div>
+
+                <div class="author-info">
+                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Author" class="author-avatar">
+                    <div class="author-details">
+                        <h5>{{ $berita->author_name ?? 'Admin' }}</h5>
+                        <p class="mb-0 text-muted">Official news and updates from our school administration</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 my-4">
+                    <span class="fw-bold">Share:</span>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
+                        class="text-primary"><i class="bi bi-facebook fs-5"></i></a>
+                    <a href="https://twitter.com/intent/tweet?text={{ urlencode($berita->judul) }}&url={{ urlencode(request()->fullUrl()) }}"
+                        class="text-primary"><i class="bi bi-twitter fs-5"></i></a>
+                    <a href="https://api.whatsapp.com/send?text={{ urlencode($berita->judul . ' ' . request()->fullUrl()) }}"
+                        target="_blank" title="Share to WhatsApp" class="text-primary"><i
+                            class="bi bi-whatsapp"></i></a>
+                    <a href="javascript:void(0);" onclick="copyLink()" class="text-primary"><i
+                            class="bi bi-link-45deg"></i></a>
+                </div>
+
+                <div class="comments-section">
+                    <h3 class="mb-4">Comments (45)</h3>
+
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">John Smith</span>
+                            <span class="comment-date">January 16, 2025</span>
+                        </div>
+                        <p class="mb-0">Congratulations to the team! This is such an inspiring achievement. Our school
+                            continues to produce exceptional students.</p>
+                    </div>
+
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">Emily Johnson</span>
+                            <span class="comment-date">January 16, 2025</span>
+                        </div>
+                        <p class="mb-0">As a parent, I'm so proud of what our students have accomplished. This shows the
+                            quality of education our children are receiving.</p>
+                    </div>
+
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">Michael Chen</span>
+                            <span class="comment-date">January 15, 2025</span>
+                        </div>
+                        <p class="mb-0">Amazing work! The renewable energy project sounds fascinating. Best of luck at
+                            the international competition!</p>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Leave a Comment</h5>
+                            <form>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="4" placeholder="Your Comment"
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-read-more">Post Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card sidebar-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-newspaper"></i> Related News</h5>
+                    </div>
+
+                    <div class="card-body">
+                        @foreach($latestBeritas as $latest)
+                            <div class="related-item">
+                                <img src="{{ $latest->thumbnail_url ?? asset('portal/images/default.jpg') }}"
+                                    alt="{{ $latest->judul }}">
+                                <div class="related-item-content">
+                                    <h6><a href="{{ route('detail-berita-agenda', ['slug' => $latest->slug]) }}"
+                                            class="text-dark">{{ $latest->judul }}</a></h6>
+                                    <small><i class="bi bi-calendar3"></i>
+                                        {{ $latest->created_at->format('d/m/Y') }}</small>
+                                </div>
                             </div>
+                        @endforeach
+                    </div>
+                </div>
 
-                            <div class="news-thumbnail mb-4" data-aos="fade-up" data-aos-delay="100">
-                                <img src="{{ $berita->thumbnail_url ?? asset('portal/assets/img/services/services-1.webp') }}"
-                                    alt="{{ $berita->judul }}" class="img-fluid rounded">
-                            </div>
-
-                            <p class="content-block">
-                                {!! $berita->isi !!}
-                            </p>
+                <div class="card sidebar-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-tags"></i> Categories</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-primary">Achievement</span>
+                            <span class="badge bg-secondary">Event</span>
+                            <span class="badge bg-success">Facility</span>
+                            <span class="badge bg-info">Community</span>
+                            <span class="badge bg-warning">Academic</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 order-lg-2 order-2">
-                    <div class="service-sidebar" data-aos="fade-left">
-
-                        <div class="service-features-list" data-aos="fade-up" data-aos-delay="200">
-                            <h4>Berita Terbaru</h4>
-                            <ul>
-                                @foreach($latestBeritas as $latest)
-                                    <li>
-                                        <img src="{{ $latest->thumbnail_url ?? asset('portal/assets/img/services/services-1.webp') }}"
-                                            alt="{{ $latest->judul }}">
-                                        <div>
-                                            <a href="{{ route('detail-berita-agenda', ['slug' => $latest->slug]) }}">
-                                                <h5>{{ $latest->judul }}</h5>
-                                            </a>
-                                            <p>{{ Str::limit(strip_tags($latest->isi), 50) }}</p>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <div class="contact-info" data-aos="fade-up" data-aos-delay="400">
-                            <h4>Bagikan</h4>
-                            <div class="contact-method">
-                                <!-- Twitter -->
-                                <a href="https://twitter.com/intent/tweet?text={{ urlencode($berita->judul) }}&url={{ urlencode(request()->fullUrl()) }}"
-                                    target="_blank" title="Share to Twitter" class="twitter">
-                                    <i class="bi bi-twitter"></i>
-                                </a>
-
-                                <!-- Facebook -->
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
-                                    target="_blank" title="Share to Facebook" class="facebook">
-                                    <i class="bi bi-facebook"></i>
-                                </a>
-
-                                <!-- LinkedIn -->
-                                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->fullUrl()) }}&title={{ urlencode($berita->judul) }}"
-                                    target="_blank" title="Share to LinkedIn" class="linkedin">
-                                    <i class="bi bi-linkedin"></i>
-                                </a>
-
-                                <!-- WhatsApp -->
-                                <a href="https://api.whatsapp.com/send?text={{ urlencode($berita->judul . ' ' . request()->fullUrl()) }}"
-                                    target="_blank" title="Share to WhatsApp" class="whatsapp">
-                                    <i class="bi bi-whatsapp"></i>
-                                </a>
-
-                                <!-- Copy Link -->
-                                <a href="javascript:void(0);" onclick="copyLink()" title="Copy Link" class="copy-link">
-                                    <i class="bi bi-link-45deg"></i>
-                                </a>
-                            </div>
-                        </div>
-
+                <div class="card sidebar-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Upcoming Events</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <small class="text-muted d-block"><i class="bi bi-calendar3"></i> Feb 5, 2025</small>
+                                <strong>Annual Sports Day</strong>
+                            </li>
+                            <li class="mb-3">
+                                <small class="text-muted d-block"><i class="bi bi-calendar3"></i> Feb 10, 2025</small>
+                                <strong>Science Fair Exhibition</strong>
+                            </li>
+                            <li class="mb-3">
+                                <small class="text-muted d-block"><i class="bi bi-calendar3"></i> Feb 15, 2025</small>
+                                <strong>Art & Music Festival</strong>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
             </div>
         </div>
-    </section><!-- /Service Details Section -->
+    </div>
 
     <script>
         function copyLink() {

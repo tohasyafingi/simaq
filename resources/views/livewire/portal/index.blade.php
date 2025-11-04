@@ -1,299 +1,216 @@
 <div>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero section">
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-      <div class="row align-items-center">
-
-        <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right" data-aos-delay="200">
-          <div class="hero-content">
-            <h1 class="hero-title">Creating Digital Experiences That Matter</h1>
-            <p class="hero-description">We craft beautiful, functional, and meaningful digital solutions that help
-              businesses connect with their audiences in authentic ways.</p>
-            <div class="hero-actions">
-              <a href="#about" class="btn-primary">Start Your Journey</a>
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn-secondary glightbox">
-                <i class="bi bi-play-circle"></i>
-                <span>Watch Our Story</span>
-              </a>
-            </div>
-            <div class="hero-stats">
-              {{-- <div class="stat-item">
-                <span class="stat-number">3</span>
-                <span class="stat-label">Program jurusan</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">1234</span>
-                <span class="stat-label">Siswa Aktif</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">99</span>
-                <span class="stat-label">Guru dan Staff</span>
-              </div> --}}
-            </div>
-          </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to Our High School</h1>
+            <p class="lead">Empowering Students for a Brighter Future</p>
+            <a href="#about" class="btn btn-primary btn-lg px-5">Learn More</a>
         </div>
+    </section>
 
-        <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="300">
-          <div class="hero-visual">
-            <div class="hero-image-wrapper">
-              <img src="{{asset('portal/assets/img/illustration/illustration-15.webp')}}" class="img-fluid hero-image"
-                alt="Hero Image">
-              <div class="floating-elements">
-                <div class="floating-card card-1">
-                  <i class="bi bi-lightbulb"></i>
-                  <span>Innovation</span>
+    <!-- About Section -->
+    <section id="about" class="bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="section-title text-start">About Our School</h2>
+                    <p class="lead">Building Excellence in Education Since 1990</p>
+                    <p>Our high school is committed to providing quality education that prepares students for success in
+                        higher education and beyond. With experienced teachers, modern facilities, and a supportive
+                        learning environment, we nurture academic excellence and character development.</p>
+                    <p>We believe in holistic education that develops not only intellectual capabilities but also
+                        social, emotional, and spiritual growth. Our diverse programs and activities ensure every
+                        student can discover and develop their unique talents.</p>
+                    <a href="profile-history.html" class="btn btn-primary mt-3">Read Our History</a>
                 </div>
-                <div class="floating-card card-2">
-                  <i class="bi bi-award"></i>
-                  <span>Excellence</span>
+                <div class="col-lg-6">
+                    <img src="{{ asset('portal/images/default.jpg') }}" alt="School Building"
+                        class="img-fluid rounded shadow">
                 </div>
-                <div class="floating-card card-3">
-                  <i class="bi bi-people"></i>
-                  <span>Collaboration</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    <section id="news">
+        <div class="container">
+            <h2 class="section-title">Latest News</h2>
+            <div class="row">
+                <!-- News Card 1 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('portal/images/default.jpg') }}" class="card-img-top" alt="News 1">
+                        <div class="card-body">
+                            <p class="text-muted small"><i class="bi bi-calendar3"></i> January 15, 2025</p>
+                            <h5 class="card-title">National Science Competition Winners</h5>
+                            <p class="card-text">Our students won first place in the National Science Competition,
+                                showcasing their excellence in STEM fields.</p>
+                            <a href="public-info-news.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section><!-- /Hero Section -->
-
-  <!-- About Section -->
-  <section id="about" class="about section">
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-      <div class="row gy-5">
-
-        <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-          <div class="content-wrapper">
-            <div class="section-header">
-              <span class="section-badge">ABOUT ME</span>
-              <h2>Profil MA Takhassus Al-Qur'an Wonosobo</h2>
-            </div>
-
-            <p class="description-text">Bertolak dari gagasan luhur KH. Ahmad Faqih Muntaha untuk menciptakan pendidikan
-              yang
-              berkualitas namun terjangkau oleh masyarakat menengah ke bawah, Yayasan Al-Asy'ariyyah pada tahun 2008
-              mendirikan sekolah setingkat SMA yang diberi nama Madrasah Aliyah Takhassus Al-Qur'an.
-              Alumninya diharapkan dapat menciptakan atau mengisi lapangan kerja dan bagi yang melanjutkan ke jenjang
-              perguruan tinggi bisa berkompetensi dengan yang lain.</p>
-          </div>
-        </div>
-
-        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-          <div class="visual-section">
-            <div class="main-image-container">
-              <img src="{{ asset('portal/assets/img/about/about-8.webp')}}" alt="Professional team collaboration"
-                class="img-fluid main-visual">
-              <div class="overlay-card">
-                <div class="card-content">
-                  <h4>Quality First</h4>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
-                  <div class="card-icon">
-                    <i class="bi bi-award-fill"></i>
-                  </div>
+                <!-- News Card 2 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('portal/images/default.jpg') }}" class="card-img-top" alt="News 2">
+                        <div class="card-body">
+                            <p class="text-muted small"><i class="bi bi-calendar3"></i> January 10, 2025</p>
+                            <h5 class="card-title">New Computer Lab Opening</h5>
+                            <p class="card-text">State-of-the-art computer laboratory with latest technology now
+                                available for all students.</p>
+                            <a href="public-info-news.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-
-            {{-- <div class="secondary-images">
-              <div class="row g-3">
-                <div class="col-6">
-                  <img src="{{ asset('portal/assets/img/about/about-11.webp')}}" alt="Team meeting"
-                    class="img-fluid secondary-img">
+                <!-- News Card 3 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('portal/images/default.jpg') }}" class="card-img-top" alt="News 3">
+                        <div class="card-body">
+                            <p class="text-muted small"><i class="bi bi-calendar3"></i> January 5, 2025</p>
+                            <h5 class="card-title">Sports Championship Victory</h5>
+                            <p class="card-text">Our basketball team secured the regional championship title in an
+                                exciting final match.</p>
+                            <a href="public-info-news.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6">
-                  <img src="{{ asset('portal/assets/img/about/about-5.webp')}}" alt="Office workspace"
-                    class="img-fluid secondary-img">
+                <!-- News Card 4 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('portal/images/default.jpg') }}" class="card-img-top" alt="News 4">
+                        <div class="card-body">
+                            <p class="text-muted small"><i class="bi bi-calendar3"></i> December 28, 2024</p>
+                            <h5 class="card-title">Community Service Program</h5>
+                            <p class="card-text">Students participated in community service activities, making a
+                                positive impact in local neighborhoods.</p>
+                            <a href="public-info-news.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div> --}}
-          </div>
+            </div>
         </div>
+    </section>
 
-      </div>
-
-    </div>
-
-  </section><!-- /About Section -->
-
-  <section class="services section">
-    <div class="container pt-3" data-aos="fade-up" data-aos-delay="100">
-
-      <div class="container section-title">
-        <span class="description-title">Berita Terbaru</span>
-        <h2>Berita Terbaru</h2>
-      </div>
-
-      <div class="services-grid mt-5">
-        <div class="row g-4">
-          @forelse($beritas as $berita)
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <div class="service-card">
-                <div class="card-image">
-                  <img src="{{ $berita->thumbnail_url ?? asset('portal/assets/img/services/services-1.webp') }}"
-                    alt="{{ $berita->judul }}">
+    <!-- Gallery Section -->
+    <section id="gallery" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 1">
+                    </div>
                 </div>
-                <div class="card-content">
-                  <h5 class="service-title">
-                    <a href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}">
-                      {{ $berita->judul }}
-                    </a>
-                  </h5>
-                  <p class="service-description">
-                    {!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}
-                  </p>
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 2">
+                    </div>
                 </div>
-              </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 3">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 4">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 5">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 6">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 7">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Gallery 8">
+                    </div>
+                </div>
             </div>
-          @empty
-            <p class="text-center">Belum ada berita publik tersedia.</p>
-          @endforelse
-
+            <div class="text-center mt-4">
+                <a href="gallery.html" class="btn btn-primary">View All Photos</a>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="testimonials section">
-
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <span class="description-title">Quote of the Day</span>
-      <h2>Quote of the Day</h2>
-      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
-
-    <div class="container">
-
-      <div class="testimonial-masonry">
-
-        <div class="testimonial-item" data-aos="fade-up">
-          <div class="testimonial-content">
-            <div class="quote-pattern">
-              <i class="bi bi-quote"></i>
+    <!-- Admission Section -->
+    <section id="admission">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Admission"
+                        class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">Admission (PPDB)</h2>
+                    <p class="lead">Join Our School Community</p>
+                    <p>We are now accepting applications for the new academic year. Our admission process is designed to
+                        identify students who will thrive in our challenging and supportive environment.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Online registration
+                            available</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Scholarship
+                            opportunities</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Flexible payment
+                            plans</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Campus tours
+                            available</li>
+                    </ul>
+                    <a href="admission.html" class="btn btn-primary btn-lg mt-3">Register Now</a>
+                </div>
             </div>
-            <p>Implementing innovative strategies has revolutionized our approach to market challenges and competitive
-              positioning.</p>
-            <div class="client-info">
-              <div class="client-image">
-                <img src="{{ asset('portal/assets/img/person/person-f-7.webp')}}" alt="Client">
-              </div>
-              <div class="client-details">
-                <h3>Rachel Bennett</h3>
-                <span class="position">Strategy Director</span>
-              </div>
-            </div>
-          </div>
         </div>
+    </section>
 
-        <div class="testimonial-item highlight" data-aos="fade-up" data-aos-delay="100">
-          <div class="testimonial-content">
-            <div class="quote-pattern">
-              <i class="bi bi-quote"></i>
+    <!-- Contact Section -->
+    <section id="contact" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 text-center p-4">
+                        <i class="bi bi-geo-alt-fill text-primary" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Address</h5>
+                        <p>123 Education Street<br>City, State 12345</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 text-center p-4">
+                        <i class="bi bi-telephone-fill text-primary" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Phone</h5>
+                        <p>+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 text-center p-4">
+                        <i class="bi bi-envelope-fill text-primary" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Email</h5>
+                        <p>info@highschool.edu<br>admission@highschool.edu</p>
+                    </div>
+                </div>
             </div>
-            <p>Exceptional service delivery and innovative solutions have transformed our business operations, leading
-              to remarkable growth and enhanced customer satisfaction across all touchpoints.</p>
-            <div class="client-info">
-              <div class="client-image">
-                <img src="{{ asset('portal/assets/img/person/person-m-7.webp')}}" alt="Client">
-              </div>
-              <div class="client-details">
-                <h3>Daniel Morgan</h3>
-                <span class="position">Chief Innovation Officer</span>
-              </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="ratio ratio-21x9">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2412648750455!2d-73.98784368459395!3d40.74844097932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-
-        <div class="testimonial-item" data-aos="fade-up" data-aos-delay="200">
-          <div class="testimonial-content">
-            <div class="quote-pattern">
-              <i class="bi bi-quote"></i>
-            </div>
-            <p>Strategic partnership has enabled seamless digital transformation and operational excellence.</p>
-            <div class="client-info">
-              <div class="client-image">
-                <img src="{{ asset('portal/assets/img/person/person-f-8.webp')}}" alt="Client">
-              </div>
-              <div class="client-details">
-                <h3>Emma Thompson</h3>
-                <span class="position">Digital Lead</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item" data-aos="fade-up" data-aos-delay="300">
-          <div class="testimonial-content">
-            <div class="quote-pattern">
-              <i class="bi bi-quote"></i>
-            </div>
-            <p>Professional expertise and dedication have significantly improved our project delivery timelines and
-              quality metrics.</p>
-            <div class="client-info">
-              <div class="client-image">
-                <img src="{{ asset('portal/assets/img/person/person-m-8.webp')}}" alt="Client">
-              </div>
-              <div class="client-details">
-                <h3>Christopher Lee</h3>
-                <span class="position">Technical Director</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item highlight" data-aos="fade-up" data-aos-delay="400">
-          <div class="testimonial-content">
-            <div class="quote-pattern">
-              <i class="bi bi-quote"></i>
-            </div>
-            <p>Collaborative approach and industry expertise have revolutionized our product development cycle,
-              resulting in faster time-to-market and increased customer engagement levels.</p>
-            <div class="client-info">
-              <div class="client-image">
-                <img src="{{ asset('portal/assets/img/person/person-f-9.webp')}}" alt="Client">
-              </div>
-              <div class="client-details">
-                <h3>Olivia Carter</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item" data-aos="fade-up" data-aos-delay="500">
-          <div class="testimonial-content">
-            <div class="quote-pattern">
-              <i class="bi bi-quote"></i>
-            </div>
-            <p>Innovative approach to user experience design has significantly enhanced our platform's engagement
-              metrics and customer retention rates.</p>
-            <div class="client-info">
-              <div class="client-image">
-                <img src="{{ asset('portal/assets/img/person/person-m-13.webp')}}" alt="Client">
-              </div>
-              <div class="client-details">
-                <h3>Nathan Brooks</h3>
-                <span class="position">UX Director</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section><!-- /Testimonials Section -->
+    </section>
 
 </div>

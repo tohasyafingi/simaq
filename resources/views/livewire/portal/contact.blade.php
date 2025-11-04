@@ -1,96 +1,121 @@
 <div>
-    <!-- Contact Section -->
-    <section id="contact" class="contact section light-background">
-        <div style="padding-top: 30px">
-            <!-- Section Title -->
-            <div class="container section-title">
-                <span class="description-title">Contact</span>
-                <h2>Contact</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-            </div><!-- End Section Title -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Contact Us</h1>
+            <p class="lead">Get in touch with us - we're here to help</p>
         </div>
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
+    </div>
 
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <div class="content" data-aos="fade-up" data-aos-delay="200">
-                        <div class="section-category mb-3">Contact US</div>
-                        <h2 class="display-5 mb-4">Nemo enim ipsam voluptatem quia voluptas aspernatur</h2>
-                        <p class="lead mb-4">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-                            suscipit laboriosam.</p>
-
-                        <div class="contact-info mt-5">
-                            <div class="info-item d-flex mb-3" data-aos="fade-up" data-aos-delay="300">
-                                <i class="bi bi-envelope-at me-3"></i>
-                                <span>info@example.com</span>
-                            </div>
-
-                            <div class="info-item d-flex mb-3" data-aos="fade-up" data-aos-delay="400">
-                                <i class="bi bi-telephone me-3"></i>
-                                <span>+1 5589 55488 558</span>
-                            </div>
-
-                            <div class="info-item d-flex mb-4" data-aos="fade-up" data-aos-delay="500">
-                                <i class="bi bi-geo-alt me-3"></i>
-                                <span>A108 Adam Street, New York, NY 535022</span>
-                            </div>
-
-                            <a href="#" class="map-link d-inline-flex align-items-center" data-aos="fade-up"
-                                data-aos-delay="600">
-                                Open Map
-                                <i class="bi bi-arrow-right ms-2"></i>
-                            </a>
-                        </div>
+    <div class="container mb-5">
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-geo-alt"></i>
                     </div>
+                    <h5>Visit Us</h5>
+                    <p>123 Education Street<br>Academic District<br>City, State 12345</p>
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="card-body p-4 p-lg-5">
-
-                            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-                                data-aos-delay="600">
-                                <div class="row gy-4">
-
-                                    <div class="col-12">
-                                        <input type="text" name="name" class="form-control" placeholder="Your Name"
-                                            required="">
-                                    </div>
-
-                                    <div class="col-12 ">
-                                        <input type="email" class="form-control" name="email" placeholder="Your Email"
-                                            required="">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" name="subject" placeholder="Subject"
-                                            required="">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <textarea class="form-control" name="message" rows="6" placeholder="Message"
-                                            required=""></textarea>
-                                    </div>
-
-                                    <div class="col-12 text-center">
-                                        <div class="loading">Loading</div>
-                                        <div class="error-message"></div>
-                                        <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                        <button type="submit" class="btn btn-submit w-100">Submit Message</button>
-                                    </div>
-
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <h5>Call Us</h5>
+                    <p>Main Office: (555) 123-4567<br>Admissions: (555) 123-4568<br>Fax: (555) 123-4569</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <h5>Email Us</h5>
+                    <p>info@highschool.edu<br>admissions@highschool.edu<br>support@highschool.edu</p>
+                </div>
+            </div>
         </div>
 
-    </section><!-- /Contact Section -->
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="map-container">
+                    <div class="text-center">
+                        <i class="bi bi-map" style="font-size: 4rem; color: var(--primary-color);"></i>
+                        <p class="mt-3 text-muted">Map integration placeholder</p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4" style="color: var(--primary-color);">Send Us a Message</h3>
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <select class="form-control" id="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="admission">Admission Inquiry</option>
+                                    <option value="academic">Academic Information</option>
+                                    <option value="general">General Question</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-submit w-100">
+                                <i class="bi bi-send"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4" style="color: var(--primary-color);">Office Hours</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>School Office</h5>
+                                <ul class="list-unstyled">
+                                    <li><strong>Monday - Friday:</strong> 7:30 AM - 4:00 PM</li>
+                                    <li><strong>Saturday:</strong> 8:00 AM - 12:00 PM</li>
+                                    <li><strong>Sunday:</strong> Closed</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Admissions Office</h5>
+                                <ul class="list-unstyled">
+                                    <li><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM</li>
+                                    <li><strong>Saturday:</strong> 9:00 AM - 1:00 PM</li>
+                                    <li><strong>Sunday:</strong> Closed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

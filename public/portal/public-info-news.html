@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Announcements - High School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #1abc9c;
+            --primary-hover: #16a085;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: #333 !important;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            padding: 80px 0 60px;
+            margin-bottom: 50px;
+        }
+        
+        .news-card {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .news-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .news-category {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .btn-read-more {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-read-more:hover {
+            background-color: var(--primary-hover);
+            color: white;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 80px;
+        }
+        
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-mortarboard-fill"></i> High School
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile-history.html">History</a></li>
+                            <li><a class="dropdown-item" href="profile-vision-mission.html">Vision & Mission</a></li>
+                            <li><a class="dropdown-item" href="profile-organizational-structure.html">Organizational Structure</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Academic
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="academic-study-programs.html">Study Programs</a></li>
+                            <li><a class="dropdown-item" href="academic-extracurricular.html">Extracurricular</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Student Affairs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="student-affairs-council.html">Student Council</a></li>
+                            <li><a class="dropdown-item" href="student-affairs-scouts.html">Scouts</a></li>
+                            <li><a class="dropdown-item" href="student-affairs-tahfidz.html">Tahfidz Program</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Public Information
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="public-info-news.html">News & Announcements</a></li>
+                            <li><a class="dropdown-item" href="public-info-scientific-works.html">Scientific Works</a></li>
+                            <li><a class="dropdown-item" href="public-info-ebook.html">E-Books</a></li>
+                            <li><a class="dropdown-item" href="public-info-download.html">Downloads</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admission.html">Admission</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold">News & Announcements</h1>
+            <p class="lead">Stay updated with the latest news and events from our school</p>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card news-card">
+                    <img src="/placeholder.svg?height=400&width=800" alt="Science Competition" class="news-image">
+                    <div class="card-body">
+                        <span class="news-category">Achievement</span>
+                        <p class="news-date"><i class="bi bi-calendar3"></i> January 15, 2025</p>
+                        <h3 class="card-title">Students Win National Science Competition</h3>
+                        <p class="card-text">Our students have achieved remarkable success at the National Science Competition, securing first place in the Physics category. The team, consisting of seniors Alex Thompson, Maria Garcia, and James Lee, demonstrated exceptional knowledge and problem-solving skills throughout the three-day competition held in the capital city. Their project on renewable energy solutions impressed the judges with its innovative approach and practical applications. The team will represent our country at the International Science Olympiad next month.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary me-2"><i class="bi bi-eye"></i> 1,234 views</span>
+                            <span class="badge bg-secondary"><i class="bi bi-chat"></i> 45 comments</span>
+                        </div>
+                        <a href="#" class="btn btn-read-more mt-3">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="card news-card">
+                    <img src="/placeholder.svg?height=400&width=800" alt="Cultural Festival" class="news-image">
+                    <div class="card-body">
+                        <span class="news-category">Event</span>
+                        <p class="news-date"><i class="bi bi-calendar3"></i> January 10, 2025</p>
+                        <h3 class="card-title">Annual Cultural Festival 2025 - A Grand Success</h3>
+                        <p class="card-text">Our Annual Cultural Festival concluded with overwhelming success, featuring performances, exhibitions, and cultural displays from over 500 students. The three-day event showcased the diversity and talent of our school community through traditional dances, music performances, art exhibitions, and international food stalls. Special highlights included the Indonesian traditional dance ensemble, the jazz band performance, and the multicultural fashion show. Parents and community members praised the organization and the students' dedication to celebrating cultural diversity.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary me-2"><i class="bi bi-eye"></i> 2,156 views</span>
+                            <span class="badge bg-secondary"><i class="bi bi-chat"></i> 78 comments</span>
+                        </div>
+                        <a href="#" class="btn btn-read-more mt-3">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="card news-card">
+                    <img src="/placeholder.svg?height=400&width=800" alt="New Library" class="news-image">
+                    <div class="card-body">
+                        <span class="news-category">Facility</span>
+                        <p class="news-date"><i class="bi bi-calendar3"></i> January 5, 2025</p>
+                        <h3 class="card-title">State-of-the-Art Digital Library Opens</h3>
+                        <p class="card-text">We are excited to announce the grand opening of our new digital library, a $2 million investment in educational infrastructure. The 5,000 square foot facility is equipped with 100 computer workstations, interactive smart boards, 3D printers, and access to over 50,000 digital resources including e-books, academic journals, and multimedia content. The library features quiet study zones, collaborative workspaces, and a multimedia production studio. Students can now access resources 24/7 through our online portal, supporting both in-person and remote learning.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary me-2"><i class="bi bi-eye"></i> 3,421 views</span>
+                            <span class="badge bg-secondary"><i class="bi bi-chat"></i> 92 comments</span>
+                        </div>
+                        <a href="#" class="btn btn-read-more mt-3">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="card news-card">
+                    <img src="/placeholder.svg?height=400&width=800" alt="Community Service" class="news-image">
+                    <div class="card-body">
+                        <span class="news-category">Community</span>
+                        <p class="news-date"><i class="bi bi-calendar3"></i> December 28, 2024</p>
+                        <h3 class="card-title">Community Service Program Makes Real Impact</h3>
+                        <p class="card-text">Over 200 students participated in our winter community service program, dedicating more than 1,500 volunteer hours to local communities. Activities included tutoring underprivileged children, organizing environmental clean-up drives, visiting elderly care homes, and distributing food packages to families in need. The program, now in its fifth year, has become a cornerstone of our school's commitment to social responsibility. Student Council President Sarah Johnson stated, "This experience taught us the importance of giving back and making a positive difference in our community."</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary me-2"><i class="bi bi-eye"></i> 1,876 views</span>
+                            <span class="badge bg-secondary"><i class="bi bi-chat"></i> 63 comments</span>
+                        </div>
+                        <a href="#" class="btn btn-read-more mt-3">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="card news-card">
+                    <img src="/placeholder.svg?height=400&width=800" alt="Robotics Competition" class="news-image">
+                    <div class="card-body">
+                        <span class="news-category">Achievement</span>
+                        <p class="news-date"><i class="bi bi-calendar3"></i> December 20, 2024</p>
+                        <h3 class="card-title">Robotics Team Advances to Regional Finals</h3>
+                        <p class="card-text">Our school's robotics team has qualified for the Regional Robotics Championship after placing second in the district competition. The team's autonomous robot successfully completed complex tasks including object recognition, navigation, and precision manipulation. Team mentor Mr. David Chen praised the students' dedication, noting they spent over 300 hours designing, building, and programming their robot. The regional finals will take place in March 2025.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary me-2"><i class="bi bi-eye"></i> 1,543 views</span>
+                            <span class="badge bg-secondary"><i class="bi bi-chat"></i> 51 comments</span>
+                        </div>
+                        <a href="#" class="btn btn-read-more mt-3">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="card news-card">
+                    <img src="/placeholder.svg?height=400&width=800" alt="Theater Production" class="news-image">
+                    <div class="card-body">
+                        <span class="news-category">Event</span>
+                        <p class="news-date"><i class="bi bi-calendar3"></i> December 15, 2024</p>
+                        <h3 class="card-title">Drama Club Presents Award-Winning Performance</h3>
+                        <p class="card-text">The school's drama club delivered an outstanding performance of Shakespeare's "A Midsummer Night's Dream" to sold-out audiences over three nights. The production featured elaborate costumes, professional lighting, and impressive set designs all created by students. Drama teacher Ms. Patricia Williams directed the 40-member cast and crew, who rehearsed for four months. The performance received standing ovations and critical acclaim from local theater critics.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary me-2"><i class="bi bi-eye"></i> 2,234 views</span>
+                            <span class="badge bg-secondary"><i class="bi bi-chat"></i> 87 comments</span>
+                        </div>
+                        <a href="#" class="btn btn-read-more mt-3">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: var(--primary-color); color: white;">
+                        <h5 class="mb-0"><i class="bi bi-megaphone"></i> Important Announcements</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-3 pb-3 border-bottom">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 20, 2025</small>
+                                <p class="mb-1"><strong>Semester Exam Schedule Released</strong></p>
+                                <small class="text-muted">Final exams will begin on February 5th. Check the academic portal for your personalized schedule.</small>
+                            </li>
+                            <li class="mb-3 pb-3 border-bottom">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 18, 2025</small>
+                                <p class="mb-1"><strong>Parent-Teacher Meeting</strong></p>
+                                <small class="text-muted">Mandatory meeting on January 25th at 2 PM in the school auditorium to discuss student progress.</small>
+                            </li>
+                            <li class="mb-3 pb-3 border-bottom">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 15, 2025</small>
+                                <p class="mb-1"><strong>School Holiday Notice</strong></p>
+                                <small class="text-muted">School will be closed on January 22-23 for staff professional development.</small>
+                            </li>
+                            <li class="mb-3 pb-3 border-bottom">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 12, 2025</small>
+                                <p class="mb-1"><strong>New Admission Period Opens</strong></p>
+                                <small class="text-muted">Applications for 2025-2026 academic year now open. Limited spots available.</small>
+                            </li>
+                            <li class="mb-3">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 8, 2025</small>
+                                <p class="mb-1"><strong>Library Extended Hours</strong></p>
+                                <small class="text-muted">Digital library now open until 8 PM on weekdays to support exam preparation.</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: var(--primary-color); color: white;">
+                        <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Upcoming Events</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-3 pb-3 border-bottom">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 5, 2025</small>
+                                <p class="mb-1"><strong>Annual Sports Day</strong></p>
+                                <small class="text-muted">Inter-house athletics competition featuring track and field events.</small>
+                            </li>
+                            <li class="mb-3 pb-3 border-bottom">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 10, 2025</small>
+                                <p class="mb-1"><strong>Science Fair Exhibition</strong></p>
+                                <small class="text-muted">Student science projects on display. Open to parents and community.</small>
+                            </li>
+                            <li class="mb-3 pb-3 border-bottom">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 15, 2025</small>
+                                <p class="mb-1"><strong>Art & Music Festival</strong></p>
+                                <small class="text-muted">Showcasing student artwork and musical performances.</small>
+                            </li>
+                            <li class="mb-3">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 20, 2025</small>
+                                <p class="mb-1"><strong>Career Guidance Workshop</strong></p>
+                                <small class="text-muted">University representatives and career counselors for senior students.</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="background-color: var(--primary-color); color: white;">
+                        <h5 class="mb-0"><i class="bi bi-trophy"></i> Recent Achievements</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> National Science Competition - 1st Place</li>
+                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> Regional Math Olympiad - 2nd Place</li>
+                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> Debate Championship - Finalist</li>
+                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> Basketball Tournament - Champions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-white mb-3">About Our School</h5>
+                    <p>Excellence in education, nurturing future leaders with strong character and academic achievement.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="profile-history.html">About Us</a></li>
+                        <li><a href="academic-study-programs.html">Academic Programs</a></li>
+                        <li><a href="admission.html">Admissions</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-white mb-3">Connect With Us</h5>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <div class="text-center">
+                <p>&copy; 2025 High School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,178 +1,143 @@
 <div>
-  <div class="page-banner">
-    <div class="container">
-      <h1>Tahfidz Program</h1>
-      <p class="lead">Quranic Memorization & Islamic Studies</p>
+  <!-- ===== Banner Section Start ===== -->
+  <section class="hero-section" style="height: 300px;">
+    <div class="hero-content text-center">
+      <h1>Tahfidz Al-Qur'an Program</h1>
+      <p>Memorizing & Understanding the Quran</p>
     </div>
-  </div>
+  </section>
+  <!-- ===== Banner Section End ===== -->
 
-  <!-- Content -->
-  <section class="py-5">
+  <!-- ===== Content Section Start ===== -->
+  <section class="section">
     <div class="container">
-      <div class="row mb-5">
-        <div class="col-lg-8 mx-auto text-center">
-          <h2 class="mb-4">About Tahfidz Program</h2>
-          <p class="lead">Our Tahfidz program provides students with the opportunity to memorize the Holy Quran while
-            developing strong Islamic character and values. Under the guidance of qualified instructors, students
-            progress at their own pace in a supportive environment.</p>
-        </div>
-      </div>
-
-      <!-- Program Features -->
-      <div class="row mb-5">
-        <div class="col-md-6 col-lg-3">
-          <div class="program-feature text-center">
-            <div class="icon-box mx-auto">
-              <i class="bi bi-book"></i>
-            </div>
-            <h5>Structured Curriculum</h5>
-            <p>Systematic approach to Quran memorization with proven methods</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="program-feature text-center">
-            <div class="icon-box mx-auto">
-              <i class="bi bi-person-check"></i>
-            </div>
-            <h5>Qualified Teachers</h5>
-            <p>Experienced instructors with Ijazah certification</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="program-feature text-center">
-            <div class="icon-box mx-auto">
-              <i class="bi bi-clock"></i>
-            </div>
-            <h5>Flexible Schedule</h5>
-            <p>Daily sessions that fit with academic schedule</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="program-feature text-center">
-            <div class="icon-box mx-auto">
-              <i class="bi bi-award"></i>
-            </div>
-            <h5>Certification</h5>
-            <p>Recognition upon completion of memorization milestones</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Program Details -->
       <div class="row align-items-center mb-5">
         <div class="col-lg-6 mb-4 mb-lg-0">
-          <h3 class="mb-4">Program Structure</h3>
-          <ul class="list-unstyled">
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Daily Sessions:</strong>
-              Morning and afternoon memorization classes</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Tajweed Training:</strong>
-              Proper pronunciation and recitation rules</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Review System:</strong>
-              Regular revision to maintain memorization</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Islamic Studies:</strong>
-              Understanding Quranic meanings and context</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Progress
-                Tracking:</strong> Individual monitoring and parent updates</li>
-          </ul>
+          <h2 class="section-title">About Tahfidz Program</h2>
+          <p class="mb-3">The Tahfidz Al-Qur'an program is a specialized initiative designed to help students memorize
+            and deeply understand the Qur'an. This program combines traditional memorization methods with modern
+            teaching techniques and spiritual guidance.</p>
+          <p class="mb-3">Our experienced Qur'an instructors provide individualized guidance to help each student
+            progress at their own pace. The program fosters discipline, concentration, and spiritual development while
+            building a strong community of learners.</p>
+          <p>We believe that memorizing the Qur'an is not just about memorization, but also about understanding its
+            meanings and applying its teachings in daily life.</p>
         </div>
         <div class="col-lg-6">
-          <img src="{{ asset('portal/images/default.jpg') }}" alt="Tahfidz Class"
-            class="img-fluid rounded shadow">
+          <img src="{{ asset('images/default.jpg') }}" alt="Tahfidz Program" class="img-fluid rounded">
         </div>
       </div>
 
-      <!-- Levels -->
+      <h2 class="section-title">Program Features</h2>
+
+      <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-graduation-cap text-primary"></i> Experienced Instructors</h5>
+              <p class="card-text">Qualified Qur'an teachers with years of experience in Tahfidz education and Islamic
+                knowledge.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-book text-primary"></i> Structured Curriculum</h5>
+              <p class="card-text">Well-designed learning path with clear goals and milestones for progression.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-users text-primary"></i> Small Group Sessions</h5>
+              <p class="card-text">Personalized attention through small group classes ensuring individual progress
+                tracking.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-certificate text-primary"></i> Certification</h5>
+              <p class="card-text">Recognition and certification for students who complete memorization milestones.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-mosque text-primary"></i> Spiritual Guidance</h5>
+              <p class="card-text">Religious and spiritual mentorship to develop Islamic understanding and values.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-trophy text-primary"></i> Annual Competitions</h5>
+              <p class="card-text">Tahfidz competitions and recitation contests to motivate and celebrate achievements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Memorization Levels</h2>
+
       <div class="row">
-        <div class="col-12">
-          <h3 class="text-center mb-4">Program Levels</h3>
-          <div class="row">
-            <div class="col-md-4 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title" style="color: var(--primary-color);">Beginner Level</h5>
-                  <p class="card-text"><strong>Juz 30 (Juz Amma)</strong></p>
-                  <p class="card-text">Foundation level focusing on short surahs and basic tajweed rules. Perfect for
-                    students starting their memorization journey.</p>
-                </div>
-              </div>
+        <div class="col-lg-4 mb-4">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header" style="background-color: var(--primary-color); color: white;">
+              <h5 class="mb-0">Beginner</h5>
             </div>
-            <div class="col-md-4 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title" style="color: var(--primary-color);">Intermediate Level</h5>
-                  <p class="card-text"><strong>5-15 Juz</strong></p>
-                  <p class="card-text">Progressive memorization with emphasis on retention and understanding. Students
-                    develop consistent study habits.</p>
-                </div>
-              </div>
+            <div class="card-body">
+              <p class="card-text"><strong>Target:</strong> 1-5 Juz (chapters)</p>
+              <p class="card-text" style="font-size: 0.9rem; color: #666;">Foundation building with focus on proper
+                pronunciation (Tajweed) and memorization techniques.</p>
             </div>
-            <div class="col-md-4 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title" style="color: var(--primary-color);">Advanced Level</h5>
-                  <p class="card-text"><strong>15-30 Juz (Complete Quran)</strong></p>
-                  <p class="card-text">Complete memorization with advanced tajweed and preparation for Ijazah
-                    certification.</p>
-                </div>
-              </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header" style="background-color: var(--primary-color); color: white;">
+              <h5 class="mb-0">Intermediate</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><strong>Target:</strong> 6-15 Juz</p>
+              <p class="card-text" style="font-size: 0.9rem; color: #666;">Building upon foundation with increased
+                memorization and understanding of meanings.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header" style="background-color: var(--primary-color); color: white;">
+              <h5 class="mb-0">Advanced (Hafiz/Hafizah)</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><strong>Target:</strong> 30 Juz (Complete Qur'an)</p>
+              <p class="card-text" style="font-size: 0.9rem; color: #666;">Complete memorization of the entire Qur'an
+                with mastery of Tajweed.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Benefits Section -->
-  <section class="bg-light py-5">
-    <div class="container">
-      <h3 class="text-center mb-5">Benefits of Tahfidz Program</h3>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <div class="d-flex">
-            <i class="bi bi-star-fill text-warning me-3" style="font-size: 2rem;"></i>
-            <div>
-              <h5>Spiritual Growth</h5>
-              <p>Deepen connection with the Quran and strengthen faith through memorization and understanding.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="d-flex">
-            <i class="bi bi-brain text-primary me-3" style="font-size: 2rem;"></i>
-            <div>
-              <h5>Memory Enhancement</h5>
-              <p>Improve cognitive abilities and memory retention skills that benefit all areas of study.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="d-flex">
-            <i class="bi bi-shield-check text-success me-3" style="font-size: 2rem;"></i>
-            <div>
-              <h5>Character Building</h5>
-              <p>Develop discipline, patience, and perseverance through consistent practice and dedication.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="d-flex">
-            <i class="bi bi-people-fill" style="font-size: 2rem; color: var(--primary-color);" class="me-3"></i>
-            <div>
-              <h5>Community Connection</h5>
-              <p>Join a supportive community of students and teachers dedicated to Quranic learning.</p>
-            </div>
-          </div>
-        </div>
+      <div class="text-center mt-5">
+        <a href="scouts.html" class="btn btn-secondary me-2">Previous: Scouts</a>
+        <a href="../index.html" class="btn btn-primary">Back to Home</a>
       </div>
     </div>
   </section>
+  <!-- ===== Content Section End ===== -->
 
-  <!-- Call to Action -->
-  <section class="py-5">
-    <div class="container text-center">
-      <h2 class="mb-4">Join Our Tahfidz Program</h2>
-      <p class="lead mb-4">Begin your journey of Quranic memorization with us.</p>
-      <a href="admission.html" class="btn btn-primary btn-lg">Enroll Now</a>
-    </div>
-  </section>
 </div>

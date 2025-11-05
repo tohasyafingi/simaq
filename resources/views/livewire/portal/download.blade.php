@@ -1,422 +1,109 @@
 <div>
-    <div class="page-header">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Downloads</h1>
-            <p class="lead">Access important documents, forms, and resources</p>
+<!-- ===== Banner Section Start ===== -->
+<section class="hero-section" style="height: 300px;">
+  <div class="hero-content text-center">
+    <h1>Downloads</h1>
+    <p>Important Documents & Resources</p>
+  </div>
+</section>
+<!-- ===== Banner Section End ===== -->
+
+<!-- ===== Content Section Start ===== -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Available Downloads</h2>
+
+    <div class="row mb-5">
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-file-pdf text-danger"></i> School Calendar 2024-2025</h5>
+            <p class="card-text text-muted"><small>PDF Format | 2.5 MB | Updated: November 2024</small></p>
+            <p class="card-text">Complete school calendar including holidays, exam dates, and important events for the academic year.</p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+              <a href="download-detail.html" class="btn btn-secondary btn-sm">Details</a>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-file-pdf text-danger"></i> Student Handbook</h5>
+            <p class="card-text text-muted"><small>PDF Format | 5.8 MB | Updated: September 2024</small></p>
+            <p class="card-text">Complete guide for students including rules, regulations, rights, and responsibilities at SMA School.</p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+              <a href="download-detail.html" class="btn btn-secondary btn-sm">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-file-excel text-success"></i> Admission Application Form</h5>
+            <p class="card-text text-muted"><small>Excel Format | 0.8 MB | Updated: October 2024</small></p>
+            <p class="card-text">Downloadable application form for prospective students seeking admission to SMA School.</p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+              <a href="download-detail.html" class="btn btn-secondary btn-sm">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-file-word text-info"></i> Syllabus Sample</h5>
+            <p class="card-text text-muted"><small>Word Document | 1.2 MB | Updated: August 2024</small></p>
+            <p class="card-text">Sample course syllabuses showing curriculum structure and learning outcomes for various subjects.</p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+              <a href="download-detail.html" class="btn btn-secondary btn-sm">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-file-pdf text-danger"></i> Scholarship Information</h5>
+            <p class="card-text text-muted"><small>PDF Format | 3.1 MB | Updated: October 2024</small></p>
+            <p class="card-text">Details about available scholarships, eligibility criteria, and application procedures.</p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+              <a href="download-detail.html" class="btn btn-secondary btn-sm">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-file-excel text-success"></i> Fee Structure</h5>
+            <p class="card-text text-muted"><small>Excel Format | 0.5 MB | Updated: July 2024</small></p>
+            <p class="card-text">Complete breakdown of tuition fees, charges, and payment information for all grades.</p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+              <a href="download-detail.html" class="btn btn-secondary btn-sm">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="container mb-5">
-        <!-- Added more comprehensive download categories with detailed descriptions -->
-        <div class="download-section">
-            <h2 class="section-title"><i class="bi bi-file-earmark-text"></i> Admission Forms</h2>
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-file-earmark-text"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">New Student Registration Form 2025-2026</h5>
-                            <p class="text-muted mb-1">Complete this form to apply for admission to our school. Includes sections for personal information, academic history, and parent/guardian details.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 245 KB • Updated: Jan 15, 2025 • Downloads: 2,345</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-file-earmark-text"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Transfer Student Application</h5>
-                            <p class="text-muted mb-1">Form for students transferring from other schools. Requires previous school transcripts and recommendation letters.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 198 KB • Updated: Jan 15, 2025 • Downloads: 876</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-file-earmark-text"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Scholarship Application Form</h5>
-                            <p class="text-muted mb-1">Apply for academic merit or financial aid scholarships. Includes essay requirements and financial documentation checklist.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 312 KB • Updated: Jan 10, 2025 • Downloads: 1,543</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-file-earmark-text"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">International Student Application</h5>
-                            <p class="text-muted mb-1">Special application for international students including visa documentation requirements and English proficiency guidelines.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 287 KB • Updated: Jan 5, 2025 • Downloads: 432</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="download-section">
-            <h2 class="section-title"><i class="bi bi-calendar3"></i> Academic Documents</h2>
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-calendar3"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Academic Calendar 2024-2025</h5>
-                            <p class="text-muted mb-1">Complete schedule of academic year including term dates, holidays, exam periods, and important school events.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 456 KB • Updated: Dec 20, 2024 • Downloads: 5,678</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-book"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Curriculum Guide 2024-2025</h5>
-                            <p class="text-muted mb-1">Comprehensive overview of all courses, learning objectives, assessment methods, and graduation requirements for each grade level.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 1.2 MB • Updated: Dec 15, 2024 • Downloads: 3,234</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-clipboard-check"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Exam Schedule - Semester 1</h5>
-                            <p class="text-muted mb-1">First semester examination timetable with dates, times, and room assignments for all grade levels.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 178 KB • Updated: Jan 18, 2025 • Downloads: 4,567</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-journal-text"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Course Catalog 2024-2025</h5>
-                            <p class="text-muted mb-1">Detailed descriptions of all available courses including prerequisites, credit hours, and teacher information.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 892 KB • Updated: Dec 10, 2024 • Downloads: 2,891</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-clock-history"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Class Schedule Template</h5>
-                            <p class="text-muted mb-1">Blank template for students to organize their weekly class schedule, study time, and extracurricular activities.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 124 KB • Updated: Dec 5, 2024 • Downloads: 6,234</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="download-section">
-            <h2 class="section-title"><i class="bi bi-shield-check"></i> School Policies & Guidelines</h2>
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Student Handbook 2024-2025</h5>
-                            <p class="text-muted mb-1">Complete guide to school rules, regulations, dress code, attendance policy, and student rights and responsibilities.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 2.1 MB • Updated: Aug 20, 2024 • Downloads: 8,456</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-person-badge"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Code of Conduct</h5>
-                            <p class="text-muted mb-1">Expected behavior standards, disciplinary procedures, and consequences for policy violations.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 567 KB • Updated: Aug 15, 2024 • Downloads: 4,123</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-heart-pulse"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Health & Safety Guidelines</h5>
-                            <p class="text-muted mb-1">Important health protocols, emergency procedures, medical forms, and safety regulations for students and parents.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 423 KB • Updated: Sep 10, 2024 • Downloads: 3,567</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-laptop"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Technology Acceptable Use Policy</h5>
-                            <p class="text-muted mb-1">Guidelines for responsible use of school technology resources, internet safety, and digital citizenship.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 334 KB • Updated: Sep 5, 2024 • Downloads: 2,789</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-exclamation-triangle"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Anti-Bullying Policy</h5>
-                            <p class="text-muted mb-1">School's commitment to preventing bullying, reporting procedures, and support resources for students.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 289 KB • Updated: Aug 25, 2024 • Downloads: 1,987</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="download-section">
-            <h2 class="section-title"><i class="bi bi-people"></i> Parent Resources</h2>
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Parent-Teacher Association Guide</h5>
-                            <p class="text-muted mb-1">Information about PTA membership, meeting schedules, volunteer opportunities, and ways to get involved in school activities.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 345 KB • Updated: Oct 15, 2024 • Downloads: 2,456</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-cash-coin"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Fee Structure & Payment Guide 2024-2025</h5>
-                            <p class="text-muted mb-1">Detailed breakdown of tuition fees, payment schedules, accepted payment methods, and financial aid information.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 289 KB • Updated: Jan 10, 2025 • Downloads: 7,234</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-clipboard-heart"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Parent Communication Guide</h5>
-                            <p class="text-muted mb-1">How to stay connected with teachers, access online portals, receive updates, and participate in parent-teacher conferences.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 267 KB • Updated: Oct 20, 2024 • Downloads: 3,123</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-bus-front"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Transportation & Bus Routes</h5>
-                            <p class="text-muted mb-1">School bus routes, pickup/drop-off times, transportation policies, and bus registration forms.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 412 KB • Updated: Nov 5, 2024 • Downloads: 4,567</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="download-section">
-            <h2 class="section-title"><i class="bi bi-clipboard2-check"></i> Forms & Templates</h2>
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-clipboard2-pulse"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Medical Information Form</h5>
-                            <p class="text-muted mb-1">Required health information, emergency contacts, medication authorization, and allergy documentation.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 156 KB • Updated: Aug 30, 2024 • Downloads: 5,234</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-calendar-x"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Absence Excuse Form</h5>
-                            <p class="text-muted mb-1">Form to report and excuse student absences with parent/guardian signature required.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 98 KB • Updated: Sep 1, 2024 • Downloads: 8,901</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-camera"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Photo & Video Release Form</h5>
-                            <p class="text-muted mb-1">Permission form for use of student photos and videos in school publications and promotional materials.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 134 KB • Updated: Aug 28, 2024 • Downloads: 3,678</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-item">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1">
-                        <div class="download-icon">
-                            <i class="bi bi-airplane"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Field Trip Permission Form</h5>
-                            <p class="text-muted mb-1">General permission form for student participation in school-sponsored field trips and excursions.</p>
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> PDF • 167 KB • Updated: Sep 15, 2024 • Downloads: 4,890</small>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-download">
-                        <i class="bi bi-download"></i> Download
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="text-center">
+      <a href="../index.html" class="btn btn-primary">Back to Home</a>
     </div>
+  </div>
+</section>
+<!-- ===== Content Section End ===== -->
+
 </div>

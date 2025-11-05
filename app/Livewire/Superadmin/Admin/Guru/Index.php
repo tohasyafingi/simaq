@@ -7,12 +7,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\GuruExport;
+use App\Imports\GuruImport;
 
 #[Title('Data Guru')]
 class Index extends Component
@@ -20,7 +22,7 @@ class Index extends Component
     use WithPagination, WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
-
+    public $file;
     public $paginate = 10;
     public $search = '';
 
@@ -45,11 +47,57 @@ class Index extends Component
         ];
     }
 
+public function import()
+{
+    $this->validate([
+        'file' => 'required|file|mimes:xlsx,xls',
+    ]);
 
+    try {
+        $import = new GuruImport();
+        Excel::import($import, $this->file);
+
+        $errors = $import->errors();
+        $failures = $import->failures();
+        $skipped = $import->skipped;
+
+        Log::info("Import selesai. Errors: " . count($errors) . ", Failures: " . count($failures) . ", Skipped: " . count($skipped)); // Logging debug
+
+        $this->file = null;
+
+        $message = 'Import selesai.';
+        if (count($errors) > 0 || count($failures) > 0 || count($skipped) > 0) {
+            $message .= ' Detail:';
+            if (count($errors) > 0) {
+                $message .= ' ' . count($errors) . ' baris error.';
+            }
+            if (count($failures) > 0) {
+                $message .= ' ' . count($failures) . ' baris gagal validasi (e.g., duplikat).';
+            }
+            if (count($skipped) > 0) {
+                $message .= ' ' . count($skipped) . ' baris di-skip.';
+            }
+            session()->flash('warning', $message);
+        } else {
+            session()->flash('message', 'Data guru berhasil diimport sepenuhnya.');
+        }
+
+        $this->dispatch('closeImportModal');
+    } catch (\Exception $e) {
+        Log::error("Exception di import: " . $e->getMessage());
+        session()->flash('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
+    }
+}
+
+public function downloadTemplate()
+{
+    return Excel::download(new GuruExport('template'), 'template_guru.xlsx');
+}
     public function export()
     {
-        return Excel::download(new GuruExport, 'data_guru.xlsx');
+        return Excel::download(new GuruExport('data'), 'data_guru.xlsx');
     }
+
 
     public function render()
     {

@@ -1,249 +1,98 @@
 <div>
-    <div class="page-header">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Digital Library</h1>
-            <p class="lead">Access our collection of educational e-books and digital resources</p>
+<!-- ===== Banner Section Start ===== -->
+<section class="hero-section" style="height: 300px;">
+  <div class="hero-content text-center">
+    <h1>Digital Library</h1>
+    <p>Access Our Collection of E-Books</p>
+  </div>
+</section>
+<!-- ===== Banner Section End ===== -->
+
+<!-- ===== Content Section Start ===== -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Available E-Books</h2>
+
+    <div class="row mb-5">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 1" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">The Art of Critical Thinking</h5>
+            <p class="card-text text-muted"><small>By Prof. Williams | 2023</small></p>
+            <p class="card-text">Develop essential critical thinking skills through practical exercises and real-world examples.</p>
+            <a href="ebook-detail.html" class="btn btn-primary btn-sm">View Details</a>
+          </div>
         </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 2" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Introduction to Sustainable Development</h5>
+            <p class="card-text text-muted"><small>By Dr. Green | 2023</small></p>
+            <p class="card-text">Explore sustainable development goals and how individuals can contribute to environmental protection.</p>
+            <a href="ebook-detail.html" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 3" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Digital Literacy in the Modern World</h5>
+            <p class="card-text text-muted"><small>By Tech Experts | 2024</small></p>
+            <p class="card-text">Master digital tools and navigate the digital landscape with confidence and security.</p>
+            <a href="ebook-detail.html" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 4" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Creative Writing Essentials</h5>
+            <p class="card-text text-muted"><small>By Author Smith | 2023</small></p>
+            <p class="card-text">Unlock your creative potential with comprehensive guides to storytelling and literary techniques.</p>
+            <a href="ebook-detail.html" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 5" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">History of World Civilizations</h5>
+            <p class="card-text text-muted"><small>By Prof. History | 2023</small></p>
+            <p class="card-text">Journey through major world civilizations and understand their significant contributions to human history.</p>
+            <a href="ebook-detail.html" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 6" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Advanced Mathematics for Science</h5>
+            <p class="card-text text-muted"><small>By Dr. Math | 2023</small></p>
+            <p class="card-text">Master advanced mathematical concepts essential for scientific and engineering applications.</p>
+            <a href="ebook-detail.html" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="container mb-5">
-        <div class="search-box">
-            <input type="text" class="form-control" placeholder="Search for books, subjects, or authors...">
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Physics Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Physics</span>
-                        <h5 class="card-title">Advanced Physics Concepts</h5>
-                        <p class="text-muted mb-2"><small>By: Dr. James Wilson</small></p>
-                        <p class="card-text">Comprehensive guide to advanced physics topics including quantum mechanics, relativity, thermodynamics, and electromagnetism. Features detailed explanations, real-world applications, and practice problems with solutions.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 1.2k</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Chemistry Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Chemistry</span>
-                        <h5 class="card-title">Organic Chemistry Essentials</h5>
-                        <p class="text-muted mb-2"><small>By: Prof. Sarah Martinez</small></p>
-                        <p class="card-text">Essential guide to understanding organic chemistry principles, reaction mechanisms, and synthesis strategies. Includes 3D molecular visualizations, laboratory techniques, and exam preparation materials.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 980</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Math Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Mathematics</span>
-                        <h5 class="card-title">Calculus Made Simple</h5>
-                        <p class="text-muted mb-2"><small>By: Dr. Michael Chen</small></p>
-                        <p class="card-text">Step-by-step approach to mastering calculus concepts including limits, derivatives, integrals, and series. Features interactive examples, visual aids, and comprehensive problem sets for all skill levels.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 1.5k</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Biology Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Biology</span>
-                        <h5 class="card-title">Human Biology & Anatomy</h5>
-                        <p class="text-muted mb-2"><small>By: Dr. Emily Johnson</small></p>
-                        <p class="card-text">Detailed exploration of human body systems, cellular biology, genetics, and physiological processes. Enhanced with high-resolution diagrams, case studies, and clinical applications.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 890</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Literature Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Literature</span>
-                        <h5 class="card-title">World Literature Classics</h5>
-                        <p class="text-muted mb-2"><small>By: Prof. David Brown</small></p>
-                        <p class="card-text">Curated collection of classic literary works from diverse cultures with critical analysis, historical context, and discussion questions. Perfect for literature students and enthusiasts.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 750</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="History Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">History</span>
-                        <h5 class="card-title">Modern World History</h5>
-                        <p class="text-muted mb-2"><small>By: Dr. Robert Taylor</small></p>
-                        <p class="card-text">Comprehensive overview of major historical events from 1900 to present, including world wars, political movements, technological revolutions, and cultural transformations with primary sources.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 1.1k</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Computer Science Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Computer Science</span>
-                        <h5 class="card-title">Introduction to Programming</h5>
-                        <p class="text-muted mb-2"><small>By: Prof. Lisa Anderson</small></p>
-                        <p class="card-text">Beginner-friendly guide to programming fundamentals using Python. Covers variables, loops, functions, data structures, and object-oriented programming with hands-on coding exercises.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 2.1k</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Economics Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Economics</span>
-                        <h5 class="card-title">Principles of Economics</h5>
-                        <p class="text-muted mb-2"><small>By: Dr. Thomas White</small></p>
-                        <p class="card-text">Fundamental economic principles covering microeconomics, macroeconomics, market dynamics, and policy analysis with real-world case studies and current economic issues.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 670</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Psychology Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Psychology</span>
-                        <h5 class="card-title">Introduction to Psychology</h5>
-                        <p class="text-muted mb-2"><small>By: Dr. Jennifer Adams</small></p>
-                        <p class="card-text">Explore human behavior, cognition, and mental processes. Topics include developmental psychology, social psychology, abnormal psychology, and therapeutic approaches with research findings.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 945</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Environmental Science Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Environmental Science</span>
-                        <h5 class="card-title">Environmental Science Today</h5>
-                        <p class="text-muted mb-2"><small>By: Dr. Karen Mitchell</small></p>
-                        <p class="card-text">Comprehensive study of ecosystems, climate change, sustainability, and conservation. Addresses current environmental challenges with scientific evidence and proposed solutions.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 823</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Statistics Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Mathematics</span>
-                        <h5 class="card-title">Statistics & Data Analysis</h5>
-                        <p class="text-muted mb-2"><small>By: Prof. Richard Lee</small></p>
-                        <p class="card-text">Learn statistical methods, probability theory, hypothesis testing, and data visualization techniques. Includes practical applications using Excel and statistical software.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 1.3k</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card ebook-card">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Art History Book" class="ebook-cover">
-                    <div class="card-body">
-                        <span class="ebook-subject">Arts</span>
-                        <h5 class="card-title">Art History Through Ages</h5>
-                        <p class="text-muted mb-2"><small>By: Prof. Catherine Moore</small></p>
-                        <p class="card-text">Journey through art movements from Renaissance to contemporary art. Features high-quality reproductions, artist biographies, and cultural context for major artworks and styles.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-muted"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                            <span class="text-muted"><i class="bi bi-download"></i> 712</span>
-                        </div>
-                        <a href="#" class="btn btn-read mt-3">
-                            <i class="bi bi-book"></i> Read Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center mt-5">
-            <p class="text-muted">Showing 12 of 156 e-books available</p>
-            <a href="#" class="btn btn-download">Load More Books</a>
-        </div>
+    <div class="text-center">
+      <a href="download.html" class="btn btn-primary me-2">Downloads</a>
+      <a href="../index.html" class="btn btn-secondary">Back to Home</a>
     </div>
+  </div>
+</section>
+<!-- ===== Content Section End ===== -->
+
 </div>

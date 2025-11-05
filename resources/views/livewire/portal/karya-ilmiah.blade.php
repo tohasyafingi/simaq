@@ -1,223 +1,98 @@
 <div>
-    <div class="page-header">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Scientific Works</h1>
-            <p class="lead">Research papers and academic publications by our students and faculty</p>
+<!-- ===== Banner Section Start ===== -->
+<section class="hero-section" style="height: 300px;">
+  <div class="hero-content text-center">
+    <h1>Scientific Works</h1>
+    <p>Student Research & Innovation</p>
+  </div>
+</section>
+<!-- ===== Banner Section End ===== -->
+
+<!-- ===== Content Section Start ===== -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Featured Scientific Works</h2>
+
+    <div class="row mb-5">
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Research 1">
+          <div class="card-body">
+            <h5 class="card-title">Water Quality Assessment in Local Rivers</h5>
+            <p class="card-text text-muted"><strong>Author:</strong> Sophia Chen | <strong>Year:</strong> 2024</p>
+            <p class="card-text">This research examines water quality parameters and their environmental impact on local ecosystems and biodiversity.</p>
+            <a href="scientific-works-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
         </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Research 2">
+          <div class="card-body">
+            <h5 class="card-title">Solar Energy Efficiency in Urban Areas</h5>
+            <p class="card-text text-muted"><strong>Author:</strong> James Mitchell | <strong>Year:</strong> 2024</p>
+            <p class="card-text">Study of photovoltaic panel efficiency and optimization strategies for urban renewable energy implementation.</p>
+            <a href="scientific-works-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Research 3">
+          <div class="card-body">
+            <h5 class="card-title">Biodegradable Plastic Alternatives</h5>
+            <p class="card-text text-muted"><strong>Author:</strong> Emma Rodriguez | <strong>Year:</strong> 2023</p>
+            <p class="card-text">Investigation of eco-friendly materials to replace conventional plastics with focus on sustainability.</p>
+            <a href="scientific-works-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Research 4">
+          <div class="card-body">
+            <h5 class="card-title">AI Applications in Medical Diagnosis</h5>
+            <p class="card-text text-muted"><strong>Author:</strong> David Park | <strong>Year:</strong> 2023</p>
+            <p class="card-text">Exploration of machine learning algorithms for early disease detection and improved healthcare outcomes.</p>
+            <a href="scientific-works-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Research 5">
+          <div class="card-body">
+            <h5 class="card-title">Urban Garden Design for Food Security</h5>
+            <p class="card-text text-muted"><strong>Author:</strong> Jessica Williams | <strong>Year:</strong> 2023</p>
+            <p class="card-text">Design and implementation of sustainable urban gardens to enhance community food security.</p>
+            <a href="scientific-works-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Research 6">
+          <div class="card-body">
+            <h5 class="card-title">Atmospheric Pollution Monitoring System</h5>
+            <p class="card-text text-muted"><strong>Author:</strong> Michael Chang | <strong>Year:</strong> 2023</p>
+            <p class="card-text">Development of IoT-based air quality monitoring network for real-time environmental assessment.</p>
+            <a href="scientific-works-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="container mb-5">
-        <div class="text-center mb-5">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Science</button>
-            <button class="filter-btn">Mathematics</button>
-            <button class="filter-btn">Social Studies</button>
-            <button class="filter-btn">Language</button>
-            <button class="filter-btn">Technology</button>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-flask"></i>
-                        </div>
-                        <span class="work-category">Science</span>
-                        <h5 class="card-title mt-3">The Effect of pH Levels on Plant Growth</h5>
-                        <p class="text-muted mb-2">By: Sarah Johnson, Grade 12</p>
-                        <p class="text-muted mb-3"><small>Published: December 2024 | Advisor: Dr. Emily Roberts</small></p>
-                        <p class="card-text text-start">This experimental study examines how different pH levels in soil affect the growth rate and health of common garden plants. The research involved testing five different pH levels (4.0, 5.5, 7.0, 8.5, 10.0) on tomato plants over a 12-week period. Results showed optimal growth at pH 6.5-7.0, with significant stunting at extreme pH levels. The study provides practical implications for sustainable agriculture and home gardening.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 24 pages | <i class="bi bi-download"></i> 456 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-calculator"></i>
-                        </div>
-                        <span class="work-category">Mathematics</span>
-                        <h5 class="card-title mt-3">Applications of Fibonacci Sequence in Nature</h5>
-                        <p class="text-muted mb-2">By: Michael Chen, Grade 11</p>
-                        <p class="text-muted mb-3"><small>Published: November 2024 | Advisor: Prof. David Martinez</small></p>
-                        <p class="card-text text-start">This research explores the mathematical patterns found in nature through the lens of the Fibonacci sequence and golden ratio. The study documents occurrences in flower petals, pine cones, nautilus shells, and tree branching patterns. Using mathematical modeling and photography, the paper demonstrates how these patterns optimize space and resource distribution in biological systems, providing insights into biomimicry applications.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 32 pages | <i class="bi bi-download"></i> 623 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-globe"></i>
-                        </div>
-                        <span class="work-category">Social Studies</span>
-                        <h5 class="card-title mt-3">Impact of Social Media on Youth Culture</h5>
-                        <p class="text-muted mb-2">By: Emily Rodriguez, Grade 12</p>
-                        <p class="text-muted mb-3"><small>Published: October 2024 | Advisor: Dr. Patricia Williams</small></p>
-                        <p class="card-text text-start">A comprehensive sociological analysis examining how social media platforms influence communication patterns and cultural trends among teenagers. The study surveyed 500 students across five schools, analyzing usage patterns, content consumption, and behavioral changes. Findings reveal both positive aspects (global connectivity, creative expression) and concerns (mental health impacts, misinformation spread), offering recommendations for healthy digital citizenship.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 45 pages | <i class="bi bi-download"></i> 892 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-lightbulb"></i>
-                        </div>
-                        <span class="work-category">Science</span>
-                        <h5 class="card-title mt-3">Renewable Energy Solutions for Schools</h5>
-                        <p class="text-muted mb-2">By: David Kim, Grade 12</p>
-                        <p class="text-muted mb-3"><small>Published: September 2024 | Advisor: Dr. James Wilson</small></p>
-                        <p class="card-text text-start">This research investigates the feasibility of implementing solar panels and wind turbines in educational institutions to reduce carbon footprint. The study includes cost-benefit analysis, energy consumption data from three local schools, and projected ROI over 10 years. Results demonstrate that renewable energy installations could reduce school energy costs by 60% while providing hands-on STEM learning opportunities for students.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 38 pages | <i class="bi bi-download"></i> 734 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-book"></i>
-                        </div>
-                        <span class="work-category">Language</span>
-                        <h5 class="card-title mt-3">Evolution of Modern English Slang</h5>
-                        <p class="text-muted mb-2">By: Jessica Taylor, Grade 11</p>
-                        <p class="text-muted mb-3"><small>Published: August 2024 | Advisor: Prof. Margaret Anderson</small></p>
-                        <p class="card-text text-start">A linguistic study tracking the development and adoption of contemporary slang terms in English-speaking communities. The research analyzes social media data, interviews with teenagers, and historical language evolution patterns. The paper explores how digital communication accelerates language change and examines the role of internet culture in creating new vocabulary, with particular focus on Gen Z linguistic innovations.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 28 pages | <i class="bi bi-download"></i> 567 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-graph-up"></i>
-                        </div>
-                        <span class="work-category">Mathematics</span>
-                        <h5 class="card-title mt-3">Statistical Analysis of Student Performance</h5>
-                        <p class="text-muted mb-2">By: Robert Anderson, Grade 12</p>
-                        <p class="text-muted mb-3"><small>Published: July 2024 | Advisor: Dr. Lisa Chen</small></p>
-                        <p class="card-text text-start">This quantitative study uses advanced statistical methods to identify factors contributing to academic success. Analyzing data from 1,000 students over three years, the research examines correlations between study habits, sleep patterns, extracurricular involvement, and GPA. Key findings include the importance of consistent study schedules, adequate sleep (7-9 hours), and balanced extracurricular participation in achieving optimal academic performance.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 41 pages | <i class="bi bi-download"></i> 812 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-cpu"></i>
-                        </div>
-                        <span class="work-category">Technology</span>
-                        <h5 class="card-title mt-3">Machine Learning for Image Recognition</h5>
-                        <p class="text-muted mb-2">By: Alex Thompson, Grade 12</p>
-                        <p class="text-muted mb-3"><small>Published: June 2024 | Advisor: Prof. Kevin Zhang</small></p>
-                        <p class="card-text text-start">An exploration of convolutional neural networks (CNNs) for image classification tasks. The project implements a custom CNN using Python and TensorFlow to classify 10,000 images across 10 categories with 94% accuracy. The paper discusses network architecture, training methodology, and potential applications in medical imaging, autonomous vehicles, and security systems, making complex AI concepts accessible to high school students.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 36 pages | <i class="bi bi-download"></i> 1,245 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-water"></i>
-                        </div>
-                        <span class="work-category">Science</span>
-                        <h5 class="card-title mt-3">Water Quality Analysis in Local Rivers</h5>
-                        <p class="text-muted mb-2">By: Maria Garcia, Grade 11</p>
-                        <p class="text-muted mb-3"><small>Published: May 2024 | Advisor: Dr. Thomas Brown</small></p>
-                        <p class="card-text text-start">This environmental study assesses water quality in three local rivers by measuring pH, dissolved oxygen, turbidity, and bacterial content over six months. The research identifies pollution sources, seasonal variations, and impacts on aquatic ecosystems. Findings were shared with local environmental agencies, contributing to community awareness and conservation efforts. The study demonstrates the importance of citizen science in environmental monitoring.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 33 pages | <i class="bi bi-download"></i> 678 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card work-card">
-                    <div class="card-body text-center">
-                        <div class="work-icon">
-                            <i class="bi bi-music-note-beamed"></i>
-                        </div>
-                        <span class="work-category">Social Studies</span>
-                        <h5 class="card-title mt-3">The Psychology of Music and Emotion</h5>
-                        <p class="text-muted mb-2">By: Christopher Lee, Grade 12</p>
-                        <p class="text-muted mb-3"><small>Published: April 2024 | Advisor: Dr. Rachel Green</small></p>
-                        <p class="card-text text-start">An interdisciplinary study examining how different musical genres affect emotional states and cognitive performance. Using surveys, heart rate monitoring, and cognitive tests with 200 participants, the research reveals that classical music enhances focus, upbeat pop improves mood, and ambient music reduces stress. The paper discusses applications in education, therapy, and workplace productivity, supported by neuroscience research.</p>
-                        <div class="mt-3 text-start">
-                            <small class="text-muted"><i class="bi bi-file-pdf"></i> 29 pages | <i class="bi bi-download"></i> 543 downloads</small>
-                        </div>
-                        <a href="#" class="btn btn-download mt-3">
-                            <i class="bi bi-download"></i> Download PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center mt-5">
-            <p class="text-muted">Showing 9 of 47 scientific works</p>
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item active"><a class="page-link" href="#" style="background-color: var(--primary-color); border-color: var(--primary-color);">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" style="color: var(--primary-color);">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#" style="color: var(--primary-color);">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#" style="color: var(--primary-color);">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#" style="color: var(--primary-color);">5</a></li>
-                </ul>
-            </nav>
-        </div>
+    <div class="text-center">
+      <a href="ebook.html" class="btn btn-primary me-2">E-Books</a>
+      <a href="../index.html" class="btn btn-secondary">Back to Home</a>
     </div>
+  </div>
+</section>
+<!-- ===== Content Section End ===== -->
+
 </div>

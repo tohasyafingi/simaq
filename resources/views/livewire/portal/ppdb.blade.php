@@ -1,121 +1,189 @@
 <div>
-    <div class="page-header">
+    <!-- ===== Banner Section Start ===== -->
+    <section class="hero-section" style="height: 300px;">
+        <div class="hero-content text-center">
+            <h1>Student Admission (PPDB)</h1>
+            <p>Join Our School Community</p>
+        </div>
+    </section>
+    <!-- ===== Banner Section End ===== -->
+
+    <!-- ===== Content Section Start ===== -->
+    <section class="section">
         <div class="container">
-            <h1 class="display-4 fw-bold">Admissions</h1>
-            <p class="lead">Join our community of learners and future leaders</p>
-        </div>
-    </div>
+            <h2 class="section-title">Admission Information 2024-2025</h2>
 
-    <div class="container mb-5">
-        <div class="info-box">
-            <h4><i class="bi bi-calendar-event"></i> Admission Period 2025-2026</h4>
-            <p class="mb-0">Applications are now open! Registration period: January 15 - March 31, 2025</p>
-        </div>
-
-        <h2 class="text-center mb-5" style="color: var(--primary-color);">Admission Process</h2>
-
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="step-card text-center">
-                    <div class="step-number">1</div>
-                    <h5>Submit Application</h5>
-                    <p>Complete and submit the online application form with required documents</p>
+            <div class="row mb-5">
+                <div class="col-lg-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Registration Period</h5>
+                            <p class="card-text"><strong>Start:</strong> January 15, 2025</p>
+                            <p class="card-text"><strong>End:</strong> March 31, 2025</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-6 col-lg-3">
-                <div class="step-card text-center">
-                    <div class="step-number">2</div>
-                    <h5>Entrance Test</h5>
-                    <p>Take the entrance examination covering core subjects</p>
+                <div class="col-lg-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-file-check fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Selection Tests</h5>
+                            <p class="card-text"><strong>Date:</strong> April 15-20, 2025</p>
+                            <p class="card-text"><strong>Location:</strong> School Campus</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-6 col-lg-3">
-                <div class="step-card text-center">
-                    <div class="step-number">3</div>
-                    <h5>Interview</h5>
-                    <p>Attend an interview with school administrators and counselors</p>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="step-card text-center">
-                    <div class="step-number">4</div>
-                    <h5>Enrollment</h5>
-                    <p>Receive acceptance letter and complete enrollment procedures</p>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="mt-5 mb-4" style="color: var(--primary-color);">Requirements</h2>
-
-        <div class="requirement-item">
-            <h5><i class="bi bi-file-earmark-text"></i> Completed Application Form</h5>
-            <p class="mb-0">Fill out all sections of the application form accurately and completely</p>
-        </div>
-
-        <div class="requirement-item">
-            <h5><i class="bi bi-card-image"></i> Recent Photographs</h5>
-            <p class="mb-0">4 passport-sized color photographs (3x4 cm) taken within the last 3 months</p>
-        </div>
-
-        <div class="requirement-item">
-            <h5><i class="bi bi-file-earmark-pdf"></i> Academic Records</h5>
-            <p class="mb-0">Certified copies of report cards from previous school (last 2 years)</p>
-        </div>
-
-        <div class="requirement-item">
-            <h5><i class="bi bi-award"></i> Birth Certificate</h5>
-            <p class="mb-0">Original and photocopy of birth certificate</p>
-        </div>
-
-        <div class="requirement-item">
-            <h5><i class="bi bi-heart-pulse"></i> Health Certificate</h5>
-            <p class="mb-0">Medical examination report from certified healthcare provider</p>
-        </div>
-
-        <div class="requirement-item">
-            <h5><i class="bi bi-people"></i> Parent/Guardian Information</h5>
-            <p class="mb-0">Identification documents and contact information of parents or legal guardians</p>
-        </div>
-
-        <h2 class="mt-5 mb-4" style="color: var(--primary-color);">Tuition & Fees</h2>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Registration Fee</h5>
-                        <h3 style="color: var(--primary-color);">$500</h3>
-                        <p class="text-muted">One-time, non-refundable fee</p>
+                <div class="col-lg-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-check-circle fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Results Announcement</h5>
+                            <p class="card-text"><strong>Date:</strong> May 10, 2025</p>
+                            <p class="card-text"><strong>Method:</strong> Online Portal</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Annual Tuition</h5>
-                        <h3 style="color: var(--primary-color);">$8,500</h3>
-                        <p class="text-muted">Per academic year (10 months)</p>
+            <h2 class="section-title">Requirements</h2>
+
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <h4><i class="fas fa-list text-primary"></i> Document Requirements</h4>
+                    <ul>
+                        <li>Original birth certificate or certified copy</li>
+                        <li>Latest school report card (Junior High)</li>
+                        <li>Copy of national ID (student & parents)</li>
+                        <li>Family card copy</li>
+                        <li>Passport-sized photos (4x6 cm)</li>
+                        <li>Medical examination report</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <h4><i class="fas fa-graduation-cap text-primary"></i> Academic Requirements</h4>
+                    <ul>
+                        <li>Completion of Junior High School (Grade 9)</li>
+                        <li>Minimum GPA: 7.0 from previous school</li>
+                        <li>Passing score on entrance examination</li>
+                        <li>Passing interview</li>
+                        <li>Good conduct and discipline record</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title">Admission Process</h2>
+
+            <div class="row mb-5">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <div
+                                style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">
+                                1</div>
+                            <h5 class="card-title">Registration</h5>
+                            <p class="card-text text-muted">Submit application form with required documents</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <div
+                                style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">
+                                2</div>
+                            <h5 class="card-title">Selection Test</h5>
+                            <p class="card-text text-muted">Take entrance examination in Indonesian, English,
+                                Mathematics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <div
+                                style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">
+                                3</div>
+                            <h5 class="card-title">Interview</h5>
+                            <p class="card-text text-muted">Personal interview with school staff and teachers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <div
+                                style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">
+                                4</div>
+                            <h5 class="card-title">Acceptance</h5>
+                            <p class="card-text text-muted">Results announcement and enrollment confirmation</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="info-box">
-            <h5><i class="bi bi-info-circle"></i> Scholarship Opportunities</h5>
-            <p class="mb-0">We offer merit-based and need-based scholarships to qualified students. Contact our
-                admissions office for more information about scholarship applications.</p>
-        </div>
+            <h2 class="section-title">Tuition & Fees</h2>
 
-        <div class="text-center mt-5">
-            <a href="#" class="btn btn-apply">
-                <i class="bi bi-file-earmark-text"></i> Apply Now
-            </a>
-            <p class="mt-3 text-muted">Questions? Contact our admissions office at <a
-                    href="mailto:admissions@highschool.edu">admissions@highschool.edu</a></p>
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead style="background-color: var(--primary-color); color: white;">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Amount (per year)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Registration Fee</td>
+                                    <td>$500</td>
+                                </tr>
+                                <tr>
+                                    <td>Tuition Fee</td>
+                                    <td>$4,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Academic Materials</td>
+                                    <td>$300</td>
+                                </tr>
+                                <tr>
+                                    <td>Extracurricular Activities</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Transportation (Optional)</td>
+                                    <td>$1,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-light p-4 rounded mb-5">
+                <h4><i class="fas fa-info-circle text-primary"></i> Important Notes</h4>
+                <ul>
+                    <li>Early registration is encouraged for better consideration</li>
+                    <li>Scholarship opportunities are available for qualified candidates</li>
+                    <li>Payment plans are available upon request</li>
+                    <li>All documents must be original or officially certified</li>
+                    <li>Falsification of documents will lead to disqualification</li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="btn btn-primary btn-lg"><i class="fas fa-edit"></i> Register Now</a>
+                <a href="index.html" class="btn btn-secondary btn-lg ms-2">Back to Home</a>
+            </div>
         </div>
-    </div>
+    </section>
+    <!-- ===== Content Section End ===== -->
+
 </div>

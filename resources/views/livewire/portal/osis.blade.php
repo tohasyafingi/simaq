@@ -1,91 +1,160 @@
 <div>
-  <div class="page-banner">
-    <div class="container">
-      <h1>Student Council</h1>
-      <p class="lead">Student Leadership & Representation</p>
-    </div>
-  </div>
-
-  <!-- Content -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-lg-8 mx-auto text-center">
-          <h2 class="mb-4">About Student Council</h2>
-          <p class="lead">The Student Council serves as the voice of the student body, organizing events, addressing
-            student concerns, and fostering a positive school community. Our elected representatives work closely with
-            school administration to enhance the student experience.</p>
-        </div>
-      </div>
-
-      <!-- Council Members -->
-      <h3 class="text-center mb-5">2024-2025 Council Members</h3>
-      <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <div class="member-card">
-            <img src="{{ asset('portal1/images/default.jpg') }}" alt="President">
-            <h5>Alex Johnson</h5>
-            <p class="text-muted">President</p>
-            <p class="small">Leading the council with vision and dedication to student welfare.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="member-card">
-            <img src="{{ asset('portal1/images/default.jpg') }}" alt="Vice President">
-            <h5>Emma Davis</h5>
-            <p class="text-muted">Vice President</p>
-            <p class="small">Supporting initiatives and coordinating council activities.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="member-card">
-            <img src="{{ asset('portal1/images/default.jpg') }}" alt="Secretary">
-            <h5>Michael Chen</h5>
-            <p class="text-muted">Secretary</p>
-            <p class="small">Managing communications and documentation.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="member-card">
-            <img src="{{ asset('portal1/images/default.jpg') }}" alt="Treasurer">
-            <h5>Sarah Williams</h5>
-            <p class="text-muted">Treasurer</p>
-            <p class="small">Overseeing budget and financial planning.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Activities & Initiatives -->
-      <div class="row mt-5 align-items-center">
-        <div class="col-lg-6 mb-4 mb-lg-0">
-          <h3 class="mb-4">Our Activities & Initiatives</h3>
-          <ul class="list-unstyled">
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>School Events:</strong>
-              Organizing dances, spirit weeks, and cultural celebrations</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Student Voice:</strong>
-              Representing student concerns to administration</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Community
-                Service:</strong> Leading charitable initiatives and volunteer projects</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>School
-                Improvement:</strong> Proposing and implementing positive changes</li>
-            <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Peer Support:</strong>
-              Creating programs to support student wellbeing</li>
-          </ul>
-        </div>
-        <div class="col-lg-6">
-          <img src="{{ asset('portal1/images/default.jpg') }}" alt="Council Activities"
-            class="img-fluid rounded shadow">
-        </div>
-      </div>
+  <!-- ===== Banner Section Start ===== -->
+  <section class="hero-section" style="height: 300px;">
+    <div class="hero-content text-center">
+      <h1>Student Council (OSIS)</h1>
+      <p>Student Leadership & Representation</p>
     </div>
   </section>
+  <!-- ===== Banner Section End ===== -->
 
-  <!-- Call to Action -->
-  <section class="bg-light py-5">
-    <div class="container text-center">
-      <h2 class="mb-4">Get Involved</h2>
-      <p class="lead mb-4">Interested in joining the Student Council? Elections are held annually.</p>
-      <a href="contact.html" class="btn btn-primary btn-lg">Contact Us</a>
+  <!-- ===== Content Section Start ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="section-title">About Student Council</h2>
+          <p class="mb-3">The Student Council (OSIS - Organisasi Siswa Intra Sekolah) is the representative body of our
+            student body. It serves as a bridge between students and school administration, advocating for student
+            rights and promoting school spirit.</p>
+          <p class="mb-3">Our council is dedicated to organizing school events, improving the student experience, and
+            fostering a positive school culture. Members are elected by their peers and demonstrate exceptional
+            leadership, integrity, and commitment to the school community.</p>
+          <p>We believe in empowering students to take active roles in shaping their educational experience and
+            contributing to a vibrant school environment.</p>
+        </div>
+        <div class="col-lg-6">
+          <img src="{{ asset('images/default.jpg') }}" alt="Student Council" class="img-fluid rounded">
+        </div>
+      </div>
+
+      <h2 class="section-title">Leadership Structure</h2>
+
+      <div class="row mb-5">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card text-center">
+            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Chairperson">
+            <div class="card-body">
+              <h5 class="card-title">Chairperson</h5>
+              <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">Alex
+                Johnson</p>
+              <p class="card-text text-muted" style="font-size: 0.9rem;">Grade 12</p>
+              <p class="card-text" style="font-size: 0.9rem;">Oversees all council activities and represents students in
+                school meetings.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card text-center">
+            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Vice Chairperson">
+            <div class="card-body">
+              <h5 class="card-title">Vice Chairperson</h5>
+              <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">Maria
+                Garcia</p>
+              <p class="card-text text-muted" style="font-size: 0.9rem;">Grade 12</p>
+              <p class="card-text" style="font-size: 0.9rem;">Assists the chairperson and manages council operations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card text-center">
+            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Secretary">
+            <div class="card-body">
+              <h5 class="card-title">Secretary</h5>
+              <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">Emma Davis
+              </p>
+              <p class="card-text text-muted" style="font-size: 0.9rem;">Grade 11</p>
+              <p class="card-text" style="font-size: 0.9rem;">Maintains records and handles communication with members.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card text-center">
+            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Treasurer">
+            <div class="card-body">
+              <h5 class="card-title">Treasurer</h5>
+              <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">James Lee
+              </p>
+              <p class="card-text text-muted" style="font-size: 0.9rem;">Grade 11</p>
+              <p class="card-text" style="font-size: 0.9rem;">Manages council budget and financial matters.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Main Responsibilities</h2>
+
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="d-flex">
+            <div class="flex-shrink-0">
+              <div class="d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; font-weight: bold;">
+                <i class="fas fa-calendar"></i>
+              </div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h5>Event Planning & Organization</h5>
+              <p class="text-muted">Organizing school events, competitions, and celebrations throughout the year.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="d-flex">
+            <div class="flex-shrink-0">
+              <div class="d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; font-weight: bold;">
+                <i class="fas fa-handshake"></i>
+              </div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h5>Student Advocacy</h5>
+              <p class="text-muted">Representing student interests and advocating for student rights and welfare.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="d-flex">
+            <div class="flex-shrink-0">
+              <div class="d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; font-weight: bold;">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h5>Community Building</h5>
+              <p class="text-muted">Fostering school spirit and building a positive, inclusive school community.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="d-flex">
+            <div class="flex-shrink-0">
+              <div class="d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; font-weight: bold;">
+                <i class="fas fa-comments"></i>
+              </div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h5>Communication</h5>
+              <p class="text-muted">Facilitating communication between administration and the student body.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="scouts.html" class="btn btn-primary me-2">Next: Scouts</a>
+        <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+      </div>
     </div>
   </section>
 </div>

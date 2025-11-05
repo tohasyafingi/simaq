@@ -1,170 +1,214 @@
 <div>
-    <!-- Page Banner -->
-    <div class="page-banner">
-        <div class="container">
-            <h1>Extracurricular Activities</h1>
-            <p class="lead">Discover Your Passion Beyond the Classroom</p>
+<!-- ===== Banner Section Start ===== -->
+<section class="hero-section" style="height: 300px;">
+  <div class="hero-content text-center">
+    <h1>Extracurricular Activities</h1>
+    <p>Developing Well-Rounded Students</p>
+  </div>
+</section>
+<!-- ===== Banner Section End ===== -->
+
+<!-- ===== Content Section Start ===== -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Sports & Recreation</h2>
+
+    <div class="row mb-5">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Football">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-futbol text-primary"></i> Football Team</h5>
+            <p class="card-text">Competitive football program with professional coaching and regular tournaments.</p>
+          </div>
         </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Basketball">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-basketball text-primary"></i> Basketball</h5>
+            <p class="card-text">Championship-winning basketball program for both boys and girls with state-level competitions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Volleyball">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-volleyball text-primary"></i> Volleyball</h5>
+            <p class="card-text">Dynamic volleyball team with modern training facilities and experienced coaches.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Swimming">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-swimmer text-primary"></i> Swimming</h5>
+            <p class="card-text">Olympic-standard pool with coaching in various swimming disciplines and techniques.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Badminton">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-badminton text-primary"></i> Badminton</h5>
+            <p class="card-text">Professional badminton court with coaching and regular interschool competitions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Martial Arts">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-karate text-primary"></i> Martial Arts</h5>
+            <p class="card-text">Karate, taekwondo, and traditional martial arts training for all skill levels.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Activities Content -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="mb-4">Explore Your Interests</h2>
-                    <p class="lead">Our diverse extracurricular programs help students develop leadership skills, explore new interests, and build lasting friendships.</p>
-                </div>
-            </div>
+    <h2 class="section-title">Arts & Culture</h2>
 
-            <!-- Sports Activities -->
-            <h3 class="mb-4">Sports & Athletics</h3>
-            <div class="row mb-5">
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Basketball">
-                        <div class="activity-card-body">
-                            <i class="bi bi-dribbble activity-icon"></i>
-                            <h5>Basketball</h5>
-                            <p>Join our championship basketball team. Practice teamwork, strategy, and athletic excellence.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Soccer">
-                        <div class="activity-card-body">
-                            <i class="bi bi-trophy activity-icon"></i>
-                            <h5>Soccer</h5>
-                            <p>Develop skills and sportsmanship on our competitive soccer team with experienced coaches.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Swimming">
-                        <div class="activity-card-body">
-                            <i class="bi bi-water activity-icon"></i>
-                            <h5>Swimming</h5>
-                            <p>Train in our Olympic-size pool with certified instructors and compete at regional levels.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Arts & Culture -->
-            <h3 class="mb-4">Arts & Culture</h3>
-            <div class="row mb-5">
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Music Band">
-                        <div class="activity-card-body">
-                            <i class="bi bi-music-note-beamed activity-icon"></i>
-                            <h5>Music Band</h5>
-                            <p>Express yourself through music. Join our band and perform at school events and competitions.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Drama Club">
-                        <div class="activity-card-body">
-                            <i class="bi bi-mask activity-icon"></i>
-                            <h5>Drama Club</h5>
-                            <p>Develop acting skills and confidence through theatrical performances and workshops.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Art Club">
-                        <div class="activity-card-body">
-                            <i class="bi bi-palette activity-icon"></i>
-                            <h5>Art Club</h5>
-                            <p>Explore various art forms including painting, sculpture, and digital art with guidance from professional artists.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Academic Clubs -->
-            <h3 class="mb-4">Academic Clubs</h3>
-            <div class="row mb-5">
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Robotics">
-                        <div class="activity-card-body">
-                            <i class="bi bi-robot activity-icon"></i>
-                            <h5>Robotics Club</h5>
-                            <p>Build and program robots. Compete in national robotics competitions and learn cutting-edge technology.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Debate Team">
-                        <div class="activity-card-body">
-                            <i class="bi bi-chat-quote activity-icon"></i>
-                            <h5>Debate Team</h5>
-                            <p>Sharpen critical thinking and public speaking skills through competitive debates and discussions.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Science Club">
-                        <div class="activity-card-body">
-                            <i class="bi bi-flask activity-icon"></i>
-                            <h5>Science Club</h5>
-                            <p>Conduct experiments, participate in science fairs, and explore the wonders of scientific discovery.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Community Service -->
-            <h3 class="mb-4">Community & Leadership</h3>
-            <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Volunteer Club">
-                        <div class="activity-card-body">
-                            <i class="bi bi-heart activity-icon"></i>
-                            <h5>Volunteer Club</h5>
-                            <p>Make a difference in the community through service projects and charitable initiatives.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Environmental Club">
-                        <div class="activity-card-body">
-                            <i class="bi bi-tree activity-icon"></i>
-                            <h5>Environmental Club</h5>
-                            <p>Promote sustainability and environmental awareness through green initiatives and projects.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="activity-card">
-                        <img src="{{ asset('portal/images/default.jpg') }}" alt="Yearbook">
-                        <div class="activity-card-body">
-                            <i class="bi bi-camera activity-icon"></i>
-                            <h5>Yearbook Committee</h5>
-                            <p>Capture memories and develop journalism skills by creating our annual yearbook publication.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="row mb-5">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Music">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-music text-primary"></i> Music Club</h5>
+            <p class="card-text">Choir, orchestra, and band programs with performances at major school events.</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Call to Action -->
-    <section class="bg-light py-5">
-        <div class="container text-center">
-            <h2 class="mb-4">Find Your Passion</h2>
-            <p class="lead mb-4">Join us and discover activities that inspire and challenge you.</p>
-            <a href="admission.html" class="btn btn-primary btn-lg">Enroll Today</a>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Dance">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-person-dancing text-primary"></i> Dance Troupe</h5>
+            <p class="card-text">Modern and traditional dance groups performing at competitions and exhibitions.</p>
+          </div>
         </div>
-    </section>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Drama">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-masks-theater text-primary"></i> Theater Club</h5>
+            <p class="card-text">Drama and theater performances showcasing student talent and creativity.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Visual Arts">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-palette text-primary"></i> Visual Arts</h5>
+            <p class="card-text">Painting, sculpture, and digital art programs with student exhibitions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Photography">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-camera text-primary"></i> Photography Club</h5>
+            <p class="card-text">Digital and film photography with exhibitions and competitions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Debating">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-microphone text-primary"></i> Debate Society</h5>
+            <p class="card-text">English and local language debate competitions and public speaking training.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Academic Clubs</h2>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Robotics">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-robot text-primary"></i> Robotics Club</h5>
+            <p class="card-text">STEM-focused robotics and programming club with competition participation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Science">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-flask text-primary"></i> Science Club</h5>
+            <p class="card-text">Research, experiments, and science fair participation opportunities.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Math">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-calculator text-primary"></i> Math Club</h5>
+            <p class="card-text">Math competitions, problem-solving workshops, and mathematical exploration.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Environment">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-leaf text-primary"></i> Environmental Club</h5>
+            <p class="card-text">Sustainability, conservation, and environmental awareness initiatives.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Newspaper">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-newspaper text-primary"></i> School Newspaper</h5>
+            <p class="card-text">Journalism, creative writing, and school publication management.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Entrepreneurship">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-briefcase text-primary"></i> Entrepreneurship</h5>
+            <p class="card-text">Business planning, startup ideas, and entrepreneurial skill development.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="study-programs.html" class="btn btn-secondary me-2">Previous: Study Programs</a>
+      <a href="../index.html" class="btn btn-primary">Back to Home</a>
+    </div>
+  </div>
+</section>
+<!-- ===== Content Section End ===== -->
+
 </div>

@@ -1,139 +1,121 @@
 <div>
-    <!-- Page Banner -->
-    <div class="page-banner">
-        <div class="container">
+    <!-- ===== Banner Section Start ===== -->
+    <section class="hero-section" style="height: 300px;">
+        <div class="hero-content text-center">
             <h1>Study Programs</h1>
-            <p class="lead">Comprehensive Academic Excellence</p>
+            <p>Comprehensive Educational Pathways</p>
         </div>
-    </div>
+    </section>
+    <!-- ===== Banner Section End ===== -->
 
-    <!-- Programs Content -->
-    <section class="py-5">
+    <!-- ===== Content Section Start ===== -->
+    <section class="section">
         <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="mb-4">Our Academic Programs</h2>
-                    <p class="lead">We offer a comprehensive curriculum designed to prepare students for success in higher education and beyond. Our programs combine rigorous academics with practical skills development.</p>
+            <h2 class="section-title">Academic Programs Available</h2>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Science Program">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-microscope text-primary"></i> Science Program</h5>
+                            <p class="card-text">A rigorous curriculum emphasizing physics, chemistry, and biology with
+                                hands-on laboratory experiences and research opportunities.</p>
+                            <ul style="font-size: 0.9rem; color: #666;">
+                                <li>Advanced Physics & Chemistry</li>
+                                <li>Biology & Life Sciences</li>
+                                <li>Laboratory Research</li>
+                                <li>STEM Projects</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Social Program">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-globe text-primary"></i> Social Sciences Program
+                            </h5>
+                            <p class="card-text">Comprehensive study of history, geography, economics, and civics to
+                                develop well-informed global citizens.</p>
+                            <ul style="font-size: 0.9rem; color: #666;">
+                                <li>History & Culture</li>
+                                <li>Geography & Environment</li>
+                                <li>Economics & Business</li>
+                                <li>Civics & Government</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Arts Program">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-palette text-primary"></i> Arts & Humanities Program
+                            </h5>
+                            <p class="card-text">Exploration of literature, languages, philosophy, and creative
+                                expression with focus on cultural understanding.</p>
+                            <ul style="font-size: 0.9rem; color: #666;">
+                                <li>Literature & Writing</li>
+                                <li>Languages (English, Indonesian, Foreign)</li>
+                                <li>Philosophy & Ethics</li>
+                                <li>Creative Arts</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Science Program -->
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Science Program" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-lg-6">
-                    <i class="bi bi-flask program-icon"></i>
-                    <h3 class="mb-3">Science Program</h3>
-                    <p>Our Science program emphasizes hands-on learning and critical thinking. Students explore biology, chemistry, physics, and environmental science through laboratory experiments and research projects.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Advanced laboratory facilities</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Research opportunities</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Science competition preparation</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Field trips and practical applications</li>
-                    </ul>
+            <div class="mt-5">
+                <h2 class="section-title">Grade Levels</h2>
+
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <h3 style="color: var(--primary-color); font-weight: 700; font-size: 2.5rem;">X</h3>
+                                <h5 class="card-title">Grade 10</h5>
+                                <p class="card-text">Foundation year covering core subjects and introducing specialized
+                                    programs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <h3 style="color: var(--primary-color); font-weight: 700; font-size: 2.5rem;">XI</h3>
+                                <h5 class="card-title">Grade 11</h5>
+                                <p class="card-text">Intermediate year with specialized program tracks and advanced
+                                    coursework.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <h3 style="color: var(--primary-color); font-weight: 700; font-size: 2.5rem;">XII</h3>
+                                <h5 class="card-title">Grade 12</h5>
+                                <p class="card-text">Final year preparing for national exams and university
+                                    applications.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Mathematics Program -->
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Mathematics Program" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-lg-6 order-lg-1">
-                    <i class="bi bi-calculator program-icon"></i>
-                    <h3 class="mb-3">Mathematics Program</h3>
-                    <p>Our Mathematics curriculum develops problem-solving skills and logical thinking. From algebra to calculus, students build a strong foundation for STEM careers and everyday life applications.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Comprehensive curriculum from basic to advanced</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Math olympiad training</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Technology-integrated learning</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Real-world problem solving</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Language Arts Program -->
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Language Arts" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-lg-6">
-                    <i class="bi bi-book program-icon"></i>
-                    <h3 class="mb-3">Language Arts Program</h3>
-                    <p>Develop strong communication skills through our comprehensive language program. Students master reading, writing, speaking, and critical analysis in both native and foreign languages.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>English and native language mastery</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Foreign language options (Spanish, French, Mandarin)</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Literature and creative writing</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Public speaking and debate</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Social Studies Program -->
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Social Studies" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-lg-6 order-lg-1">
-                    <i class="bi bi-globe program-icon"></i>
-                    <h3 class="mb-3">Social Studies Program</h3>
-                    <p>Explore history, geography, economics, and civics to understand our world. Students develop critical thinking about society, culture, and global citizenship.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>World and national history</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Geography and cultural studies</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Economics and government</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Current events and global issues</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Technology Program -->
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Technology Program" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-lg-6">
-                    <i class="bi bi-laptop program-icon"></i>
-                    <h3 class="mb-3">Technology & Computer Science</h3>
-                    <p>Prepare for the digital future with our comprehensive technology program. Students learn programming, digital literacy, and emerging technologies.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Programming and coding (Python, Java, Web Development)</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Robotics and AI fundamentals</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Digital media and design</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Cybersecurity awareness</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Arts Program -->
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-                    <img src="{{ asset('portal/images/default.jpg') }}" alt="Arts Program" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-lg-6 order-lg-1">
-                    <i class="bi bi-palette program-icon"></i>
-                    <h3 class="mb-3">Arts Program</h3>
-                    <p>Express creativity through visual arts, music, and performing arts. Our program nurtures artistic talent and cultural appreciation.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Visual arts (painting, sculpture, photography)</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Music (instrumental and vocal)</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Theater and drama</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Art exhibitions and performances</li>
-                    </ul>
-                </div>
+            <div class="text-center mt-5">
+                <a href="extracurricular.html" class="btn btn-primary me-2">Next: Extracurricular</a>
+                <a href="../index.html" class="btn btn-secondary">Back to Home</a>
             </div>
         </div>
     </section>
+    <!-- ===== Content Section End ===== -->
 
-    <!-- Call to Action -->
-    <section class="bg-light py-5">
-        <div class="container text-center">
-            <h2 class="mb-4">Ready to Join Our Academic Community?</h2>
-            <p class="lead mb-4">Explore our comprehensive programs and discover your potential.</p>
-            <a href="admission.html" class="btn btn-primary btn-lg me-3">Apply Now</a>
-            <a href="contact.html" class="btn btn-outline-primary btn-lg">Schedule a Visit</a>
-        </div>
-    </section>
 </div>

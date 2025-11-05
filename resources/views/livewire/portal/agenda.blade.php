@@ -1,13 +1,102 @@
 <div class="news-page">
 
-    <div class="page-header">
-        <div class="container">
-            <h1 class="display-4 fw-bold">News & Announcements</h1>
-            <p class="lead">Stay updated with the latest news and events from our school</p>
+<!-- ===== Banner Section Start ===== -->
+<section class="hero-section" style="height: 300px;">
+  <div class="hero-content text-center">
+    <h1>News & Updates</h1>
+    <p>Latest Stories from SMA School</p>
+  </div>
+</section>
+<!-- ===== Banner Section End ===== -->
+
+<!-- ===== Content Section Start ===== -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Recent News</h2>
+
+    <div class="row mb-5">
+      <div class="col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 1">
+          <div class="card-body">
+            <h5 class="card-title">Annual School Festival 2024</h5>
+            <p class="card-text text-muted"><small><i class="fas fa-calendar"></i> November 5, 2024</small></p>
+            <p class="card-text">Join us for our spectacular annual festival featuring performances, exhibitions, art displays, and cultural celebrations showcasing student talent.</p>
+            <a href="news-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
         </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 2">
+          <div class="card-body">
+            <h5 class="card-title">Scholarship Opportunities Available</h5>
+            <p class="card-text text-muted"><small><i class="fas fa-calendar"></i> October 28, 2024</small></p>
+            <p class="card-text">We are proud to announce new scholarship opportunities for deserving students. Apply now to secure your future education at SMA School.</p>
+            <a href="news-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 3">
+          <div class="card-body">
+            <h5 class="card-title">New Science Lab Inauguration</h5>
+            <p class="card-text text-muted"><small><i class="fas fa-calendar"></i> October 20, 2024</small></p>
+            <p class="card-text">Our state-of-the-art science laboratory is now ready to provide hands-on learning experiences with the latest equipment for students.</p>
+            <a href="news-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 4">
+          <div class="card-body">
+            <h5 class="card-title">Basketball Team Wins Regional Championship</h5>
+            <p class="card-text text-muted"><small><i class="fas fa-calendar"></i> October 15, 2024</small></p>
+            <p class="card-text">Congratulations to our basketball team on winning the regional championship! An outstanding achievement by our dedicated athletes.</p>
+            <a href="news-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 5">
+          <div class="card-body">
+            <h5 class="card-title">International Exchange Program Launched</h5>
+            <p class="card-text text-muted"><small><i class="fas fa-calendar"></i> October 8, 2024</small></p>
+            <p class="card-text">SMA School is launching a new international exchange program providing students opportunities to study abroad and gain global perspective.</p>
+            <a href="news-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card">
+          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 6">
+          <div class="card-body">
+            <h5 class="card-title">Environmental Awareness Campaign</h5>
+            <p class="card-text text-muted"><small><i class="fas fa-calendar"></i> September 30, 2024</small></p>
+            <p class="card-text">Students and staff participate in an environmental awareness campaign to promote sustainability and protect our planet.</p>
+            <a href="news-detail.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="container mb-5">
+    <div class="text-center">
+      <a href="scientific-works.html" class="btn btn-primary me-2">Scientific Works</a>
+      <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+    </div>
+  </div>
+</section>
+<!-- ===== Content Section End ===== -->
+
+    {{-- <div class="container mb-5">
         <div class="row">
             <div class="col-lg-8">
                 @forelse($beritas as $berita)
@@ -33,109 +122,7 @@
                     <p class="text-center">Belum ada berita publik tersedia.</p>
                 @endforelse
             </div>
-
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-header" style="background-color: var(--primary-color); color: white;">
-                        <h5 class="mb-0"><i class="bi bi-megaphone"></i> Important Announcements</h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-3 pb-3 border-bottom">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 20,
-                                    2025</small>
-                                <p class="mb-1"><strong>Semester Exam Schedule Released</strong></p>
-                                <small class="text-muted">Final exams will begin on February 5th. Check the academic
-                                    portal for your personalized schedule.</small>
-                            </li>
-                            <li class="mb-3 pb-3 border-bottom">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 18,
-                                    2025</small>
-                                <p class="mb-1"><strong>Parent-Teacher Meeting</strong></p>
-                                <small class="text-muted">Mandatory meeting on January 25th at 2 PM in the school
-                                    auditorium to discuss student progress.</small>
-                            </li>
-                            <li class="mb-3 pb-3 border-bottom">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 15,
-                                    2025</small>
-                                <p class="mb-1"><strong>School Holiday Notice</strong></p>
-                                <small class="text-muted">School will be closed on January 22-23 for staff professional
-                                    development.</small>
-                            </li>
-                            <li class="mb-3 pb-3 border-bottom">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 12,
-                                    2025</small>
-                                <p class="mb-1"><strong>New Admission Period Opens</strong></p>
-                                <small class="text-muted">Applications for 2025-2026 academic year now open. Limited
-                                    spots available.</small>
-                            </li>
-                            <li class="mb-3">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Jan 8,
-                                    2025</small>
-                                <p class="mb-1"><strong>Library Extended Hours</strong></p>
-                                <small class="text-muted">Digital library now open until 8 PM on weekdays to support
-                                    exam preparation.</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card mb-4">
-                    <div class="card-header" style="background-color: var(--primary-color); color: white;">
-                        <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Upcoming Events</h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-3 pb-3 border-bottom">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 5,
-                                    2025</small>
-                                <p class="mb-1"><strong>Annual Sports Day</strong></p>
-                                <small class="text-muted">Inter-house athletics competition featuring track and field
-                                    events.</small>
-                            </li>
-                            <li class="mb-3 pb-3 border-bottom">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 10,
-                                    2025</small>
-                                <p class="mb-1"><strong>Science Fair Exhibition</strong></p>
-                                <small class="text-muted">Student science projects on display. Open to parents and
-                                    community.</small>
-                            </li>
-                            <li class="mb-3 pb-3 border-bottom">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 15,
-                                    2025</small>
-                                <p class="mb-1"><strong>Art & Music Festival</strong></p>
-                                <small class="text-muted">Showcasing student artwork and musical performances.</small>
-                            </li>
-                            <li class="mb-3">
-                                <small class="text-muted d-block mb-1"><i class="bi bi-calendar3"></i> Feb 20,
-                                    2025</small>
-                                <p class="mb-1"><strong>Career Guidance Workshop</strong></p>
-                                <small class="text-muted">University representatives and career counselors for senior
-                                    students.</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" style="background-color: var(--primary-color); color: white;">
-                        <h5 class="mb-0"><i class="bi bi-trophy"></i> Recent Achievements</h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> National Science Competition -
-                                1st Place</li>
-                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> Regional Math Olympiad - 2nd
-                                Place</li>
-                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> Debate Championship - Finalist
-                            </li>
-                            <li class="mb-2"><i class="bi bi-star-fill text-warning"></i> Basketball Tournament -
-                                Champions</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
+    </div> --}}
 
 </div>

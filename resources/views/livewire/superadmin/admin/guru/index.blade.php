@@ -30,31 +30,29 @@
                     <!-- Default box -->
                     <div class="card">
                         <div class="card-header">
-                            <div class="d-flex justify-content-between mb-1">
-                                <div>
-                                    <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#createModal"><i class="bi bi-person-plus-fill mr-2"></i>
-                                        Tambah</button>
-                                </div>
-                                <div>
-                                    <!-- Button Import -->
-                                    <button class="btn btn-md btn-success grid text-center me-0 me-sm-3 mb-3 mb-sm-0"
-                                        data-bs-toggle="modal" data-bs-target="#importModal">
-                                        <i class="fas fa-file-excel"></i> Import
-                                    </button>
-                                    <!-- Button Export -->
-                                    <button wire:click="export"
-                                        class="btn btn-md btn-primary grid text-center me-0 me-sm-3 mb-3 mb-sm-0">
-                                        <i class="fas fa-file-export"></i> Export
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+<div class="d-flex justify-content-between mb-1">
+    <div>
+        <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+            <i class="bi bi-person-plus-fill mr-2"></i> Tambah
+        </button>
+    </div>
 
-                        <!-- Modal Import -->
-                        <x-modal-import id="importModal" title="Import Data Excel"
-                            routeImport="{{ route('superadmin.admin.import.guru') }}"
-                            routeTemplate="{{ route('superadmin.admin.download.template.guru') }}" inputName="file" />
+    <div>
+        <!-- Tombol Import -->
+        <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
+            <i class="fas fa-file-excel"></i> Import
+        </button>
+
+        <!-- Tombol Export Data Guru -->
+        <button wire:click="export" class="btn btn-md btn-primary">
+            <i class="fas fa-file-export"></i> Export
+        </button>
+
+        <x-modal-import id="importModal" title="Import Data Guru" inputName="file" />
+    </div>
+</div>
+
+                        </div>
 
                         <div class="card-body">
 

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scouts Program - SMA School</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<!-- ===== Navbar Start ===== -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="../index.html">
+      <i class="fas fa-school"></i> SMA School
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+            <li><a class="dropdown-item" href="../profile/history.html">History</a></li>
+            <li><a class="dropdown-item" href="../profile/vision-mission.html">Vision & Mission</a></li>
+            <li><a class="dropdown-item" href="../profile/organization.html">Organizational Structure</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="academicDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Academic
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="academicDropdown">
+            <li><a class="dropdown-item" href="../academic/study-programs.html">Study Programs</a></li>
+            <li><a class="dropdown-item" href="../academic/extracurricular.html">Extracurricular</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="studentAffairsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Student Affairs
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="studentAffairsDropdown">
+            <li><a class="dropdown-item" href="student-council.html">Student Council</a></li>
+            <li><a class="dropdown-item active" href="scouts.html">Scouts</a></li>
+            <li><a class="dropdown-item" href="tahfidz.html">Tahfidz Program</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="publicInfoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Public Information
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="publicInfoDropdown">
+            <li><a class="dropdown-item" href="../public-info/news.html">News</a></li>
+            <li><a class="dropdown-item" href="../public-info/scientific-works.html">Scientific Works</a></li>
+            <li><a class="dropdown-item" href="../public-info/ebook.html">E-Book</a></li>
+            <li><a class="dropdown-item" href="../public-info/download.html">Download</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../gallery.html">Gallery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../admission.html">Admission (PPDB)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../contact.html">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a href="../login.html" class="btn btn-login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- ===== Navbar End ===== -->
+
+<!-- ===== Banner Section Start ===== -->
+<section class="hero-section" style="height: 300px;">
+  <div class="hero-content text-center">
+    <h1>Scouts Program</h1>
+    <p>Developing Leaders & Citizens</p>
+  </div>
+</section>
+<!-- ===== Banner Section End ===== -->
+
+<!-- ===== Content Section Start ===== -->
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-6">
+        <img src="{{ asset('portal/images/default.jpg') }}" alt="Scouts Program" class="img-fluid rounded mb-4 mb-lg-0">
+      </div>
+      <div class="col-lg-6">
+        <h2 class="section-title">About Our Scouts Program</h2>
+        <p class="mb-3">Our school's Scouting program is part of a worldwide movement dedicated to developing young people as active citizens and responsible members of society. We provide youth with opportunities to discover their potential and contribute to society in a meaningful way.</p>
+        <p class="mb-3">Through exciting outdoor adventures, practical skills training, and community service, our scouts learn leadership, teamwork, and environmental stewardship while having fun and making lasting friendships.</p>
+        <p>We are proud to be part of the global scout family, following the established scout law and promise to develop character, courage, and commitment.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Scout Divisions</h2>
+
+    <div class="row mb-5">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <div class="card-header" style="background-color: var(--primary-color); color: white; padding: 1rem;">
+            <h5 class="mb-0"><i class="fas fa-child"></i> Cub Scouts</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Ages:</strong> 10-13 years</p>
+            <p class="card-text"><strong>Focus:</strong> Fun and adventure with basic outdoor skills</p>
+            <ul style="font-size: 0.9rem; color: #666;">
+              <li>Basic camping skills</li>
+              <li>Teamwork exercises</li>
+              <li>Community service</li>
+              <li>Badge earning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <div class="card-header" style="background-color: var(--primary-color); color: white; padding: 1rem;">
+            <h5 class="mb-0"><i class="fas fa-person-hiking"></i> Boy/Girl Scouts</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Ages:</strong> 13-17 years</p>
+            <p class="card-text"><strong>Focus:</strong> Adventure, leadership, and personal growth</p>
+            <ul style="font-size: 0.9rem; color: #666;">
+              <li>Advanced camping & hiking</li>
+              <li>Leadership training</li>
+              <li>Environmental projects</li>
+              <li>Merit badges</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <div class="card-header" style="background-color: var(--primary-color); color: white; padding: 1rem;">
+            <h5 class="mb-0"><i class="fas fa-star"></i> Venturers</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Ages:</strong> 17+ years</p>
+            <p class="card-text"><strong>Focus:</strong> Challenge and service leadership</p>
+            <ul style="font-size: 0.9rem; color: #666;">
+              <li>Expedition planning</li>
+              <li>Leadership roles</li>
+              <li>Community service</li>
+              <li>Personal challenges</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Scout Activities & Events</h2>
+
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="d-flex mb-3">
+          <div class="flex-shrink-0">
+            <div class="d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%;">
+              <i class="fas fa-campground"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Camping Expeditions</h5>
+            <p class="text-muted" style="font-size: 0.9rem;">Regular camping trips to develop outdoor skills and bonding among scouts.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="d-flex mb-3">
+          <div class="flex-shrink-0">
+            <div class="d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%;">
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Community Service</h5>
+            <p class="text-muted" style="font-size: 0.9rem;">Environmental projects, disaster relief, and community welfare initiatives.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="d-flex mb-3">
+          <div class="flex-shrink-0">
+            <div class="d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%;">
+              <i class="fas fa-mountain"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Adventure Training</h5>
+            <p class="text-muted" style="font-size: 0.9rem;">Rock climbing, rappelling, kayaking, and other adventure sports.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="d-flex mb-3">
+          <div class="flex-shrink-0">
+            <div class="d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%;">
+              <i class="fas fa-users"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Scout Jamborees</h5>
+            <p class="text-muted" style="font-size: 0.9rem;">Large gatherings with scouts from other schools and regions for friendship and learning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="student-council.html" class="btn btn-secondary me-2">Previous: Student Council</a>
+      <a href="tahfidz.html" class="btn btn-primary">Next: Tahfidz Program</a>
+    </div>
+  </div>
+</section>
+<!-- ===== Content Section End ===== -->
+
+<!-- ===== Footer Start ===== -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 mb-4">
+        <h5>About SMA</h5>
+        <p>A leading institution dedicated to providing excellence in education and character development.</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h5>Quick Links</h5>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../gallery.html">Gallery</a></li>
+          <li><a href="../admission.html">Admission</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h5>Contact Info</h5>
+        <p>123 Education Street<br>Phone: +1 (555) 123-4567<br>Email: info@smaschool.edu</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h5>Follow Us</h5>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 SMA School. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+<!-- ===== Footer End ===== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

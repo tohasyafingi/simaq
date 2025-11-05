@@ -115,7 +115,7 @@
                                                         <div class="d-flex justify-content-center gap-1">
                                                             <button class="btn btn-sm btn-outline-success">
                                                                 <a wire:navigate
-                                                                    href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $item['guru_pelajaran']->id,'rombelId' => $rombel->id], 'guru') }}"
+                                                                    href="{{ routeRoleBased('pelajaran.materi.index', ['guruPelajaranId' => $item['guru_pelajaran']->id,'rombelId' => $rombel->id]) }}"
                                                                     style="text-decoration: none; color: inherit;">
                                                                     <i class="fas fa-eye"></i> Detail
                                                                 </a>

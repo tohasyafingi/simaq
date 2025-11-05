@@ -147,12 +147,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/e-book', AdminEBookIndex::class)->name('e-book.index');
     Route::get('/download', AdminDownloadIndex::class)->name('download.index');
     Route::get('/galeri', AdminGaleriIndex::class)->name('galeri.index');
-
-    Route::get('/data-import-export', DataImportExport::class)->name('data.import.export');
-    Route::post('/import/guru', [ImportsController::class, 'importGuru'])->name('import.guru');
-    Route::get('/download/template/guru', function () {
-        return response()->download(storage_path('app/templates/guru_template.xlsx'));
-    })->name('download.template.guru');
 });
 
 Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('superadmin.guru.')->group(function () {

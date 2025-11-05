@@ -57,7 +57,7 @@ class GuruImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnErro
             });
         } catch (\Exception $e) {
             Log::error("Gagal import baris: " . json_encode($row) . " | Error: " . $e->getMessage());
-            return null; // Skip baris jika error
+            return null; 
         }
     }
 

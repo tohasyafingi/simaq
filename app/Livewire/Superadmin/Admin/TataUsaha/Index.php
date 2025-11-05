@@ -11,6 +11,10 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\Log;
+use App\Exports\TataUsahaExport;
+use App\Imports\TataUsahaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 #[Title('Data Tata Usaha')]
 class Index extends Component
@@ -19,10 +23,10 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $file;
     public $paginate = 10;
     public $search = '';
 
-    // Form fields
     public $tata_usaha_id, $kd_tu, $name, $email, $no_hp, $img, $status;
 
     public $deleteId = null;
@@ -42,6 +46,58 @@ class Index extends Component
             'img' => 'nullable|image|max:2048',
             'status' => 'required|boolean',
         ];
+    }
+
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|file|mimes:xlsx,xls',
+        ]);
+
+        try {
+            $import = new TataUsahaImport();
+            Excel::import($import, $this->file);
+
+            $errorCount = count($import->getErrors());
+            $failureCount = count($import->getFailures());
+            $skippedCount = count($import->skipped);
+
+            // Log detail failures untuk debugging
+            if ($failureCount > 0) {
+                foreach ($import->getFailures() as $failure) {
+                    Log::warning("Baris {$failure->row()}: " . implode(', ', $failure->errors()));
+                }
+            }
+
+            Log::info("Import selesai: {$errorCount} error, {$failureCount} gagal, {$skippedCount} di-skip.");
+
+            $this->file = null;
+
+            if ($errorCount > 0 || $failureCount > 0 || $skippedCount > 0) {
+                $message = "Import selesai dengan beberapa masalah: ";
+                if ($errorCount > 0) $message .= "{$errorCount} error. ";
+                if ($failureCount > 0) $message .= "{$failureCount} gagal validasi (lihat log untuk detail). ";
+                if ($skippedCount > 0) $message .= "{$skippedCount} baris di-skip. ";
+                session()->flash('warning', $message);
+            } else {
+                session()->flash('message', 'Semua data Tata Usaha berhasil diimport.');
+            }
+
+            $this->dispatch('closeImportModal');
+        } catch (\Exception $e) {
+            Log::error("Exception di import: " . $e->getMessage());
+            session()->flash('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        return Excel::download(new TataUsahaExport('template'), 'template_tata_usaha.xlsx');
+    }
+
+    public function export()
+    {
+        return Excel::download(new TataUsahaExport('data'), 'data_tata_usaha.xlsx');
     }
 
     public function render()
@@ -81,7 +137,7 @@ class Index extends Component
             $validatedData = $this->validate();
 
             if ($this->img) {
-                $validatedData['img'] = $this->img->store('karyawan', 'public');
+                $validatedData['img'] = $this->img->store('tata_usaha', 'public');
             }
 
             $tata_usaha = TataUsaha::create($validatedData);
@@ -100,7 +156,7 @@ class Index extends Component
                 'img' => $validatedData['img'] ?? null,
                 'password' => Hash::make($validatedData['kd_tu']),
                 'role' => 'karyawan',  // Tetap 'karyawan' seperti kode asli
-                'tata_usaha_id' => $tata_usaha->id,  // Tambahkan tata_usaha_id
+                'tata_usaha_id' => $tata_usaha->id,
                 'status' => $validatedData['status'],
             ]);
 
@@ -136,7 +192,7 @@ class Index extends Component
                 if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
                     Storage::disk('public')->delete($tata_usaha->img);
                 }
-                $validatedData['img'] = $this->img->store('karyawan', 'public');
+                $validatedData['img'] = $this->img->store('tata_usaha', 'public');
             } else {
                 $validatedData['img'] = $tata_usaha->img;
             }

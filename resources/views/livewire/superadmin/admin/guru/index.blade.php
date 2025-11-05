@@ -30,27 +30,29 @@
                     <!-- Default box -->
                     <div class="card">
                         <div class="card-header">
-<div class="d-flex justify-content-between mb-1">
-    <div>
-        <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-            <i class="bi bi-person-plus-fill mr-2"></i> Tambah
-        </button>
-    </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div>
+                                    <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#createModal">
+                                        <i class="bi bi-person-plus-fill mr-2"></i> Tambah
+                                    </button>
+                                </div>
 
-    <div>
-        <!-- Tombol Import -->
-        <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
-            <i class="fas fa-file-excel"></i> Import
-        </button>
+                                <div>
+                                    <!-- Tombol Import -->
+                                    <button class="btn btn-md btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#importModal">
+                                        <i class="fas fa-file-excel"></i> Import
+                                    </button>
 
-        <!-- Tombol Export Data Guru -->
-        <button wire:click="export" class="btn btn-md btn-primary">
-            <i class="fas fa-file-export"></i> Export
-        </button>
+                                    <!-- Tombol Export Data Guru -->
+                                    <button wire:click="export" class="btn btn-md btn-primary">
+                                        <i class="fas fa-file-export"></i> Export
+                                    </button>
 
-        <x-modal-import id="importModal" title="Import Data Guru" inputName="file" />
-    </div>
-</div>
+                                    <x-modal-import id="importModal" title="Import Data Guru" inputName="file" />
+                                </div>
+                            </div>
 
                         </div>
 
@@ -147,6 +149,28 @@
             <!--end::Row-->
         </div>
     </div>
+
+    @script
+    <script>
+        $wire.on('closeImportModal', () => {
+            const modalElement = document.getElementById('importModal');
+            let modalInstance = bootstrap.Modal.getInstance(modalElement);
+
+            if (!modalInstance) {
+                modalInstance = new bootstrap.Modal(modalElement);
+            }
+
+            modalInstance.hide();
+
+            Swal.fire({
+                title: "Sukses",
+                text: "Data Berhasil Ditambah!",
+                icon: "success"
+            });
+        });
+
+    </script>
+    @endscript
 
     @include('livewire.superadmin.admin.guru.create')
     @script

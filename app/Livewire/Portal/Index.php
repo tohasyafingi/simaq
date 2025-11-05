@@ -4,7 +4,11 @@ namespace App\Livewire\Portal;
 
 use Livewire\Component;
 use App\Models\Berita;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Beranda')]
+#[Layout('components.layouts.portal')]
 class Index extends Component
 {
     public $beritas;
@@ -19,7 +23,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.portal.index')
-            ->layout('components.layouts.portal');
+        return view('livewire.portal.index');
     }
 }

@@ -47,52 +47,52 @@ class Index extends Component
         ];
     }
 
-public function import()
-{
-    $this->validate([
-        'file' => 'required|file|mimes:xlsx,xls',
-    ]);
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|file|mimes:xlsx,xls',
+        ]);
 
-    try {
-        $import = new GuruImport();
-        Excel::import($import, $this->file);
+        try {
+            $import = new GuruImport();
+            Excel::import($import, $this->file);
 
-        $errors = $import->errors();
-        $failures = $import->failures();
-        $skipped = $import->skipped;
+            $errors = $import->errors();
+            $failures = $import->failures();
+            $skipped = $import->skipped;
 
-        Log::info("Import selesai. Errors: " . count($errors) . ", Failures: " . count($failures) . ", Skipped: " . count($skipped)); // Logging debug
+            Log::info("Import selesai. Errors: " . count($errors) . ", Failures: " . count($failures) . ", Skipped: " . count($skipped)); // Logging debug
 
-        $this->file = null;
+            $this->file = null;
 
-        $message = 'Import selesai.';
-        if (count($errors) > 0 || count($failures) > 0 || count($skipped) > 0) {
-            $message .= ' Detail:';
-            if (count($errors) > 0) {
-                $message .= ' ' . count($errors) . ' baris error.';
+            $message = 'Import selesai.';
+            if (count($errors) > 0 || count($failures) > 0 || count($skipped) > 0) {
+                $message .= ' Detail:';
+                if (count($errors) > 0) {
+                    $message .= ' ' . count($errors) . ' baris error.';
+                }
+                if (count($failures) > 0) {
+                    $message .= ' ' . count($failures) . ' baris gagal validasi (e.g., duplikat).';
+                }
+                if (count($skipped) > 0) {
+                    $message .= ' ' . count($skipped) . ' baris di-skip.';
+                }
+                session()->flash('warning', $message);
+            } else {
+                session()->flash('message', 'Data guru berhasil diimport sepenuhnya.');
             }
-            if (count($failures) > 0) {
-                $message .= ' ' . count($failures) . ' baris gagal validasi (e.g., duplikat).';
-            }
-            if (count($skipped) > 0) {
-                $message .= ' ' . count($skipped) . ' baris di-skip.';
-            }
-            session()->flash('warning', $message);
-        } else {
-            session()->flash('message', 'Data guru berhasil diimport sepenuhnya.');
+
+            $this->dispatch('closeImportModal');
+        } catch (\Exception $e) {
+            Log::error("Exception di import: " . $e->getMessage());
+            session()->flash('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
         }
-
-        $this->dispatch('closeImportModal');
-    } catch (\Exception $e) {
-        Log::error("Exception di import: " . $e->getMessage());
-        session()->flash('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
     }
-}
 
-public function downloadTemplate()
-{
-    return Excel::download(new GuruExport('template'), 'template_guru.xlsx');
-}
+    public function downloadTemplate()
+    {
+        return Excel::download(new GuruExport('template'), 'template_guru.xlsx');
+    }
     public function export()
     {
         return Excel::download(new GuruExport('data'), 'data_guru.xlsx');

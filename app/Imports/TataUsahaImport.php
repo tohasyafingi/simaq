@@ -5,44 +5,106 @@ namespace App\Imports;
 use App\Models\TataUsaha;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class TataUsahaImport implements ToModel, WithHeadingRow, WithValidation
+class TataUsahaImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnError, SkipsOnFailure, WithBatchInserts
 {
+    use Importable, SkipsErrors, SkipsFailures;
+
+    public $skipped = []; // Baris yang di-skip
+
+    // Method untuk mengakses properti protected dari trait
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    public function getFailures()
+    {
+        return $this->failures;
+    }
+
     public function model(array $row)
     {
-        // Buat TataUsaha
-        $tata_usaha = TataUsaha::create([
-            'kd_tu' => $row['kode_tu'],
-            'name' => $row['nama'],
-            'email' => $row['email'],
-            'no_hp' => $row['no_hp'],
-            'status' => $row['status'] == 'aktif' ? true : false,
-        ]);
+        try {
+            Log::info("Memproses baris: " . json_encode($row));
 
-        // Buat User terkait
-        User::create([
-            'name' => $row['nama'],
-            'email' => $row['email'],
-            'password' => Hash::make($row['kd_tu']),
-            'role' => 'karyawan',
-            'tata_usaha_id' => $tata_usaha->id,
-            'status' => $row['status'] == 'aktif' ? true : false,
-        ]);
+            return DB::transaction(function () use ($row) {
+                $tata_usaha = TataUsaha::create([
+                    'kd_tu' => $row['kode_tu'],
+                    'name'    => $row['nama'],
+                    'email'   => $row['email'],
+                    'no_hp'   => $row['no_hp'],
+                    'status'  => strtolower($row['status']) === 'aktif',
+                ]);
 
-        return $tata_usaha;
+                User::create([
+                    'name'      => $row['nama'],
+                    'email'     => $row['email'],
+                    'password'  => Hash::make($row['kode_tu']),
+                    'role'      => 'karyawan',
+                    'tata_usaha_id'   => $tata_usaha->id,
+                    'status'    => strtolower($row['status']) === 'aktif',
+                ]);
+
+                Log::info("Berhasil simpan: {$row['kode_tu']}");
+                return $tata_usaha;
+            });
+        } catch (\Exception $e) {
+            Log::error("Gagal simpan baris: " . $e->getMessage());
+            $this->skipped[] = $row;
+            return null;
+        }
     }
 
     public function rules(): array
     {
         return [
-            'kode_tu' => 'required|unique:tata_usahas,kd_tu',
-            'nama' => 'required',
-            'email' => 'required|email|unique:tata_usahas,email|unique:users,email',
-            'no_hp' => 'required',
+            'kode_tu' => [
+                'required',
+                'string',
+                Rule::unique('tata_usahas', 'kd_tu'),
+            ],
+            'nama'   => 'required|string',
+            'email'  => [
+                'required',
+                'email',
+                Rule::unique('tata_usahas', 'email'),
+                Rule::unique('users', 'email'),
+            ],
+            'no_hp'  => 'required|string',
             'status' => 'required|in:aktif,tidak_aktif',
         ];
+    }
+
+    public function customValidationMessages()
+    {
+        return [
+            'kode_tu.required' => 'Kolom kode_tu wajib diisi.',
+            'kode_tu.unique'   => 'Kode tata usaha sudah ada.',
+            'nama.required'           => 'Kolom nama wajib diisi.',
+            'email.required'          => 'Kolom email wajib diisi.',
+            'email.email'             => 'Kolom email harus format email valid.',
+            'email.unique'            => 'Email sudah digunakan.',
+            'no_hp.required'          => 'Kolom no_hp wajib diisi.',
+            'status.required'         => 'Kolom status wajib diisi.',
+            'status.in'               => 'Kolom status harus "aktif" atau "tidak_aktif".',
+        ];
+    }
+
+    public function batchSize(): int
+    {
+        return 100;
     }
 }

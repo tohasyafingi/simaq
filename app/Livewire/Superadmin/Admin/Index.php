@@ -2,24 +2,82 @@
 
 namespace App\Livewire\Superadmin\Admin;
 
-use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\Guru;
+use App\Models\Bendahara;
+use App\Models\GuruPelajaran;
+use App\Models\TataUsaha;
+use App\Models\Siswa;
+use App\Models\Jurusan;
+use App\Models\Rombel;
+use App\Models\RuangKelas;
+use App\Models\TahunAjaran;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth; 
 use Livewire\Attributes\Title;
 
 #[Title('Dashboard Admin')]
 class Index extends Component
 {
+    public $nama_admin;
+    public $jumlah_guru;
+    public $jumlah_bendahara;
+    public $jumlah_tu;
+    public $jumlah_siswa;
+    public $tahun_ajaran;
+    public $jumlah_jurusan;
+    public $jumlah_rombel;
+    public $jumlah_ruang_kelas;
+    public $jumlah_pengajar;
+
+    public $events = [];
+
+    public function mount()
+    {
+        $this->nama_admin = Auth::user()->name ?? 'Admin';
+
+        $this->jumlah_guru = Guru::count();
+        $this->jumlah_bendahara = Bendahara::count();
+        $this->jumlah_tu = TataUsaha::count();
+        $this->jumlah_siswa = Siswa::count();
+        $this->jumlah_jurusan = Jurusan::count();
+        $this->jumlah_rombel = Rombel::count();
+        $this->jumlah_ruang_kelas = RuangKelas::count();
+        $this->jumlah_pengajar = GuruPelajaran::count();
+
+        // Perbaiki query status (asumsikan boolean, bukan string)
+        $aktif = TahunAjaran::where('status', true)->first();
+        $this->tahun_ajaran = $aktif
+            ? $aktif->tahun . ' ' . $aktif->semester
+            : 'Belum ada Tahun Ajaran Aktif';
+
+        // Events dengan format lengkap (start, end, color)
+        $this->events = [
+            [
+                'title' => 'Ujian Tengah Semester',
+                'start' => Carbon::now()->startOfMonth()->addDays(10)->toDateString(),
+                'end' => Carbon::now()->startOfMonth()->addDays(10)->toDateString(),
+                'color' => '#3b82f6'
+            ],
+            [
+                'title' => 'Libur Nasional',
+                'start' => Carbon::now()->startOfMonth()->addDays(15)->toDateString(),
+                'end' => Carbon::now()->startOfMonth()->addDays(15)->toDateString(),
+                'color' => '#ef4444'
+            ],
+            [
+                'title' => 'Rapat Guru',
+                'start' => Carbon::now()->startOfMonth()->addDays(20)->toDateString(),
+                'end' => Carbon::now()->startOfMonth()->addDays(20)->toDateString(),
+                'color' => '#10b981'
+            ],
+        ];
+    }
+
     public function render()
     {
-        // Set locale secara global ke Bahasa Indonesia
-        Carbon::setLocale('id');
-
-        // Format waktu sekarang dalam bahasa Indonesia
-        $waktuSekarang = Carbon::now()->translatedFormat('l, d F Y H:i');
-
         return view('livewire.superadmin.admin.index', [
-            'title' => 'Dashboard Admin',
-            'waktuSekarang' => $waktuSekarang,
+            'title' => 'Dashboard Admin'
         ]);
     }
 }

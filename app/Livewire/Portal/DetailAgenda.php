@@ -4,7 +4,11 @@ namespace App\Livewire\Portal;
 
 use Livewire\Component;
 use App\Models\Berita;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Berita')]
+#[Layout('components.layouts.portal')]
 class DetailAgenda extends Component
 {
     public $beritaId;
@@ -28,6 +32,6 @@ public function mount($slug)
         return view('livewire.portal.detail-agenda', [
             'berita' => $this->berita,
             'latestBeritas' => $latestBeritas,
-        ])->layout('components.layouts.portal');
+        ]);
     }
 }

@@ -11,6 +11,10 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BendaharaExport;
+use App\Imports\BendaharaImport;
+use Illuminate\Support\Facades\Log;
 
 #[Title('Data Bendahara')]
 class Index extends Component
@@ -19,6 +23,7 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $file;
     public $paginate = 10;
     public $search = '';
 
@@ -41,6 +46,57 @@ class Index extends Component
             'img' => 'nullable|image|max:2048',
             'status' => 'required|boolean',
         ];
+    }
+
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|file|mimes:xlsx,xls',
+        ]);
+
+        try {
+            $import = new BendaharaImport();
+            Excel::import($import, $this->file);
+
+            $errorCount = count($import->errors());
+            $failureCount = count($import->failures());
+            $skippedCount = property_exists($import, 'skipped') ? count($import->skipped) : 0;
+
+            // Log detail failures untuk debugging
+            if ($failureCount > 0) {
+                foreach ($import->failures() as $failure) {
+                    Log::warning("Baris {$failure->row()}: " . implode(', ', $failure->errors()));
+                }
+            }
+
+            Log::info("Import selesai: {$errorCount} error, {$failureCount} gagal, {$skippedCount} di-skip.");
+
+            $this->file = null;
+
+            if ($errorCount > 0 || $failureCount > 0 || $skippedCount > 0) {
+                $message = "Import selesai dengan beberapa masalah: ";
+                if ($errorCount > 0) $message .= "{$errorCount} error. ";
+                if ($failureCount > 0) $message .= "{$failureCount} gagal validasi (lihat log untuk detail). ";
+                if ($skippedCount > 0) $message .= "{$skippedCount} baris di-skip. ";
+                session()->flash('warning', $message);
+            } else {
+                session()->flash('message', 'Semua data Bendahara berhasil diimport.');
+            }
+
+            $this->dispatch('closeImportModal');
+        } catch (\Exception $e) {
+            Log::error("Exception di import: " . $e->getMessage());
+            session()->flash('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
+        }
+    }
+    public function downloadTemplate()
+    {
+        return Excel::download(new BendaharaExport('template'), 'template_bendahara.xlsx');
+    }
+
+    public function export()
+    {
+        return Excel::download(new BendaharaExport('data'), 'data_bendahara.xlsx');
     }
 
     public function render()

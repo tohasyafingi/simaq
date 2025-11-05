@@ -4,7 +4,11 @@ namespace App\Livewire\Portal;
 
 use Livewire\Component;
 use App\Models\Berita;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Berita')]
+#[Layout('components.layouts.portal')]
 class Agenda extends Component
 {
     public $beritas;
@@ -17,7 +21,6 @@ class Agenda extends Component
     }
     public function render()
     {
-        return view('livewire.portal.agenda')
-            ->layout('components.layouts.portal');
+        return view('livewire.portal.agenda');
     }
 }

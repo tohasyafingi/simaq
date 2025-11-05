@@ -1,70 +1,122 @@
-<div wire:poll.1000ms>
-    <div class="app-content">
+<div class="app-content">
+    <!-- Header -->
+    <div class="app-content-header">
         <div class="container-fluid">
-            <div class="card border-0 shadow-sm rounded-3 p-4 mb-4 text-center">
-                <p class="text-muted mb-3">Pukul</p>
-
-                <!-- Jam Digital LED -->
-                <div class="digital-clock" id="digitalClock">00:00:00</div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Selamat Datang, {{ $nama_admin }}!</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-end">
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="d-flex justify-content-between mb-3">
-        <a href="{{ route('superadmin.admin.data.import.export') }}" class="btn btn-primary">Import & Export Data</a>
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <!-- Info Boxes Utama -->
+        <div class="row g-3 mb-4">
+            @php
+                $boxes = [
+                    ['Guru', $jumlah_guru, '#3b82f6', 'bi-person-badge-fill'],
+                    ['Bendahara', $jumlah_bendahara, '#10b981', 'bi-wallet2'],
+                    ['Tata Usaha', $jumlah_tu, '#f59e0b', 'bi-briefcase'],
+                    ['Siswa', $jumlah_siswa, '#ef4444', 'bi-people'],
+                ];
+            @endphp
+            @foreach($boxes as $box)
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box p-3 rounded-2 d-flex align-items-center"
+                        style="background:{{ $box[2] }}; color:white;">
+                        <i class="bi {{ $box[3] }} fs-2 me-3"></i>
+                        <div>
+                            <div>{{ $box[0] }}</div>
+                            <div class="fs-5 fw-bold">{{ $box[1] }}</div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <!-- Kalender Kiri & Info Boxes Kanan -->
+        <div class="row g-3">
+            <!-- Kalender -->
+            <div class="col-lg-6 col-md-12 d-flex">
+                <div class="card p-3 flex-fill d-flex flex-column">
+                    <h5>Kalender Kegiatan</h5>
+                    <div id="calendar" style="flex: 1 1 auto; min-height: 400px;"></div>
+                    <!-- Tambah min-height untuk fallback -->
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="card p-3 h-100">
+                    <h5>Pengumuman</h5>
+                    <div></div>
+                </div>
+            </div>
+            <!-- Info Boxes Kanan -->
+            <div class="col-lg-3 col-md-12">
+                @php
+                    $rightBoxes = [
+                        ['Tahun Ajaran', $tahun_ajaran, '#6366f1', 'bi-calendar-event'],
+                        ['Jurusan', $jumlah_jurusan, '#3b82f6', 'bi-building'],
+                        ['Ruang Kelas', $jumlah_ruang_kelas, '#10b981', 'bi-door-closed'],
+                        ['Pengajar', $jumlah_pengajar, '#f59e0b', 'bi-person-badge'],
+                        ['Rombel', $jumlah_rombel, '#f43f5e', 'bi-people'],
+                    ];
+                @endphp
+                @foreach($rightBoxes as $box)
+                    <div class="card mb-3 p-3" style="background:{{ $box[2] }}; color:white;">
+                        <div class="d-flex align-items-center">
+                            <i class="bi {{ $box[3] }} fs-2 me-3"></i>
+                            <div>
+                                <div>{{ $box[0] }}</div>
+                                <div class="fs-5 fw-bold">{{ $box[1] }}</div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
-    <style>
-        .digital-clock {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: clamp(2rem, 8vw, 4rem);
-            /* Responsif: min 2rem, max 4rem */
-            font-weight: bold;
-            color: #00ff00;
-            background: #000;
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: inline-block;
-            letter-spacing: 3px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-            text-shadow:
-                0 0 5px #00ff00,
-                0 0 10px #00ff00,
-                0 0 20px #00ff00;
+    <!-- Scripts FullCalendar -->
+@push('scripts')
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/locales/id.global.min.js"></script>
 
-            /* Mengurangi flicker */
-            will-change: contents;
-            transform: translateZ(0);
-        }
-
-        /* Atur agar tetap rapi di layar kecil */
-        @media (max-width: 576px) {
-            .digital-clock {
-                padding: 10px 15px;
-                letter-spacing: 2px;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .digital-clock {
-                padding: 20px 50px;
-            }
-        }
-    </style>
-
-    <script>
-        function setDigitalClock() {
-            const now = new Date();
-            const h = now.getHours().toString().padStart(2, '0');
-            const m = now.getMinutes().toString().padStart(2, '0');
-            const s = now.getSeconds().toString().padStart(2, '0');
-
-            document.getElementById('digitalClock').textContent = `${h}:${m}:${s}`;
-
-            requestAnimationFrame(setDigitalClock);
-        }
-
-        setDigitalClock();
-    </script>
+<script>
+document.addEventListener('livewire:load', function () {
+    const calendarEl = document.getElementById('calendar');
+    if (calendarEl) {
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'id',
+            height: '100%',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            buttonText: {
+                today: 'Hari Ini',
+                month: 'Bulan',
+                week: 'Minggu',
+                day: 'Hari',
+                list: 'Agenda'
+            },
+            events: @json($events ?? []),
+            editable: false,
+            selectable: false,
+            themeSystem: 'bootstrap5'
+        });
+        calendar.render();
+    }
+});
+</script>
+@endpush
 
 </div>

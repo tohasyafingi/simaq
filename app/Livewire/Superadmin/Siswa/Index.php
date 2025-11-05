@@ -3,21 +3,44 @@
 namespace App\Livewire\Superadmin\Siswa;
 
 use Livewire\Component;
-use Carbon\Carbon;
+use App\Models\Siswa;
+use App\Models\Pelajaran;
+use Illuminate\Support\Facades\Auth; 
 use Livewire\Attributes\Title;
 
 #[Title('Dashboard Siswa')]
 class Index extends Component
 {
+    public $nama_rombel;
+    public $status_siswa;
+    public $jumlah_pelajaran = 0;
+    public $events = [];
+
+    public function mount()
+    {
+        $user = Auth::user()->name ?? 'Siswa';
+        $siswa = Siswa::with(['rombels.tahunAjaran'])->find(Auth::user()->siswa_id);
+
+        // Ambil rombel aktif
+        $rombel_aktif = $siswa->rombels()->wherePivot('status', true)->first();
+
+        $this->nama_rombel = $rombel_aktif->nama ?? 'Belum ada Rombel';
+        $this->status_siswa = $siswa->status ? 'Aktif' : 'Tidak Aktif';
+
+        if ($rombel_aktif) {
+            $pelajarans = Pelajaran::where('tingkat_kelas_id', $rombel_aktif->tingkat_kelas_id)
+                ->when($rombel_aktif->jurusan_id, fn($q) => $q->where('jurusan_id', $rombel_aktif->jurusan_id))
+                ->where('status', true)
+                ->get();
+
+            $this->jumlah_pelajaran = $pelajarans->count();
+        }
+    }
+
     public function render()
     {
-        Carbon::setLocale('id');
-
-        $waktuSekarang = Carbon::now()->translatedFormat('l, d F Y H:i');
-
         return view('livewire.superadmin.siswa.index', [
             'title' => 'Dashboard Siswa',
-            'waktuSekarang' => $waktuSekarang,
         ]);
     }
 }

@@ -37,10 +37,7 @@
                                         Tambah</button>
                                 </div>
                                 <div>
-                                    <button class="btn btn-md btn-success grid text-center me-0 me-sm-3 mb-3 mb-sm-0"><i
-                                            class="fas fa-file-excel"></i> Import</button>
-                                    <button class="btn btn-md btn-primary grid text-center me-0 me-sm-3 mb-3 mb-sm-0"><i
-                                            class="fas fa-file-export"></i> Export</button>
+                                    
                                 </div>
                             </div>
                         </div>

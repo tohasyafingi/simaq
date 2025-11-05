@@ -37,10 +37,18 @@
                                         Tambah</button>
                                 </div>
                                 <div>
-                                    <button class="btn btn-md btn-success grid text-center me-0 me-sm-3 mb-3 mb-sm-0"><i
-                                            class="fas fa-file-excel"></i> Import</button>
-                                    <button class="btn btn-md btn-primary grid text-center me-0 me-sm-3 mb-3 mb-sm-0"><i
-                                            class="fas fa-file-export"></i> Export</button>
+                                    <!-- Tombol Import -->
+                                    <button class="btn btn-md btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#importModal">
+                                        <i class="fas fa-file-excel"></i> Import
+                                    </button>
+
+                                    <!-- Tombol Export Data Bendahara -->
+                                    <button wire:click="export" class="btn btn-md btn-primary">
+                                        <i class="fas fa-file-export"></i> Export
+                                    </button>
+
+                                    <x-modal-import id="importModal" title="Import Data Bendahara" inputName="file" />
                                 </div>
                             </div>
                         </div>
@@ -85,8 +93,8 @@
                                                 <td class="text-center">{{ $bendaharas->firstItem() + $index }}</td>
                                                 <td class="text-center">
                                                     @if($bendahara->img)
-                                                        <img src="{{ asset('storage/' . $bendahara->img) }}" alt="Foto Bendahara"
-                                                            width="40" class="rounded-circle">
+                                                        <img src="{{ asset('storage/' . $bendahara->img) }}"
+                                                            alt="Foto Bendahara" width="40" class="rounded-circle">
                                                     @else
                                                         <img src="{{ asset('images/default-image.jpg') }}" alt="Default"
                                                             width="40" class="rounded-circle">
@@ -137,6 +145,29 @@
             <!--end::Row-->
         </div>
     </div>
+
+    @script
+    <script>
+        $wire.on('closeImportModal', () => {
+            const modalElement = document.getElementById('importModal');
+            let modalInstance = bootstrap.Modal.getInstance(modalElement);
+
+            if (!modalInstance) {
+                modalInstance = new bootstrap.Modal(modalElement);
+            }
+
+            modalInstance.hide();
+
+            Swal.fire({
+                title: "Sukses",
+                text: "Data Berhasil Ditambah!",
+                icon: "success"
+            });
+        });
+
+    </script>
+    @endscript
+
     @include('livewire.superadmin.admin.bendahara.create')
     @script
     <script>

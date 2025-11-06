@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('superadmin.admin.dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$title}}</li>
                     </ol>
                 </div>
@@ -34,7 +34,7 @@
                             <div class="d-flex justify-content-between mb-1">
                                 <div>
                                     <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-                                        <i class="bi bi-file-earmark-plus mr-2"></i> Tambah
+                                        <i class="bi bi-plus-circle me-2"></i> Tambah
                                     </button>
                                 </div>
                             </div>

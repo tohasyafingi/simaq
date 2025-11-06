@@ -23,7 +23,8 @@
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                     <!-- Menampilkan gambar pengguna yang login atau gambar default jika tidak ada -->
-                    <img src="{{ Auth::user()->img ? asset('storage/' . Auth::user()->img) : asset('images/default-image.jpg') }}" class="user-image rounded-circle" alt="User Image" />
+                    <img src="{{ Auth::user()->img ? asset('storage/' . Auth::user()->img) : asset('assets/default-image.webp') }}"
+                        class="user-image rounded-circle" alt="{{ Auth::user()->name }}" />
                     <span class="d-none d-md-inline">
                         <!-- Menampilkan nama pengguna berdasarkan data yang ada di Auth -->
                         {{ Auth::user()->name }}
@@ -33,10 +34,12 @@
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
                         <!-- Menampilkan gambar profil atau gambar default -->
-                        <img src="{{ Auth::user()->img ? asset('storage/' . Auth::user()->img) : asset('images/default-image.jpg') }}" class="rounded-circle" alt="User Image" />
+                        <img src="{{ Auth::user()->img ? asset('storage/' . Auth::user()->img) : asset('assets/default-image.webp') }}"
+                            class="rounded-circle" alt="{{ Auth::user()->name }}" />
                         <p>
                             <!-- Menampilkan nama dan role pengguna -->
-                            {{ Auth::user()->name }} - {{ Auth::user()->role }} <!-- Gantilah 'role' dengan atribut role yang sesuai di model -->
+                            {{ Auth::user()->name }} - {{ Auth::user()->role }}
+                            <!-- Gantilah 'role' dengan atribut role yang sesuai di model -->
                             <small>Member since {{ Auth::user()->created_at->format('M Y') }}</small>
                         </p>
                     </li>

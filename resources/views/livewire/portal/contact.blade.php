@@ -1,6 +1,6 @@
 <div>
     <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 300px;">
+    <section class="hero-section" style="height: 200px;">
         <div class="hero-content text-center">
             <h1>Contact Us</h1>
             <p>Get In Touch With SMA School</p>
@@ -87,14 +87,10 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.1234567891234!2d-74.00601234567891!3d40.71282345678912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzUwLjM2Ik4gNzTCsDAwJzIxLjcyIlc!5e0!3m2!1sen!2sus!4v1234567890"
-                        width="100%" height="400" style="border:0; border-radius: 8px;" allowfullscreen=""
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.5317778782146!2d109.88533677596475!3d-7.406240572933534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aa162f26a900f%3A0x4415158fe6f9b809!2sMA%20Takhassus%20Al-Qur&#39;an!5e0!3m2!1sen!2sid!4v1762429192769!5m2!1sen!2sid"
+                        width="100%" height="400" style="border: 0; border-radius: 8px" allowfullscreen=""
                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-            </div>
-
-            <div class="text-center mt-5">
-                <a href="index.html" class="btn btn-primary">Back to Home</a>
             </div>
         </div>
     </section>

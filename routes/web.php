@@ -34,6 +34,7 @@ use App\Livewire\Superadmin\Admin\Kontak\Index as AdminKontakIndex;
 use App\Livewire\Superadmin\Admin\Berita\Index as AdminBeritaIndex;
 use App\Livewire\Superadmin\Admin\Berita\Create as AdminBeritaCreate;
 use App\Livewire\Superadmin\Admin\KaryaIlmiah\Index as AdminKaryaIlmiahIndex;
+use App\Livewire\Superadmin\Admin\KaryaIlmiah\Create as AdminKaryaIlmiahCreate;
 use App\Livewire\Superadmin\Admin\EBook\Index as AdminEBookIndex;
 use App\Livewire\Superadmin\Admin\Download\Index as AdminDownloadIndex;
 use App\Livewire\Superadmin\Admin\Galeri\Index as AdminGaleriIndex;
@@ -74,9 +75,8 @@ use App\Livewire\Portal\Pramuka as PortalPramuka;
 use App\Livewire\Portal\ProgramTahfidz as PortalProgramTahfidz;
 use App\Livewire\Portal\Artikel as PortalArtikel;
 use App\Livewire\Portal\KaryaIlmiah as PortalKaryaIlmiah;
+use App\Livewire\Portal\DetailKaryaIlmiah as PortalDetailKaryaIlmiah;
 use App\Livewire\Portal\Download as PortalDownload;
-
-use App\Livewire\DataImportExport;
 
 
 Route::get('/', PortalIndex::class)->name('beranda');
@@ -95,6 +95,7 @@ Route::get('/pramuka', PortalPramuka::class)->name('pramuka');
 Route::get('/program-tahfidz', PortalProgramTahfidz::class)->name('program-tahfidz');
 Route::get('/artikel', PortalArtikel::class)->name('artikel');
 Route::get('/karya-ilmiah', PortalKaryaIlmiah::class)->name('karya-ilmiah');
+Route::get('/karya-ilmiah/{slug}', PortalDetailKaryaIlmiah::class)->name('detail-karya-ilmiah');
 Route::get('/download', PortalDownload::class)->name('download');
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.admin.')->group(function () {
@@ -143,6 +144,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/berita/{id}/edit', AdminBeritaCreate::class)->name('berita.edit');
     Route::get('/kategori-berita', AdminKatBeritaIndex::class)->name('kat-berita.index');
     Route::get('/karya-ilmiah', AdminKaryaIlmiahIndex::class)->name('karya-ilmiah.index');
+    Route::get('/karya-ilmiah/tambah', AdminKaryaIlmiahCreate::class)->name('karya-ilmiah.create');
+    Route::get('/karya-ilmiah/{id}/edit', AdminKaryaIlmiahCreate::class)->name('karya-ilmiah.edit');
     Route::get('/kategori-karya-ilmiah', AdminKatKaryaIlmiahIndex::class)->name('kat-karya-ilmiah.index');
     Route::get('/e-book', AdminEBookIndex::class)->name('e-book.index');
     Route::get('/download', AdminDownloadIndex::class)->name('download.index');

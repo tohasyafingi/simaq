@@ -11,12 +11,21 @@
     <meta name="author" content="" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    {{-- favicon --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('assets/favicon.png')}}" />
+    <meta name="theme-color" content="#ffffff">
 
     @include('components.layouts.style')
     @livewireStyles
 </head>
 <!--end::Head-->
 <!--begin::Body-->
+
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
@@ -34,7 +43,7 @@
         {{-- @include('layouts.sidebar') --}}
         <!--end::Sidebar-->
         <main class="app-main">
-        <x-alert />
+            <x-alert />
             <!--begin::App Main-->
             {{ $slot }}
             <!--end::App Main-->

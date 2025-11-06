@@ -1,6 +1,6 @@
 <div>
 <!-- ===== Banner Section Start ===== -->
-<section class="hero-section" style="height: 300px;">
+<section class="hero-section" style="height: 200px;">
   <div class="hero-content text-center">
     <h1>Digital Library</h1>
     <p>Access Our Collection of E-Books</p>
@@ -16,7 +16,7 @@
     <div class="row mb-5">
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
-          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 1" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('assets/e-book.webp') }}" class="card-img-top" alt="E-Book 1" style="height: 300px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">The Art of Critical Thinking</h5>
             <p class="card-text text-muted"><small>By Prof. Williams | 2023</small></p>
@@ -28,7 +28,7 @@
 
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
-          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 2" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('assets/e-book.webp') }}" class="card-img-top" alt="E-Book 2" style="height: 300px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">Introduction to Sustainable Development</h5>
             <p class="card-text text-muted"><small>By Dr. Green | 2023</small></p>
@@ -40,7 +40,7 @@
 
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
-          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 3" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('assets/e-book.webp') }}" class="card-img-top" alt="E-Book 3" style="height: 300px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">Digital Literacy in the Modern World</h5>
             <p class="card-text text-muted"><small>By Tech Experts | 2024</small></p>
@@ -52,7 +52,7 @@
 
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
-          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 4" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('assets/e-book.webp') }}" class="card-img-top" alt="E-Book 4" style="height: 300px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">Creative Writing Essentials</h5>
             <p class="card-text text-muted"><small>By Author Smith | 2023</small></p>
@@ -64,7 +64,7 @@
 
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
-          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 5" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('assets/e-book.webp') }}" class="card-img-top" alt="E-Book 5" style="height: 300px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">History of World Civilizations</h5>
             <p class="card-text text-muted"><small>By Prof. History | 2023</small></p>
@@ -76,7 +76,7 @@
 
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
-          <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="E-Book 6" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('assets/e-book.webp') }}" class="card-img-top" alt="E-Book 6" style="height: 300px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">Advanced Mathematics for Science</h5>
             <p class="card-text text-muted"><small>By Dr. Math | 2023</small></p>
@@ -85,11 +85,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="text-center">
-      <a href="download.html" class="btn btn-primary me-2">Downloads</a>
-      <a href="../index.html" class="btn btn-secondary">Back to Home</a>
     </div>
   </div>
 </section>

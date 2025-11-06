@@ -3,7 +3,8 @@
     <!-- ===== Hero Section Start ===== -->
     <section class="hero-section">
         <div class="hero-content text-center">
-            <h1>Welcome to SMA School</h1>
+            <h3>Selamat Datang di</h3>
+            <h1>MA takhassus Al-Qur'an Wonosobo</h1>
             <p>Building Leaders, Inspiring Minds, Creating Tomorrow</p>
             <a href="#about" class="btn btn-primary">Learn More</a>
         </div>
@@ -35,8 +36,7 @@
                     </p>
                 </div>
                 <div class="col-lg-6">
-                    <img src="{{ asset('images/default.jpg') }}" alt="About SMA School"
-                        class="img-fluid rounded" />
+                    <img src="{{ asset('assets/tentang.webp') }}" alt="About SMA School" class="img-fluid rounded" />
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card">
-                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 1" />
+                        <img src="{{ asset('assets/berita.webp') }}" class="card-img-top" alt="News 1" />
                         <div class="card-body">
                             <h5 class="card-title">
                                 Annual School Festival 2024
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card">
-                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 2" />
+                        <img src="{{ asset('assets/berita.webp') }}" class="card-img-top" alt="News 2" />
                         <div class="card-body">
                             <h5 class="card-title">
                                 Scholarship Opportunities Available
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card">
-                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="News 3" />
+                        <img src="{{ asset('assets/berita.webp') }}" class="card-img-top" alt="News 3" />
                         <div class="card-body">
                             <h5 class="card-title">
                                 New Science Lab Inauguration
@@ -116,28 +116,28 @@
             <h2 class="section-title">Gallery</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="{{ asset('images/default.jpg') }}" alt="Gallery Image 1" />
+                    <img src="{{ asset('assets/galeri.webp') }}" alt="Gallery Image 1" />
                     <div class="gallery-overlay">
                         <h5>Graduation Ceremony 2024</h5>
                         <p class="mb-0">Celebrating our graduating class</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/default.jpg') }}" alt="Gallery Image 2" />
+                    <img src="{{ asset('assets/galeri.webp') }}" alt="Gallery Image 2" />
                     <div class="gallery-overlay">
                         <h5>Graduation Ceremony 2024</h5>
                         <p class="mb-0">Celebrating our graduating class</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/default.jpg') }}" alt="Gallery Image 3" />
+                    <img src="{{ asset('assets/galeri.webp') }}" alt="Gallery Image 3" />
                     <div class="gallery-overlay">
                         <h5>Graduation Ceremony 2024</h5>
                         <p class="mb-0">Celebrating our graduating class</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/default.jpg') }}" alt="Gallery Image 4" />
+                    <img src="{{ asset('assets/galeri.webp') }}" alt="Gallery Image 4" />
                     <div class="gallery-overlay">
                         <h5>Graduation Ceremony 2024</h5>
                         <p class="mb-0">Celebrating our graduating class</p>
@@ -157,7 +157,7 @@
             <h2 class="section-title">Admission (PPDB) 2024</h2>
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <img src="{{ asset('images/default.jpg') }}" alt="Admission"
+                    <img src="{{ asset('assets/ppdb.webp') }}" alt="Admission"
                         class="img-fluid rounded mb-3 mb-lg-0" />
                 </div>
                 <div class="col-lg-6">
@@ -215,7 +215,7 @@
             <div class="row mt-4">
                 <div class="col-lg-8 mx-auto">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.1234567891234!2d-74.00601234567891!3d40.71282345678912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzUwLjM2Ik4gNzTCsDAwJzIxLjcyIlc!5e0!3m2!1sen!2sus!4v1234567890"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.5317778782146!2d109.88533677596475!3d-7.406240572933534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aa162f26a900f%3A0x4415158fe6f9b809!2sMA%20Takhassus%20Al-Qur&#39;an!5e0!3m2!1sen!2sid!4v1762429192769!5m2!1sen!2sid"
                         width="100%" height="300" style="border: 0; border-radius: 8px" allowfullscreen=""
                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>

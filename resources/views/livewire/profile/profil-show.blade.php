@@ -29,7 +29,7 @@
                             <div class="row g-3 align-items-center">
                                 <!-- Foto Profil -->
                                 <div class="col-md-4 text-center">
-                                    <img src="{{ $userData->img ? asset('storage/' . $userData->img) : asset('images/default-image.jpg') }}"
+                                    <img src="{{ $userData->img ? asset('storage/' . $userData->img) : asset('assets/default-image.webp') }}"
                                         alt="Foto Profil"
                                         class="img-fluid rounded-circle border border-3 border-success shadow-sm"
                                         style="width: 270px; height: 270px; object-fit: cover;">

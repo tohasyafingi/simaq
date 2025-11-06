@@ -1,6 +1,6 @@
 <div>
     <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 300px;">
+    <section class="hero-section" style="height: 200px;">
         <div class="hero-content text-center">
             <h1>Student Admission (PPDB)</h1>
             <p>Join Our School Community</p>
@@ -176,11 +176,6 @@
                     <li>All documents must be original or officially certified</li>
                     <li>Falsification of documents will lead to disqualification</li>
                 </ul>
-            </div>
-
-            <div class="text-center">
-                <a href="#" class="btn btn-primary btn-lg"><i class="fas fa-edit"></i> Register Now</a>
-                <a href="index.html" class="btn btn-secondary btn-lg ms-2">Back to Home</a>
             </div>
         </div>
     </section>

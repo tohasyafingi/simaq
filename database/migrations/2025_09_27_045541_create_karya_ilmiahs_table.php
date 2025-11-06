@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('karya_ilmiahs', function (Blueprint $table) {
             $table->id();
+            $table->string('judul');
+            $table->string('author');
+            $table->string('slug');
+            $table->string('thumbnail');
+            $table->foreignId('kat_karya_ilmiah_id')->constrained('kat_karya_ilmiahs')->onDelete('cascade');
+            $table->boolean('status')->default(0); 
+            $table->longText('isi');
             $table->timestamps();
         });
     }

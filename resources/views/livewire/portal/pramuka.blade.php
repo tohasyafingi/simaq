@@ -1,7 +1,7 @@
 <div>
 
   <!-- ===== Banner Section Start ===== -->
-  <section class="hero-section" style="height: 300px;">
+  <section class="hero-section" style="height: 200px;">
     <div class="hero-content text-center">
       <h1>Scouts Program</h1>
       <p>Developing Leaders & Citizens</p>
@@ -14,7 +14,7 @@
     <div class="container">
       <div class="row align-items-center mb-5">
         <div class="col-lg-6">
-          <img src="{{ asset('images/default.jpg') }}" alt="Scouts Program" class="img-fluid rounded mb-4 mb-lg-0">
+          <img src="{{ asset('assets/kesiswaan.webp') }}" alt="Scouts Program" class="img-fluid rounded mb-4 mb-lg-0">
         </div>
         <div class="col-lg-6">
           <h2 class="section-title">About Our Scouts Program</h2>
@@ -153,11 +153,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="text-center mt-5">
-        <a href="student-council.html" class="btn btn-secondary me-2">Previous: Student Council</a>
-        <a href="tahfidz.html" class="btn btn-primary">Next: Tahfidz Program</a>
       </div>
     </div>
   </section>

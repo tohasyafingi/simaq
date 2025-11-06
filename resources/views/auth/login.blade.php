@@ -117,10 +117,10 @@
 
         <div class="login-card">
             <!-- Logo -->
-            <img src="{{ asset('images/default-image.jpg') }}" alt="Logo Sekolah" class="logo">
+            <img src="{{ asset('assets/logo.webp') }}" alt="Logo Sekolah" class="logo">
 
             <h2>Login</h2>
-            <p class="text-muted mb-4">Masuk ke akun Anda untuk melanjutkan</p>
+            <p class="text-muted mb-4">Sistem Informasi Akademik MA Takhassus Al-Qur'an Wonosobo</p>
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -151,6 +151,9 @@
 
                 <div>
                     <a href="{{ route('password.request') }}" class="forgot-password">Forgot your password?</a>
+                </div>
+                <div>
+                    <a href="{{ route('beranda') }}" class="forgot-password">Halaman Utama</a>
                 </div>
             </form>
         </div>

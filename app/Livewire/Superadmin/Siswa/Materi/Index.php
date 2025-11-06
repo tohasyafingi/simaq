@@ -9,6 +9,7 @@ use App\Models\TahunAjaran;
 use App\Models\Materi;
 use App\Models\Rombel;
 use App\Models\GuruPelajaran;
+use App\Models\Pelajaran;
 
 #[Title('Materi Pembelajaran')]
 class Index extends Component
@@ -22,7 +23,6 @@ class Index extends Component
         $this->siswaId = $siswaId;
         $this->pelajaranId = $pelajaranId;
 
-        // Default: tahun ajaran aktif
         $tahunAjaranAktif = TahunAjaran::where('status', true)->first();
         if ($tahunAjaranAktif) {
             $this->tahun_ajaran_id = $tahunAjaranAktif->id;
@@ -33,8 +33,8 @@ class Index extends Component
     {
         $tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
 
-        // Ambil data siswa dan rombel-nya pada tahun ajaran terpilih
         $siswa = Siswa::with('rombels')->findOrFail($this->siswaId);
+        $pelajaran = Pelajaran::findOrFail($this->pelajaranId);
 
         $rombel = $siswa->rombels()
             ->where('tahun_ajaran_id', $this->tahun_ajaran_id)
@@ -43,7 +43,6 @@ class Index extends Component
         $materis = collect();
 
         if ($rombel) {
-            // Ambil guru_pelajaran yang sesuai pelajaran & tahun ajaran
             $guruPelajaran = GuruPelajaran::where('pelajaran_id', $this->pelajaranId)
                 ->where('tahun_ajaran_id', $this->tahun_ajaran_id)
                 ->first();
@@ -63,6 +62,7 @@ class Index extends Component
             'siswa' => $siswa,
             'rombel' => $rombel,
             'materis' => $materis,
+            'pelajaran' => $pelajaran,
         ]);
     }
 }

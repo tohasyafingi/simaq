@@ -36,7 +36,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between mb-1">
-                                <a href="{{ route('superadmin.admin.berita.create') }}" class="btn btn-md btn-primary">
+                                <a href="{{ route('superadmin.admin.karya-ilmiah.create') }}"
+                                    class="btn btn-md btn-primary">
                                     <i class="bi bi-person-plus-fill me-2"></i> Tambah
                                 </a>
                             </div>
@@ -70,6 +71,7 @@
                                         <tr>
                                             <th class="text-center">No</th>
                                             <th>Thumbnail</th>
+                                            <th>Author</th>
                                             <th>Judul</th>
                                             <th>Isi Berita</th>
                                             <th class="text-center">Status</th>
@@ -77,133 +79,48 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">
-                                                <img src="https://via.placeholder.com/40" alt="Thumbnail berita"
-                                                    class="rounded">
-                                            </td>
-                                            <td>Judul Berita 1</td>
-                                            <td>Isi berita singkat ke-1...</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-success">Aktif</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit" class="btn btn-sm btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button wire:click="confirmDelete"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td class="text-center">
-                                                <img src="https://via.placeholder.com/40" alt="Thumbnail berita"
-                                                    class="rounded">
-                                            </td>
-                                            <td>Judul Berita 2</td>
-                                            <td>Isi berita singkat ke-2...</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-secondary">Draft</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit" class="btn btn-sm btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button wire:click="confirmDelete"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td class="text-center">
-                                                <img src="https://via.placeholder.com/40" alt="Thumbnail berita"
-                                                    class="rounded">
-                                            </td>
-                                            <td>Judul Berita 3</td>
-                                            <td>Isi berita singkat ke-3...</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-success">Aktif</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit" class="btn btn-sm btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button wire:click="confirmDelete"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td class="text-center">
-                                                <img src="https://via.placeholder.com/40" alt="Thumbnail berita"
-                                                    class="rounded">
-                                            </td>
-                                            <td>Judul Berita 4</td>
-                                            <td>Isi berita singkat ke-4...</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-danger">Nonaktif</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit" class="btn btn-sm btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button wire:click="confirmDelete"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">5</td>
-                                            <td class="text-center">
-                                                <img src="https://via.placeholder.com/40" alt="Thumbnail berita"
-                                                    class="rounded">
-                                            </td>
-                                            <td>Judul Berita 5</td>
-                                            <td>Isi berita singkat ke-5...</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-success">Aktif</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit" class="btn btn-sm btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button wire:click="confirmDelete"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @forelse($karya_ilmiahs as $index => $karya)
+                                            <tr>
+                                                <td class="text-center">{{ $karya_ilmiahs->firstItem() + $index }}</td>
+                                                <td class="text-center">
+                                                    <img src="{{ $karya->thumbnail_url ?? asset('images/default.jpg') }}"
+                                                        class="rounded" alt="Thumbnail" width="40" height="40"
+                                                        loading="lazy">
+                                                </td>
+                                                <td>{{ $karya->author }}</td>
+                                                <td>{{ $karya->judul }}</td>
+                                                <td>{{ \Illuminate\Support\Str::limit(strip_tags($karya->isi), 50, '...') }}
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($karya->status)
+                                                        <span class="badge bg-success">Aktif</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">Draft</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center gap-1">
+                                                        <button wire:click="edit({{ $karya->id }})"
+                                                            class="btn btn-sm btn-outline-primary" title="Edit">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <button wire:click="confirmDelete({{ $karya->id }})"
+                                                            class="btn btn-sm btn-outline-danger" title="Hapus">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center">Data tidak ditemukan.</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-center mt-3">
+                                    {{ $karya_ilmiahs->links() }}
+                                </div>
                             </div>
                             <!-- End Table -->
                         </div>

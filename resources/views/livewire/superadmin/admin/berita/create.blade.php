@@ -76,7 +76,8 @@
                                 <div class="mb-3">
                                     <label class="form-label">Isi Berita</label>
                                     <div wire:ignore>
-                                        <textarea id="isi" class="form-control summernote" wire:model="isi"></textarea>
+                                        <textarea id="isi" class="form-control summernote"
+                                            wire:model.defer="isi"></textarea>
                                     </div>
                                     @error('isi') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>

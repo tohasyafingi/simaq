@@ -1,6 +1,6 @@
 <div>
     <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 300px;">
+    <section class="hero-section" style="height: 200px;">
         <div class="hero-content text-center">
             <h1>Vision & Mission</h1>
             <p>Our Commitment to Excellence</p>
@@ -104,11 +104,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="text-center mt-5">
-                        <a href="history.html" class="btn btn-secondary me-2">Previous: History</a>
-                        <a href="organization.html" class="btn btn-primary">Next: Organization</a>
                     </div>
                 </div>
             </div>

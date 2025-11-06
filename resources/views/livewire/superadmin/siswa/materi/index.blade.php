@@ -6,7 +6,7 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0"><i class="bi bi-person-fill sm-1"></i>{{$title}}</h3>
+                    <h3 class="mb-0"><i class="bi bi-book"></i>{{$title}}</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
@@ -34,7 +34,7 @@
                                 <!-- Info Siswa -->
                                 <div class="col-md-6">
                                     <div class="border p-3 rounded bg-light">
-                                        <p class="mb-1"><strong>Nama:</strong> {{ $siswa->name }}</p>
+                                        <p class="mb-1"><strong>Mata Pelajaran:</strong> {{ $pelajaran->nama }}</p>
                                         @if($rombel)
                                             <p class="mb-0"><strong>Rombel:</strong> {{ $rombel->nama }}</p>
                                         @else
@@ -81,7 +81,7 @@
                                                 {{ \Carbon\Carbon::parse($materi->tanggal)->translatedFormat('d F Y') }}
                                                 {{ $materi->jam }}
                                             </p>
-                                            <a href="{{ routeRoleBased('pelajaran.materi.absensi', [$siswa->id, $pelajaranId, $materi->id]) }}"
+                                            <a href="{{ routeRoleBased('pelajaran.materi.absensi', ['siswaId' => $siswa->id, $pelajaranId, 'materiId'=> $materi->id]) }}"
                                                 class="btn btn-sm btn-primary">
                                                 Absensi
                                             </a>

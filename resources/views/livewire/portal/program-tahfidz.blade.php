@@ -1,6 +1,6 @@
 <div>
   <!-- ===== Banner Section Start ===== -->
-  <section class="hero-section" style="height: 300px;">
+  <section class="hero-section" style="height: 200px;">
     <div class="hero-content text-center">
       <h1>Tahfidz Al-Qur'an Program</h1>
       <p>Memorizing & Understanding the Quran</p>
@@ -24,7 +24,7 @@
             meanings and applying its teachings in daily life.</p>
         </div>
         <div class="col-lg-6">
-          <img src="{{ asset('images/default.jpg') }}" alt="Tahfidz Program" class="img-fluid rounded">
+          <img src="{{ asset('assets/kesiswaan.webp') }}" alt="Tahfidz Program" class="img-fluid rounded">
         </div>
       </div>
 
@@ -130,11 +130,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="text-center mt-5">
-        <a href="scouts.html" class="btn btn-secondary me-2">Previous: Scouts</a>
-        <a href="../index.html" class="btn btn-primary">Back to Home</a>
       </div>
     </div>
   </section>

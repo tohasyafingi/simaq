@@ -12,10 +12,10 @@
             <div class="col-md-3 mb-4">
                 <h5>Quick Links</h5>
                 <ul style="list-style: none; padding: 0">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="admission.html">Admission</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{ route('beranda') }}">Home</a></li>
+                    <li><a href="{{ route('berita-agenda') }}">Berita</a></li>
+                    <li><a href="{{ route('ppdb') }}">PPDB</a></li>
+                    <li><a href="{{ route('kontak') }}">Contact</a></li>
                 </ul>
             </div>
             <div class="col-md-3 mb-4">
@@ -36,7 +36,11 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 SMA School. All Rights Reserved.</p>
+            <strong>
+                Copyright &copy; {{ date('Y') }}&nbsp;
+                <a href="#" class="text-decoration-none">MATAQ WSB </a>|
+            </strong>
+            Support by <a href="#" class="text-decoration-none"> @tohasyafingi</a>
         </div>
     </div>
 </footer>

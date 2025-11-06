@@ -1,6 +1,6 @@
 <div>
   <!-- ===== Banner Section Start ===== -->
-  <section class="hero-section" style="height: 300px;">
+  <section class="hero-section" style="height: 200px;">
     <div class="hero-content text-center">
       <h1>Student Council (OSIS)</h1>
       <p>Student Leadership & Representation</p>
@@ -24,7 +24,7 @@
             contributing to a vibrant school environment.</p>
         </div>
         <div class="col-lg-6">
-          <img src="{{ asset('images/default.jpg') }}" alt="Student Council" class="img-fluid rounded">
+          <img src="{{ asset('assets/kesiswaan.webp') }}" alt="Student Council" class="img-fluid rounded">
         </div>
       </div>
 
@@ -33,7 +33,7 @@
       <div class="row mb-5">
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card text-center">
-            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Chairperson">
+            <img src="{{ asset('assets/default-image.webp') }}" class="card-img-top" alt="Chairperson">
             <div class="card-body">
               <h5 class="card-title">Chairperson</h5>
               <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">Alex
@@ -47,7 +47,7 @@
 
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card text-center">
-            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Vice Chairperson">
+            <img src="{{ asset('assets/default-image.webp') }}" class="card-img-top" alt="Vice Chairperson">
             <div class="card-body">
               <h5 class="card-title">Vice Chairperson</h5>
               <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">Maria
@@ -61,7 +61,7 @@
 
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card text-center">
-            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Secretary">
+            <img src="{{ asset('assets/default-image.webp') }}" class="card-img-top" alt="Secretary">
             <div class="card-body">
               <h5 class="card-title">Secretary</h5>
               <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">Emma Davis
@@ -75,7 +75,7 @@
 
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card text-center">
-            <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Treasurer">
+            <img src="{{ asset('assets/default-image.webp') }}" class="card-img-top" alt="Treasurer">
             <div class="card-body">
               <h5 class="card-title">Treasurer</h5>
               <p class="card-text" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">James Lee
@@ -149,11 +149,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="text-center mt-5">
-        <a href="scouts.html" class="btn btn-primary me-2">Next: Scouts</a>
-        <a href="../index.html" class="btn btn-secondary">Back to Home</a>
       </div>
     </div>
   </section>

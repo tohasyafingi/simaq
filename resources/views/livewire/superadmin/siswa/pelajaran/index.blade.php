@@ -6,7 +6,7 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0"><i class="bi bi-person-fill sm-1"></i>{{$title}}</h3>
+                    <h3 class="mb-0"><i class="bi bi-book"></i>{{$title}}</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="card-body">
                                             <p class="card-text p-0">Guru: {{ $pelajaran->guru }}</p>
-                                            <a href="{{ routeRoleBased('pelajaran.materi.index', ['siswaId' => $siswa->id, 'pelajaranId' => $pelajaran->id], 'siswa') }}"
+                                            <a href="{{ routeRoleBased('pelajaran.materi.index', ['siswaId' => $siswa->id, 'pelajaranId' => $pelajaran->id]) }}"
                                                 class="btn btn-sm btn-primary">
                                                 {{ $pelajaran->jumlah_materi }} Materi 
                                             </a>

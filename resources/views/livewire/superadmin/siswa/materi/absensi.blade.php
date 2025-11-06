@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <a wire:navigate
-                        href="{{ routeRoleBased('pelajaran.materi.index', [$siswaId, $pelajaranId]) }}"
+                        href="{{ routeRoleBased('pelajaran.materi.index', ['siswaId' => $siswa->id, 'pelajaranId' => $pelajaranId]) }}"
                         class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                     </a>
@@ -14,7 +14,7 @@
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
                         <li class="breadcrumb-item"><a wire:navigate
-                                href="{{ routeRoleBased('pelajaran.materi.index', [$siswaId, $pelajaranId]) }}">Materi</a>
+                                href="{{ routeRoleBased('pelajaran.materi.index', ['siswaId' => $siswa->id, 'pelajaranId' => $pelajaranId]) }}">Materi</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Absensi</li>
                     </ol>

@@ -1,6 +1,6 @@
 <div>
 <!-- ===== Banner Section Start ===== -->
-<section class="hero-section" style="height: 300px;">
+<section class="hero-section" style="height: 200px;">
   <div class="hero-content text-center">
     <h1>Downloads</h1>
     <p>Important Documents & Resources</p>
@@ -97,10 +97,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="text-center">
-      <a href="../index.html" class="btn btn-primary">Back to Home</a>
     </div>
   </div>
 </section>

@@ -81,7 +81,7 @@
                                             <tr>
                                                 <td class="text-center">{{ $beritas->firstItem() + $index }}</td>
                                                 <td class="text-center">
-                                                    <img src="{{ $berita->thumbnail_url }}" alt="Thumbnail berita"
+                                                    <img src="{{ $berita->thumbnail_url ?? asset('images/default.jpg')}}" alt="Thumbnail berita"
                                                         class="rounded" width="40">
                                                 </td>
                                                 <td>{{ $berita->judul }}</td>

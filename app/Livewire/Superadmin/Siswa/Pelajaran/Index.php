@@ -57,7 +57,9 @@ class Index extends Component
                     ->first();
 
                 $pelajaran->jumlah_materi = $guruPelajaran
-                    ? Materi::where('guru_pelajaran_id', $guruPelajaran->id)->count()
+                    ? Materi::where('guru_pelajaran_id', $guruPelajaran->id)
+                    ->where('rombel_id', $rombel->id)
+                    ->count()
                     : 0;
             }
         }

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
   <div class="container">
     <a class="navbar-brand" href="{{ route('beranda') }}">
-      <i class="fas fa-school"></i> SMA School
+      <img src="{{ asset('assets/logo.webp') }}" alt="MATAQ WSB" style="height: 45px; width: auto;"> MATAQ WSB
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,15 +19,15 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('sejarah', 'visi-misi', 'struktur-organisasi') ? 'active' : '' }}"
             href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile
+            Profil
           </a>
           <ul class="dropdown-menu" aria-labelledby="profileDropdown">
             <li><a class="dropdown-item {{ request()->routeIs('sejarah') ? 'active' : '' }}" wire:navigate
-                href="{{ route('sejarah') }}">History</a></li>
+                href="{{ route('sejarah') }}">Sejarah</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('visi-misi') ? 'active' : '' }}" wire:navigate
-                href="{{ route('visi-misi') }}">Vision & Mission</a></li>
+                href="{{ route('visi-misi') }}">Visi & Misi</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('struktur-organisasi') ? 'active' : '' }}" wire:navigate
-                href="{{ route('struktur-organisasi') }}">Organizational Structure</a></li>
+                href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a></li>
           </ul>
         </li>
 
@@ -35,13 +35,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('jurusan', 'ekstrakurikuler') ? 'active' : '' }}"
             href="#" id="academicDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Academic
+            Akademik
           </a>
           <ul class="dropdown-menu" aria-labelledby="academicDropdown">
             <li><a class="dropdown-item {{ request()->routeIs('jurusan') ? 'active' : '' }}" wire:navigate
-                href="{{ route('jurusan') }}">Study Programs</a></li>
+                href="{{ route('jurusan') }}">Program Jurusan</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('ekstrakurikuler') ? 'active' : '' }}" wire:navigate
-                href="{{ route('ekstrakurikuler') }}">Extracurricular</a></li>
+                href="{{ route('ekstrakurikuler') }}">Ekstrakurikuler</a></li>
           </ul>
         </li>
 
@@ -49,15 +49,15 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('osis', 'pramuka', 'program-tahfidz') ? 'active' : '' }}"
             href="#" id="studentAffairsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Student Affairs
+            Kesiswaan
           </a>
           <ul class="dropdown-menu" aria-labelledby="studentAffairsDropdown">
             <li><a class="dropdown-item {{ request()->routeIs('osis') ? 'active' : '' }}" wire:navigate
-                href="{{ route('osis') }}">Student Council</a></li>
+                href="{{ route('osis') }}">OSIS</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('pramuka') ? 'active' : '' }}" wire:navigate
-                href="{{ route('pramuka') }}">Scouts</a></li>
+                href="{{ route('pramuka') }}">Pramuka</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('program-tahfidz') ? 'active' : '' }}" wire:navigate
-                href="{{ route('program-tahfidz') }}">Tahfidz Program</a></li>
+                href="{{ route('program-tahfidz') }}">Program Tahfidz</a></li>
           </ul>
         </li>
 
@@ -65,13 +65,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('berita-agenda', 'karya-ilmiah', 'artikel', 'download') ? 'active' : '' }}"
             href="#" id="publicInfoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Public Information
+            Informasi Publik
           </a>
           <ul class="dropdown-menu" aria-labelledby="publicInfoDropdown">
             <li><a class="dropdown-item {{ request()->routeIs('berita-agenda') ? 'active' : '' }}" wire:navigate
-                href="{{ route('berita-agenda') }}">News</a></li>
+                href="{{ route('berita-agenda') }}">Berita</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('karya-ilmiah') ? 'active' : '' }}" wire:navigate
-                href="{{ route('karya-ilmiah') }}">Scientific Works</a></li>
+                href="{{ route('karya-ilmiah') }}">Karya Ilmiah</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('artikel') ? 'active' : '' }}" wire:navigate
                 href="{{ route('artikel') }}">E-Book</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('download') ? 'active' : '' }}" wire:navigate
@@ -88,13 +88,13 @@
         <!-- Admission -->
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('ppdb') ? 'active' : '' }}" wire:navigate
-            href="{{ route('ppdb') }}">Admission (PPDB)</a>
+            href="{{ route('ppdb') }}">PPDB</a>
         </li>
 
         <!-- Contact -->
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" wire:navigate
-            href="{{ route('kontak') }}">Contact</a>
+            href="{{ route('kontak') }}">Kontak</a>
         </li>
 
         <!-- Auth Buttons -->

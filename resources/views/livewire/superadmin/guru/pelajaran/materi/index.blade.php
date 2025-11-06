@@ -29,7 +29,7 @@
                                     <a wire:navigate
                                         href="{{ routeRoleBased('pelajaran.materi.create', ['guruPelajaranId' => $guruPelajaranId, 'rombelId' => $rombelId]) }}"
                                         class="btn btn-primary">
-                                        <i class="fas fa-plus"></i> Tambah
+                                        <i class="bi bi-plus-circle me-2"></i> Tambah
                                     </a>
                                 </div>
 
@@ -117,7 +117,7 @@
                                         <tr>
                                             <td class="text-center">{{ $materis->firstItem() + $index }}</td>
                                             <td>{{ $materi->judul }}</td>
-                                            <td>{{ $materi->deskripsi ?? '-' }}</td>
+                                            <td>{{ \Illuminate\Support\Str::limit($materi->deskripsi ?? '-', 80) }}</td>
                                             <td>{{ \Carbon\Carbon::parse($materi->tanggal)->translatedFormat('d F Y') }}</td>
                                             <td>{{ $materi->jam }}</td>
                                             <td>

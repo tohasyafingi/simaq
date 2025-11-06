@@ -1,6 +1,6 @@
 <div>
     <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 300px;">
+    <section class="hero-section" style="height: 200px;">
         <div class="hero-content text-center">
             <h1>School History</h1>
             <p>Our Journey of Excellence</p>
@@ -46,11 +46,6 @@
                         <p>Today, we serve over 1,200 students with a dedicated faculty of 80+ experienced educators.
                             Our campus spans across 5 acres with state-of-the-art facilities including science
                             laboratories, computer labs, sports fields, and a modern library.</p>
-                    </div>
-
-                    <div class="text-center mt-5">
-                        <a href="../index.html" class="btn btn-primary me-2">Back to Home</a>
-                        <a href="vision-mission.html" class="btn btn-secondary">Next: Vision & Mission</a>
                     </div>
                 </div>
             </div>

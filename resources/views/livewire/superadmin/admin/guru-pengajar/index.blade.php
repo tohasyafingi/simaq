@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('superadmin.admin.dashboard') }}"><i class="fas fa-home"></i></i> Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$title}}</li>
                     </ol>
                 </div>

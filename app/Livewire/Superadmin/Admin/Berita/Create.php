@@ -46,10 +46,13 @@ class Create extends Component
             'kat_berita_id' => 'required|exists:kat_beritas,id',
             'isi' => 'required|string',
             'status' => 'required|boolean',
-            'thumbnail' => $this->beritaId ? 'nullable|image|max:2048' : 'required|image|max:2048',
+            'thumbnail' => $this->beritaId ? 'nullable|image|max:5120' : 'required|image|max:5120', // 5MB
         ]);
 
-        $thumbPath = $this->thumbnailUrl; // default pakai thumbnail lama
+        // Ambil berita lama jika update
+        $beritaLama = $this->beritaId ? Berita::find($this->beritaId) : null;
+
+        $thumbPath = $beritaLama ? $beritaLama->thumbnail : null;
 
         // Simpan thumbnail baru jika ada
         if ($this->thumbnail) {

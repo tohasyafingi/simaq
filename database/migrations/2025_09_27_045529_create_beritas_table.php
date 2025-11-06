@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->foreignId('kat_berita_id')->constrained('kat_beritas')->onDelete('cascade');
             $table->boolean('status')->default(0); 
-            $table->text('isi');
+            $table->longText('isi');
             $table->timestamps();
         });
     }

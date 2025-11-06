@@ -18,31 +18,33 @@
         <input type="text" class="form-control w-25" placeholder="Search berita..." wire:model.live="search">
       </div>
 
-      @forelse($beritas as $berita)
-        <div class="row mb-5">
-          <div class="col-lg-4 mb-4">
-            <div class="card position-relative">
-              <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}" class="card-img-top"
-                alt="{{ $berita->judul }}" loading="lazy">
+      @forelse($beritas->chunk(3) as $chunk)
+      <div class="row mb-5">
+        @forelse($chunk as $berita)
+            <div class="col-lg-4 mb-4">
+              <div class="card position-relative">
+                <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}" class="card-img-top"
+                  alt="{{ $berita->judul }}" loading="lazy">
 
-              <!-- Label Kategori -->
-              <span class="badge-category">
-                {{ $berita->kategori->nama ?? 'Umum' }}
-              </span>
+                <!-- Label Kategori -->
+                <span class="badge-category">
+                  {{ $berita->kategori->nama ?? 'Umum' }}
+                </span>
 
-              <div class="card-body">
-                <h5 class="card-title">{{ $berita->judul }}</h5>
-                <p class="card-text text-muted">
-                  <small><i class="fas fa-calendar"></i> {{ $berita->created_at->format('d/m/Y') }}</small>
-                </p>
-                <p class="card-text">{!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}</p>
-                <a href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
-                  class="btn btn-primary btn-sm">Read More</a>
+                <div class="card-body">
+                  <h5 class="card-title">{{ $berita->judul }}</h5>
+                  <p class="card-text text-muted">
+                    <small><i class="fas fa-calendar"></i> {{ $berita->created_at->format('d/m/Y') }}</small>
+                  </p>
+                  <p class="card-text">{!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}</p>
+                  <a href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
+                    class="btn btn-primary btn-sm">Baca Selengkapnya</a>
+                </div>
               </div>
             </div>
+            @endforeach
           </div>
-        </div>
-      @empty
+        @empty
         <p class="text-center">Belum ada berita publik tersedia.</p>
       @endforelse
 

@@ -32,14 +32,14 @@
                   <p class="card-text">{!! \Illuminate\Support\Str::limit(strip_tags($karya_ilmiah->isi), 120, '...') !!}
                   </p>
                   <a href="{{ route('detail-karya-ilmiah', ['slug' => $karya_ilmiah->slug]) }}"
-                    class="btn btn-primary btn-sm">Read More</a>
+                    class="btn btn-primary btn-sm">Baca Selengkapnya</a>
                 </div>
               </div>
             </div>
           @endforeach
         </div>
       @empty
-        <p class="text-center">Belum ada karya ilmiah tersedia.</p>
+        <p class="text-center">Belum ada karya ilmiah publik tersedia.</p>
       @endforelse
 
       <!-- Pagination -->

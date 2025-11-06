@@ -18,21 +18,18 @@
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <h2 class="section-title mb-4">About Us</h2>
                     <p class="mb-3">
-                        SMA School is a leading institution dedicated to
-                        providing excellence in education. With a strong
-                        commitment to academic rigor and character
-                        development, we prepare our students for success in
-                        higher education and beyond.
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae
+                        pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean
+                        sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa
+                        nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti
+                        sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
                     </p>
                     <p class="mb-3">
-                        Our dedicated faculty and modern facilities ensure
-                        that every student receives a comprehensive
-                        education that fosters critical thinking,
-                        creativity, and leadership.
-                    </p>
-                    <p>
-                        Join us in our mission to shape the future leaders
-                        of tomorrow.
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae
+                        pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean
+                        sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa
+                        nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti
+                        sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos..
                     </p>
                 </div>
                 <div class="col-lg-6">
@@ -46,72 +43,78 @@
     <!-- ===== Latest News Section Start ===== -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title">Latest News</h2>
-            <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="{{ asset('assets/berita.webp') }}" class="card-img-top" alt="News 1" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Annual School Festival 2024
-                            </h5>
-                            <p class="card-text text-muted">
-                                <small>Posted on November 5, 2024</small>
-                            </p>
-                            <p class="card-text">
-                                Join us for our spectacular annual festival
-                                featuring performances, exhibitions, and
-                                cultural celebrations.
-                            </p>
-                            <a href="public-info/news-detail.html" class="btn btn-primary btn-sm">Read More</a>
+            <h2 class="section-title">Berita Terbaru</h2>
+                @forelse($beritas->chunk(3) as $chunk)
+                <div class="row mb-5">
+                    @forelse($chunk as $berita)
+                            <div class="col-lg-4 mb-4">
+                                <div class="card position-relative">
+                                    <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}" class="card-img-top"
+                                        alt="{{ $berita->judul }}" loading="lazy">
+
+                                    <!-- Label Kategori -->
+                                    <span class="badge-category">
+                                        {{ $berita->kategori->nama ?? 'Umum' }}
+                                    </span>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $berita->judul }}</h5>
+                                        <p class="card-text text-muted">
+                                            <small><i class="fas fa-calendar"></i>
+                                                {{ $berita->created_at->format('d/m/Y') }}</small>
+                                        </p>
+                                        <p class="card-text">
+                                            {!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}
+                                        </p>
+                                        <a href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
+                                            class="btn btn-primary btn-sm">Baca Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
+                    @empty
+                    <p class="text-center">Belum ada berita publik tersedia.</p>
+                @endforelse
+        </div>
+    </section>
+    <!-- ===== Latest News Section End ===== -->
+
+    <!-- ===== Latest Karya Section Start ===== -->
+    <section class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Karya Ilmiah Terbaru</h2>
+                @forelse($karya_ilmiahs->chunk(3) as $chunk)
+                    <div class="row mb-5">
+                        @foreach($chunk as $karya_ilmiah)
+                            <div class="col-lg-4 mb-4">
+                                <div class="card position-relative">
+                                    <img src="{{ $karya_ilmiah->thumbnail_url ?? asset('assets/karya.webp') }}"
+                                        class="card-img-top" alt="{{ $karya_ilmiah->judul }}" loading="lazy">
+                                    <span class="badge-category">{{ $karya_ilmiah->kategori->nama ?? 'Umum' }}</span>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $karya_ilmiah->judul }}</h5>
+                                        <p class="card-text text-muted"><small><i class="fas fa-calendar"></i>
+                                                {{ $karya_ilmiah->created_at->format('d/m/Y') }}</small></p>
+                                        <p class="card-text">
+                                            {!! \Illuminate\Support\Str::limit(strip_tags($karya_ilmiah->isi), 120, '...') !!}
+                                        </p>
+                                        <a href="{{ route('detail-karya-ilmiah', ['slug' => $karya_ilmiah->slug]) }}"
+                                            class="btn btn-primary btn-sm">Baca Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="{{ asset('assets/berita.webp') }}" class="card-img-top" alt="News 2" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Scholarship Opportunities Available
-                            </h5>
-                            <p class="card-text text-muted">
-                                <small>Posted on October 28, 2024</small>
-                            </p>
-                            <p class="card-text">
-                                We are proud to announce new scholarship
-                                opportunities for deserving students. Apply
-                                now to secure your future.
-                            </p>
-                            <a href="public-info/news-detail.html" class="btn btn-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="{{ asset('assets/berita.webp') }}" class="card-img-top" alt="News 3" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                New Science Lab Inauguration
-                            </h5>
-                            <p class="card-text text-muted">
-                                <small>Posted on October 20, 2024</small>
-                            </p>
-                            <p class="card-text">
-                                Our state-of-the-art science laboratory is
-                                now ready to provide hands-on learning
-                                experiences to our students.
-                            </p>
-                            <a href="public-info/news-detail.html" class="btn btn-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @empty
+                    <p class="text-center">Belum ada karya ilmiah publik tersedia.</p>
+                @endforelse
         </div>
     </section>
     <!-- ===== Latest News Section End ===== -->
 
     <!-- ===== Gallery Section Start ===== -->
-    <section class="section bg-light">
+    <section class="section">
         <div class="container">
             <h2 class="section-title">Gallery</h2>
             <div class="gallery-grid">
@@ -152,13 +155,12 @@
     <!-- ===== Gallery Section End ===== -->
 
     <!-- ===== Admission Section Start ===== -->
-    <section class="section">
+    <section class="section bg-light">
         <div class="container">
             <h2 class="section-title">Admission (PPDB) 2024</h2>
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <img src="{{ asset('assets/ppdb.webp') }}" alt="Admission"
-                        class="img-fluid rounded mb-3 mb-lg-0" />
+                    <img src="{{ asset('assets/ppdb.webp') }}" alt="Admission" class="img-fluid rounded mb-3 mb-lg-0" />
                 </div>
                 <div class="col-lg-6">
                     <p class="mb-3">
@@ -183,7 +185,7 @@
     <!-- ===== Admission Section End ===== -->
 
     <!-- ===== Contact Section Start ===== -->
-    <section class="section bg-light">
+    <section class="section">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
             <div class="row">
@@ -222,4 +224,23 @@
             </div>
         </div>
     </section>
+
+    <style>
+        .card {
+            position: relative;
+        }
+
+        .badge-category {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #1abc9c;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            font-weight: bold;
+            z-index: 10;
+        }
+    </style>
 </div>

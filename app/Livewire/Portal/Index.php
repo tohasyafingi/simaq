@@ -4,6 +4,7 @@ namespace App\Livewire\Portal;
 
 use Livewire\Component;
 use App\Models\Berita;
+use App\Models\KaryaIlmiah;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
@@ -12,12 +13,17 @@ use Livewire\Attributes\Layout;
 class Index extends Component
 {
     public $beritas;
+    public $karya_ilmiahs;
 
     public function mount()
     {
         $this->beritas = Berita::where('status', 1)
             ->orderBy('created_at', 'desc')
-            ->take(6) // Batasi hanya 6 berita terbaru
+            ->take(3)
+            ->get();
+        $this->karya_ilmiahs = KaryaIlmiah::where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
             ->get();
     }
 

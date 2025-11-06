@@ -15,7 +15,7 @@ class KaryaIlmiahSeeder extends Seeder
             'author' => 'Siti Aisyah',
             'slug' => 'penelitian-olahraga-kesehatan-mental',
             'thumbnail' => 'assets/karya.webp',
-            'kat_karya_ilmiah_id' => 4, 
+            'kat_karya_ilmiah_id' => 1, 
             'status' => 1,
             'isi' => 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
         ]);
@@ -33,7 +33,7 @@ class KaryaIlmiahSeeder extends Seeder
             'author' => 'Andi Saputra',
             'slug' => 'pengaruh-teknologi-pembelajaran',
             'thumbnail' => 'assets/karya.webp',
-            'kat_karya_ilmiah_id' => 3, 
+            'kat_karya_ilmiah_id' => 1, 
             'status' => 1,
             'isi' => 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
         ]);
@@ -51,7 +51,7 @@ class KaryaIlmiahSeeder extends Seeder
             'author' => 'Budi Santoso',
             'slug' => 'penggunaan-media-sosial-pembelajaran',
             'thumbnail' => 'assets/karya.webp',
-            'kat_karya_ilmiah_id' => 3, 
+            'kat_karya_ilmiah_id' => 1, 
             'status' => 1,
             'isi' => 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
         ]);

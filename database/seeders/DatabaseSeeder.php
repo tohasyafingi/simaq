@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\KatBerita;
+use App\Models\KatKaryaIlmiah;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +21,10 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             BendaharaSeeder::class,
             TataUsahaSeeder::class,
+            KatBeritaSeeder::class,
+            KatKaryaIlmiahSeeder::class,
+            BeritaSeeder::class,
+            KaryaIlmiahSeeder::class,
         ]);
     }
 }

@@ -9,7 +9,7 @@
     </div> --}}
     <div class="sidebar-brand">
         <a href="{{ route('superadmin.admin.dashboard') }}" class="brand-link">
-            <img src="{{ asset('assets/logo.webp') }}" alt="SIMAQ" class="brand-image opacity-75" />
+            <img src="{{ asset('assets/logo.webp') }}" alt="SIMAQ" class="brand-image" />
             <span class="brand-text fw-light">SIMAQ</span>
         </a>
     </div>

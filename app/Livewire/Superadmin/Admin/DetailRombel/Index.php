@@ -16,32 +16,38 @@ class Index extends Component
 
     public $rombel;
     public $siswa_id, $status;
-    public $search = '';  // Properti pencarian siswa berdasarkan nama atau NIS
+    public $search = '';
     public $searchSiswa = '';
     public $paginate = 10;
     public $paginateSiswa = 10;
 
-    // Mengambil ID rombel dari URL
     public function mount($rombelId)
     {
         $this->rombel = Rombel::with(['tingkatKelas', 'jurusan', 'ruangKelas', 'tahunAjaran'])->findOrFail($rombelId);
     }
 
-    // Menambahkan siswa ke rombel
     public function addSiswa()
     {
         $this->validate([
             'siswa_id' => 'required|exists:siswas,id',
         ]);
 
-        $siswa = Siswa::find($this->siswa_id);
+        $siswa = Siswa::where('id', $this->siswa_id)
+            ->where('status', 'aktif') // pastikan aktif
+            ->first();
+
+        if (!$siswa) {
+            session()->flash('message', 'Siswa tidak ditemukan atau tidak aktif.');
+            return;
+        }
 
         if ($siswa->isInAnyRombel()) {
             session()->flash('message', 'Siswa sudah tergabung di rombel lain.');
             return;
         }
 
-        $this->rombel->siswa()->attach($this->siswa_id, ['status' => 1]);  // Status 1 = Aktif
+        $this->rombel->siswa()->attach($this->siswa_id, ['status' => 1]);
+
 
         $this->resetInputFields();
         $this->dispatch('closeCreateModal');
@@ -79,13 +85,14 @@ class Index extends Component
     // Render view
     public function render()
     {
-        // Menampilkan siswa yang belum ada di rombel
-        $siswaList = Siswa::whereDoesntHave('rombels') // Hanya siswa yang belum masuk rombel manapun
+        $siswaList = Siswa::where('status', 'aktif') // Hanya siswa aktif
+            ->whereDoesntHave('rombels') // Belum masuk rombel manapun
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('nis', 'like', '%' . $this->search . '%');
             })
-            ->paginate($this->paginate); // Pagination sesuai pilihan user
+            ->paginate($this->paginate);
+
 
         // Menampilkan siswa yang sudah ada di rombel
         $siswaInRombel = $this->rombel->siswa()

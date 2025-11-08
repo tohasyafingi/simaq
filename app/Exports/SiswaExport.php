@@ -21,6 +21,21 @@ class SiswaExport implements FromCollection, WithHeadings
             // Export data riil dari database
             return Siswa::all(['nis', 'name', 'email', 'no_hp', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'status']);
         }
+        
+        if ($this->mode === 'lulus') {
+            // Export hanya siswa yang statusnya 'lulus'
+            return Siswa::where('status', 'lulus')->get([
+                'nis',
+                'name',
+                'email',
+                'no_hp',
+                'jenis_kelamin',
+                'tempat_lahir',
+                'tanggal_lahir',
+                'alamat',
+                'status'
+            ]);
+        }
 
         // Mode template: satu baris contoh
         return collect([

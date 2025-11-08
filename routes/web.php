@@ -13,6 +13,7 @@ use App\Livewire\Superadmin\Admin\Siswa\Index as AdminSiswaIndex;
 use App\Livewire\Superadmin\Admin\Guru\Index as AdminGuruIndex;
 use App\Livewire\Superadmin\Admin\Bendahara\Index as AdminBendaharaIndex;
 use App\Livewire\Superadmin\Admin\TataUsaha\Index as AdminTataUsahaIndex;
+use App\Livewire\Superadmin\Admin\Lulus\Index as AdminLulusIndex;
 use App\Livewire\Superadmin\Admin\TahunAjaran\Index as AdminTahunAjaranIndex;
 use App\Livewire\Superadmin\Admin\Jurusan\Index as AdminJurusanIndex;
 use App\Livewire\Superadmin\Admin\TingkatKelas\Index as AdminTingkatKelasIndex;
@@ -104,6 +105,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/data-guru', AdminGuruIndex::class)->name('guru.index');
     Route::get('/data-bendahara', AdminBendaharaIndex::class)->name('bendahara.index');
     Route::get('/data-tata-usaha', AdminTataUsahaIndex::class)->name('tata-usaha.index');
+    Route::get('/data-kelulusan', AdminLulusIndex::class)->name('lulus.index');
     Route::get('/tahun-ajaran', AdminTahunAjaranIndex::class)->name('tahun-ajaran.index');
     Route::get('/tingkat-kelas', AdminTingkatKelasIndex::class)->name('tingkat-kelas.index');
     Route::get('/jurusan', AdminJurusanIndex::class)->name('jurusan.index');

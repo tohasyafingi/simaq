@@ -52,7 +52,7 @@
             </div>
             <div class="col-lg-3 col-md-12">
                 <div class="card p-3 h-100">
-                    <h5>Pengumuman</h5>
+                    <!-- <h5>Pengumuman</h5> -->
                     <div></div>
                 </div>
             </div>

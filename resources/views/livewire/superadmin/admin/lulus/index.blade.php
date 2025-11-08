@@ -32,23 +32,12 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between mb-1">
                                 <div>
-                                    <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#createModal"><i class="bi bi-person-plus-fill mr-2"></i>
-                                        Tambah</button>
                                 </div>
                                 <div>
-                                    <!-- Tombol Import -->
-                                    <button class="btn btn-md btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#importModal">
-                                        <i class="fas fa-file-excel"></i> Import
-                                    </button>
-
                                     <!-- Tombol Export Data Guru -->
                                     <button wire:click="export" class="btn btn-md btn-primary">
                                         <i class="fas fa-file-export"></i> Export
                                     </button>
-
-                                    <x-modal-import id="importModal" title="Import Data Guru" inputName="file" />
                                 </div>
                             </div>
                         </div>
@@ -120,6 +109,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -135,49 +125,7 @@
         </div>
     </div>
 
-    @script
-    <script>
-        $wire.on('closeImportModal', () => {
-            const modalElement = document.getElementById('importModal');
-            let modalInstance = bootstrap.Modal.getInstance(modalElement);
-
-            if (!modalInstance) {
-                modalInstance = new bootstrap.Modal(modalElement);
-            }
-
-            modalInstance.hide();
-
-            Swal.fire({
-                title: "Sukses",
-                text: "Data Berhasil Ditambah!",
-                icon: "success"
-            });
-        });
-    </script>
-    @endscript
-
-    @include('livewire.superadmin.admin.siswa.create')
-    @script
-    <script>
-        $wire.on('closeCreateModal', () => {
-            const modalElement = document.getElementById('createModal');
-            let modalInstance = bootstrap.Modal.getInstance(modalElement);
-
-            if (!modalInstance) {
-                modalInstance = new bootstrap.Modal(modalElement);
-            }
-
-            modalInstance.hide();
-
-            Swal.fire({
-                title: "Sukses",
-                text: "Data Berhasil Ditambah!",
-                icon: "success"
-            });
-        });
-    </script>
-    @endscript
-    @include('livewire.superadmin.admin.siswa.edit')
+    @include('livewire.superadmin.admin.lulus.edit')
     @script
     <script>
         $wire.on('closeEditModal', () => {
@@ -198,7 +146,7 @@
         });
     </script>
     @endscript
-    @include('livewire.superadmin.admin.siswa.delete')
+    @include('livewire.superadmin.admin.lulus.delete')
     @script
     <script>
         $wire.on('closeDeleteModal', () => {

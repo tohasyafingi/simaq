@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Superadmin\Admin\Siswa;
+namespace App\Livewire\Superadmin\Admin\Lulus;
 
 use App\Models\Siswa;
 use App\Models\User;
@@ -11,9 +11,9 @@ use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Livewire\Attributes\Title;
 
 #[Title('Data Siswa')]
@@ -52,82 +52,10 @@ class Index extends Component
         ];
     }
 
-    public function create()
-    {
-        $this->resetValidation();
-        $this->reset([
-            'siswa_id',
-            'nis',
-            'name',
-            'email',
-            'no_hp',
-            'jenis_kelamin',
-            'tempat_lahir',
-            'tanggal_lahir',
-            'alamat',
-            'kk',
-            'akta',
-            'ijazah_terakhir',
-            'img',
-            'status',
-        ]);
-    }
-
-    public function import()
-    {
-        $this->validate([
-            'file' => 'required|file|mimes:xlsx,xls',
-        ]);
-
-        try {
-            $import = new SiswaImport();
-            Excel::import($import, $this->file);
-
-            // ✅ Gunakan getter method
-            $errors = $import->getErrors();
-            $failures = $import->getFailures();
-            $skipped = $import->skipped ?? [];
-
-            $this->file = null;
-
-            // Hitung hasil
-            $errorCount = count($errors);
-            $failureCount = count($failures);
-            $skippedCount = count($skipped);
-
-            $message = "Import selesai: {$errorCount} error, {$failureCount} gagal, {$skippedCount} di-skip.";
-
-            // Log detail ke storage/logs/laravel.log
-            if ($failureCount > 0) {
-                foreach ($failures as $failure) {
-                    Log::warning("Baris {$failure->row()}: " . implode(', ', $failure->errors()));
-                }
-            }
-
-            Log::info($message);
-
-            // Tampilkan feedback ke UI
-            if ($errorCount > 0 || $failureCount > 0 || $skippedCount > 0) {
-                session()->flash('warning', $message);
-            } else {
-                session()->flash('message', 'Semua data siswa berhasil diimport.');
-            }
-
-            $this->dispatch('closeImportModal');
-        } catch (\Exception $e) {
-            Log::error("Exception di import siswa: " . $e->getMessage());
-            session()->flash('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
-        }
-    }
-
-    public function downloadTemplate()
-    {
-        return Excel::download(new SiswaExport('template'), 'template_siswa.xlsx');
-    }
 
     public function export()
     {
-        return Excel::download(new SiswaExport('data'), 'data_siswa.xlsx');
+        return Excel::download(new SiswaExport('lulus'), 'data_kelulusan.xlsx');
     }
 
 
@@ -261,7 +189,7 @@ class Index extends Component
 
             $this->dispatch('closeEditModal');
             session()->flash('message', 'Data siswa berhasil diperbarui.');
-            $this->create();  
+            $this->create();  // Reset form
         } catch (\Exception $e) {
             session()->flash('error', 'Terjadi kesalahan saat memperbarui siswa: ' . $e->getMessage());
         }
@@ -270,19 +198,17 @@ class Index extends Component
     public function render()
     {
         $data = Siswa::with(['jurusan'])
-            ->where('status', '!=', 'lulus')
+            ->where('status', 'lulus') // hanya siswa lulus
             ->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('nis', 'like', '%' . $this->search . '%')
-                    ->orWhere('email', 'like', '%' . $this->search . '%')
-                    ->orWhere('status', 'like', '%' . $this->search . '%');
+                    ->orWhere('email', 'like', '%' . $this->search . '%');
             })
             ->orderBy('name')
             ->paginate($this->paginate);
 
-
-        return view('livewire.superadmin.admin.siswa.index', [
-            'title' => 'Data Siswa',
+        return view('livewire.superadmin.admin.lulus.index', [
+            'title' => 'Data Kelulusan',
             'siswa' => $data,
         ]);
     }

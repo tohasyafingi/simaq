@@ -78,38 +78,38 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                         @forelse($beritas as $index => $berita)
-                                            <tr>
-                                                <td class="text-center">{{ $beritas->firstItem() + $index }}</td>
-                                                <td class="text-center">
-                                                    <img src="{{ $berita->thumbnail_url ?? asset('images/default.jpg')}}" alt="Thumbnail berita"
-                                                        class="rounded" width="40">
-                                                </td>
-                                                <td>{{ $berita->judul }}</td>
-                                                <td>{{ Str::limit(strip_tags($berita->isi), 50) }}</td>
-                                                <td class="text-center">
-                                                    @if($berita->status)
-                                                        <span class="badge bg-success">Aktif</span>
-                                                    @else
-                                                        <span class="badge bg-secondary">Draft</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center gap-1">
-                                                        <button wire:click="edit({{ $berita->id }})"
-                                                            class="btn btn-sm btn-outline-primary" title="Edit">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button wire:click="confirmDelete({{ $berita->id }})"
-                                                            class="btn btn-sm btn-outline-danger" title="Hapus">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td class="text-center">{{ $beritas->firstItem() + $index }}</td>
+                                            <td class="text-center">
+                                                <img src="{{ $berita->thumbnail_url ?? asset('images/default.jpg')}}" alt="Thumbnail berita"
+                                                    class="rounded" width="50" loading="lazy">
+                                            </td>
+                                            <td>{{ $berita->judul }}</td>
+                                            <td>{{ Str::limit(strip_tags($berita->isi), 50) }}</td>
+                                            <td class="text-center">
+                                                @if($berita->status)
+                                                <span class="badge bg-success">Aktif</span>
+                                                @else
+                                                <span class="badge bg-secondary">Draft</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center gap-1">
+                                                    <button wire:click="edit({{ $berita->id }})"
+                                                        class="btn btn-sm btn-outline-primary" title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button wire:click="confirmDelete({{ $berita->id }})"
+                                                        class="btn btn-sm btn-outline-danger" title="Hapus">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         @empty
-                                            <tr>
-                                                <td colspan="6" class="text-center">Belum ada berita</td>
-                                            </tr>
+                                        <tr>
+                                            <td colspan="6" class="text-center">Belum ada berita</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

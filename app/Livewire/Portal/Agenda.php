@@ -25,13 +25,14 @@ class Agenda extends Component
 
     public function render()
     {
-        $beritas = Berita::where('status', 1)
-            ->where(function($query) {
-                $query->where('judul', 'like', '%'.$this->search.'%')
-                      ->orWhere('isi', 'like', '%'.$this->search.'%');
+        $beritas = Berita::with('kategori')
+            ->where('status', 1)
+            ->where(function ($query) {
+                $query->where('judul', 'like', '%' . $this->search . '%')
+                    ->orWhere('isi', 'like', '%' . $this->search . '%');
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(12); 
+            ->paginate(12);
 
         return view('livewire.portal.agenda', compact('beritas'));
     }

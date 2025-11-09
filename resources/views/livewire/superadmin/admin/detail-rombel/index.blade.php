@@ -38,7 +38,7 @@
                     <div class="col-12 col-md-4 mb-3 mb-md-0">
                         <label for="siswa_id" class="form-label">Pilih Siswa</label>
                         <select wire:model.live="siswa_id" class="form-select" id="siswa_id">
-                            <!-- <option value="">-- Pilih Siswa --</option> Agar menampilkan nama siswa ketika user mengetikkan di pencarian -->
+                            <option value="">-- Pilih Siswa --</option> Agar menampilkan nama siswa ketika user mengetikkan di pencarian
                             @foreach($siswaList as $siswa)
                             <option value="{{ $siswa->id }}">{{ $siswa->nis }} - {{ $siswa->name }}</option>
                             @endforeach
@@ -124,7 +124,7 @@
                 </table>
             </div>
 
-            {{ $siswaInRombel->links() }} <!-- Paginasi untuk siswa di rombel -->
+            {{ $siswaInRombel->links() }}
         </div>
     </div>
 

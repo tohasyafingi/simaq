@@ -2,8 +2,8 @@
     <!-- ===== Banner Section Start ===== -->
     <section class="hero-section" style="height: 200px;">
         <div class="hero-content text-center">
-            <h1>School History</h1>
-            <p>Our Journey of Excellence</p>
+            <h1>Sejarah</h1>
+            <p>MA Takhassus Al-Qur'an Wonosobo</p>
         </div>
     </section>
     <!-- ===== Banner Section End ===== -->
@@ -13,44 +13,35 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h2 class="section-title">Our Rich History</h2>
-
+                    <h4 class="section-title">Sejarah Singkat</h4>
                     <div class="mb-5">
-                        <h4 class="mb-3"><i class="fas fa-calendar-alt text-primary"></i> Founded in 1995</h4>
-                        <p>SMA School was established with a vision to provide quality education and develop
-                            well-rounded individuals. Over the past three decades, we have grown from a small
-                            institution to one of the most respected schools in the region.</p>
-                    </div>
-
-                    <div class="mb-5">
-                        <h4 class="mb-3"><i class="fas fa-star text-primary"></i> Major Milestones</h4>
-                        <ul>
-                            <li><strong>1995:</strong> School founded with 200 students and 15 faculty members</li>
-                            <li><strong>2001:</strong> Achieved accreditation and expanded campus facilities</li>
-                            <li><strong>2008:</strong> Introduced advanced science and technology programs</li>
-                            <li><strong>2015:</strong> Established international exchange partnerships</li>
-                            <li><strong>2021:</strong> Implemented modern digital learning infrastructure</li>
-                        </ul>
-                    </div>
-
-                    <div class="mb-5">
-                        <h4 class="mb-3"><i class="fas fa-book text-primary"></i> Academic Excellence</h4>
-                        <p>Over the years, SMA School has consistently maintained high academic standards and has
-                            produced thousands of successful graduates. Our alumni have gone on to pursue careers in
-                            medicine, engineering, law, business, and various other fields, making significant
-                            contributions to society.</p>
-                    </div>
-
-                    <div class="mb-5">
-                        <h4 class="mb-3"><i class="fas fa-users text-primary"></i> Growth and Expansion</h4>
-                        <p>Today, we serve over 1,200 students with a dedicated faculty of 80+ experienced educators.
-                            Our campus spans across 5 acres with state-of-the-art facilities including science
-                            laboratories, computer labs, sports fields, and a modern library.</p>
+                        <!-- Gambar di atas -->
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('assets/tentang.webp') }}" alt="School History" class="img-fluid rounded">
+                        </div>
+                        <!-- Teks Deskripsi -->
+                        <h4 class="mb-3"><i class="fas fa-calendar-alt"></i> Berdiri pada Tahun 2008</h4>
+                        <p>Berawal dari kepedulian terhadap perkembangan pendidikan di Indonesia, khususnya di Kabupaten Wonosobo, 
+                            KH. Achmad Faqih Muntaha melalui Yayasan Al-Asy’ariyyah mendirikan Madrasah Aliyah Takhassus Al-Qur’an (MATAQ) 
+                            pada tahun 2008. Gagasan pendirian madrasah ini didorong oleh keinginan untuk menciptakan lembaga 
+                            pendidikan menengah yang tidak hanya fokus pada penguatan ilmu agama, tetapi juga memberikan kesempatan 
+                            pendidikan berkualitas kepada siswa dari berbagai latar belakang ekonomi. MATAQ bertujuan untuk 
+                            menghasilkan generasi yang cerdas, berakhlak mulia, dan mampu bersaing di tingkat global.</p>
+                        <p>MATAQ mengusung visi untuk mencetak generasi Qur’ani yang unggul dalam akademik dan karakter. 
+                            Kurikulum yang diterapkan memadukan pendidikan Al-Qur’an, agama, dan ilmu pengetahuan umum. 
+                            Selain aspek akademik, sekolah ini juga menekankan pembentukan karakter melalui pembiasaan nilai-nilai Qur’ani, 
+                            pengajaran etika, dan kegiatan ekstrakurikuler yang bertujuan menanamkan disiplin, tanggung jawab, dan 
+                            kepedulian sosial pada setiap siswa. Hal ini bertujuan agar lulusan MATAQ tidak hanya unggul di bidang intelektual, 
+                            tetapi juga memiliki moral yang tinggi dan integritas yang dapat dijadikan teladan di masyarakat.</p>
+                        <p>Seiring berjalannya waktu, MATAQ terus berkembang dan menyesuaikan diri dengan tuntutan pendidikan modern. 
+                            Lembaga ini tidak hanya mendalami ilmu agama, tetapi juga mengembangkan kreativitas dan keterampilan siswa 
+                            untuk mempersiapkan mereka menghadapi dunia pendidikan tinggi dan dunia kerja. MATAQ berkomitmen untuk menjadi 
+                            lembaga pendidikan unggul yang tidak hanya mencetak lulusan yang cerdas, tetapi juga berakhlak mulia dan siap 
+                            memberikan kontribusi positif bagi masyarakat, bangsa, dan agama melalui pendidikan yang inklusif dan holistik.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- ===== Content Section End ===== -->
-
 </div>

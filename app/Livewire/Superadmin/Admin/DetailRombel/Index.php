@@ -33,7 +33,7 @@ class Index extends Component
         ]);
 
         $siswa = Siswa::where('id', $this->siswa_id)
-            ->where('status', 'aktif') // pastikan aktif
+            ->where('status', 'aktif')
             ->first();
 
         if (!$siswa) {
@@ -54,14 +54,12 @@ class Index extends Component
         session()->flash('message', 'Siswa berhasil ditambahkan.');
     }
 
-    // Update status siswa
     public function updateStatus($siswa_id, $status)
     {
         $this->rombel->siswa()->updateExistingPivot($siswa_id, ['status' => (bool) $status]);
         session()->flash('message', 'Status siswa berhasil diubah.');
     }
 
-    // Menghapus siswa dari rombel
     public function deleteSiswa($siswaId)
     {
         $this->rombel->siswa()->detach($siswaId);
@@ -69,38 +67,33 @@ class Index extends Component
         session()->flash('message', 'Siswa berhasil dihapus.');
     }
 
-    // Reset input fields
     private function resetInputFields()
     {
         $this->siswa_id = '';
         $this->status = '';
     }
 
-    // Reset pagination saat search berubah
     public function updatedSearchSiswa()
     {
-        $this->resetPage(); // Reset pagination ke halaman pertama saat pencarian berubah
+        $this->resetPage();
     }
 
-    // Render view
     public function render()
     {
-        $siswaList = Siswa::where('status', 'aktif') // Hanya siswa aktif
-            ->whereDoesntHave('rombels') // Belum masuk rombel manapun
+        $siswaList = Siswa::where('status', 'aktif')
+            ->whereDoesntHave('rombels')
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('nis', 'like', '%' . $this->search . '%');
             })
             ->paginate($this->paginate);
 
-
-        // Menampilkan siswa yang sudah ada di rombel
         $siswaInRombel = $this->rombel->siswa()
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->searchSiswa . '%')
                     ->orWhere('nis', 'like', '%' . $this->searchSiswa . '%');
             })
-            ->paginate($this->paginateSiswa); // Pagination untuk siswa di rombel
+            ->paginate($this->paginateSiswa);
 
         return view('livewire.superadmin.admin.detail-rombel.index', [
             'title' => 'Detail Rombel',

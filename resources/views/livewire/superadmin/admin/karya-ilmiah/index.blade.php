@@ -80,41 +80,41 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                         @forelse($karya_ilmiahs as $index => $karya)
-                                            <tr>
-                                                <td class="text-center">{{ $karya_ilmiahs->firstItem() + $index }}</td>
-                                                <td class="text-center">
-                                                    <img src="{{ $karya->thumbnail_url ?? asset('images/default.jpg') }}"
-                                                        class="rounded" alt="Thumbnail" width="40" height="40"
-                                                        loading="lazy">
-                                                </td>
-                                                <td>{{ $karya->author }}</td>
-                                                <td>{{ $karya->judul }}</td>
-                                                <td>{{ \Illuminate\Support\Str::limit(strip_tags($karya->isi), 50, '...') }}
-                                                </td>
-                                                <td class="text-center">
-                                                    @if($karya->status)
-                                                        <span class="badge bg-success">Aktif</span>
-                                                    @else
-                                                        <span class="badge bg-secondary">Draft</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center gap-1">
-                                                        <button wire:click="edit({{ $karya->id }})"
-                                                            class="btn btn-sm btn-outline-primary" title="Edit">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button wire:click="confirmDelete({{ $karya->id }})"
-                                                            class="btn btn-sm btn-outline-danger" title="Hapus">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td class="text-center">{{ $karya_ilmiahs->firstItem() + $index }}</td>
+                                            <td class="text-center">
+                                                <img src="{{ $karya->thumbnail_url ?? asset('images/default.jpg') }}"
+                                                    class="rounded" alt="Thumbnail" width="50"
+                                                    loading="lazy">
+                                            </td>
+                                            <td>{{ $karya->author }}</td>
+                                            <td>{{ $karya->judul }}</td>
+                                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($karya->isi), 50, '...') }}
+                                            </td>
+                                            <td class="text-center">
+                                                @if($karya->status)
+                                                <span class="badge bg-success">Aktif</span>
+                                                @else
+                                                <span class="badge bg-secondary">Draft</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center gap-1">
+                                                    <button wire:click="edit({{ $karya->id }})"
+                                                        class="btn btn-sm btn-outline-primary" title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button wire:click="confirmDelete({{ $karya->id }})"
+                                                        class="btn btn-sm btn-outline-danger" title="Hapus">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         @empty
-                                            <tr>
-                                                <td colspan="7" class="text-center">Data tidak ditemukan.</td>
-                                            </tr>
+                                        <tr>
+                                            <td colspan="7" class="text-center">Data tidak ditemukan.</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

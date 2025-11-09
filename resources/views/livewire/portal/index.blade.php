@@ -44,38 +44,38 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Berita Terbaru</h2>
-                @forelse($beritas->chunk(3) as $chunk)
-                <div class="row mb-5">
-                    @forelse($chunk as $berita)
-                            <div class="col-lg-4 mb-4">
-                                <div class="card position-relative">
-                                    <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}" class="card-img-top"
-                                        alt="{{ $berita->judul }}" loading="lazy">
+            @forelse($beritas->chunk(3) as $chunk)
+            <div class="row mb-5">
+                @forelse($chunk as $berita)
+                <div class="col-lg-4 mb-4">
+                    <div class="card position-relative">
+                        <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}" class="card-img-top"
+                            alt="{{ $berita->judul }}" loading="lazy">
 
-                                    <!-- Label Kategori -->
-                                    <span class="badge-category">
-                                        {{ $berita->kategori->nama ?? 'Umum' }}
-                                    </span>
+                        <!-- Label Kategori -->
+                        <span class="badge-category">
+                            {{ $berita->kategori->nama ?? 'Umum' }}
+                        </span>
 
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $berita->judul }}</h5>
-                                        <p class="card-text text-muted">
-                                            <small><i class="fas fa-calendar"></i>
-                                                {{ $berita->created_at->format('d/m/Y') }}</small>
-                                        </p>
-                                        <p class="card-text">
-                                            {!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}
-                                        </p>
-                                        <a href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
-                                            class="btn btn-primary btn-sm">Baca Selengkapnya</a>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $berita->judul }}</h5>
+                            <p class="card-text text-muted">
+                                <small><i class="fas fa-calendar"></i>
+                                    {{ $berita->created_at->format('d/m/Y') }}</small>
+                            </p>
+                            <p class="card-text">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}
+                            </p>
+                            <a wire:navigate href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
+                                class="btn btn-primary btn-sm">Baca Selengkapnya</a>
                         </div>
-                    @empty
-                    <p class="text-center">Belum ada berita publik tersedia.</p>
-                @endforelse
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @empty
+            <p class="text-center">Belum ada berita publik tersedia.</p>
+            @endforelse
         </div>
     </section>
     <!-- ===== Latest News Section End ===== -->
@@ -84,31 +84,31 @@
     <section class="section bg-light">
         <div class="container">
             <h2 class="section-title">Karya Ilmiah Terbaru</h2>
-                @forelse($karya_ilmiahs->chunk(3) as $chunk)
-                    <div class="row mb-5">
-                        @foreach($chunk as $karya_ilmiah)
-                            <div class="col-lg-4 mb-4">
-                                <div class="card position-relative">
-                                    <img src="{{ $karya_ilmiah->thumbnail_url ?? asset('assets/karya.webp') }}"
-                                        class="card-img-top" alt="{{ $karya_ilmiah->judul }}" loading="lazy">
-                                    <span class="badge-category">{{ $karya_ilmiah->kategori->nama ?? 'Umum' }}</span>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $karya_ilmiah->judul }}</h5>
-                                        <p class="card-text text-muted"><small><i class="fas fa-calendar"></i>
-                                                {{ $karya_ilmiah->created_at->format('d/m/Y') }}</small></p>
-                                        <p class="card-text">
-                                            {!! \Illuminate\Support\Str::limit(strip_tags($karya_ilmiah->isi), 120, '...') !!}
-                                        </p>
-                                        <a href="{{ route('detail-karya-ilmiah', ['slug' => $karya_ilmiah->slug]) }}"
-                                            class="btn btn-primary btn-sm">Baca Selengkapnya</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+            @forelse($karya_ilmiahs->chunk(3) as $chunk)
+            <div class="row mb-5">
+                @foreach($chunk as $karya_ilmiah)
+                <div class="col-lg-4 mb-4">
+                    <div class="card position-relative">
+                        <img src="{{ $karya_ilmiah->thumbnail_url ?? asset('assets/karya.webp') }}"
+                            class="card-img-top" alt="{{ $karya_ilmiah->judul }}" loading="lazy">
+                        <span class="badge-category">{{ $karya_ilmiah->kategori->nama ?? 'Umum' }}</span>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $karya_ilmiah->judul }}</h5>
+                            <p class="card-text text-muted"><small><i class="fas fa-calendar"></i>
+                                    {{ $karya_ilmiah->created_at->format('d/m/Y') }}</small></p>
+                            <p class="card-text">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($karya_ilmiah->isi), 120, '...') !!}
+                            </p>
+                            <a wire:navigate href="{{ route('detail-karya-ilmiah', ['slug' => $karya_ilmiah->slug]) }}"
+                                class="btn btn-primary btn-sm">Baca Selengkapnya</a>
+                        </div>
                     </div>
-                @empty
-                    <p class="text-center">Belum ada karya ilmiah publik tersedia.</p>
-                @endforelse
+                </div>
+                @endforeach
+            </div>
+            @empty
+            <p class="text-center">Belum ada karya ilmiah publik tersedia.</p>
+            @endforelse
         </div>
     </section>
     <!-- ===== Latest News Section End ===== -->
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="{{route('galeri')}}" class="btn btn-primary">View All Gallery</a>
+                <a wire:navigate href="{{route('galeri')}}" class="btn btn-primary">View All Gallery</a>
             </div>
         </div>
     </section>
@@ -177,7 +177,7 @@
                         <li>Positive character references</li>
                         <li>Participation in extracurricular activities</li>
                     </ul>
-                    <a href="{{route('ppdb')}}" class="btn btn-primary">Register Now</a>
+                    <a wire:navigate href="{{route('ppdb')}}" class="btn btn-primary">Register Now</a>
                 </div>
             </div>
         </div>

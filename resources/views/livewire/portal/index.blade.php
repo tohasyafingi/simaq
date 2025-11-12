@@ -4,7 +4,8 @@
     <section class="hero-section">
         <div class="hero-content text-center">
             <h3>Selamat Datang di</h3>
-            <h1>MA takhassus Al-Qur'an Wonosobo</h1>
+            <h1 id="typing-text"></h1>
+            <!-- <h1>MA takhassus Al-Qur'an Wonosobo</h1> -->
             <p>Building Leaders, Inspiring Minds, Creating Tomorrow</p>
             <a href="#about" class="btn btn-primary">Learn More</a>
         </div>
@@ -243,4 +244,23 @@
             z-index: 10;
         }
     </style>
+    @script
+    <script>
+        const text = "MA takhassus Al-Qur'an Wonosobo";
+        const typingSpeed = 100; // kecepatan mengetik (ms per karakter)
+        const target = document.getElementById("typing-text");
+
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                target.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, typingSpeed);
+            }
+        }
+
+        window.onload = type;
+    </script>
+    @endscript
 </div>

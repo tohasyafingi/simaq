@@ -119,288 +119,287 @@
                                 <p>Ruang Kelas</p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a wire:navigate href="{{route('superadmin.admin.jam-pelajaran.index')}}"
-                        class="nav-link {{ Request::is('admin/jam-pelajaran*') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-circle-fill"></i>
-                        <p>Jam Pelajaran</p>
-                        </a>
-                </li> --}}
+                                class="nav-link {{ Request::is('admin/jam-pelajaran*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Jam Pelajaran</p>
+                            </a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.pelajaran.index')}}"
+                                class="nav-link {{ Request::is('admin/mata-pelajaran*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Mata Pelajaran</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item {{ Request::is('admin/pengajar*') || Request::is('admin/modul-pelajaran*') || Request::is('admin/rombel*') || Request::is('admin/jadwal*') ? 'menu-open' : '' }}">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>
+                            E-LEARNING
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.pengajar.index')}}"
+                                class="nav-link {{ Request::is('admin/pengajar*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Pengajar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.modul.index')}}"
+                                class="nav-link {{ Request::is('admin/modul-pelajaran*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Modul Pelajaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.rombel.index')}}"
+                                class="nav-link {{ Request::is('admin/rombel*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Rombel</p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.jadwal.index')}}"
+                                class="nav-link {{ Request::is('admin/jadwal*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Jadwal</p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </li>
+
+                <!-- GURU -->
+                <li class="nav-header">GURU</li>
+                <li
+                    class="nav-item {{ Request::is('admin/guru-pengajar*') || Request::is('admin/guru-modul*') ? 'menu-open' : '' }}">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>
+                            E-LEARNING GURU
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.guru-pengajar.index')}}"
+                                class="nav-link {{ Request::is('admin/guru-pengajar*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Mata Pelajaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.guru-modul.index')}}"
+                                class="nav-link {{ Request::is('admin/guru-modul*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Modul Pelajaran</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- SISWA -->
+                <li class="nav-header">SISWA</li>
+                <li
+                    class="nav-item {{ Request::is('admin/siswa-rombel*') || Request::is('admin/siswa-modul*') ? 'menu-open' : '' }}">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>
+                            E-LEARNING SISWA
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.siswa-rombel.index')}}"
+                                class="nav-link {{ Request::is('admin/siswa-rombel*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Mata Pelajaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{route('superadmin.admin.siswa-modul.index')}}"
+                                class="nav-link {{ Request::is('admin/siswa-modul*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Modul Pelajaran</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- WEBSITE -->
+                <li class="nav-header">WEBSITE</li>
+                <li
+                    class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') || Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') || Request::is('admin/e-book*') || Request::is('admin/download*') || Request::is('admin/galeri*') ? 'menu-open' : '' }}">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="nav-icon fas fa-window-restore"></i>
+                        <p>
+                            KONTEN
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li
+                            class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Berita
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a wire:navigate href="{{ route('superadmin.admin.berita.index')}}"
+                                        class="nav-link {{ Request::is('admin/berita*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>Daftar Berita</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a wire:navigate href="{{ route('superadmin.admin.kat-berita.index')}}"
+                                        class="nav-link {{ Request::is('admin/kategori-berita*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>Kategori</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li
+                            class="nav-item {{ Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Karya Ilmiah
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a wire:navigate href="{{ route('superadmin.admin.karya-ilmiah.index')}}"
+                                        class="nav-link {{ Request::is('admin/karya-ilmiah*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>Daftar Karya Ilmiah</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a wire:navigate href="{{ route('superadmin.admin.kat-karya-ilmiah.index')}}"
+                                        class="nav-link {{ Request::is('admin/kategori-karya-ilmiah*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>Kategori</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.e-book.index')}}"
+                                class="nav-link {{ Request::is('admin/e-book*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>E-book</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.download.index')}}"
+                                class="nav-link {{ Request::is('admin/download*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Download</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.galeri.index')}}"
+                                class="nav-link {{ Request::is('admin/galeri*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Galeri</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- WEBSITE -->
+                <li
+                    class="nav-item {{ Request::is('admin/profil*') || Request::is('admin/akademik*') || Request::is('admin/kesiswaan*') || Request::is('admin/ppdb*') || Request::is('admin/kontak*') ? 'menu-open' : '' }}">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="nav-icon fas fa-desktop"></i>
+                        <p>
+                            DATA WEBSITE
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.profil.index')}}"
+                                class="nav-link {{ Request::is('admin/profil*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Profil</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.akademik.index')}}"
+                                class="nav-link {{ Request::is('admin/akademik*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Akademik</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.kesiswaan.index')}}"
+                                class="nav-link {{ Request::is('admin/kesiswaan*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Kesiswaan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.ppdb.index')}}"
+                                class="nav-link {{ Request::is('admin/ppdb*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>PPDB</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a wire:navigate href="{{ route('superadmin.admin.kontak.index')}}"
+                                class="nav-link {{ Request::is('admin/kontak*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle-fill"></i>
+                                <p>Kontak</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Setting -->
+                <li class="nav-header">SETTING</li>
                 <li class="nav-item">
-                    <a wire:navigate href="{{route('superadmin.admin.pelajaran.index')}}"
-                        class="nav-link {{ Request::is('admin/mata-pelajaran*') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-circle-fill"></i>
-                        <p>Mata Pelajaran</p>
+                    <a wire:navigate href="{{route('superadmin.admin.user.index')}}"
+                        class="nav-link {{ Request::is('admin/data-user*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+                            Manajemen User
+                        </p>
                     </a>
                 </li>
-            </ul>
-            </li>
-            <li
-                class="nav-item {{ Request::is('admin/pengajar*') || Request::is('admin/modul-pelajaran*') || Request::is('admin/rombel*') || Request::is('admin/jadwal*') ? 'menu-open' : '' }}">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="nav-icon fas fa-book-open"></i>
-                    <p>
-                        E-LEARNING
-                        <i class="nav-arrow bi bi-chevron-right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a wire:navigate href="{{route('superadmin.admin.pengajar.index')}}"
-                            class="nav-link {{ Request::is('admin/pengajar*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Pengajar</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{route('superadmin.admin.modul.index')}}"
-                            class="nav-link {{ Request::is('admin/modul-pelajaran*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Modul Pelajaran</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{route('superadmin.admin.rombel.index')}}"
-                            class="nav-link {{ Request::is('admin/rombel*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Rombel</p>
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item">
-                            <a wire:navigate href="{{route('superadmin.admin.jadwal.index')}}"
-                    class="nav-link {{ Request::is('admin/jadwal*') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle-fill"></i>
-                    <p>Jadwal</p>
+                <li class="nav-item">
+                    <a href="{{route('beranda')}}" target="_blank" class="nav-link">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Go to Website
+                        </p>
                     </a>
-            </li> --}}
-            </ul>
-            </li>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>Logout</p>
+                    </a>
 
-            <!-- GURU -->
-            <li class="nav-header">GURU</li>
-            <li
-                class="nav-item {{ Request::is('admin/guru-pengajar*') || Request::is('admin/guru-modul*') ? 'menu-open' : '' }}">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="nav-icon fas fa-book-open"></i>
-                    <p>
-                        E-LEARNING GURU
-                        <i class="nav-arrow bi bi-chevron-right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a wire:navigate href="{{route('superadmin.admin.guru-pengajar.index')}}"
-                            class="nav-link {{ Request::is('admin/guru-pengajar*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Mata Pelajaran</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{route('superadmin.admin.guru-modul.index')}}"
-                            class="nav-link {{ Request::is('admin/guru-modul*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Modul Pelajaran</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- SISWA -->
-            <li class="nav-header">SISWA</li>
-            <li
-                class="nav-item {{ Request::is('admin/siswa-rombel*') || Request::is('admin/siswa-modul*') ? 'menu-open' : '' }}">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="nav-icon fas fa-book-open"></i>
-                    <p>
-                        E-LEARNING SISWA
-                        <i class="nav-arrow bi bi-chevron-right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a wire:navigate href="{{route('superadmin.admin.siswa-rombel.index')}}"
-                            class="nav-link {{ Request::is('admin/siswa-rombel*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Mata Pelajaran</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{route('superadmin.admin.siswa-modul.index')}}"
-                            class="nav-link {{ Request::is('admin/siswa-modul*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Modul Pelajaran</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- WEBSITE -->
-            <li class="nav-header">WEBSITE</li>
-            <!-- KONTEN -->
-            <li
-                class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') || Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') || Request::is('admin/e-book*') || Request::is('admin/download*') || Request::is('admin/galeri*') ? 'menu-open' : '' }}">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="nav-icon fas fa-window-restore"></i>
-                    <p>
-                        KONTEN
-                        <i class="nav-arrow bi bi-chevron-right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li
-                        class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Berita
-                                <i class="nav-arrow bi bi-chevron-right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a wire:navigate href="{{ route('superadmin.admin.berita.index')}}"
-                                    class="nav-link {{ Request::is('admin/berita*') ? 'active' : '' }}">
-                                    <i class="nav-icon bi bi-circle"></i>
-                                    <p>Daftar Berita</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a wire:navigate href="{{ route('superadmin.admin.kat-berita.index')}}"
-                                    class="nav-link {{ Request::is('admin/kategori-berita*') ? 'active' : '' }}">
-                                    <i class="nav-icon bi bi-circle"></i>
-                                    <p>Kategori</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li
-                        class="nav-item {{ Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Karya Ilmiah
-                                <i class="nav-arrow bi bi-chevron-right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a wire:navigate href="{{ route('superadmin.admin.karya-ilmiah.index')}}"
-                                    class="nav-link {{ Request::is('admin/karya-ilmiah*') ? 'active' : '' }}">
-                                    <i class="nav-icon bi bi-circle"></i>
-                                    <p>Daftar Karya Ilmiah</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a wire:navigate href="{{ route('superadmin.admin.kat-karya-ilmiah.index')}}"
-                                    class="nav-link {{ Request::is('admin/kategori-karya-ilmiah*') ? 'active' : '' }}">
-                                    <i class="nav-icon bi bi-circle"></i>
-                                    <p>Kategori</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.e-book.index')}}"
-                            class="nav-link {{ Request::is('admin/e-book*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>E-book</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.download.index')}}"
-                            class="nav-link {{ Request::is('admin/download*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Download</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.galeri.index')}}"
-                            class="nav-link {{ Request::is('admin/galeri*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Galeri</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- WEBSITE -->
-            <li
-                class="nav-item {{ Request::is('admin/profil*') || Request::is('admin/akademik*') || Request::is('admin/kesiswaan*') || Request::is('admin/ppdb*') || Request::is('admin/kontak*') ? 'menu-open' : '' }}">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="nav-icon fas fa-desktop"></i>
-                    <p>
-                        DATA WEBSITE
-                        <i class="nav-arrow bi bi-chevron-right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.profil.index')}}"
-                            class="nav-link {{ Request::is('admin/profil*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Profil</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.akademik.index')}}"
-                            class="nav-link {{ Request::is('admin/akademik*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Akademik</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.kesiswaan.index')}}"
-                            class="nav-link {{ Request::is('admin/kesiswaan*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Kesiswaan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.ppdb.index')}}"
-                            class="nav-link {{ Request::is('admin/ppdb*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>PPDB</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a wire:navigate href="{{ route('superadmin.admin.kontak.index')}}"
-                            class="nav-link {{ Request::is('admin/kontak*') ? 'active' : '' }}">
-                            <i class="nav-icon bi bi-circle-fill"></i>
-                            <p>Kontak</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- Setting -->
-            <li class="nav-header">SETTING</li>
-            <li class="nav-item">
-                <a wire:navigate href="{{route('superadmin.admin.user.index')}}"
-                    class="nav-link {{ Request::is('admin/data-user*') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-users-cog"></i>
-                    <p>
-                        Manajemen User
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('beranda')}}" target="_blank" class="nav-link">
-                    <i class="nav-icon fas fa-globe"></i>
-                    <p>
-                        Go to Website
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                    <p>Logout</p>
-                </a>
-
-                <!-- Form logout -->
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </li>
+                    <!-- Form logout -->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </nav>
     </div>

@@ -119,7 +119,7 @@
             <!-- Logo -->
             <img src="{{ asset('assets/logo.webp') }}" alt="Logo Sekolah" class="logo">
 
-            <h2>Login</h2>
+            <h2>Selamat Datang</h2>
             <p class="text-muted mb-4">Sistem Informasi Akademik MA Takhassus Al-Qur'an Wonosobo</p>
 
             <form method="POST" action="{{ route('login') }}">

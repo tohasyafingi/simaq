@@ -48,7 +48,7 @@
                                         <i class="fas fa-file-export"></i> Export
                                     </button>
 
-                                    <x-modal-import id="importModal" title="Import Data Guru" inputName="file" />
+                                    <x-modal-import id="importModal" title="Import Data Siswa" inputName="file" />
                                 </div>
                             </div>
                         </div>

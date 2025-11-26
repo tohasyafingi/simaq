@@ -40,7 +40,7 @@
         </div>
 
         <!-- Kalender & Pengumuman -->
-        <div class="row g-3">
+        <!-- <div class="row g-3">
             <div class="col-lg-8 col-md-12 d-flex">
                 <div class="card p-3 flex-fill d-flex flex-column min-vh-50">
                     <h5>Kalender Kegiatan</h5>
@@ -50,47 +50,11 @@
 
             <div class="col-lg-4 col-md-12">
                 <div class="card p-3 h-100">
-                    <!-- <h5>Pengumuman</h5> -->
                     <div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
-    @push('scripts')
-        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/locales/id.global.min.js"></script>
-
-        <script>
-            document.addEventListener('livewire:load', function () {
-                const calendarEl = document.getElementById('calendar');
-                if (calendarEl) {
-                    const calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        locale: 'id',
-                        height: '100%',
-                        headerToolbar: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                        },
-                        buttonText: {
-                            today: 'Hari Ini',
-                            month: 'Bulan',
-                            week: 'Minggu',
-                            day: 'Hari',
-                            list: 'Agenda'
-                        },
-                        events: @json($events),
-                        editable: false,
-                        selectable: false,
-                        themeSystem: 'bootstrap5'
-                    });
-                    calendar.render();
-                }
-            });
-        </script>
-    @endpush
 </div>

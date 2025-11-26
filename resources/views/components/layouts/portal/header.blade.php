@@ -118,7 +118,7 @@
             @endphp
 
             @if ($dashboardRoute && Route::has($dashboardRoute))
-              <a class="btn btn-outline-light ms-2" wire:navigate href="{{ route($dashboardRoute) }}">Dashboard</a>
+              <a class="btn btn-outline-light ms-2" href="{{ route($dashboardRoute) }}">Dashboard</a>
             @else
               <a class="btn btn-outline-light ms-2" wire:navigate href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

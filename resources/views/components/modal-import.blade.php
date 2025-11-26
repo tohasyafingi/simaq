@@ -23,6 +23,14 @@
                     @error($inputName)
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+
+                    <!-- Loading saat file sedang di-upload -->
+                    <div wire:loading wire:target="{{ $inputName }}" class="mt-2 text-center">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Mengunggah file...
+                    </div>
                 </div>
             </div>
 

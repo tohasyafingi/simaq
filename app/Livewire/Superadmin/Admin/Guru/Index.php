@@ -154,7 +154,7 @@ class Index extends Component
                 'password' => Hash::make($validatedData['kd_guru']),
                 'role' => 'guru',
                 'guru_id' => $guru->id,
-                'status' => $validatedData['status'],
+                'status' => $validatedData['status'] ? true : false,
             ]);
 
             $this->dispatch('closeCreateModal');
@@ -202,7 +202,7 @@ class Index extends Component
                     'name' => $validatedData['name'],
                     'email' => $validatedData['email'],
                     'img' => $validatedData['img'],
-                    'status' => $validatedData['status'],
+                    'status' => $validatedData['status'] ? true : false,
                 ]);
             }
 

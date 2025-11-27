@@ -121,6 +121,21 @@
 
             <h2>Selamat Datang</h2>
             <p class="text-muted mb-4">Sistem Informasi Akademik MA Takhassus Al-Qur'an Wonosobo</p>
+            
+            <!-- Alert Notifikasi -->
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            @endif
+
+            @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('status') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            @endif
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -129,14 +144,14 @@
                     <input type="email" name="email" class="form-control" placeholder="Email Address"
                         value="{{ old('email') }}" required autofocus>
                     @error('email')
-                        <small class="text-danger">{{ $message }}</small>
+                    <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mb-3">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                     @error('password')
-                        <small class="text-danger">{{ $message }}</small>
+                    <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 

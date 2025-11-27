@@ -34,6 +34,14 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+
+        if (!Auth::user()->status) {
+            Auth::logout();
+
+            return redirect()->route('login')
+                ->with('error', 'Akun anda tidak aktif. Silakan hubungi admin.');
+        }
+
         $request->session()->regenerate();
 
         $user = Auth::user();
@@ -48,6 +56,24 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('login')
             ->with('error', 'Akun tidak dikenali atau belum punya akses.');
     }
+
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
+    //     $request->session()->regenerate();
+
+    //     $user = Auth::user();
+    //     $route = $this->roleRoutes[$user->role] ?? null;
+
+    //     if ($route && Route::has($route)) {
+    //         return redirect()->route($route);
+    //     }
+
+    //     Auth::logout();
+
+    //     return redirect()->route('login')
+    //         ->with('error', 'Akun tidak dikenali atau belum punya akses.');
+    // }
 
     /**
      * Destroy an authenticated session.

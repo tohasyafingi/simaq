@@ -172,8 +172,8 @@ class Index extends Component
                     'img' => $data['img'] ?? null,
                     'password' => Hash::make($validatedData['nis']),
                     'role' => 'siswa',
-                    'siswa_id' => $siswa->id,  // Pastikan siswa_id tersimpan
-                    'status' => $validatedData['status'] == 'aktif' ? true : false,  // Konversi status
+                    'siswa_id' => $siswa->id,
+                    'status' => $validatedData['status'] === 'aktif',
                 ]);
             } catch (\Exception $e) {
                 // Jika User gagal dibuat, hapus Siswa untuk konsistensi
@@ -255,13 +255,13 @@ class Index extends Component
                     'name' => $validatedData['name'],
                     'email' => $validatedData['email'],
                     'img' => $siswa->img,
-                    'status' => $validatedData['status'] == 'aktif' ? true : false,
+                    'status' => $validatedData['status'] === 'aktif',
                 ]);
             }
 
             $this->dispatch('closeEditModal');
             session()->flash('message', 'Data siswa berhasil diperbarui.');
-            $this->create();  
+            $this->create();
         } catch (\Exception $e) {
             session()->flash('error', 'Terjadi kesalahan saat memperbarui siswa: ' . $e->getMessage());
         }

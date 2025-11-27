@@ -155,8 +155,8 @@ class Index extends Component
                 'img' => $validatedData['img'] ?? null,
                 'password' => Hash::make($validatedData['kd_bendahara']),
                 'role' => 'bendahara',
-                'bendahara_id' => $bendahara->id,  // Tambahkan bendahara_id
-                'status' => $validatedData['status'],
+                'bendahara_id' => $bendahara->id,
+                'status' => $validatedData['status'] ? true : false,
             ]);
 
             $this->dispatch('closeCreateModal');
@@ -205,7 +205,7 @@ class Index extends Component
                     'name' => $validatedData['name'],
                     'email' => $validatedData['email'],
                     'img' => $validatedData['img'],
-                    'status' => $validatedData['status'],
+                    'status' => $validatedData['status'] ? true : false,
                 ]);
             }
 

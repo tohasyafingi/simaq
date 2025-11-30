@@ -30,4 +30,9 @@ class TahunAjaran extends Model
     {
         return $this->hasMany(Penilaian::class, 'tahun_ajaran_id');
     }
+    
+    public function rombels()
+    {
+        return $this->hasMany(Rombel::class, 'tahun_ajaran_id');
+    }
 }

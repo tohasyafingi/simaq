@@ -12,7 +12,7 @@ class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    
+
     public $search = '';
     public $paginate = 10;
     public $tahun, $semester = 'Ganjil', $status = 1, $tahunAjaranId;
@@ -108,11 +108,15 @@ class Index extends Component
     public function destroy()
     {
         $tahunAjaran = TahunAjaran::findOrFail($this->tahunAjaranId);
+
+        // Cek relasi agar tidak error 1451
+        if ($tahunAjaran->rombels()->exists()) {
+            $this->dispatch('deleteFailed', 'Tidak dapat menghapus karena Tahun Ajaran masih digunakan pada data Rombel.');
+            return;
+        }
+
         $tahunAjaran->delete();
 
-        session()->flash('message', 'Tahun Ajaran berhasil dihapus.');
-
-        $this->reset('tahunAjaranId');
-        $this->dispatch('closeDeleteModal');
+        $this->dispatch('closeDeleteModal'); // sukses
     }
 }

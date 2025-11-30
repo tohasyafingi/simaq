@@ -106,7 +106,7 @@
 <div class="login-container">
     <div class="login-card">
         <!-- Logo -->
-        <img src="{{ asset('images/default-image.jpg') }}" alt="Logo Sekolah" class="logo">
+        <img src="{{ asset('assets/logo.webp') }}" alt="Logo Sekolah" class="logo">
 
         <h2>Forgot Password</h2>
         <p class="text-muted mb-4">Masukkan email Anda, kami akan mengirimkan link reset password.</p>

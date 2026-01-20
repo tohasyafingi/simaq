@@ -2,114 +2,181 @@
     <!-- ===== Banner Section Start ===== -->
     <section class="hero-section" style="height: 200px;">
         <div class="hero-content text-center">
-            <h1>Photo Gallery</h1>
-            <p>Capturing Moments of Our School Life</p>
+            <h1>Galeri Kegiatan</h1>
         </div>
     </section>
     <!-- ===== Banner Section End ===== -->
 
-    <!-- ===== Content Section Start ===== -->
+    <!-- ===== Gallery Section ===== -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title">School Photo Gallery</h2>
-
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <a href="#img1">
-                        <img src="{{ asset('assets/galeri.webp') }}" alt="Gallery Image 1">
-                        <div class="gallery-overlay">
-                            <h5>Graduation Ceremony 2024</h5>
+            <div class="gallery-grid row g-3">
+                @foreach($galleries as $gallery)
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="gallery-item position-relative cursor-pointer"
+                            wire:click="selectGallery({{ $gallery->id }})">
+                            <img src="{{ asset('storage/'.$gallery->thumbnail) }}"
+                                alt="{{ $gallery->judul }}" class="img-fluid rounded">
+                            <div class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center bg-dark bg-opacity-50 opacity-0 hover-opacity-100 transition">
+                                <h5>{{ $gallery->judul }}</h5>
+                                <p class="mb-0">{{ $gallery->deskripsi }}</p>
+                            </div>
                         </div>
-                    </a>
-                </div>
-
-                <!-- Lightbox overlay -->
-                <div id="img1" class="lightbox">
-                    <!-- Klik close akan menghapus target -->
-                    <a href="#" class="close">&times;</a>
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Full Image">
-                </div>
-
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="School Campus 2">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="School Event">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Sports Activity">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Academic Program">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Student Performance">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Classroom">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Laboratory">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Library">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Sports Field">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="Student Club">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/galeri.webp') }}" alt="School Gathering">
-                    <div class="gallery-overlay">
-                        <h5>Graduation Ceremony 2024</h5>
-                        <p class="mb-0">Celebrating our graduating class</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
-    <!-- ===== Content Section End ===== -->
 
+    <!-- ===== Slider Modal ===== -->
+    <div class="modal fade" id="gallerySliderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body p-0">
+                    @if($galleryImages)
+                    <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach($galleryImages as $key => $img)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                <img src="{{ asset('storage/'.$img) }}" class="d-block w-100 rounded" alt="Gallery Image">
+                            </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Script untuk Livewire event ===== -->
+    @script
+    <script>
+        (function() {
+            function showModalAndInitCarousel() {
+                const modalEl = document.getElementById('gallerySliderModal');
+                if (!modalEl) return;
+                const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                modal.show();
+                modalEl.addEventListener('shown.bs.modal', () => {
+                    const carouselEl = document.getElementById('galleryCarousel');
+                    if (carouselEl) {
+                        try {
+                            const c = bootstrap.Carousel.getInstance(carouselEl) || new bootstrap.Carousel(carouselEl, {
+                                ride: false
+                            });
+                            c.to(0);
+                        } catch (e) {}
+                    }
+                }, {
+                    once: true
+                });
+            }
+
+            function hideModalCleanup() {
+                const modalEl = document.getElementById('gallerySliderModal');
+                if (!modalEl) return;
+                const modal = bootstrap.Modal.getInstance(modalEl) || bootstrap.Modal.getOrCreateInstance(modalEl);
+                if (modal) modal.hide();
+                document.querySelectorAll('.modal-backdrop').forEach(e => e.remove());
+                document.body.classList.remove('modal-open');
+            }
+
+            // Register immediately if $wire is present
+            try {
+                if (typeof $wire !== 'undefined' && $wire.on) {
+                    $wire.on('openGalleryModal', () => {
+                        console.debug('Livewire event received: openGalleryModal');
+                        showModalAndInitCarousel();
+                    });
+                    $wire.on('hideGalleryModal', () => {
+                        console.debug('Livewire event received: hideGalleryModal');
+                        hideModalCleanup();
+                    });
+                }
+            } catch (e) {
+                // ignore
+            }
+
+            // Also listen after livewire load to be safe
+            window.addEventListener('livewire:load', function() {
+                if (typeof $wire !== 'undefined' && $wire.on) {
+                    $wire.on('openGalleryModal', () => {
+                        console.debug('Livewire (post-load) event: openGalleryModal');
+                        showModalAndInitCarousel();
+                    });
+                    $wire.on('hideGalleryModal', () => {
+                        console.debug('Livewire (post-load) event: hideGalleryModal');
+                        hideModalCleanup();
+                    });
+                }
+            });
+
+            // Fallback: listen for plain window events
+            window.addEventListener('openGalleryModal', function() {
+                console.debug('Window event: openGalleryModal');
+                showModalAndInitCarousel();
+            });
+            window.addEventListener('hideGalleryModal', function() {
+                console.debug('Window event: hideGalleryModal');
+                hideModalCleanup();
+            });
+            document.addEventListener('keydown', function(e) {
+                const modalEl = document.getElementById('gallerySliderModal');
+                const carouselEl = document.getElementById('galleryCarousel');
+                if (!modalEl || !carouselEl) return;
+
+                // Hanya aktif jika modal sedang terbuka
+                const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                if (!modalInstance || !modalEl.classList.contains('show')) return;
+
+                const carouselInstance = bootstrap.Carousel.getInstance(carouselEl);
+                if (!carouselInstance) return;
+
+                if (e.key === 'ArrowRight') {
+                    carouselInstance.next(); // geser ke gambar berikutnya
+                } else if (e.key === 'ArrowLeft') {
+                    carouselInstance.prev(); // geser ke gambar sebelumnya
+                }
+            });
+        })();
+    </script>
+    @endscript
+
+    <style>
+        .gallery-item {
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            transition: opacity 0.3s;
+        }
+
+        .hover-opacity-100:hover {
+            opacity: 1 !important;
+        }
+
+        #gallerySliderModal .carousel-item img {
+            max-width: 100vw;
+            max-height: 80vh;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+    </style>
 </div>

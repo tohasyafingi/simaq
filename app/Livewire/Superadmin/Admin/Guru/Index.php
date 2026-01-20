@@ -41,7 +41,7 @@ class Index extends Component
                 Rule::unique('gurus', 'email')->ignore($this->guru_id),
                 Rule::unique('users', 'email')->ignore($this->guru_id ? User::where('guru_id', $this->guru_id)->value('id') : null),
             ],
-            'no_hp' => 'required|string',
+            'no_hp' => 'required|string|max:15',
             'img' => 'nullable|image|max:2048',
             'status' => 'required|boolean',
         ];

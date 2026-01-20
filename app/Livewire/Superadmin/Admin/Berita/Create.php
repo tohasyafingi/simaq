@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use App\Models\Berita;
 use App\Models\KatBerita;
 use Livewire\Attributes\Title;
+use Illuminate\Support\Str;
 
 #[Title('Berita')]
 class Create extends Component
@@ -39,42 +40,37 @@ class Create extends Component
         }
     }
 
-    public function store()
-    {
-        $this->validate([
-            'judul' => 'required|string|max:255',
-            'kat_berita_id' => 'required|exists:kat_beritas,id',
-            'isi' => 'required|string',
-            'status' => 'required|boolean',
-            'thumbnail' => $this->beritaId ? 'nullable|image|max:5120' : 'required|image|max:5120', // 5MB
-        ]);
+public function store()
+{
+    $this->validate([
+        'judul' => 'required|string|max:255',
+        'kat_berita_id' => 'required|exists:kat_beritas,id',
+        'isi' => 'required|string',
+        'status' => 'required|in:0,1',
+        'thumbnail' => $this->beritaId
+            ? 'nullable|image|max:5120'
+            : 'required|image|max:5120',
+    ]);
 
-        // Ambil berita lama jika update
-        $beritaLama = $this->beritaId ? Berita::find($this->beritaId) : null;
+    $berita = $this->beritaId
+        ? Berita::findOrFail($this->beritaId)
+        : new Berita();
 
-        $thumbPath = $beritaLama ? $beritaLama->thumbnail : null;
-
-        // Simpan thumbnail baru jika ada
-        if ($this->thumbnail) {
-            $thumbPath = $this->thumbnail->store('berita', 'public');
-        }
-
-        $data = [
-            'judul' => $this->judul,
-            'thumbnail' => $thumbPath,
-            'kat_berita_id' => $this->kat_berita_id,
-            'status' => $this->status,
-            'isi' => $this->isi,
-        ];
-
-        Berita::updateOrCreate(
-            ['id' => $this->beritaId],
-            $data
-        );
-
-        session()->flash('message', $this->beritaId ? 'Berita diperbarui.' : 'Berita berhasil ditambahkan.');
-        return redirect()->route('superadmin.admin.berita.index');
+    // Thumbnail
+    if ($this->thumbnail) {
+        $berita->thumbnail = $this->thumbnail->store('berita', 'public');
     }
+
+    $berita->judul = $this->judul;
+    $berita->slug  = Str::slug($this->judul); // 🔥 WAJIB
+    $berita->kat_berita_id = $this->kat_berita_id;
+    $berita->status = (int) $this->status;
+    $berita->isi = $this->isi;
+    $berita->save();
+
+    return redirect()->route('superadmin.admin.berita.index');
+}
+
 
     public function render()
     {

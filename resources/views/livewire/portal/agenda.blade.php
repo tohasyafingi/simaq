@@ -3,21 +3,23 @@
   <!-- ===== Banner Section Start ===== -->
   <section class="hero-section" style="height: 200px;">
     <div class="hero-content text-center">
-      <h1>News & Updates</h1>
-      <p>Latest Stories from SMA School</p>
+      <h1>Berita & Agenda</h1>
     </div>
   </section>
   <!-- ===== Banner Section End ===== -->
 
   <!-- ===== Search & Content Section Start ===== -->
-  <section class="section">
+  <section class="section pt-3 pb-4">
     <div class="container">
-
       <!-- Search bar -->
       <div class="d-flex justify-content-end mb-3">
         <input type="text" class="form-control w-25" placeholder="Search berita..." wire:model.live="search">
       </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
       @forelse($beritas->chunk(3) as $chunk)
       <div class="row mb-5">
         @foreach($chunk as $berita)

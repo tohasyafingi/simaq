@@ -119,13 +119,6 @@
                                 <p>Ruang Kelas</p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a wire:navigate href="{{route('superadmin.admin.jam-pelajaran.index')}}"
-                                class="nav-link {{ Request::is('admin/jam-pelajaran*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle-fill"></i>
-                                <p>Jam Pelajaran</p>
-                            </a>
-                        </li> -->
                         <li class="nav-item">
                             <a wire:navigate href="{{route('superadmin.admin.pelajaran.index')}}"
                                 class="nav-link {{ Request::is('admin/mata-pelajaran*') ? 'active' : '' }}">
@@ -166,13 +159,6 @@
                                 <p>Rombel</p>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a wire:navigate href="{{route('superadmin.admin.jadwal.index')}}"
-                                class="nav-link {{ Request::is('admin/jadwal*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle-fill"></i>
-                                <p>Jadwal</p>
-                            </a>
-                        </li> -->
                     </ul>
                 </li>
 
@@ -235,7 +221,7 @@
                 </li> -->
 
                 <!-- WEBSITE -->
-                <!-- <li class="nav-header">WEBSITE</li>
+                <li class="nav-header">WEBSITE</li>
                 <li
                     class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') || Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') || Request::is('admin/e-book*') || Request::is('admin/download*') || Request::is('admin/galeri*') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -318,11 +304,11 @@
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
 
                 <!-- WEBSITE -->
-                <!-- <li
-                    class="nav-item {{ Request::is('admin/profil*') || Request::is('admin/akademik*') || Request::is('admin/kesiswaan*') || Request::is('admin/ppdb*') || Request::is('admin/kontak*') ? 'menu-open' : '' }}">
+                <li
+                    class="nav-item {{ Request::is('admin/data-profil*') || Request::is('admin/struktur*') || Request::is('admin/kontak') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
                         <i class="nav-icon fas fa-desktop"></i>
                         <p>
@@ -333,44 +319,37 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a wire:navigate href="{{ route('superadmin.admin.profil.index')}}"
-                                class="nav-link {{ Request::is('admin/profil*') ? 'active' : '' }}">
+                                class="nav-link {{ Request::is('admin/data-profil*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle-fill"></i>
-                                <p>Profil</p>
+                                <p>Data Profil</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a wire:navigate href="{{ route('superadmin.admin.akademik.index')}}"
-                                class="nav-link {{ Request::is('admin/akademik*') ? 'active' : '' }}">
+                            <a wire:navigate href="{{ route('superadmin.admin.struktur.index')}}"
+                                class="nav-link {{ Request::is('admin/struktur*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle-fill"></i>
-                                <p>Akademik</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a wire:navigate href="{{ route('superadmin.admin.kesiswaan.index')}}"
-                                class="nav-link {{ Request::is('admin/kesiswaan*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle-fill"></i>
-                                <p>Kesiswaan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a wire:navigate href="{{ route('superadmin.admin.ppdb.index')}}"
-                                class="nav-link {{ Request::is('admin/ppdb*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle-fill"></i>
-                                <p>PPDB</p>
+                                <p>Struktur</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a wire:navigate href="{{ route('superadmin.admin.kontak.index')}}"
-                                class="nav-link {{ Request::is('admin/kontak*') ? 'active' : '' }}">
+                                class="nav-link {{ Request::is('admin/kontak') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle-fill"></i>
                                 <p>Kontak</p>
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
 
                 <!-- Setting -->
                 <li class="nav-header">SETTING</li>
+                <li class="nav-item">
+                    <a wire:navigate href="{{ route('superadmin.admin.kontak-masuk.index')}}"
+                        class="nav-link {{ Request::is('admin/kontak-masuk*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>Kontak Masuk</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a wire:navigate href="{{route('superadmin.admin.user.index')}}"
                         class="nav-link {{ Request::is('admin/data-user*') ? 'active' : '' }}">

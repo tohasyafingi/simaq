@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between mb-1">
                                 <div>
-                                    <button wire:click="" class="btn btn-md btn-primary" data-bs-toggle="modal"
+                                    <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#createModal">
                                         <i class="bi bi-book-half mr-2"></i> Tambah E-Book
                                     </button>
@@ -49,7 +49,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-search"></i></span>
                                         <input wire:model.live="search" type="text" class="form-control"
-                                            placeholder="Cari dengan judul atau penulis">
+                                            placeholder="Cari dengan judul">
                                     </div>
                                 </div>
                             </div>
@@ -61,42 +61,53 @@
                                             <th class="text-center">No</th>
                                             <th>Thumbnail</th>
                                             <th>Judul</th>
-                                            <th>Penulis</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
-
+                                        @forelse($downloads as $i => $item)
                                         <tr>
-                                            <td class="text-center">1</td>
-                                            <td>
-                                                <img src="" style="max-height:50px;">
-                                            </td>
-                                            <td>Judul</td>
-                                            <td>penulis</td>
                                             <td class="text-center">
-                                                <span class="badge bg-success">Tersedia</span>
+                                                {{ ($downloads->currentPage()-1)*$downloads->perPage()+$i+1 }}
+                                            </td>
+                                            <td>
+                                                @if($item->image)
+                                                <img src="{{ asset('storage/'.$item->image) }}" style="height:40px">
+                                                @endif
+                                            </td>
+                                            <td>{{ $item->judul }}</td>
+                                            <td class="text-center">
+                                                <span class="badge {{ $item->status ? 'bg-success':'bg-secondary' }}">
+                                                    {{ $item->status ? 'Aktif':'Nonaktif' }}
+                                                </span>
                                             </td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="" class="btn btn-sm btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
+                                                    <button wire:click="edit({{ $item->id }})"
+                                                        class="btn btn-sm btn-outline-primary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editModal">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <button wire:click="confirmDelete"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
+                                                    <button wire:click="confirmDelete({{ $item->id }})"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">Data tidak ditemukan.</td>
+                                            <td colspan="5" class="text-center">Data tidak ditemukan</td>
                                         </tr>
+                                        @endforelse
+
                                     </tbody>
                                 </table>
+                                {{ $downloads->links() }}
                             </div>
 
                         </div>
@@ -125,7 +136,6 @@
                 icon: "success"
             });
         });
-
     </script>
     @endscript
     @include('livewire.superadmin.admin.download.edit')
@@ -147,10 +157,9 @@
                 icon: "success"
             });
         });
-
     </script>
     @endscript
-    {{-- @include('livewire.superadmin.admin.jurusan.delete')
+    @include('livewire.superadmin.admin.jurusan.delete')
     @script
     <script>
         $wire.on('closeDeleteModal', () => {
@@ -169,8 +178,7 @@
                 icon: "success"
             });
         });
-
     </script>
-    @endscript --}}
+    @endscript
     <!--end::App Content-->
 </div>

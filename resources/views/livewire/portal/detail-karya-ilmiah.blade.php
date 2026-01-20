@@ -23,6 +23,8 @@
                         {!! $karyaIlmiah->isi !!}
                     </div>
 
+                </div>
+                <div class="col-lg-8">
                     <!-- Share Section -->
                     <div
                         class="share-section d-flex align-items-center justify-content-between border-top border-bottom py-3 my-4">
@@ -55,7 +57,6 @@
                             <small class="text-muted">Official student research and innovation</small>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

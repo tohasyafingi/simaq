@@ -4,45 +4,72 @@ namespace App\Livewire\Superadmin\Admin\Berita;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Berita;
 use Livewire\Attributes\Title;
+use App\Models\Berita;
 
 #[Title('Berita')]
 class Index extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
-    public $search = '';
+    /* ================= PROPERTIES ================= */
+
+    public $title    = 'Data Berita';
+    public $search   = '';
     public $paginate = 10;
+
+    public $deleteId = null;
 
     protected $updatesQueryString = ['search', 'paginate'];
 
+    /* ================= LIFECYCLE ================= */
+
     public function updatingSearch()
     {
-        $this->resetPage(); // reset halaman saat search berubah
+        $this->resetPage();
     }
+
+    /* ================= RENDER ================= */
 
     public function render()
     {
         $beritas = Berita::with('kategori')
             ->where('judul', 'like', '%' . $this->search . '%')
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->paginate($this->paginate);
 
         return view('livewire.superadmin.admin.berita.index', [
-            'title' => 'Data Berita',
+            'title'   => $this->title,
             'beritas' => $beritas,
         ]);
     }
-public function edit($id)
-{
-    return redirect()->route('superadmin.admin.berita.edit', ['id' => $id]);
-}
 
+    /* ================= ACTION ================= */
+
+    public function edit($id)
+    {
+        return redirect()->route(
+            'superadmin.admin.berita.edit',
+            ['id' => $id]
+        );
+    }
 
     public function confirmDelete($id)
     {
-        $this->dispatchBrowserEvent('confirm-delete', ['id' => $id]);
+        $this->deleteId = $id;
+    }
+
+    public function destroy()
+    {
+        $berita = Berita::findOrFail($this->deleteId);
+        $berita->delete();
+
+        $this->dispatch('closeDeleteModal');
+        session()->flash('message', 'Berita berhasil dihapus.');
+
+        $this->deleteId = null;
+        $this->resetPage();
     }
 }

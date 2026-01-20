@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between mb-1">
                                 <div>
-                                    <button wire:click="" class="btn btn-md btn-primary" data-bs-toggle="modal"
+                                    <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#createModal">
                                         <i class="bi bi-book-half mr-2"></i> Tambah E-Book
                                     </button>
@@ -61,42 +61,56 @@
                                             <th class="text-center">No</th>
                                             <th>Thumbnail</th>
                                             <th>Judul</th>
-                                            <th>Penulis</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
-
+                                        @forelse($books as $index => $item)
                                         <tr>
-                                            <td class="text-center">1</td>
-                                            <td>
-                                                <img src="" style="max-height:50px;">
-                                            </td>
-                                            <td>Judul</td>
-                                            <td>penulis</td>
                                             <td class="text-center">
+                                                {{ ($books->firstItem() + $index) }}
+                                            </td>
+                                            </td>
+                                            <td>
+                                                @if($item->image)
+                                                <img src="{{ asset('storage/'.$item->image) }}" style="max-height:50px;">
+                                                @endif
+                                            </td>
+                                            <td>{{ $item->judul }}</td>
+                                            <td class="text-center">
+                                                @if($item->status)
                                                 <span class="badge bg-success">Tersedia</span>
+                                                @else
+                                                <span class="badge bg-secondary">Draft</span>
+                                                @endif
                                             </td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="" class="btn btn-sm btn-outline-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
+                                                    <button wire:click="edit({{ $item->id }})"
+                                                        class="btn btn-sm btn-outline-primary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editModal">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <button wire:click="confirmDelete"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
+                                                    <button wire:click="confirmDelete({{ $item->id }})"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @empty
                                         <tr>
                                             <td colspan="6" class="text-center">Data tidak ditemukan.</td>
                                         </tr>
+                                        @endforelse
                                     </tbody>
+
                                 </table>
+                                {{ $books->links() }}
                             </div>
 
                         </div>
@@ -125,7 +139,6 @@
                 icon: "success"
             });
         });
-
     </script>
     @endscript
     @include('livewire.superadmin.admin.e-book.edit')
@@ -147,10 +160,9 @@
                 icon: "success"
             });
         });
-
     </script>
     @endscript
-    {{-- @include('livewire.superadmin.admin.jurusan.delete')
+    @include('livewire.superadmin.admin.jurusan.delete')
     @script
     <script>
         $wire.on('closeDeleteModal', () => {
@@ -171,6 +183,6 @@
         });
 
     </script>
-    @endscript --}}
+    @endscript
     <!--end::App Content-->
 </div>

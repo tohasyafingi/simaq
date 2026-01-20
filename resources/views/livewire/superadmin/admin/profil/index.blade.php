@@ -4,20 +4,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0"><i class="bi bi-person-fill sm-1"></i>{{$title}}</h3>
+                    <h3 class="mb-0"><i class="bi bi-person-fill sm-1"></i>{{ $title ?? 'Profil' }}</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{$title}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $title ?? 'Profil' }}</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-    <!--end::App Content Header-->
-
-    <!--begin::App Content-->
     <div class="app-content">
         <div class="container-fluid">
             <div class="row">
@@ -26,262 +23,241 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between mb-1">
                                 <div>
-                                    <h3>Lengkapi data berikut</h3>
+                                    <h3>Manage Profil Sekolah</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="accordion" id="accordionExample">
-                                <!-- Sejarah -->
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingSejarah">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseSejarah"
-                                            aria-expanded="false" aria-controls="collapseSejarah">
-                                            <strong>Sejarah</strong>
-                                        </button>
-                                    </h2>
-                                    <div id="collapseSejarah" class="accordion-collapse collapse"
-                                        aria-labelledby="headingSejarah" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <form action="/profil/sejarah" method="POST" enctype="multipart/form-data">
-                                                <!-- Upload gambar -->
-                                                <div class="mb-3">
-                                                    <label for="sejarahImage" class="form-label">Upload Gambar</label>
-                                                    <input class="form-control" type="file" id="sejarahImage"
-                                                        name="sejarahImage" accept="image/*">
-                                                </div>
-                                                <!-- Text Editor -->
-                                                <div class="mb-3">
-                                                    <label for="sejarahContent" class="form-label">Konten
-                                                        Sejarah</label>
-                                                    <textarea id="sejarahContent" name="sejarahContent"
-                                                        class="form-control" rows="6"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </form>
-                                        </div>
-                                    </div>
+                            <div class="mb-4">
+                                @if (session()->has('message'))
+                                <div class="alert alert-success">{{ session('message') }}</div>
+                                @endif
+                            </div>
+
+                            <div class="mb-4">
+                                <button wire:click="$set('tab','vision')" class="btn btn-sm {{ $tab=='vision' ? 'btn-primary' : 'btn-secondary' }}">Vision & Mission</button>
+                                <button wire:click="$set('tab','history')" class="btn btn-sm {{ $tab=='history' ? 'btn-primary' : 'btn-secondary' }}">History</button>
+                                <button wire:click="$set('tab','struktur')" class="btn btn-sm {{ $tab=='struktur' ? 'btn-primary' : 'btn-secondary' }}">Struktur</button>
+                            </div>
+
+                            <!-- Vision Tab -->
+                            @if($tab=='vision')
+                            <div class="card p-3 mb-4">
+                                <h4>Tambah / Edit Vision</h4>
+                                <div class="form-group">
+                                    <label>Visi</label>
+                                    <input wire:model="vision" class="form-control" />
                                 </div>
-
-                                <!-- Visi & Misi -->
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingVisiMisi">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseVisiMisi"
-                                            aria-expanded="false" aria-controls="collapseVisiMisi">
-                                            <strong>Visi & Misi</strong>
-                                        </button>
-                                    </h2>
-                                    <div id="collapseVisiMisi" class="accordion-collapse collapse"
-                                        aria-labelledby="headingVisiMisi" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <form action="/profil/visi-misi" method="POST"
-                                                enctype="multipart/form-data">
-                                                <!-- Upload gambar -->
-                                                <div class="mb-3">
-                                                    <label for="visiMisiImage" class="form-label">Upload Gambar</label>
-                                                    <input class="form-control" type="file" id="visiMisiImage"
-                                                        name="visiMisiImage" accept="image/*">
-                                                </div>
-                                                <!-- Visi -->
-                                                <div class="mb-3">
-                                                    <label for="visiContent" class="form-label">Visi</label>
-                                                    <textarea id="visiContent" name="visiContent" class="form-control"
-                                                        rows="4"></textarea>
-                                                </div>
-                                                <!-- Misi -->
-                                                <div class="mb-3">
-                                                    <label for="misiContent" class="form-label">Misi</label>
-                                                    <textarea id="misiContent" name="misiContent" class="form-control"
-                                                        rows="6"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Misi</label>
+                                    <textarea wire:model="mission" class="form-control"></textarea>
                                 </div>
-
-                                <!-- Struktur Organisasi -->
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingStruktur">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseStruktur"
-                                            aria-expanded="false" aria-controls="collapseStruktur">
-                                            <strong>Struktur Organisasi Sekolah</strong>
-                                        </button>
-                                    </h2>
-                                    <div id="collapseStruktur" class="accordion-collapse collapse"
-                                        aria-labelledby="headingStruktur" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <!-- Kiri: Form Upload/Edit -->
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5 class="card-title mb-0" id="formTitle">Tambah Anggota
-                                                            </h5>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <form id="strukturForm" enctype="multipart/form-data">
-                                                                <input type="hidden" id="anggotaId" name="anggotaId">
-
-                                                                <div class="mb-3">
-                                                                    <label for="strukturFoto"
-                                                                        class="form-label">Foto</label>
-                                                                    <input type="file" class="form-control"
-                                                                        id="strukturFoto" name="strukturFoto"
-                                                                        accept="image/*">
-                                                                    <img id="previewFoto" src="" alt=""
-                                                                        class="img-fluid mt-2 d-none"
-                                                                        style="max-height:150px;">
-                                                                </div>
-
-                                                                <div class="mb-3">
-                                                                    <label for="strukturNama"
-                                                                        class="form-label">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="strukturNama" name="strukturNama"
-                                                                        placeholder="Nama lengkap">
-                                                                </div>
-
-                                                                <div class="mb-3">
-                                                                    <label for="strukturJabatan"
-                                                                        class="form-label">Jabatan</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="strukturJabatan" name="strukturJabatan"
-                                                                        placeholder="Contoh: Kepala Sekolah">
-                                                                </div>
-
-                                                                <div id="formButtons" class="d-flex gap-2">
-                                                                    <button type="submit" class="btn btn-primary">
-                                                                        <i class="fas fa-save"></i> Simpan
-                                                                    </button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Kanan: List Anggota -->
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5 class="card-title mb-0">Daftar Anggota</h5>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <table class="table table-bordered table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th width="5%">No</th>
-                                                                        <th>Nama</th>
-                                                                        <th>Jabatan</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="listAnggota">
-                                                                    <tr data-id="1" data-nama="Budi"
-                                                                        data-jabatan="Kepala Sekolah"
-                                                                        data-foto="foto1.jpg">
-                                                                        <td>1</td>
-                                                                        <td>Budi</td>
-                                                                        <td>Kepala Sekolah</td>
-                                                                    </tr>
-                                                                    <tr data-id="2" data-nama="Siti"
-                                                                        data-jabatan="Wakil Kepala Sekolah"
-                                                                        data-foto="foto2.jpg">
-                                                                        <td>2</td>
-                                                                        <td>Siti</td>
-                                                                        <td>Wakil Kepala Sekolah</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Kanan -->
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Gambar</label>
+                                    <input type="file" wire:model="image" />
                                 </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select wire:model="status" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="mt-2">
+                                    @if($vision_id)
+                                    <button wire:click="updateVision" class="btn btn-success btn-sm">Update</button>
+                                    <button wire:click="resetVisionForm" class="btn btn-secondary btn-sm">Cancel</button>
+                                    @else
+                                    <button wire:click="createVision" class="btn btn-primary btn-sm">Create</button>
+                                    @endif
+                                </div>
+                            </div>
 
-                            </div> <!-- end accordion -->
-                        </div> <!-- end card-body -->
-                    </div> <!-- end card -->
-                </div> <!-- end col -->
-            </div> <!-- end row -->
-        </div> <!-- end container-fluid -->
-    </div> <!-- end app-content -->
+                            <div class="card p-3">
+                                <h5>List Vision & Mission</h5>
+                                <table class="table table-striped">
+                                    <thead>
+                                            <tr>
+                                            <th>No</th>
+                                            <th>Gambar</th>
+                                            <th>Visi</th>
+                                            <th>Misi</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($visions as $v)
+                                        <tr>
+                                            <td>{{ $visions->firstItem() + $loop->index }}</td>
+                                            <td>@if($v->image)<img src="{{ asset('storage/'.$v->image) }}" alt="" width="80">@endif</td>
+                                            <td>{{ Str::limit($v->vision,60) }}</td>
+                                            <td>{{ Str::limit($v->mission,80) }}</td>
+                                            <td>{{ $v->status ? 'Active' : 'Inactive' }}</td>
+                                            <td>
+                                                <button wire:click="editVision({{ $v->id }})" class="btn btn-sm btn-info">Edit</button>
+                                                <button wire:click="deleteVision({{ $v->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                {{ $visions->links() }}
+                            </div>
+                            @endif
 
-    <!-- CKEditor CDN -->
-    <script>
-        ClassicEditor.create(document.querySelector('#sejarahContent')).catch(error => console.error(error));
-        ClassicEditor.create(document.querySelector('#visiContent')).catch(error => console.error(error));
-        ClassicEditor.create(document.querySelector('#misiContent')).catch(error => console.error(error));
-    </script>
+                            <!-- History Tab -->
+                            @if($tab=='history')
+                            <div class="card p-3 mb-4">
+                                <h4>Tambah / Edit Sejarah</h4>
+                                <div class="form-group">
+                                    <label>Judul</label>
+                                    <input wire:model="judul" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Konten</label>
+                                    <textarea wire:model="content" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Gambar</label>
+                                    <input type="file" wire:model="image_h" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select wire:model="status_h" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="mt-2">
+                                    @if($history_id)
+                                    <button wire:click="updateHistory" class="btn btn-success btn-sm">Update</button>
+                                    <button wire:click="resetHistoryForm" class="btn btn-secondary btn-sm">Cancel</button>
+                                    @else
+                                    <button wire:click="createHistory" class="btn btn-primary btn-sm">Create</button>
+                                    @endif
+                                </div>
+                            </div>
 
-    <!-- Script Struktur Organisasi -->
-    <script>
-        const form = document.getElementById('strukturForm');
-        const formTitle = document.getElementById('formTitle');
-        const formButtons = document.getElementById('formButtons');
-        const anggotaId = document.getElementById('anggotaId');
-        const namaInput = document.getElementById('strukturNama');
-        const jabatanInput = document.getElementById('strukturJabatan');
-        const fotoInput = document.getElementById('strukturFoto');
-        const previewFoto = document.getElementById('previewFoto');
-        const listAnggota = document.getElementById('listAnggota');
+                            <div class="card p-3">
+                                <h5>List Histories</h5>
+                                <table class="table table-striped">
+                                    <thead>
+                                            <tr>
+                                            <th>No</th>
+                                            <th>Gambar</th>
+                                            <th>Judul</th>
+                                            <th>Konten</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($histories as $h)
+                                        <tr>
+                                            <td>{{ $histories->firstItem() + $loop->index }}</td>
+                                            <td>@if($h->image)<img src="{{ asset('storage/'.$h->image) }}" alt="" width="80">@endif</td>
+                                            <td>{{ $h->judul }}</td>
+                                            <td>{{ Str::limit($h->content,80) }}</td>
+                                            <td>{{ $h->status ? 'Active' : 'Inactive' }}</td>
+                                            <td>
+                                                <button wire:click="editHistory({{ $h->id }})" class="btn btn-sm btn-info">Edit</button>
+                                                <button wire:click="deleteHistory({{ $h->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                {{ $histories->links() }}
+                            </div>
+                            @endif
 
-        // Klik baris -> masuk ke mode edit
-        listAnggota.querySelectorAll('tr').forEach(row => {
-            row.style.cursor = "pointer";
-            row.addEventListener('click', () => {
-                anggotaId.value = row.dataset.id;
-                namaInput.value = row.dataset.nama;
-                jabatanInput.value = row.dataset.jabatan;
-                if (row.dataset.foto) {
-                    previewFoto.src = row.dataset.foto;
-                    previewFoto.classList.remove('d-none');
-                } else {
-                    previewFoto.classList.add('d-none');
-                }
+                            <!-- Struktur Tab -->
+                            @if($tab=='struktur')
+                            <div class="card p-3 mb-4">
+                                <h4>Tambah / Edit Struktur</h4>
+                                <div class="form-group">
+                                    <label>Jabatan</label>
+                                    <input wire:model="jabatan" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Urutan</label>
+                                    <input wire:model="urutan" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Nama (Guru / Bendahara / Tata Usaha)</label>
+                                    <select wire:model="member_selection" class="form-control">
+                                        <option value="">-- pilih nama --</option>
+                                        <optgroup label="Guru">
+                                            @foreach($gurus as $id=>$name)
+                                                <option value="guru:{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                        <optgroup label="Bendahara">
+                                            @foreach($bendaharas as $id=>$name)
+                                                <option value="bendahara:{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                        <optgroup label="Tata Usaha">
+                                            @foreach($tata_usahas as $id=>$name)
+                                                <option value="tata_usaha:{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select wire:model="status_s" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="mt-2">
+                                    @if($struktur_id)
+                                    <button wire:click="updateStruktur" class="btn btn-success btn-sm">Update</button>
+                                    <button wire:click="resetStrukturForm" class="btn btn-secondary btn-sm">Cancel</button>
+                                    @else
+                                    <button wire:click="createStruktur" class="btn btn-primary btn-sm">Create</button>
+                                    @endif
+                                </div>
+                            </div>
 
-                formTitle.textContent = "Edit Anggota";
-                formButtons.innerHTML = `
-                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Update</button>
-                <button type="button" class="btn btn-danger" onclick="deleteAnggota('${row.dataset.id}')"><i class="fas fa-trash"></i> Hapus</button>
-                <button type="button" class="btn btn-secondary" onclick="resetForm()"><i class="fas fa-times"></i> Batal</button>
-            `;
-            });
-        });
-
-        // Reset form
-        function resetForm() {
-            anggotaId.value = "";
-            namaInput.value = "";
-            jabatanInput.value = "";
-            fotoInput.value = "";
-            previewFoto.classList.add('d-none');
-            formTitle.textContent = "Tambah Anggota";
-            formButtons.innerHTML = `
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-        `;
-        }
-
-        // Dummy delete (bisa disesuaikan backend)
-        function deleteAnggota(id) {
-            if (confirm("Yakin hapus anggota ini?")) {
-                document.querySelector(`#listAnggota tr[data-id="${id}"]`).remove();
-                resetForm();
-            }
-        }
-
-        // Preview foto
-        fotoInput.addEventListener("change", function () {
-            const file = this.files[0];
-            if (file) {
-                previewFoto.src = URL.createObjectURL(file);
-                previewFoto.classList.remove("d-none");
-            }
-        });
-    </script>
+                            <div class="card p-3">
+                                <h5>List Struktur</h5>
+                                <table class="table table-striped">
+                                    <thead>
+                                            <tr>
+                                            <th>No</th>
+                                            <th>Jabatan</th>
+                                            <th>Urutan</th>
+                                            <th>Nama</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($strukturs as $s)
+                                        <tr>
+                                            <td>{{ $strukturs->firstItem() + $loop->index }}</td>
+                                            <td>{{ $s->jabatan }}</td>
+                                            <td>{{ $s->urutan }}</td>
+                                            <td>{{ $gurus[$s->guru_id] ?? $bendaharas[$s->bendahara_id] ?? $tata_usahas[$s->tata_usaha_id] ?? '' }}</td>
+                                            <td>{{ $s->status ? 'Active' : 'Inactive' }}</td>
+                                            <td>
+                                                <button wire:click="editStruktur({{ $s->id }})" class="btn btn-sm btn-info">Edit</button>
+                                                <button wire:click="deleteStruktur({{ $s->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                {{ $strukturs->links() }}
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

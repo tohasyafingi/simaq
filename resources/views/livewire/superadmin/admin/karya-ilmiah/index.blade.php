@@ -105,7 +105,9 @@
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     <button wire:click="confirmDelete({{ $karya->id }})"
-                                                        class="btn btn-sm btn-outline-danger" title="Hapus">
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -134,4 +136,25 @@
         <!--end::Container-->
     </div>
     <!--end::App Content-->
+    @include('livewire.superadmin.admin.karya-ilmiah.delete')
+    @script
+    <script>
+        $wire.on('closeDeleteModal', () => {
+            const modalElement = document.getElementById('deleteModal');
+            let modalInstance = bootstrap.Modal.getInstance(modalElement);
+
+            if (!modalInstance) {
+                modalInstance = new bootstrap.Modal(modalElement);
+            }
+
+            modalInstance.hide();
+
+            Swal.fire({
+                title: "Sukses",
+                text: "Data Berhasil Dihapus!",
+                icon: "success"
+            });
+        });
+    </script>
+    @endscript
 </div>

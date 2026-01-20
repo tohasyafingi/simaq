@@ -100,34 +100,34 @@
         <!-- Auth Buttons -->
         <li class="nav-item">
           @guest
-            <a wire:navigate href="{{ route('login') }}" class="btn btn-login">Login</a>
+          <a wire:navigate href="{{ route('login') }}" class="btn btn-login">Login</a>
           @endguest
           @auth
-            @php
-              $roleRoutes = [
-                'admin' => 'superadmin.admin.dashboard',
-                'guru' => 'superadmin.guru.dashboard',
-                'siswa' => 'superadmin.siswa.dashboard',
-                'karyawan' => 'karyawan.dashboard',
-                'bendahara' => 'bendahara.dashboard',
-                'alumni' => 'alumni.dashboard',
-              ];
-              $user = Auth::user();
-              $userRole = $user->role ?? null;
-              $dashboardRoute = $roleRoutes[$userRole] ?? null;
-            @endphp
+          @php
+          $roleRoutes = [
+          'admin' => 'superadmin.admin.dashboard',
+          'guru' => 'superadmin.guru.dashboard',
+          'siswa' => 'superadmin.siswa.dashboard',
+          'karyawan' => 'karyawan.dashboard',
+          'bendahara' => 'bendahara.dashboard',
+          'alumni' => 'alumni.dashboard',
+          ];
+          $user = Auth::user();
+          $userRole = $user->role ?? null;
+          $dashboardRoute = $roleRoutes[$userRole] ?? null;
+          @endphp
 
-            @if ($dashboardRoute && Route::has($dashboardRoute))
-              <a class="btn btn-outline-light ms-2" href="{{ route($dashboardRoute) }}">Dashboard</a>
-            @else
-              <a class="btn btn-outline-light ms-2" wire:navigate href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                Logout
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-              </form>
-            @endif
+          @if ($dashboardRoute && Route::has($dashboardRoute))
+          <a class="btn btn-outline-light ms-2" href="{{ route($dashboardRoute) }}">Dashboard</a>
+          @else
+          <a class="btn btn-outline-light ms-2" wire:navigate href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+          </form>
+          @endif
           @endauth
         </li>
       </ul>

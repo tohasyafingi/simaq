@@ -11,26 +11,6 @@
                     <div class="mb-3">
                         <h5 class="text-center text-danger fw-bold">Apakah Anda yakin ingin menghapus data berikut?</h5>
                     </div>
-
-                    {{-- <div class="container">
-                        <div class="row">
-                            <!-- Kolom Kiri -->
-                            <div class="col-md-6">
-                                <div class="mb-2 row">
-                                    <div class="col-md-2 fw-semibold text-secondary">Kode</div>
-                                    <div class="col-md-4">: {{$kode}}</div>
-                                </div>
-                            </div>
-
-                            <!-- Kolom Kanan -->
-                            <div class="col-md-6">
-                                <div class="mb-2 row">
-                                    <div class="col-md-2 fw-semibold text-secondary">Nama Jurusan</div>
-                                    <div class="col-md-4">: {{$nama}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Batal</button>

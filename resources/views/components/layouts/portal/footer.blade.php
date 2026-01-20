@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 mb-4">
-                <h5>About SMA</h5>
+                <h5>Tentang Kami</h5>
                 <p>
                     A leading institution dedicated to providing
                     excellence in education and character development.
@@ -13,7 +13,7 @@
                 <h5>Quick Links</h5>
                 <ul style="list-style: none; padding: 0">
                     <li><a href="{{ route('beranda') }}">Home</a></li>
-                    <li><a href="{{ route('berita-agenda') }}">Berita</a></li>
+                    <li><a href="{{ route('berita') }}">Berita</a></li>
                     <li><a href="{{ route('ppdb') }}">PPDB</a></li>
                     <li><a href="{{ route('kontak') }}">Contact</a></li>
                 </ul>

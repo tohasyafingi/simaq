@@ -40,7 +40,9 @@
         @endforeach
       </div>
       @empty
-      <p class="text-center">Belum ada karya ilmiah publik tersedia.</p>
+      <div class="alert alert-warning text-center">
+        Konten karya ilmiah belum tersedia.
+      </div>
       @endforelse
 
       <!-- Pagination -->

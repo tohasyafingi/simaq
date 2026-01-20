@@ -27,10 +27,8 @@
                     </div>
                 </div>
                 @empty
-                <div class="col-12">
-                    <div class="alert alert-warning text-center">
-                        Konten ekstrakurikuler belum tersedia.
-                    </div>
+                <div class="alert alert-warning text-center">
+                    Konten ekstrakurikuler belum tersedia.
                 </div>
                 @endforelse
 

@@ -17,14 +17,14 @@
                     @if($sejarah->image)
                     <div class="text-center mb-4">
                         <img
-                        src="{{ asset('storage/'.$sejarah->image) }}"
-                        alt="{{ $sejarah->judul }}"
-                        class="img-fluid rounded">
+                            src="{{ asset('storage/'.$sejarah->image) }}"
+                            alt="{{ $sejarah->judul }}"
+                            class="img-fluid rounded">
                     </div>
                     @endif
-                    
+
                     <h2 class="section-title">{{ $sejarah->judul }}</h2>
-                    
+
                     <div class="content-text">
                         {!! $sejarah->content !!}
                     </div>

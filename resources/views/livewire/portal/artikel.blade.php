@@ -46,10 +46,8 @@
           </div>
         </div>
         @empty
-        <div class="col-12">
-          <div class="alert alert-warning text-center">
-            Belum ada E-Book tersedia.
-          </div>
+        <div class="alert alert-warning text-center">
+          Konten e-book belum tersedia.
         </div>
         @endforelse
       </div>

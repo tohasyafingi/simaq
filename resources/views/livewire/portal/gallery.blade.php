@@ -26,6 +26,11 @@
                     </div>
                 </div>
                 @endforeach
+                @if($galleries->isEmpty())
+                <div class="alert alert-warning text-center">
+                    Konten gallery belum tersedia.
+                </div>
+                @endif
             </div>
         </div>
     </section>
@@ -151,32 +156,4 @@
     </script>
     @endscript
 
-    <style>
-        .gallery-item {
-            overflow: hidden;
-        }
-
-        .gallery-item img {
-            transition: transform 0.5s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            transition: opacity 0.3s;
-        }
-
-        .hover-opacity-100:hover {
-            opacity: 1 !important;
-        }
-
-        #gallerySliderModal .carousel-item img {
-            max-width: 100vw;
-            max-height: 80vh;
-            object-fit: contain;
-            margin: 0 auto;
-        }
-    </style>
 </div>

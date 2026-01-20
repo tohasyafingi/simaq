@@ -18,7 +18,6 @@ use App\Livewire\Superadmin\Admin\TahunAjaran\Index as AdminTahunAjaranIndex;
 use App\Livewire\Superadmin\Admin\Jurusan\Index as AdminJurusanIndex;
 use App\Livewire\Superadmin\Admin\TingkatKelas\Index as AdminTingkatKelasIndex;
 use App\Livewire\Superadmin\Admin\RuangKelas\Index as AdminRuangKelasIndex;
-use App\Livewire\Superadmin\Admin\WaktuJadwal\Index as AdminJamPelajaranIndex;
 use App\Livewire\Superadmin\Admin\Pelajaran\Index as AdminPelajaranIndex;
 use App\Livewire\Superadmin\Admin\GuruPelajaran\Index as AdminPengajarIndex;
 use App\Livewire\Superadmin\Admin\Modul\Index as AdminModulIndex;
@@ -109,7 +108,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.adm
     Route::get('/tingkat-kelas', AdminTingkatKelasIndex::class)->name('tingkat-kelas.index');
     Route::get('/jurusan', AdminJurusanIndex::class)->name('jurusan.index');
     Route::get('/ruang-kelas', AdminRuangKelasIndex::class)->name('ruang-kelas.index');
-    Route::get('/jam-pelajaran', AdminJamPelajaranIndex::class)->name('jam-pelajaran.index');
     Route::get('/mata-pelajaran', AdminPelajaranIndex::class)->name('pelajaran.index');
     Route::get('/pengajar', AdminPengajarIndex::class)->name('pengajar.index');
     Route::get('/modul-pelajaran', AdminModulIndex::class)->name('modul.index');

@@ -68,20 +68,20 @@ class Index extends Component
     public function store()
     {
         $this->validate([
-    'user_id' => 'required|exists:users,id',
-    'jabatan' => 'required|string|max:255',
-    'urutan' => 'required|integer',
-    'status' => 'required|in:0,1',
-]);
+            'user_id' => 'required|exists:users,id',
+            'jabatan' => 'required|string|max:255',
+            'urutan' => 'required|integer',
+            'status' => 'required|in:0,1',
+        ]);
 
 
         Struktur::create([
-    'nama' => User::find($this->user_id)?->name ?? null,
-    'jabatan' => $this->jabatan,
-    'urutan' => $this->urutan,
-    'user_id' => $this->user_id,
-    'status' => $this->status,
-]);
+            'nama' => User::find($this->user_id)?->name ?? null,
+            'jabatan' => $this->jabatan,
+            'urutan' => $this->urutan,
+            'user_id' => $this->user_id,
+            'status' => $this->status,
+        ]);
 
 
         session()->flash('message', 'Data berhasil ditambahkan!');
@@ -103,21 +103,21 @@ class Index extends Component
     public function update()
     {
         $this->validate([
-    'user_id' => 'required|exists:users,id',
-    'jabatan' => 'required|string|max:255',
-    'urutan' => 'required|integer',
-    'status' => 'required|in:0,1',
-]);
+            'user_id' => 'required|exists:users,id',
+            'jabatan' => 'required|string|max:255',
+            'urutan' => 'required|integer',
+            'status' => 'required|in:0,1',
+        ]);
 
 
         $struktur = Struktur::findOrFail($this->strukturId);
         $struktur->update([
-    'nama' => User::find($this->user_id)?->name ?? $struktur->nama,
-    'jabatan' => $this->jabatan,
-    'urutan' => $this->urutan,
-    'user_id' => $this->user_id,
-    'status' => $this->status,
-]);
+            'nama' => User::find($this->user_id)?->name ?? $struktur->nama,
+            'jabatan' => $this->jabatan,
+            'urutan' => $this->urutan,
+            'user_id' => $this->user_id,
+            'status' => $this->status,
+        ]);
 
 
         session()->flash('message', 'Data berhasil diperbarui!');

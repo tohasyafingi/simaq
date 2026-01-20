@@ -98,7 +98,9 @@
             </div>
 
             @else
-            <p class="text-center">Data kontak belum tersedia.</p>
+            <div class="alert alert-warning text-center">
+                Konten kontak belum tersedia.
+            </div>
             @endif
         </div>
     </section>

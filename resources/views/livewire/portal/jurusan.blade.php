@@ -27,10 +27,8 @@
                     </div>
                 </div>
                 @empty
-                <div class="col-12">
-                    <div class="alert alert-warning text-center">
-                        Konten jurusan belum tersedia.
-                    </div>
+                <div class="alert alert-warning text-center">
+                    Konten jurusan belum tersedia.
                 </div>
                 @endforelse
 

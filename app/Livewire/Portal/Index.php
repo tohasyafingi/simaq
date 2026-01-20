@@ -3,6 +3,7 @@
 namespace App\Livewire\Portal;
 
 use App\Models\Berita;
+use App\Models\Kontak;
 use Livewire\Component;
 use App\Models\Profiles;
 use App\Models\KaryaIlmiah;
@@ -19,7 +20,7 @@ class Index extends Component
     public $ppdb;
     public $tentang;
     public $galleryImages = [];
-
+    public $kontak;
     public function mount()
     {
         $this->ppdb = Profiles::where('type', 'ppdb')
@@ -38,6 +39,7 @@ class Index extends Component
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
+        $this->kontak = Kontak::latest()->first();
     }
     public function selectGallery($id)
     {

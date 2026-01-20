@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             BendaharaSeeder::class,
             TataUsahaSeeder::class,
-            KatBeritaSeeder::class,
-            KatKaryaIlmiahSeeder::class,
-            BeritaSeeder::class,
-            KaryaIlmiahSeeder::class,
+            // KatBeritaSeeder::class,
+            // KatKaryaIlmiahSeeder::class,
+            // BeritaSeeder::class,
+            // KaryaIlmiahSeeder::class,
         ]);
     }
 }

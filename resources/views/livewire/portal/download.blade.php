@@ -8,14 +8,14 @@
     <!-- ===== Banner Section End ===== -->
 
     <!-- ===== Search Section ===== -->
-  <section class="section pt-3 pb-4">
-    <div class="container">
-      <!-- Search bar -->
-      <div class="d-flex justify-content-end mb-3">
-        <input type="text" class="form-control w-25" placeholder="Search downloads..." wire:model.live="search">
-      </div>
-    </div>
-  </section>
+    <section class="section pt-3 pb-4">
+        <div class="container">
+            <!-- Search bar -->
+            <div class="d-flex justify-content-end mb-3">
+                <input type="text" class="form-control w-25" placeholder="Search downloads..." wire:model.live="search">
+            </div>
+        </div>
+    </section>
 
     <!-- ===== Content Section Start ===== -->
     <section class="section">
@@ -25,10 +25,10 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
                         @if($item->image)
-                        <img src="{{ asset('storage/'.$item->image) }}" 
-                             class="card-img-top" 
-                             alt="{{ $item->judul }}" 
-                             style="height: 250px; object-fit: cover;">
+                        <img src="{{ asset('storage/'.$item->image) }}"
+                            class="card-img-top"
+                            alt="{{ $item->judul }}"
+                            style="height: 250px; object-fit: cover;">
                         @endif
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $item->judul }}</h5>
@@ -36,9 +36,9 @@
                             <p class="card-text">{{ $item->description }}</p>
                             @endif
                             @if($item->file)
-                            <a href="{{ asset('storage/'.$item->file) }}" 
-                               target="_blank" 
-                               class="btn btn-primary btn-sm mt-auto">
+                            <a href="{{ asset('storage/'.$item->file) }}"
+                                target="_blank"
+                                class="btn btn-primary btn-sm mt-auto">
                                 <i class="fas fa-download"></i> Unduh
                             </a>
                             @endif
@@ -46,10 +46,8 @@
                     </div>
                 </div>
                 @empty
-                <div class="col-12">
-                    <div class="alert alert-warning text-center">
-                        Belum ada file download tersedia.
-                    </div>
+                <div class="alert alert-warning text-center">
+                    Konten download belum tersedia.
                 </div>
                 @endforelse
             </div>

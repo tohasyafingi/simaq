@@ -81,7 +81,7 @@
                                 <input type="file" wire:model="file" class="form-control">
                                 @error('file') <small class="text-danger">{{ $message }}</small> @enderror
 
-                                <div wire:loading wire:target="file">Uploading...</div>
+                                @include('components.upload-loading', ['target' => 'file'])
 
                                 <!-- Preview file lama / file baru -->
                                 @if($file)

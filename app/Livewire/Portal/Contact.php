@@ -5,6 +5,7 @@ namespace App\Livewire\Portal;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 use App\Models\Kontak;
 
 #[Title('Kontak')]
@@ -21,8 +22,16 @@ class Contact extends Component
 
     public function render()
     {
+        $meta = [
+            'title' => 'Kontak',
+            'description' => Str::limit(strip_tags(optional($this->kontak)->alamat ?? config('app.description', 'Kontak')), 160),
+            'image' => \App\Helpers\SeoHelper::image(optional($this->kontak)->image ?? null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
         return view('livewire.portal.contact', [
-            'kontak' => $this->kontak
-        ]);
+            'kontak' => $this->kontak,
+        ])->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

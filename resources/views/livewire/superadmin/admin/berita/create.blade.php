@@ -42,11 +42,8 @@
                                     <div class="col-md-4">
                                         <label class="form-label">Upload Thumbnail</label>
                                         <input type="file" class="form-control" wire:model="thumbnail" accept="image/*">
-                                        @if($thumbnail)
-                                        <img src="{{ $thumbnail->temporaryUrl() }}" class="mt-2 rounded" width="100">
-                                        @elseif($thumbnailUrl)
-                                        <img src="{{ $thumbnailUrl }}" class="mt-2 rounded" width="100">
-                                        @endif
+                                        @include('components.upload-loading', ['target' => 'thumbnail'])
+                                        @include('components.upload-preview', ['file' => $thumbnail ?? $thumbnailUrl, 'maxHeight' => '100px'])
                                         @error('thumbnail') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
 

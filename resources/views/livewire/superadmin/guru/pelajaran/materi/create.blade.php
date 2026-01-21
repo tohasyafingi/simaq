@@ -83,7 +83,7 @@
                                 @error('file') <small class="text-danger">{{ $message }}</small> @enderror
 
                                 <!-- Preview / status upload -->
-                                <div wire:loading wire:target="file">Uploading...</div>
+                                @include('components.upload-loading', ['target' => 'file'])
                                 @if ($file)
                                     <p class="mt-2">File terpilih: {{ $file->getClientOriginalName() }}</p>
                                 @endif

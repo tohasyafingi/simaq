@@ -35,6 +35,8 @@
                     <div class="mb-3">
                         <label>Gambar</label>
                         <input type="file" wire:model="newImage" class="form-control" />
+                        @include('components.upload-loading', ['target' => 'newImage'])
+                        @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '100px'])
 
                         @if($image)
                         <div class="position-relative mt-2" style="width: 150px; height: 80px;">

@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Gallery as PhotoGallery;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 
 #[Title('Galeri')]
 #[Layout('components.layouts.portal')]
@@ -27,6 +28,15 @@ class Gallery extends Component
             ->latest()
             ->get();
 
-        return view('livewire.portal.gallery', compact('galleries'));
+        $meta = [
+            'title' => 'Galeri',
+            'description' => Str::limit(strip_tags(config('app.description', 'Galeri foto dan media')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.gallery', compact('galleries'))
+            ->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

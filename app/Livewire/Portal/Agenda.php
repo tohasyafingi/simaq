@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Berita;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 
 #[Title('Berita')]
@@ -34,6 +35,15 @@ class Agenda extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
-        return view('livewire.portal.agenda', compact('beritas'));
+        $meta = [
+            'title' => 'Berita',
+            'description' => Str::limit(strip_tags(config('app.description', 'Berita dan agenda')), 160),
+            'image' => asset('assets/og-image.png'),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.agenda', compact('beritas'))
+            ->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

@@ -21,6 +21,7 @@ use App\Livewire\Portal\Download as PortalDownload;
 use App\Livewire\Portal\Struktur as PortalStruktur;
 use App\Livewire\Portal\VisiMisi as PortalVisiMisi;
 use App\Livewire\Portal\PdfViewer as PdfViewer;
+use App\Http\Controllers\SitemapController;
 use App\Livewire\Superadmin\Guru\Index as GuruDashboard;
 use App\Livewire\Portal\KaryaIlmiah as PortalKaryaIlmiah;
 use App\Livewire\Superadmin\Admin\Index as AdminDashboard;
@@ -182,3 +183,6 @@ Route::middleware(['auth'])->group(function () {
 // });
 
 require __DIR__ . '/auth.php';
+
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');

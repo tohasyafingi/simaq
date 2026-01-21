@@ -38,7 +38,7 @@
                             <div class="d-flex justify-content-between mb-1">
                                 <a href="{{ route('superadmin.admin.karya-ilmiah.create') }}"
                                     class="btn btn-md btn-primary">
-                                    <i class="bi bi-person-plus-fill me-2"></i> Tambah
+                                    <i class="fas fa-plus"></i> Tambah
                                 </a>
                             </div>
                         </div>

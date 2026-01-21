@@ -98,6 +98,8 @@ class Index extends Component
         $this->email = $user->email;
         $this->role = $user->role;
         $this->status = $user->status;
+        // keep existing image path so preview can show stored avatar
+        $this->img = $user->img;
     }
 
     public function update()
@@ -106,19 +108,20 @@ class Index extends Component
 
         $user = User::findOrFail($this->user_id);
 
-        // Handle image upload (delete old image if new one is uploaded)
-        if ($this->img) {
+        // Handle image upload safely: only call ->store() on uploaded files
+        if (is_object($this->img) && method_exists($this->img, 'store')) {
+            // new uploaded file: remove old file then store
             if ($user->img && Storage::disk('public')->exists($user->img)) {
                 Storage::disk('public')->delete($user->img);
             }
             $validatedData['img'] = $this->img->store('users', 'public');
         } else {
-            // Keep the old image if no new one is uploaded
+            // no new upload; keep existing path
             $validatedData['img'] = $user->img;
         }
 
         // If password is provided, hash it
-        if ($validatedData['password']) {
+        if (!empty($validatedData['password'])) {
             $validatedData['password'] = Hash::make($validatedData['password']);
         } else {
             unset($validatedData['password']);

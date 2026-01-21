@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use App\Models\Profiles;
+use Illuminate\Support\Str;
 
 #[Title('Ekstrakurikuler')]
 #[Layout('components.layouts.portal')]
@@ -24,6 +25,14 @@ class Ekstrakurikuler extends Component
 
     public function render()
     {
-        return view('livewire.portal.ekstrakurikuler');
+        $meta = [
+            'title' => 'Ekstrakurikuler',
+            'description' => Str::limit(strip_tags(config('app.description', 'Kegiatan ekstrakurikuler')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.ekstrakurikuler')->with('meta', $meta);
     }
 }

@@ -36,6 +36,8 @@
                     <div class="mb-3">
                         <label>Gambar</label>
                         <input type="file" wire:model="newImage" class="form-control" />
+                        @include('components.upload-loading', ['target' => 'newImage'])
+                        @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '100px'])
                         @if($image)
                         <div class="mt-2"><img src="{{ asset('storage/'.$image) }}" style="height:80px;" /></div>
                         @endif

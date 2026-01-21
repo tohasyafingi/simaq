@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use App\Models\Profiles;
+use Illuminate\Support\Str;
 
 #[Title('Visi - Misi')]
 #[Layout('components.layouts.portal')]
@@ -31,6 +32,14 @@ class VisiMisi extends Component
 
     public function render()
     {
-        return view('livewire.portal.visi-misi');
+        $meta = [
+            'title' => 'Visi dan Misi',
+            'description' => Str::limit(strip_tags(optional($this->visi)->content ?? config('app.description', 'Visi dan misi sekolah')), 160),
+            'image' => \App\Helpers\SeoHelper::image(optional($this->visi)->image ?? null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.visi-misi')->with('meta', $meta);
     }
 }

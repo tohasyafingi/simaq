@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MATAQ WSB | {{ $title ?? '' }}</title>
+  @include('components.layouts.meta')
 
   {{-- Favicon --}}
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />

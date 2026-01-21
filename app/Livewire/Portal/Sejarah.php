@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use App\Models\Profiles;
+use Illuminate\Support\Str;
 
 #[Title('Sejarah')]
 #[Layout('components.layouts.portal')]
@@ -23,6 +24,14 @@ class Sejarah extends Component
 
     public function render()
     {
-        return view('livewire.portal.sejarah');
+        $meta = [
+            'title' => 'Sejarah',
+            'description' => Str::limit(strip_tags(optional($this->sejarah)->content ?? config('app.description', 'Sejarah sekolah')), 160),
+            'image' => \App\Helpers\SeoHelper::image(optional($this->sejarah)->image ?? null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.sejarah')->with('meta', $meta);
     }
 }

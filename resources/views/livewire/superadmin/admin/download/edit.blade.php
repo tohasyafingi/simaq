@@ -43,14 +43,10 @@
                             <label class="form-label">Thumbnail</label>
                             <input wire:model="newImage" type="file"
                                 class="form-control" accept="image/*">
-
-                            {{-- Preview gambar baru --}}
-                            @if ($newImage)
-                            <img src="{{ $newImage->temporaryUrl() }}"
-                                class="img-fluid mt-2 rounded"
-                                style="max-height:150px">
+                            @include('components.upload-loading', ['target' => 'newImage'])
+                            @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '120px'])
                             {{-- Preview gambar lama --}}
-                            @elseif ($image)
+                            @if (!$newImage && $image)
                             <img src="{{ asset('storage/'.$image) }}"
                                 class="img-fluid mt-2 rounded"
                                 style="max-height:150px">
@@ -63,15 +59,13 @@
                                 File Download
                             </label>
                             <input wire:model="newFile" type="file" class="form-control">
+                            @include('components.upload-loading', ['target' => 'newFile', 'label' => 'Mengunggah file...'])
 
                             {{-- File baru --}}
-                            @if ($newFile)
-                            <span class="badge bg-info mt-2">
-                                {{ $newFile->getClientOriginalName() }}
-                            </span>
+                            @include('components.upload-preview', ['file' => $newFile])
 
                             {{-- File lama --}}
-                            @elseif ($download_id)
+                            @if (!$newFile && $download_id)
                             <span class="badge bg-secondary mt-2">
                                 {{ basename($item->file ?? '') }}
                             </span>

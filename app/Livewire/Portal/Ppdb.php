@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Profiles;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 
 #[Title('PPDB')]
 #[Layout('components.layouts.portal')]
@@ -24,6 +25,14 @@ class Ppdb extends Component
 
     public function render()
     {
-        return view('livewire.portal.ppdb');
+        $meta = [
+            'title' => 'PPDB',
+            'description' => Str::limit(strip_tags(config('app.description', 'Informasi PPDB')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.ppdb')->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

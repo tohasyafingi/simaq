@@ -3,12 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>SIMAQ | {{$title}} </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="" />
-    <meta name="author" content="" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    @include('components.layouts.meta')
 
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon.png')}}" />

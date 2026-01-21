@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\Downloads;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 
 #[Title('Downloads')]
 #[Layout('components.layouts.portal')]
@@ -35,8 +36,17 @@ class Download extends Component
             ->latest()
             ->paginate($this->perPage);
 
+        $meta = [
+            'title' => 'Download',
+            'description' => Str::limit(strip_tags(config('app.description', 'Download file dan dokumen')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
         return view('livewire.portal.download', [
             'downloads' => $downloads,
+            'meta' => $meta,
         ]);
     }
 }

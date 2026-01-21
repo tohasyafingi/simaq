@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Profiles;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 
 #[Title('OSIS')]
 #[Layout('components.layouts.portal')]
@@ -24,6 +25,14 @@ class Osis extends Component
 
     public function render()
     {
-        return view('livewire.portal.osis');
+        $meta = [
+            'title' => 'OSIS',
+            'description' => Str::limit(strip_tags(config('app.description', 'Kegiatan OSIS')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.osis')->with('meta', $meta);
     }
 }

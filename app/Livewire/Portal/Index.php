@@ -6,6 +6,7 @@ use App\Models\Berita;
 use App\Models\Kontak;
 use Livewire\Component;
 use App\Models\Profiles;
+use Illuminate\Support\Str;
 use App\Models\KaryaIlmiah;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
@@ -54,8 +55,16 @@ class Index extends Component
             ->latest()
             ->take(3)
             ->get();
+        $meta = [
+            'title' => 'Beranda',
+            'description' => Str::limit(strip_tags(optional($this->tentang->first())->content ?? config('app.description', '')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website',
+        ];
+
         return view('livewire.portal.index', [
             'galleries' => $galleries,
-        ]);
+        ])->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

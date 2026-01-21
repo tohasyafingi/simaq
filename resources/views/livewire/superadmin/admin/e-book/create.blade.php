@@ -59,12 +59,8 @@
                             <input wire:model="newImage" type="file"
                                 class="form-control"
                                 accept="image/*">
-
-                            @if ($newImage)
-                            <img src="{{ $newImage->temporaryUrl() }}"
-                                class="img-fluid mt-2 rounded"
-                                style="max-height:150px;">
-                            @endif
+                            @include('components.upload-loading', ['target' => 'newImage'])
+                            @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '150px'])
 
                             @error('newImage')
                             <small class="text-danger">{{ $message }}</small>
@@ -77,12 +73,8 @@
                             <input wire:model="newFile" type="file"
                                 class="form-control"
                                 accept="application/pdf">
-
-                            @if ($newFile)
-                            <span class="badge bg-info mt-2">
-                                {{ $newFile->getClientOriginalName() }}
-                            </span>
-                            @endif
+                            @include('components.upload-loading', ['target' => 'newFile', 'label' => 'Mengunggah file...'])
+                            @include('components.upload-preview', ['file' => $newFile])
 
                             @error('newFile')
                             <small class="text-danger">{{ $message }}</small>

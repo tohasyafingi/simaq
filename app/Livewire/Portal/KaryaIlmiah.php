@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\KaryaIlmiah as karya;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 
 #[Title('Karya Ilmiah')]
 #[Layout('components.layouts.portal')]
@@ -33,6 +34,15 @@ class KaryaIlmiah extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
-        return view('livewire.portal.karya-ilmiah', compact('karya_ilmiahs'));
+        $meta = [
+            'title' => 'Karya Ilmiah',
+            'description' => Str::limit(strip_tags(config('app.description', 'Kumpulan karya ilmiah')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.karya-ilmiah', compact('karya_ilmiahs'))
+            ->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

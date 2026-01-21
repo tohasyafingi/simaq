@@ -86,10 +86,9 @@
                             <div class="form-group local-forms">
                                 <label>File KK</label>
                                 <input wire:model="kk" class="form-control" type="file" />
+                                @include('components.upload-loading', ['target' => 'kk', 'label' => 'Mengunggah file...'])
+                                @include('components.upload-preview', ['file' => $kk])
                                 @error('kk') <small class="text-danger">{{ $message }}</small> @enderror
-                                @if ($kk)
-                                    <small class="text-success">File dipilih: {{ $kk->getClientOriginalName() }}</small>
-                                @endif
                             </div>
                         </div>
 
@@ -98,10 +97,9 @@
                             <div class="form-group local-forms">
                                 <label>File Akta</label>
                                 <input wire:model="akta" class="form-control" type="file" />
+                                @include('components.upload-loading', ['target' => 'akta', 'label' => 'Mengunggah file...'])
+                                @include('components.upload-preview', ['file' => $akta])
                                 @error('akta') <small class="text-danger">{{ $message }}</small> @enderror
-                                @if ($akta)
-                                    <small class="text-success">File dipilih: {{ $akta->getClientOriginalName() }}</small>
-                                @endif
                             </div>
                         </div>
 
@@ -110,11 +108,9 @@
                             <div class="form-group local-forms">
                                 <label>File Ijazah Terakhir</label>
                                 <input wire:model="ijazah_terakhir" class="form-control" type="file" />
+                                @include('components.upload-loading', ['target' => 'ijazah_terakhir', 'label' => 'Mengunggah file...'])
+                                @include('components.upload-preview', ['file' => $ijazah_terakhir])
                                 @error('ijazah_terakhir') <small class="text-danger">{{ $message }}</small> @enderror
-                                @if ($ijazah_terakhir)
-                                    <small class="text-success">File dipilih:
-                                        {{ $ijazah_terakhir->getClientOriginalName() }}</small>
-                                @endif
                             </div>
                         </div>
 
@@ -123,10 +119,9 @@
                             <div class="form-group local-forms">
                                 <label>Foto Profil</label>
                                 <input wire:model="img" class="form-control" type="file" />
+                                @include('components.upload-loading', ['target' => 'img'])
+                                @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
                                 @error('img') <small class="text-danger">{{ $message }}</small> @enderror
-                                @if ($img)
-                                    <small class="text-success">File dipilih: {{ $img->getClientOriginalName() }}</small>
-                                @endif
                             </div>
                         </div>
 

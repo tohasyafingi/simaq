@@ -42,11 +42,11 @@
                         <div class="col-md-6 py-2">
                             <label class="form-label">File Modul</label>
                             <input wire:model="file" type="file" class="form-control">
+                            @include('components.upload-loading', ['target' => 'file'])
+                            @include('components.upload-preview', ['file' => $file])
                             @error('file') <small class="text-danger">{{ $message }}</small> @enderror
 
-                            @if ($file)
-                                <small class="text-success">File dipilih: {{ $file->getClientOriginalName() }}</small>
-                            @elseif($modul_id && $file === null && $existingFile)
+                            @if (!$file && $modul_id && $existingFile)
                                 <small class="text-info">File Lama: {{ $existingFile }}</small>
                             @endif
                         </div>

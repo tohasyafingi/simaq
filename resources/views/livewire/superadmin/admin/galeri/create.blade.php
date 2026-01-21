@@ -25,12 +25,8 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Thumbnail</label>
                             <input wire:model="newThumbnail" type="file" class="form-control" accept="image/*">
-
-                            @if ($newThumbnail)
-                            <img src="{{ $newThumbnail->temporaryUrl() }}"
-                                class="img-fluid mt-2"
-                                style="max-height:150px">
-                            @endif
+                            @include('components.upload-loading', ['target' => 'newThumbnail'])
+                            @include('components.upload-preview', ['file' => $newThumbnail, 'maxHeight' => '150px'])
 
                             @error('newThumbnail')
                             <small class="text-danger">{{ $message }}</small>
@@ -54,13 +50,13 @@
                         <div class="col-12 mb-3">
                             <label class="form-label">Foto Galeri</label>
                             <input wire:model="images" type="file" class="form-control" multiple accept="image/*">
+                            @include('components.upload-loading', ['target' => 'images', 'label' => 'Mengunggah gambar...'])
 
                             <div class="row mt-2">
                                 @foreach($images as $index => $image)
                                 <div class="col-md-2 mb-2">
                                     <div class="position-relative">
-                                        <img src="{{ $image->temporaryUrl() }}"
-                                            class="img-fluid rounded">
+                                        @include('components.upload-preview', ['file' => $image, 'maxHeight' => '120px'])
 
                                         <button type="button"
                                             wire:click="removeNewImage({{ $index }})"

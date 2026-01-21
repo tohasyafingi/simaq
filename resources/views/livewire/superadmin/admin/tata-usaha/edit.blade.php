@@ -55,6 +55,8 @@
                             <div class="form-group local-forms">
                                 <label>Foto</label>
                                 <input wire:model="img" type="file" class="form-control">
+                                @include('components.upload-loading', ['target' => 'img'])
+                                @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
                                 @error('img') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Livewire\Portal;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Books;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
@@ -35,8 +36,16 @@ class Artikel extends Component
             ->latest()
             ->paginate($this->perPage);
 
+        $meta = [
+            'title' => 'Perpustakaan Digital',
+            'description' => Str::limit(strip_tags(config('app.description', 'Perpustakaan digital')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
         return view('livewire.portal.artikel', [
             'books' => $books,
-        ]);
+        ])->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

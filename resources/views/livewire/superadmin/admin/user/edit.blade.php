@@ -65,6 +65,8 @@
                         <div class="col-12 col-sm-6 py-2">
                             <label>Foto Profil</label>
                             <input type="file" wire:model="img" class="form-control">
+                            @include('components.upload-loading', ['target' => 'img'])
+                            @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
                             @error('img') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                     </div>

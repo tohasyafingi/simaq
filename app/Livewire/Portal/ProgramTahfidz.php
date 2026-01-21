@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Profiles;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 
 #[Title('Program Tahfidz')]
 #[Layout('components.layouts.portal')]
@@ -24,6 +25,14 @@ class ProgramTahfidz extends Component
 
     public function render()
     {
-        return view('livewire.portal.program-tahfidz');
+        $meta = [
+            'title' => 'Program Tahfidz',
+            'description' => Str::limit(strip_tags(config('app.description', 'Program tahfidz sekolah')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.program-tahfidz')->with('meta', $meta);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Livewire\Portal;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Str;
 use App\Models\Profiles;
 
 #[Title('Program Jurusan')]
@@ -24,6 +25,14 @@ class Jurusan extends Component
 
     public function render()
     {
-        return view('livewire.portal.jurusan');
+        $meta = [
+            'title' => 'Jurusan',
+            'description' => Str::limit(strip_tags(config('app.description', 'Informasi jurusan')), 160),
+            'image' => \App\Helpers\SeoHelper::image(null),
+            'canonical' => url()->current(),
+            'og_type' => 'website'
+        ];
+
+        return view('livewire.portal.jurusan')->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

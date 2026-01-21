@@ -5,10 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password - SIMAQ</title>
-    <meta name="title" content="" />
-    <meta name="author" content="" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    @include('components.layouts.meta')
     {{-- favicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon.png')}}" />

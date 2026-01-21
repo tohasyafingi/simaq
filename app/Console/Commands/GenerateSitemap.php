@@ -98,9 +98,14 @@ class GenerateSitemap extends Command
                 }
             });
 
-            $sitemap->writeToFile(public_path('sitemap.xml'));
+            // ensure storage public directory exists and write sitemap there
+            $storagePath = storage_path('app/public');
+            if (! file_exists($storagePath)) {
+                mkdir($storagePath, 0755, true);
+            }
+            $sitemap->writeToFile($storagePath . DIRECTORY_SEPARATOR . 'sitemap.xml');
 
-            $this->info('sitemap.xml written to public/sitemap.xml');
+            $this->info('sitemap.xml written to storage/app/public/sitemap.xml');
         } catch (\Exception $e) {
             $this->error('Failed to generate sitemap: ' . $e->getMessage());
             return 1;

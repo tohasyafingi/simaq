@@ -9,13 +9,24 @@ class SitemapController extends Controller
 {
     public function index(Request $request)
     {
-        $path = public_path('sitemap.xml');
+        $storagePath = storage_path('app/public/sitemap.xml');
+        $publicPath = public_path('sitemap.xml');
 
-        if (! file_exists($path)) {
-            // If Spatie package is installed, attempt to generate
-            if (class_exists('\\Spatie\\Sitemap\\SitemapGenerator')) {
+        if (file_exists($storagePath)) {
+            $path = $storagePath;
+        } elseif (file_exists($publicPath)) {
+            $path = $publicPath;
+        } else {
+            // If Spatie package is installed, attempt to generate into storage/public
+            if (class_exists('\Spatie\\Sitemap\\SitemapGenerator')) {
                 try {
-                    \Spatie\Sitemap\SitemapGenerator::create(config('app.url'))->writeToFile($path);
+                    // ensure storage public directory exists
+                    $dir = dirname($storagePath);
+                    if (! file_exists($dir)) {
+                        mkdir($dir, 0755, true);
+                    }
+                    \Spatie\Sitemap\SitemapGenerator::create(config('app.url'))->writeToFile($storagePath);
+                    $path = $storagePath;
                 } catch (\Exception $e) {
                     abort(500, 'Failed to generate sitemap: ' . $e->getMessage());
                 }

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="mb-0">
-                        <i class="bi bi-person-fill sm-1"></i> {{$title}}
+                        <i class="fas fa-tags"></i> {{$title}}
                     </h3>
                 </div>
                 <div class="col-sm-6">

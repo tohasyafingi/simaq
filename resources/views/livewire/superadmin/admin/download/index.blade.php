@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0"><i class="bi bi-book-half sm-1"></i>{{$title}}</h3>
+                    <h3 class="mb-0"><i class="fas fa-download"></i> {{$title}}</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
@@ -28,7 +28,7 @@
                                 <div>
                                     <button wire:click="create" class="btn btn-md btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#createModal">
-                                        <i class="bi bi-book-half mr-2"></i> Tambah E-Book
+                                        <i class="bi bi-plus-circle"></i> Tambah
                                     </button>
                                 </div>
                             </div>

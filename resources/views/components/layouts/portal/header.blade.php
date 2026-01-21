@@ -9,13 +9,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <!-- Home -->
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('beranda') ? 'active' : '' }}" wire:navigate
             href="{{ route('beranda') }}">Home</a>
         </li>
 
-        <!-- Profile -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('sejarah', 'visi-misi', 'struktur-organisasi') ? 'active' : '' }}"
             href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,7 +29,6 @@
           </ul>
         </li>
 
-        <!-- Academic -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('jurusan', 'ekstrakurikuler') ? 'active' : '' }}"
             href="#" id="academicDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,7 +42,6 @@
           </ul>
         </li>
 
-        <!-- Student Affairs -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('osis', 'pramuka', 'program-tahfidz') ? 'active' : '' }}"
             href="#" id="studentAffairsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,7 +57,6 @@
           </ul>
         </li>
 
-        <!-- Public Information -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIs('berita-agenda', 'karya-ilmiah', 'artikel', 'download') ? 'active' : '' }}"
             href="#" id="publicInfoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -79,25 +74,21 @@
           </ul>
         </li>
 
-        <!-- Gallery -->
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('galeri') ? 'active' : '' }}" wire:navigate
             href="{{ route('galeri') }}">Gallery</a>
         </li>
 
-        <!-- Admission -->
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('ppdb') ? 'active' : '' }}" wire:navigate
-            href="{{ route('ppdb') }}">PPDB</a>
+            href="{{ route('ppdb') }}">SPMB</a>
         </li>
 
-        <!-- Contact -->
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" wire:navigate
             href="{{ route('kontak') }}">Kontak</a>
         </li>
 
-        <!-- Auth Buttons -->
         <li class="nav-item">
           @guest
           <a wire:navigate href="{{ route('login') }}" class="btn btn-login">Login</a>

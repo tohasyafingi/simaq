@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password - SIMAQ</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <meta name="title" content="" />
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    {{-- favicon --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('assets/favicon.png')}}" />
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
@@ -31,7 +44,7 @@
             background: #ffffff;
             padding: 2.5rem;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             text-align: center;
         }
 
@@ -43,7 +56,7 @@
 
         .form-control:focus {
             border-color: #16a085;
-            box-shadow: 0 0 0 0.2rem rgba(22,160,133,0.25);
+            box-shadow: 0 0 0 0.2rem rgba(22, 160, 133, 0.25);
         }
 
         .btn-login {
@@ -71,6 +84,10 @@
         .login-card .logo {
             width: 100px;
             margin-bottom: 1rem;
+        }
+
+        .alert {
+            text-align: left;
         }
 
         .copyright {
@@ -101,56 +118,70 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="login-container">
-    <div class="login-card">
-        <!-- Logo -->
-        <img src="{{ asset('assets/logo.webp') }}" alt="Logo Sekolah" class="logo">
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo -->
+            <img src="{{ asset('assets/logo.webp') }}" alt="Logo Sekolah" class="logo">
 
-        <h2>Forgot Password</h2>
-        <p class="text-muted mb-4">Masukkan email Anda, kami akan mengirimkan link reset password.</p>
+            <h2>Forgot Password</h2>
+            <p class="text-muted mb-4">Masukkan email Anda, kami akan mengirimkan link reset password.</p>
 
-        <!-- Session Status -->
-        @if (session('status'))
-            <div class="alert alert-success mb-3">
+            <!-- Session Status -->
+            @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('status') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
-        @endif
+            @endif
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
+            <!-- Validation Errors -->
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            @endif
 
-            <div class="mb-3 text-start">
-                <label for="email" class="form-label">Email</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                       name="email" value="{{ old('email') }}" required autofocus>
-                @error('email')
+            <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+
+                <div class="mb-3 text-start">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" type="email"
+                        class="form-control @error('email') is-invalid @enderror"
+                        name="email" value="{{ old('email') }}" required autofocus>
+                    @error('email')
                     <div class="text-danger mt-1">{{ $message }}</div>
-                @enderror
-            </div>
+                    @enderror
+                </div>
 
-            <div class="d-grid mb-3">
-                <button type="submit" class="btn btn-login w-100">Email Password Reset Link</button>
-            </div>
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-login w-100">Kirim Reset Password</button>
+                </div>
 
-            <div>
-                <a href="{{ route('login') }}" class="forgot-password">Back to Login</a>
-            </div>
-        </form>
+                <div>
+                    <a href="{{ route('login') }}" class="forgot-password">Back to Login</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div class="copyright">
-    <strong>
-        Copyright &copy; {{ date('Y') }}&nbsp;
-        <a href="#">SIMAQ</a> |
-    </strong>
-    Support by <a href="#">@tohasyafingi</a>
-</div>
+    <div class="copyright">
+        <strong>
+            Copyright &copy; {{ date('Y') }}&nbsp;
+            <a href="#">SIMAQ</a> |
+        </strong>
+        Support by <a href="#">@tohasyafingi</a>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -11,6 +11,18 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
+    <meta name="title" content="" />
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    {{-- favicon --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('assets/favicon.png')}}" />
+    <meta name="theme-color" content="#ffffff">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -40,7 +52,7 @@
             background: #ffffff;
             padding: 2.5rem;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             text-align: center;
         }
 
@@ -107,6 +119,24 @@
                 margin: 0 1rem;
             }
         }
+
+        .captcha-box {
+            border: 1px solid #1abc9c;
+            border-radius: 8px;
+            padding: 0.5rem;
+            background-color: #e0f7f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .captcha-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #16a085;
+        }
     </style>
     @livewireStyles
 </head>
@@ -121,7 +151,7 @@
 
             <h2>Selamat Datang</h2>
             <p class="text-muted mb-4">Sistem Informasi Akademik MA Takhassus Al-Qur'an Wonosobo</p>
-            
+
             <!-- Alert Notifikasi -->
             @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -129,6 +159,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             @endif
+
+            <!-- @if(session('error') && !($errors->has('email') || $errors->has('password') || $errors->has('captcha')))
+            <div class="alert alert-danger mt-3" role="alert">
+                {{ session('error') }}
+            </div>
+            @endif -->
 
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -140,7 +176,8 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <div class="mb-3">
+                {{-- Email --}}
+                <div class="mb-3 text-start">
                     <input type="email" name="email" class="form-control" placeholder="Email Address"
                         value="{{ old('email') }}" required autofocus>
                     @error('email')
@@ -148,29 +185,44 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
+                {{-- Password --}}
+                <div class="mb-3 text-start">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                     @error('password')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
+                {{-- CAPTCHA --}}
+                <div class="mb-3 text-center">
+                    <div class="captcha-box">
+                        <span class="captcha-text">{{ $num1 }} {{ $operator }} {{ $num2 }}</span>
+                    </div>
+                    <input type="text" name="captcha" class="form-control mt-2" placeholder="Masukkan jawaban" required>
+                    @error('captcha')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                {{-- Remember me --}}
                 <div class="form-check mb-3 text-start">
                     <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
                     <label class="form-check-label" for="remember_me">Remember me</label>
                 </div>
 
+                {{-- Submit --}}
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-login w-100">Login</button>
                 </div>
 
-                <div>
+                {{-- Links --}}
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('beranda') }}" class="forgot-password">Halaman Utama</a>
                     <a href="{{ route('password.request') }}" class="forgot-password">Forgot your password?</a>
                 </div>
-                <div>
-                    <a href="{{ route('beranda') }}" class="forgot-password">Halaman Utama</a>
-                </div>
+
             </form>
+
         </div>
 
     </div>

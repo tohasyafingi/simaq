@@ -1,21 +1,18 @@
 <div>
-  <!-- ===== Banner Section Start ===== -->
-  <section class="hero-section" style="height: 200px;">
-    <div class="hero-content text-center">
+  <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+        <div class="container text-center">
       <h1>Karya Ilmiah</h1>
     </div>
   </section>
-  <!-- ===== Banner Section End ===== -->
+
   <section class="section pt-3 pb-4">
     <div class="container">
-      <!-- Search bar -->
       <div class="d-flex justify-content-end mb-3">
         <input type="text" class="form-control w-25" placeholder="Search karya ilmiah..." wire:model.live="search">
       </div>
     </div>
   </section>
 
-  <!-- ===== Content Section Start ===== -->
   <section class="section">
     <div class="container">
       @forelse($karya_ilmiahs->chunk(3) as $chunk)
@@ -32,7 +29,7 @@
                   {{ $karya_ilmiah->created_at->format('d/m/Y') }}</small></p>
               <p class="card-text">{!! \Illuminate\Support\Str::limit(strip_tags($karya_ilmiah->isi), 120, '...') !!}
               </p>
-              <a href="{{ route('detail-karya-ilmiah', ['slug' => $karya_ilmiah->slug]) }}"
+              <a wire:navigate href="{{ route('detail-karya-ilmiah', ['slug' => $karya_ilmiah->slug]) }}"
                 class="btn btn-primary btn-sm">Baca Selengkapnya</a>
             </div>
           </div>
@@ -45,31 +42,16 @@
       </div>
       @endforelse
 
-      <!-- Pagination -->
       <div class="d-flex justify-content-center">
         {{ $karya_ilmiahs->links() }}
       </div>
 
     </div>
   </section>
-  <!-- ===== Content Section End ===== -->
 
   <style>
     .card {
       position: relative;
-    }
-
-    .badge-category {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: #1abc9c;
-      color: white;
-      padding: 5px 10px;
-      font-size: 0.8rem;
-      border-radius: 3px;
-      font-weight: bold;
-      z-index: 10;
     }
   </style>
 </div>

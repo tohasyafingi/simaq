@@ -18,24 +18,24 @@
     <div class="container-fluid">
         <div class="row g-3 mb-4">
             @php
-                $boxes = [
-                    ['Rombel', $nama_rombel, '#3b82f6', 'bi-people-fill'],
-                    ['Jumlah Pelajaran', $jumlah_pelajaran, '#f59e0b', 'bi-book-fill'],
-                    ['Status', $status_siswa, '#10b981', 'bi-person-check-fill'],
-                ];
+            $boxes = [
+            ['Rombel', $nama_rombel, '#3b82f6', 'bi-people-fill'],
+            ['Jumlah Pelajaran', $jumlah_pelajaran, '#f59e0b', 'bi-book-fill'],
+            ['Status', $status_siswa, '#10b981', 'bi-person-check-fill'],
+            ];
             @endphp
 
             @foreach($boxes as $box)
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="info-box p-3 rounded-2 d-flex align-items-center"
-                        style="background:{{ $box[2] }}; color:white;">
-                        <i class="bi {{ $box[3] }} fs-2 me-3"></i>
-                        <div>
-                            <div>{{ $box[0] }}</div>
-                            <div class="fs-5 fw-bold">{{ $box[1] }}</div>
-                        </div>
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="info-box p-3 rounded-2 d-flex align-items-center"
+                    style="background:{{ $box[2] }}; color:white;">
+                    <i class="bi {{ $box[3] }} fs-2 me-3"></i>
+                    <div>
+                        <div>{{ $box[0] }}</div>
+                        <div class="fs-5 fw-bold">{{ $box[1] }}</div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
 
@@ -56,5 +56,7 @@
             </div>
         </div> -->
     </div>
-
+    <x-modal-password-warning
+        :show="$showPasswordModal"
+        wire:click="$set('showPasswordModal', false)" />
 </div>

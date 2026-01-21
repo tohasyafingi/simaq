@@ -89,7 +89,9 @@ class ProfilShow extends Component
         // Update password in the database
         $user = Auth::user();
         $user->password = Hash::make($this->password);
+        $user->password_changed_at = now();
         $user->save();
+        Auth::logoutOtherDevices($this->password);
 
         // Set success state
         $this->passwordUpdated = true;

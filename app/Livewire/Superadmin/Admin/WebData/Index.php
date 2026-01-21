@@ -133,6 +133,23 @@ class Index extends Component
         $this->dispatch('openEditModal', content: $this->content);
     }
 
+    public function removeImage()
+    {
+        if ($this->image && Storage::disk('public')->exists($this->image)) {
+            Storage::disk('public')->delete($this->image);
+        }
+
+        // update database
+        Profiles::where('id', $this->profile_id)->update([
+            'image' => null,
+        ]);
+
+        // reset state
+        $this->image = null;
+        $this->newImage = null;
+
+        session()->flash('message', 'Gambar berhasil dihapus.');
+    }
 
     public function update()
     {
@@ -144,9 +161,10 @@ class Index extends Component
             if ($data->image && Storage::disk('public')->exists($data->image)) {
                 Storage::disk('public')->delete($data->image);
             }
+
             $validated['image'] = $this->newImage->store('profiles', 'public');
         } else {
-            $validated['image'] = $data->image;
+            $validated['image'] = $data->image; // tetap pakai image lama
         }
 
         $data->update($validated);
@@ -154,10 +172,10 @@ class Index extends Component
         $this->dispatch('closeEditModal');
         $this->dispatch('resetSummernote');
         session()->flash('message', 'Konten berhasil diperbarui.');
+
         $this->resetInputFields();
         $this->resetPage();
     }
-
 
     public function confirmDelete($id)
     {

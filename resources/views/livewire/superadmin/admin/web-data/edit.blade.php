@@ -35,17 +35,31 @@
                     <div class="mb-3">
                         <label>Gambar</label>
                         <input type="file" wire:model="newImage" class="form-control" />
+
                         @if($image)
-                        <div class="mt-2"><img src="{{ asset('storage/'.$image) }}" style="height:80px;" /></div>
+                        <div class="position-relative mt-2" style="width: 150px; height: 80px;">
+                            <img src="{{ asset('storage/'.$image) }}"
+                                class="img-fluid rounded"
+                                style="height: 80px; width: 150px; object-fit: cover;">
+
+                            <button type="button"
+                                wire:click="removeImage"
+                                class="btn btn-danger btn-sm position-absolute top-0 end-0">
+                                ✕
+                            </button>
+                        </div>
                         @endif
-                        @error('newImage') <small class="text-danger">{{ $message }}</small> @enderror
+
+                        @error('newImage')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label>Content</label>
                         <div wire:ignore>
-    <textarea id="editContent" class="form-control"></textarea>
-</div>
+                            <textarea id="editContent" wire:model.defer="content" class="form-control"></textarea>
+                        </div>
 
                         @error('content') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>

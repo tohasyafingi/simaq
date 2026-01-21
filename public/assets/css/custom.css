@@ -1,0 +1,50 @@
+/* =========================================
+   CUSTOM FONT - ADMINLTE 4
+   ========================================= */
+
+:root {
+    --bs-font-sans-serif: 'Inter', system-ui, -apple-system,
+        'Segoe UI', Roboto, 'Helvetica Neue',
+        Arial, sans-serif;
+
+    --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+/* Heading */
+h1, h2, h3, h4, h5, h6,
+.app-content-header h3,
+.card-title,
+.modal-title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 600;
+}
+
+/* Sidebar & Navbar */
+.main-sidebar,
+.nav-sidebar,
+.navbar {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+}
+
+/* Dashboard numbers */
+.info-box-number,
+.fs-5,
+.fw-bold {
+    font-variant-numeric: tabular-nums;
+}
+/* Container pembungkus video agar responsif */
+.note-video-clip {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9; /* Menjaga proporsi video standar */
+}
+
+/* Memastikan video di halaman publik (setelah disave) juga responsif */
+iframe[src*="youtube.com"], 
+iframe[src*="youtu.be"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+}

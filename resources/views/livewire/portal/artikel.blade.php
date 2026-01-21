@@ -1,23 +1,18 @@
 <div>
-  <!-- ===== Banner Section Start ===== -->
-  <section class="hero-section" style="height: 200px;">
-    <div class="hero-content text-center">
+  <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+        <div class="container text-center">
       <h1>Perpustakaan Digital</h1>
     </div>
   </section>
-  <!-- ===== Banner Section End ===== -->
 
-  <!-- ===== Search Section ===== -->
   <section class="section pt-3 pb-4">
     <div class="container">
-      <!-- Search bar -->
       <div class="d-flex justify-content-end mb-3">
         <input type="text" class="form-control w-25" placeholder="Search e-book..." wire:model.live="search">
       </div>
     </div>
   </section>
 
-  <!-- ===== Content Section Start ===== -->
   <section class="section">
     <div class="container">
       <div class="row mb-5">
@@ -36,11 +31,12 @@
               <p class="card-text">{{ $book->description }}</p>
               @endif
               @if($book->link || $book->file)
-              <a href="{{ $book->link ?? asset('storage/'.$book->file) }}"
-                target="_blank"
-                class="btn btn-primary btn-sm mt-auto">
+              <a href="{{ route('pdf-viewer', $book->id) }}" class="btn btn-primary btn-sm mt-auto">
                 Lihat Detail
               </a>
+              {{-- <a href="{{ asset('storage/'.$book->file) }}" class="btn btn-primary btn-sm mt-auto" target="_blank" rel="noopener noreferrer">
+                Lihat Detail
+              </a> --}}
               @endif
             </div>
           </div>
@@ -52,11 +48,9 @@
         @endforelse
       </div>
 
-      <!-- Pagination -->
       <div class="d-flex justify-content-center">
         {{ $books->links() }}
       </div>
     </div>
   </section>
-  <!-- ===== Content Section End ===== -->
 </div>

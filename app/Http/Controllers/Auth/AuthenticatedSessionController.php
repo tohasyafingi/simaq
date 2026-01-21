@@ -23,9 +23,29 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
+    // public function create(): View
+    // {
+    //     return view('auth.login');
+    // }
+
     public function create(): View
     {
-        return view('auth.login');
+        // Generate angka acak dari 0 sampai 9
+        $num1 = rand(0, 9);
+        $num2 = rand(0, 9);
+
+        // Pilih operator + atau x
+        $operators = ['+', 'x'];
+        $operator = $operators[array_rand($operators)];
+
+        // Hitung jawaban
+        $answer = $operator === '+' ? $num1 + $num2 : $num1 * $num2;
+
+        // Simpan jawaban di session
+        session(['captcha_answer' => $answer]);
+
+        // Kirim ke view
+        return view('auth.login', compact('num1', 'num2', 'operator'));
     }
 
     /**
@@ -33,6 +53,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Validasi tambahan untuk captcha
+        $request->validate([
+            'captcha' => 'required|integer',
+        ]);
+
+        if ($request->input('captcha') != session('captcha_answer')) {
+            return redirect()->route('login')
+                ->with('error', 'Jawaban salah. Silakan coba lagi.');
+        }
+
+        // Autentikasi user
         $request->authenticate();
 
         if (!Auth::user()->status) {
@@ -56,24 +87,6 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('login')
             ->with('error', 'Akun tidak dikenali atau belum punya akses.');
     }
-
-    // public function store(LoginRequest $request): RedirectResponse
-    // {
-    //     $request->authenticate();
-    //     $request->session()->regenerate();
-
-    //     $user = Auth::user();
-    //     $route = $this->roleRoutes[$user->role] ?? null;
-
-    //     if ($route && Route::has($route)) {
-    //         return redirect()->route($route);
-    //     }
-
-    //     Auth::logout();
-
-    //     return redirect()->route('login')
-    //         ->with('error', 'Akun tidak dikenali atau belum punya akses.');
-    // }
 
     /**
      * Destroy an authenticated session.

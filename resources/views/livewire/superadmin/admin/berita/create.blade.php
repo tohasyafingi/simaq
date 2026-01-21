@@ -43,9 +43,9 @@
                                         <label class="form-label">Upload Thumbnail</label>
                                         <input type="file" class="form-control" wire:model="thumbnail" accept="image/*">
                                         @if($thumbnail)
-                                            <img src="{{ $thumbnail->temporaryUrl() }}" class="mt-2 rounded" width="100">
+                                        <img src="{{ $thumbnail->temporaryUrl() }}" class="mt-2 rounded" width="100">
                                         @elseif($thumbnailUrl)
-                                            <img src="{{ $thumbnailUrl }}" class="mt-2 rounded" width="100">
+                                        <img src="{{ $thumbnailUrl }}" class="mt-2 rounded" width="100">
                                         @endif
                                         @error('thumbnail') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -55,7 +55,7 @@
                                         <select class="form-select" wire:model.defer="kat_berita_id">
                                             <option value="">-- Pilih Kategori --</option>
                                             @foreach($kategoriOptions as $kat)
-                                                <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
+                                            <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
                                             @endforeach
                                         </select>
                                         @error('kat_berita_id') <span class="text-danger">{{ $message }}</span>
@@ -95,21 +95,68 @@
     </div>
     @script
     <script type="text/javascript">
-        $(document).ready(function () {
+        let summernoteElement = $('.summernote');
+
+        function initSummernote() {
+            $('.tooltip').remove();
+
             $('.summernote').summernote({
-                height: 300,
+                height: 400,
+                placeholder: 'Masukkan isi berita...',
+                dialogsInBody: true,
+                tooltip: true,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ],
+                videoAttributes: {
+                role: 'presentation',
+                allowfullscreen: 'allowfullscreen',
+                frameborder: '0',
+                width: '100%',
+                height: '350'
+            },
                 callbacks: {
-                    onChange: function (contents, $editable) {
-                        @this.set('isi', contents);
+                    onInit: function() {
+                        $('.note-btn[data-toggle="dropdown"]').attr('data-bs-toggle', 'dropdown');
+
+                        let content = @js($isi);
+                        if (content) {
+                            $('.summernote').summernote('code', content);
+                        }
+                    },
+                    onChange: function(contents) {
+                        clearTimeout(window.summernoteTimeout);
+                        window.summernoteTimeout = setTimeout(() => {
+                            $wire.set('isi', contents);
+                        }, 500);
                     }
                 }
             });
+        }
 
-            // Set isi Summernote jika ada saat edit
-            @if($isi)
-                $('.summernote').summernote('code', {!! json_encode($isi) !!});
-            @endif
-    });
+        $(document).ready(function() {
+            initSummernote();
+        });
+
+        document.addEventListener('livewire:navigated', () => {
+            initSummernote();
+        });
+
+        Livewire.hook('morph.updated', ({
+            el,
+            component
+        }) => {
+            if (!summernoteElement.hasClass('note-editor')) {
+                initSummernote();
+            }
+        });
     </script>
     @endscript
 </div>

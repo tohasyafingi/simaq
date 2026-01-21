@@ -12,6 +12,7 @@ use Livewire\Attributes\Title;
 #[Title('Dashboard Guru')]
 class Index extends Component
 {
+    public bool $showPasswordModal = false;
     public $guru_id;
     public $jumlah_rombel = 0;
     public $jumlah_pelajaran = 0;
@@ -52,6 +53,10 @@ class Index extends Component
 
         // Status guru
         $this->status_guru = $user->guru->status ? 'Aktif' : 'Tidak Aktif';
+        
+        if (auth()->check() && auth()->user()->password_changed_at === null) {
+            $this->showPasswordModal = true;
+        }
     }
 
     public function render()

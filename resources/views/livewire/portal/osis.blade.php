@@ -1,13 +1,10 @@
 <div>
-    <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 200px;">
-        <div class="hero-content text-center">
+    <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+        <div class="container text-center">
             <h1>OSIS</h1>
         </div>
     </section>
-    <!-- ===== Banner Section End ===== -->
 
-    <!-- ===== Content Section Start ===== -->
     <section class="section">
         <div class="container">
             @forelse($activities as $activity)
@@ -36,5 +33,4 @@
             @endforelse
         </div>
     </section>
-    <!-- ===== Content Section End ===== -->
 </div>

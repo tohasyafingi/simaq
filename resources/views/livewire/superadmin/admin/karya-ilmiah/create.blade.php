@@ -97,20 +97,68 @@
     </div>
 
     @script
-    <script>
-        $(document).ready(function () {
+    <script type="text/javascript">
+        let summernoteElement = $('.summernote');
+
+        function initSummernote() {
+            $('.tooltip').remove();
+
             $('.summernote').summernote({
-                height: 300,
+                height: 400,
+                placeholder: 'Masukkan isi berita...',
+                dialogsInBody: true,
+                tooltip: true,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ],
+                videoAttributes: {
+                role: 'presentation',
+                allowfullscreen: 'allowfullscreen',
+                frameborder: '0',
+                width: '100%',
+                height: '350'
+            },
                 callbacks: {
-                    onChange: function(contents, $editable) {
-                        @this.set('isi', contents);
+                    onInit: function() {
+                        $('.note-btn[data-toggle="dropdown"]').attr('data-bs-toggle', 'dropdown');
+
+                        let content = @js($isi);
+                        if (content) {
+                            $('.summernote').summernote('code', content);
+                        }
+                    },
+                    onChange: function(contents) {
+                        clearTimeout(window.summernoteTimeout);
+                        window.summernoteTimeout = setTimeout(() => {
+                            $wire.set('isi', contents);
+                        }, 500);
                     }
                 }
             });
+        }
 
-            @if($isi)
-                $('.summernote').summernote('code', {!! json_encode($isi) !!});
-            @endif
+        $(document).ready(function() {
+            initSummernote();
+        });
+
+        document.addEventListener('livewire:navigated', () => {
+            initSummernote();
+        });
+
+        Livewire.hook('morph.updated', ({
+            el,
+            component
+        }) => {
+            if (!summernoteElement.hasClass('note-editor')) {
+                initSummernote();
+            }
         });
     </script>
     @endscript

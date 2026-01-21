@@ -1,23 +1,18 @@
 <div>
-    <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 200px;">
-        <div class="hero-content text-center">
+    <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+        <div class="container text-center">
             <h1>Downloads</h1>
         </div>
     </section>
-    <!-- ===== Banner Section End ===== -->
 
-    <!-- ===== Search Section ===== -->
     <section class="section pt-3 pb-4">
         <div class="container">
-            <!-- Search bar -->
             <div class="d-flex justify-content-end mb-3">
                 <input type="text" class="form-control w-25" placeholder="Search downloads..." wire:model.live="search">
             </div>
         </div>
     </section>
 
-    <!-- ===== Content Section Start ===== -->
     <section class="section">
         <div class="container">
             <div class="row mb-5">
@@ -51,12 +46,9 @@
                 </div>
                 @endforelse
             </div>
-
-            <!-- Pagination -->
             <div class="d-flex justify-content-center">
                 {{ $downloads->links() }}
             </div>
         </div>
     </section>
-    <!-- ===== Content Section End ===== -->
 </div>

@@ -1,42 +1,57 @@
 <div>
-    <!-- ===== Hero Section Start ===== -->
     <section class="hero-section">
         <div class="hero-content text-center">
             <h3>Selamat Datang di</h3>
             <h1>MA takhassus Al-Qur'an Wonosobo</h1>
-            <p>Building Leaders, Inspiring Minds, Creating Tomorrow</p>
+            <p>Terwujudnya Insan Madrasah yang Unggul dalam Kualitas dan Berjiwa Agamis</p>
             <a href="#about" class="btn btn-primary">Learn More</a>
         </div>
     </section>
-    <!-- ===== Hero Section End ===== -->
 
-    <!-- ===== About Section Start ===== -->
     <section id="about" class="section bg-light">
         <div class="container">
             @forelse($tentang as $about)
-            <h2 class="section-title mb-4">{{ $about->judul }}</h2>
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="content-text">
-                        {!! $about->content !!}
-                    </div>
-                </div>
-                @if($about->image)
-                <div class="col-lg-6">
-                    <img src="{{ asset('storage/'.$about->image) }}" alt="{{ $about->judul }}" class="img-fluid rounded mb-3 mb-lg-0" />
-                </div>
-                @endif
-            </div>
-            @empty
-            <div class="alert alert-warning text-center">
-                Konten Tentang belum tersedia.
-            </div>
-            @endforelse
+            <h2 class="section-title mb-4 text-center">{{ $about->judul }}</h2>
+
+            @php
+            // Izinkan <iframe> agar embed YouTube tidak hilang
+                $allowedTags = '<iframe>
+                    <p><br><a><strong><em>
+                                    <ul>
+                                        <li>
+                                            <ol><b><i>';
+                                                        $hasContent = !empty(trim(strip_tags($about->content, $allowedTags)));
+                                                        $hasImage = !empty($about->image);
+                                                        @endphp
+
+                                                        <div class="row align-items-start justify-content-center">
+                                                            {{-- Kolom konten --}}
+                                                            @if($hasContent)
+                                                            <div class="{{ $hasImage ? 'col-lg-6' : 'col-lg-8 text-center' }} mb-4 mb-lg-0">
+                                                                <div class="content-text">
+                                                                    {!! $about->content !!}
+                                                                </div>
+                                                            </div>
+                                                            @endif
+
+                                                            {{-- Kolom gambar --}}
+                                                            @if($hasImage)
+                                                            <div class="{{ $hasContent ? 'col-lg-6' : 'col-lg-8 text-center' }}">
+                                                                <img src="{{ asset('storage/'.$about->image) }}"
+                                                                    alt="{{ $about->judul }}"
+                                                                    class="img-fluid rounded mb-3 mb-lg-0" />
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                        @empty
+                                                        <div class="alert alert-warning text-center">
+                                                            Konten Tentang belum tersedia.
+                                                        </div>
+                                                        @endforelse
         </div>
     </section>
-    <!-- ===== About Section End ===== -->
 
-    <!-- ===== Latest News Section Start ===== -->
+
     <section class="section">
         <div class="container">
             <h2 class="section-title">Berita Terbaru</h2>
@@ -64,9 +79,7 @@
             @endforelse
         </div>
     </section>
-    <!-- ===== Latest News Section End ===== -->
 
-    <!-- ===== Latest Karya Section Start ===== -->
     <section class="section bg-light">
         <div class="container">
             <h2 class="section-title">Karya Ilmiah Terbaru</h2>
@@ -94,9 +107,7 @@
             @endforelse
         </div>
     </section>
-    <!-- ===== Latest Karya Section End ===== -->
 
-    <!-- ===== Gallery Section Start ===== -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">Gallery</h2>
@@ -127,9 +138,7 @@
             </div>
         </div>
     </section>
-    <!-- ===== Gallery Section End ===== -->
 
-    <!-- ===== Admission Section Start ===== -->
     <section class="section bg-light">
         <div class="container">
             @forelse($ppdb as $activity)
@@ -148,7 +157,7 @@
                 </div>
             </div>
             @empty
-            <div class="alert alert-warning text-center">Konten PPDB belum tersedia.</div>
+            <div class="alert alert-warning text-center">Konten SPMB belum tersedia.</div>
             @endforelse
         </div>
     </section>
@@ -177,9 +186,7 @@
             </div>
         </div>
     </div>
-    <!-- ===== Admission Section End ===== -->
 
-    <!-- ===== Contact Section Start ===== -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">Informasi Kontak</h2>
@@ -226,7 +233,6 @@
             <h2 class="section-title text-center mb-5">Kontak & Lokasi</h2>
 
             <div class="row mb-5 align-items-stretch">
-                <!-- Location Map -->
                 <div class="col-lg-6 mb-4">
                     <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body p-0 h-100">
@@ -235,7 +241,6 @@
                     </div>
                 </div>
 
-                <!-- Send Us a Message -->
                 <div class="col-lg-6 mb-4">
                     <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body">
@@ -261,7 +266,8 @@
                                 </div>
 
                                 <div class="text-center mt-2">
-                                    <button type="submit" class="btn btn-primary btn-sm">Kirim Pesan</button>
+                                    <!-- <button type="submit" class="btn btn-primary btn-sm">Kirim Pesan</button> -->
+                                    <button type="button" class="btn btn-primary btn-sm">Kirim Pesan</button>
                                 </div>
                             </form>
                         </div>
@@ -276,24 +282,12 @@
             @endif
         </div>
     </section>
-    <!-- ===== Contact Section End ===== -->
     <style>
         .card {
             position: relative;
         }
 
-        .badge-category {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #1abc9c;
-            color: white;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            border-radius: 3px;
-            font-weight: bold;
-            z-index: 10;
-        }
+
     </style>
     @script
     <script>
@@ -327,7 +321,6 @@
                 document.body.classList.remove('modal-open');
             }
 
-            // Register immediately if $wire is present
             try {
                 if (typeof $wire !== 'undefined' && $wire.on) {
                     $wire.on('openGalleryModal', () => {
@@ -343,7 +336,6 @@
                 // ignore
             }
 
-            // Also listen after livewire load to be safe
             window.addEventListener('livewire:load', function() {
                 if (typeof $wire !== 'undefined' && $wire.on) {
                     $wire.on('openGalleryModal', () => {
@@ -357,7 +349,6 @@
                 }
             });
 
-            // Fallback: listen for plain window events
             window.addEventListener('openGalleryModal', function() {
                 console.debug('Window event: openGalleryModal');
                 showModalAndInitCarousel();
@@ -371,7 +362,6 @@
                 const carouselEl = document.getElementById('galleryCarousel');
                 if (!modalEl || !carouselEl) return;
 
-                // Hanya aktif jika modal sedang terbuka
                 const modalInstance = bootstrap.Modal.getInstance(modalEl);
                 if (!modalInstance || !modalEl.classList.contains('show')) return;
 
@@ -379,11 +369,12 @@
                 if (!carouselInstance) return;
 
                 if (e.key === 'ArrowRight') {
-                    carouselInstance.next(); // geser ke gambar berikutnya
+                    carouselInstance.next();
                 } else if (e.key === 'ArrowLeft') {
-                    carouselInstance.prev(); // geser ke gambar sebelumnya
+                    carouselInstance.prev();
                 }
             });
+
         })();
     </script>
     @endscript

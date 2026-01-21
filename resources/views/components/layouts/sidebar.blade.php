@@ -13,13 +13,10 @@
             <span class="brand-text fw-light">SIMAQ</span>
         </a>
     </div>
-    <!--end::Sidebar Brand-->
 
-    <!--begin::Sidebar Wrapper-->
     <div class="sidebar-wrapper">
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-                <!-- Dashboard -->
                 <li class="nav-item">
                     <a wire:navigate href="{{ route('superadmin.admin.dashboard') }}"
                         class="nav-link {{ Request::is('admin/dashboard*') ? 'active' : '' }}">
@@ -27,9 +24,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <!-- DATA -->
                 <li class="nav-header">DATA</li>
-                <!-- MASTER DATA -->
                 <li
                     class="nav-item {{ Request::is('admin/data-siswa*') || Request::is('admin/data-guru*') || Request::is('admin/data-bendahara*') || Request::is('admin/data-tata-usaha*') || Request::is('admin/data-kelulusan*') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -78,7 +73,6 @@
                     </ul>
                 </li>
 
-                <!-- E-LEARNING -->
                 <li class="nav-header">E-LEARNING</li>
 
                 <li
@@ -162,8 +156,8 @@
                     </ul>
                 </li>
 
-                <!-- GURU -->
-                <!-- <li class="nav-header">GURU</li>
+                {{-- GURU --}}
+                {{-- <li class="nav-header">GURU</li>
                 <li
                     class="nav-item {{ Request::is('admin/guru-pengajar*') || Request::is('admin/guru-modul*') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -189,10 +183,10 @@
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li> --}}
 
-                <!-- SISWA -->
-                <!-- <li class="nav-header">SISWA</li>
+                {{-- SISWA --}} 
+                {{-- <li class="nav-header">SISWA</li>
                 <li
                     class="nav-item {{ Request::is('admin/siswa-rombel*') || Request::is('admin/siswa-modul*') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -218,9 +212,9 @@
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li> --}}
 
-                <!-- WEBSITE -->
+                {{-- WEBSITE --}}
                 <li class="nav-header">WEBSITE</li>
                 <li
                     class="nav-item {{ Request::is('admin/berita*') || Request::is('admin/kategori-berita*') || Request::is('admin/karya-ilmiah*') || Request::is('admin/kategori-karya-ilmiah*') || Request::is('admin/e-book*') || Request::is('admin/download*') || Request::is('admin/galeri*') ? 'menu-open' : '' }}">
@@ -306,7 +300,7 @@
                     </ul>
                 </li>
 
-                <!-- WEBSITE -->
+                {{-- WEBSITE --}}
                 <li
                     class="nav-item {{ Request::is('admin/data-profil*') || Request::is('admin/struktur*') || Request::is('admin/kontak') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -341,7 +335,7 @@
                     </ul>
                 </li>
 
-                <!-- Setting -->
+                {{-- SETTING --}}
                 <li class="nav-header">SETTING</li>
                 <li class="nav-item">
                     <a wire:navigate href="{{ route('superadmin.admin.kontak-masuk.index')}}"
@@ -374,7 +368,7 @@
                         <p>Logout</p>
                     </a>
 
-                    <!-- Form logout -->
+                    {{-- Form logout --}}
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
@@ -382,5 +376,4 @@
             </ul>
         </nav>
     </div>
-    <!--end::Sidebar Wrapper-->
 </aside>

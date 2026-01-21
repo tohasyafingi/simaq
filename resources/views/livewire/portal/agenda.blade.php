@@ -1,17 +1,12 @@
 <div class="news-page">
-
-  <!-- ===== Banner Section Start ===== -->
-  <section class="hero-section" style="height: 200px;">
-    <div class="hero-content text-center">
+  <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+        <div class="container text-center">
       <h1>Berita & Agenda</h1>
     </div>
   </section>
-  <!-- ===== Banner Section End ===== -->
 
-  <!-- ===== Search & Content Section Start ===== -->
   <section class="section pt-3 pb-4">
     <div class="container">
-      <!-- Search bar -->
       <div class="d-flex justify-content-end mb-3">
         <input type="text" class="form-control w-25" placeholder="Search berita..." wire:model.live="search">
       </div>
@@ -28,7 +23,6 @@
             <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}" class="card-img-top"
               alt="{{ $berita->judul }}" loading="lazy">
 
-            <!-- Label Kategori -->
             <span class="badge-category">
               {{ $berita->kategori->nama ?? 'Umum' }}
             </span>
@@ -39,7 +33,7 @@
                 <small><i class="fas fa-calendar"></i> {{ $berita->created_at->format('d/m/Y') }}</small>
               </p>
               <p class="card-text">{!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}</p>
-              <a href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
+              <a wire:navigate href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
                 class="btn btn-primary btn-sm">Baca Selengkapnya</a>
             </div>
           </div>
@@ -52,31 +46,16 @@
       </div>
       @endforelse
 
-      <!-- Pagination -->
       <div class="d-flex justify-content-center">
         {{ $beritas->links() }}
       </div>
 
     </div>
   </section>
-  <!-- ===== Content Section End ===== -->
 
   <style>
     .card {
       position: relative;
-    }
-
-    .badge-category {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: #1abc9c;
-      color: white;
-      padding: 5px 10px;
-      font-size: 0.8rem;
-      border-radius: 3px;
-      font-weight: bold;
-      z-index: 10;
     }
   </style>
 </div>

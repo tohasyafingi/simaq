@@ -5,12 +5,13 @@ namespace App\Livewire\Superadmin\Siswa;
 use Livewire\Component;
 use App\Models\Siswa;
 use App\Models\Pelajaran;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
 
 #[Title('Dashboard Siswa')]
 class Index extends Component
 {
+    public bool $showPasswordModal = false;
     public $nama_rombel;
     public $status_siswa;
     public $jumlah_pelajaran = 0;
@@ -34,6 +35,10 @@ class Index extends Component
                 ->get();
 
             $this->jumlah_pelajaran = $pelajarans->count();
+        }
+
+        if (auth()->check() && auth()->user()->password_changed_at === null) {
+            $this->showPasswordModal = true;
         }
     }
 

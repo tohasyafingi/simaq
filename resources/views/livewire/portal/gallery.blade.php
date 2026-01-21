@@ -1,13 +1,10 @@
 <div>
-    <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 200px;">
-        <div class="hero-content text-center">
+    <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+        <div class="container text-center">
             <h1>Galeri Kegiatan</h1>
         </div>
     </section>
-    <!-- ===== Banner Section End ===== -->
 
-    <!-- ===== Gallery Section ===== -->
     <section class="section">
         <div class="container">
             <div class="gallery-grid row g-3">
@@ -35,7 +32,6 @@
         </div>
     </section>
 
-    <!-- ===== Slider Modal ===== -->
     <div class="modal fade" id="gallerySliderModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content bg-transparent border-0">
@@ -62,7 +58,6 @@
         </div>
     </div>
 
-    <!-- ===== Script untuk Livewire event ===== -->
     @script
     <script>
         (function() {
@@ -94,8 +89,6 @@
                 document.querySelectorAll('.modal-backdrop').forEach(e => e.remove());
                 document.body.classList.remove('modal-open');
             }
-
-            // Register immediately if $wire is present
             try {
                 if (typeof $wire !== 'undefined' && $wire.on) {
                     $wire.on('openGalleryModal', () => {
@@ -107,11 +100,8 @@
                         hideModalCleanup();
                     });
                 }
-            } catch (e) {
-                // ignore
-            }
+            } catch (e) {}
 
-            // Also listen after livewire load to be safe
             window.addEventListener('livewire:load', function() {
                 if (typeof $wire !== 'undefined' && $wire.on) {
                     $wire.on('openGalleryModal', () => {
@@ -125,7 +115,6 @@
                 }
             });
 
-            // Fallback: listen for plain window events
             window.addEventListener('openGalleryModal', function() {
                 console.debug('Window event: openGalleryModal');
                 showModalAndInitCarousel();
@@ -139,7 +128,6 @@
                 const carouselEl = document.getElementById('galleryCarousel');
                 if (!modalEl || !carouselEl) return;
 
-                // Hanya aktif jika modal sedang terbuka
                 const modalInstance = bootstrap.Modal.getInstance(modalEl);
                 if (!modalInstance || !modalEl.classList.contains('show')) return;
 
@@ -147,11 +135,12 @@
                 if (!carouselInstance) return;
 
                 if (e.key === 'ArrowRight') {
-                    carouselInstance.next(); // geser ke gambar berikutnya
+                    carouselInstance.next();
                 } else if (e.key === 'ArrowLeft') {
-                    carouselInstance.prev(); // geser ke gambar sebelumnya
+                    carouselInstance.prev();
                 }
             });
+
         })();
     </script>
     @endscript

@@ -19,6 +19,7 @@ use Livewire\Attributes\Title;
 #[Title('Dashboard Admin')]
 class Index extends Component
 {
+    public bool $showPasswordModal = false;
     public $nama_admin;
     public $jumlah_guru;
     public $jumlah_bendahara;
@@ -50,6 +51,10 @@ class Index extends Component
         $this->tahun_ajaran = $aktif
             ? $aktif->tahun . ' ' . $aktif->semester
             : 'Belum ada Tahun Ajaran Aktif';
+
+        if (auth()->check() && auth()->user()->password_changed_at === null) {
+            $this->showPasswordModal = true;
+        }
     }
 
     public function render()

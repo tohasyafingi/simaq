@@ -14,12 +14,10 @@
             <span class="brand-text fw-light">SIMAQ</span>
         </a>
     </div>
-    <!--end::Sidebar Brand-->
 
     <div class="sidebar-wrapper">
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-                <!-- Dashboard -->
                 <li class="nav-item">
                     <a wire:navigate href="{{ route('superadmin.siswa.dashboard') }}"
                         class="nav-link {{ Request::is('siswa/dashboard*') ? 'active' : '' }}">
@@ -44,7 +42,6 @@
                         <p>Modul Pelajaran</p>
                     </a>
                 </li>
-                <!-- Setting -->
                 <li class="nav-header">SETTING</li>
                 <li class="nav-item">
                     <a href="javascript:void(0)" class="nav-link"
@@ -53,7 +50,6 @@
                         <p>Logout</p>
                     </a>
 
-                    <!-- Form logout -->
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

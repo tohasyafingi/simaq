@@ -1,13 +1,10 @@
 <div>
-    <!-- ===== Banner Section Start ===== -->
-    <section class="hero-section" style="height: 200px;">
-        <div class="hero-content text-center">
+    <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+        <div class="container text-center">
             <h1>Kontak Kami</h1>
         </div>
     </section>
-    <!-- ===== Banner Section End ===== -->
 
-    <!-- ===== Content Section Start ===== -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">Informasi Kontak</h2>
@@ -54,7 +51,6 @@
             <h2 class="section-title text-center mb-5">Kontak & Lokasi</h2>
 
             <div class="row mb-5 align-items-stretch">
-                <!-- Location Map -->
                 <div class="col-lg-6 mb-4">
                     <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body p-0 h-100">
@@ -63,7 +59,6 @@
                     </div>
                 </div>
 
-                <!-- Send Us a Message -->
                 <div class="col-lg-6 mb-4">
                     <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body">
@@ -89,7 +84,8 @@
                                 </div>
 
                                 <div class="text-center mt-2">
-                                    <button type="submit" class="btn btn-primary btn-sm">Kirim Pesan</button>
+                                    <!-- <button type="submit" class="btn btn-primary btn-sm">Kirim Pesan</button> -->
+                                    <button type="button" class="btn btn-primary btn-sm">Kirim Pesan</button>
                                 </div>
                             </form>
                         </div>
@@ -104,6 +100,4 @@
             @endif
         </div>
     </section>
-
-    <!-- ===== Content Section End ===== -->
 </div>

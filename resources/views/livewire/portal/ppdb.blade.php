@@ -10,7 +10,7 @@
 
             @forelse($activities as $activity)
             <h2 class="section-title">{{ $activity->judul }}</h2>
-            <div class="row align-items-center mb-5">
+            <div class="row align-items-start justify-content-center">
                 @if($activity->image)
                 <div class="col-lg-6">
                     <img src="{{ asset('storage/'.$activity->image) }}"

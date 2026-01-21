@@ -8,7 +8,7 @@
     <section class="section">
         <div class="container">
             @forelse($activities as $activity)
-                <div class="row align-items-center mb-5">
+                <div class="row align-items-start justify-content-center">
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <h2 class="section-title">{{ $activity->judul }}</h2>
                         <div class="content-text">

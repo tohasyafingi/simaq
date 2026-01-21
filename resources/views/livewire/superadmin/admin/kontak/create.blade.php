@@ -89,13 +89,13 @@
                         </div>
 
                         <!-- Copyright -->
-                        <div class="col-12 py-2">
+                        {{-- <div class="col-12 py-2">
                             <div class="form-group local-forms">
                                 <label>Copyright</label>
                                 <input wire:model="copyright" type="text" class="form-control" placeholder="Masukkan copyright">
                                 @error('copyright') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

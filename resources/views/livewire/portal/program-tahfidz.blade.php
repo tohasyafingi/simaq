@@ -9,7 +9,7 @@
         <div class="container">
 
             @forelse($activities as $activity)
-            <div class="row align-items-center mb-5">
+            <div class="row align-items-start justify-content-center">
                 @if($activity->image)
                 <div class="col-lg-6">
                     <img src="{{ asset('storage/'.$activity->image) }}" 

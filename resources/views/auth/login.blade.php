@@ -4,15 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Login - SIMAQ</title>
+    <title>MATAQ-WSB | Login</title>
 
-    <!-- Disable cache -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
     @include('components.layouts.meta')
-    {{-- favicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon.png')}}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon.png')}}" />
@@ -20,11 +18,9 @@
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/favicon.png')}}" />
     <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('assets/favicon.png')}}" />
     <meta name="theme-color" content="#ffffff">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 
-    <!-- Custom CSS -->
     <style>
         body {
             height: 100vh;
@@ -143,25 +139,17 @@
     <div class="login-container">
 
         <div class="login-card">
-            <!-- Logo -->
             <img src="{{ asset('assets/logo.webp') }}" alt="Logo Sekolah" class="logo">
 
             <h2>Selamat Datang</h2>
             <p class="text-muted mb-4">Sistem Informasi Akademik MA Takhassus Al-Qur'an Wonosobo</p>
 
-            <!-- Alert Notifikasi -->
             @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             @endif
-
-            <!-- @if(session('error') && !($errors->has('email') || $errors->has('password') || $errors->has('captcha')))
-            <div class="alert alert-danger mt-3" role="alert">
-                {{ session('error') }}
-            </div>
-            @endif -->
 
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -173,7 +161,6 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                {{-- Email --}}
                 <div class="mb-3 text-start">
                     <input type="email" name="email" class="form-control" placeholder="Email Address"
                         value="{{ old('email') }}" required autofocus>
@@ -182,7 +169,6 @@
                     @enderror
                 </div>
 
-                {{-- Password --}}
                 <div class="mb-3 text-start">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                     @error('password')
@@ -190,7 +176,6 @@
                     @enderror
                 </div>
 
-                {{-- CAPTCHA --}}
                 <div class="mb-3 text-center">
                     <div class="captcha-box">
                         <span class="captcha-text">{{ $num1 }} {{ $operator }} {{ $num2 }}</span>
@@ -201,18 +186,15 @@
                     @enderror
                 </div>
 
-                {{-- Remember me --}}
                 <div class="form-check mb-3 text-start">
                     <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
                     <label class="form-check-label" for="remember_me">Remember me</label>
                 </div>
 
-                {{-- Submit --}}
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-login w-100">Login</button>
                 </div>
 
-                {{-- Links --}}
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('beranda') }}" class="forgot-password">Halaman Utama</a>
                     <a href="{{ route('password.request') }}" class="forgot-password">Forgot your password?</a>
@@ -224,12 +206,12 @@
 
     </div>
 
-    <div class="copyright">
+    <div class="copyright small">
         <strong>
             Copyright &copy; {{ date('Y') }}&nbsp;
-            <a href="#">SIMAQ</a> |
+            <a href="#">MATAQ WSB </a>
         </strong>
-        Support by <a href="#">@tohasyafingi</a>
+        {{-- | Support by <a href="#">@tohasyafingi</a> --}}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"

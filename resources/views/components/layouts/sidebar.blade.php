@@ -157,7 +157,7 @@
                 </li>
 
                 {{-- GURU --}}
-                {{-- <li class="nav-header">GURU</li>
+                <li class="nav-header">GURU</li>
                 <li
                     class="nav-item {{ Request::is('admin/guru-pengajar*') || Request::is('admin/guru-modul*') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -183,10 +183,10 @@
                             </a>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
 
                 {{-- SISWA --}} 
-                {{-- <li class="nav-header">SISWA</li>
+                <li class="nav-header">SISWA</li>
                 <li
                     class="nav-item {{ Request::is('admin/siswa-rombel*') || Request::is('admin/siswa-modul*') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -212,7 +212,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
 
                 {{-- WEBSITE --}}
                 <li class="nav-header">WEBSITE</li>

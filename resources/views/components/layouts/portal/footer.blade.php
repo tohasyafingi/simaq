@@ -75,7 +75,7 @@
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom small">
             <strong>
                 Copyright &copy; {{ date('Y') }}&nbsp;
                 <a href="{{ route('beranda') }}" class="text-decoration-none">MATAQ WSB </a>

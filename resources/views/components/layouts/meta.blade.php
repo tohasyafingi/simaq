@@ -14,9 +14,9 @@
 
     $fullTitle = $siteName . ($pageTitle !== '' ? ' | ' . $pageTitle : '');
 
-    $description = $meta['description'] ?? config('app.description', '');
+    $description = $meta['description'] ?? config('app.description', 'Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo merupakan lembaga pendidikan formal tingkat menengah atas dibawah naungan Yayasan Al-Asy`ariyyah Wonosobo.');
     $canonical = $meta['canonical'] ?? url()->current();
-    $image = $meta['image'] ?? asset('assets/og-image.png');
+    $image = $meta['image'] ?? asset('assets/favicon.png');
     $ogType = $meta['og_type'] ?? 'website';
     $robots = $meta['robots'] ?? 'index, follow';
 @endphp

@@ -3,6 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> MATAQ-WSB | {{ $title ?? '' }}</title>
     @include('components.layouts.meta')
 
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />

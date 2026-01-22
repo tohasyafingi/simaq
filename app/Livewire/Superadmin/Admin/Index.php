@@ -52,7 +52,7 @@ class Index extends Component
             ? $aktif->tahun . ' ' . $aktif->semester
             : 'Belum ada Tahun Ajaran Aktif';
 
-        if (auth()->check() && auth()->user()->password_changed_at === null) {
+        if (Auth::check() && optional(Auth::user())->password_changed_at === null) {
             $this->showPasswordModal = true;
         }
     }

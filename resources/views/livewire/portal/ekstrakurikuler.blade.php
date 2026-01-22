@@ -13,7 +13,7 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
                         @if($activity->image)
-                        <img src="{{ asset('storage/'.$activity->image) }}" class="card-img-top" alt="{{ $activity->judul }}">
+                        <img src="{{ asset('storage/'.$activity->image) }}" class="card-img-top" alt="{{ $activity->judul }}" loading="lazy">
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $activity->judul }}</h5>

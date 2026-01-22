@@ -30,7 +30,7 @@ class Gallery extends Component
 
         $meta = [
             'title' => 'Galeri',
-            'description' => Str::limit(strip_tags(config('app.description', 'Galeri foto dan media')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Galeri foto dan media Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'

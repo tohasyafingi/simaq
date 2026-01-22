@@ -36,6 +36,7 @@
                                 <label>Jurusan <span class="text-danger">*</span></label>
                                 <select wire:model="jurusan_id" class="form-control">
                                     <option value="">Pilih Jurusan</option>
+                                    <option value="all">Semua Jurusan</option>
                                     @foreach($jurusans as $j)
                                         <option value="{{ $j->id }}">{{ $j->nama }}</option>
                                     @endforeach
@@ -50,6 +51,7 @@
                                 <label>Tingkat Kelas <span class="text-danger">*</span></label>
                                 <select wire:model="tingkat_kelas_id" class="form-control">
                                     <option value="">Pilih Tingkat Kelas</option>
+                                    <option value="all">Semua Tingkat Kelas</option>
                                     @foreach($tingkat_kelas as $tk)
                                         <option value="{{ $tk->id }}">{{ $tk->tingkat }}</option>
                                     @endforeach

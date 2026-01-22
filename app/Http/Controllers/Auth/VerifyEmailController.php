@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Verified;
+use Illuminate\Auth\events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Route;
 
 class VerifyEmailController extends Controller
 {
@@ -14,14 +15,36 @@ class VerifyEmailController extends Controller
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        $user = $request->user();
+
+        if ($user->hasVerifiedEmail()) {
+            return $this->redirectToRoleDashboard($user->role);
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
         }
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        return $this->redirectToRoleDashboard($user->role);
+    }
+
+    protected function redirectToRoleDashboard(?string $role): RedirectResponse
+    {
+        $roleRoutes = [
+            'admin' => 'superadmin.admin.dashboard',
+            'guru' => 'superadmin.guru.dashboard',
+            'siswa' => 'superadmin.siswa.dashboard',
+            'karyawan' => 'karyawan.dashboard',
+            'bendahara' => 'bendahara.dashboard',
+            'alumni' => 'alumni.dashboard',
+        ];
+
+        $route = $roleRoutes[$role] ?? null;
+
+        if ($route && Route::has($route)) {
+            return redirect()->intended(route($route).'?verified=1');
+        }
+
+        return redirect()->intended(route('beranda').'?verified=1');
     }
 }

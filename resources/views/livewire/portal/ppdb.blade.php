@@ -14,7 +14,7 @@
                 @if($activity->image)
                 <div class="col-lg-6">
                     <img src="{{ asset('storage/'.$activity->image) }}"
-                        alt="{{ $activity->judul }}"
+                        alt="{{ $activity->judul }}" loading="lazy"
                         class="img-fluid rounded mb-3 mb-lg-0" />
                 </div>
                 @endif

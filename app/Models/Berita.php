@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class Berita extends Model
 {
@@ -22,6 +23,12 @@ protected static function booted()
 
     static::updating(function ($berita) {
         $berita->slug = Str::slug($berita->judul);
+    });
+    static::saved(function ($berita) {
+        Cache::forget('seo:sitemap.xml');
+    });
+    static::deleted(function ($berita) {
+        Cache::forget('seo:sitemap.xml');
     });
 }
     public function kategori()

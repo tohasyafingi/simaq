@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>MATAQ-WSB | Login</title>
-
+    @php $title = 'Login'; @endphp
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -207,11 +206,11 @@
     </div>
 
     <div class="copyright small">
+        Copyright &copy; {{ date('Y') }}&nbsp; All Rights Reserved by
         <strong>
-            Copyright &copy; {{ date('Y') }}&nbsp;
-            <a href="#">MATAQ WSB </a>
+            <a href="{{ route('beranda') }}" class="text-decoration-none">MATAQ WONOSOBO </a>
         </strong>
-        {{-- | Support by <a href="#">@tohasyafingi</a> --}}
+        {{-- | Support by <a href="#" class="text-decoration-none"> @tohasyafingi</a> --}}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"

@@ -24,7 +24,7 @@
                                                         $hasImage = !empty($about->image);
                                                         @endphp
 
-                                                        <div class="row align-items-start justify-content-center">
+                                                            <div class="row align-items-start justify-content-center">
                                                             {{-- Kolom konten --}}
                                                             @if($hasContent)
                                                             <div class="{{ $hasImage ? 'col-lg-6' : 'col-lg-8 text-center' }} mb-4 mb-lg-0">
@@ -38,7 +38,7 @@
                                                             @if($hasImage)
                                                             <div class="{{ $hasContent ? 'col-lg-6' : 'col-lg-8 text-center' }}">
                                                                 <img src="{{ asset('storage/'.$about->image) }}"
-                                                                    alt="{{ $about->judul }}"
+                                                                    alt="{{ $about->judul }}" loading="lazy"
                                                                     class="img-fluid rounded mb-3 mb-lg-0" />
                                                             </div>
                                                             @endif
@@ -118,7 +118,7 @@
                         <div class="gallery-item position-relative cursor-pointer"
                             wire:click="selectGallery({{ $gallery->id }})">
                             <img src="{{ asset('storage/'.$gallery->thumbnail) }}"
-                                alt="{{ $gallery->judul }}" class="img-fluid rounded">
+                                alt="{{ $gallery->judul }}" loading="lazy" class="img-fluid rounded">
                             <div class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center bg-dark bg-opacity-50 opacity-0 hover-opacity-100 transition">
                                 <h5>{{ $gallery->judul }}</h5>
                                 <p class="mb-0">{{ $gallery->deskripsi }}</p>
@@ -146,7 +146,7 @@
             <div class="row align-items-start justify-content-center">
                 @if($activity->image)
                 <div class="col-lg-6">
-                    <img src="{{ asset('storage/'.$activity->image) }}" alt="{{ $activity->judul }}" class="img-fluid rounded mb-3 mb-lg-0" />
+                    <img src="{{ asset('storage/'.$activity->image) }}" alt="{{ $activity->judul }}" loading="lazy" class="img-fluid rounded mb-3 mb-lg-0" />
                 </div>
                 @endif
                 <div class="col-lg-6">
@@ -170,7 +170,7 @@
                         <div class="carousel-inner">
                             @foreach($galleryImages as $key => $img)
                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img src="{{ asset('storage/'.$img) }}" class="d-block w-100 rounded" alt="Gallery Image">
+                                <img src="{{ asset('storage/'.$img) }}" class="d-block w-100 rounded" alt="Gallery Image" loading="lazy">
                             </div>
                             @endforeach
                         </div>

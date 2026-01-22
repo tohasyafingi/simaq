@@ -27,7 +27,7 @@ class Struktur extends Component
     {
         $meta = [
             'title' => 'Struktur Organisasi',
-            'description' => Str::limit(strip_tags(config('app.description', 'Struktur organisasi sekolah')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Struktur organisasi Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'
@@ -35,7 +35,6 @@ class Struktur extends Component
 
         return view('livewire.portal.struktur', [
             'strukturs' => $this->strukturs,
-            'meta' => $meta,
-        ]);
+        ])->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

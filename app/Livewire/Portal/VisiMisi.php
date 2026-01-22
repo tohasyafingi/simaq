@@ -34,12 +34,13 @@ class VisiMisi extends Component
     {
         $meta = [
             'title' => 'Visi dan Misi',
-            'description' => Str::limit(strip_tags(optional($this->visi)->content ?? config('app.description', 'Visi dan misi sekolah')), 160),
+            'description' => Str::limit(strip_tags(optional($this->visi)->content ?? config('app.description', 'Visi dan misi Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(optional($this->visi)->image ?? null),
             'canonical' => url()->current(),
             'og_type' => 'website'
         ];
 
-        return view('livewire.portal.visi-misi')->with('meta', $meta);
+        return view('livewire.portal.visi-misi')
+            ->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

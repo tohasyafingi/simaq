@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATAQ-WSB | Verify Email</title>
+    @php $title = 'Verify Email'; @endphp
     @include('components.layouts.meta')
     {{-- favicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
@@ -142,11 +142,11 @@
     </div>
 
     <div class="copyright small">
+        Copyright &copy; {{ date('Y') }}&nbsp; All Rights Reserved by
         <strong>
-            Copyright &copy; {{ date('Y') }}&nbsp;
-            <a href="#">MATAQ WSB </a>
+            <a href="{{ route('beranda') }}" class="text-decoration-none">MATAQ WONOSOBO </a>
         </strong>
-        {{-- | Support by <a href="#">@tohasyafingi</a> --}}
+        {{-- | Support by <a href="#" class="text-decoration-none"> @tohasyafingi</a> --}}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"

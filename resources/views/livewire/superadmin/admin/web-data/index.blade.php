@@ -195,104 +195,103 @@
         });
     </script>
     @endscript
-@script
-<script>
-    let editContentValue = '';
+    @script
+    <script>
+        let editContentValue = '';
+        /**
+         * Fungsi Inisialisasi Summernote yang Kompatibel dengan BS5 & AdminLTE
+         */
+        function initSummernote(selector, content = '') {
+            let $el = $(selector);
 
-    /**
-     * Fungsi Inisialisasi Summernote yang Kompatibel dengan BS5 & AdminLTE
-     */
-    function initSummernote(selector, content = '') {
-        let $el = $(selector);
-        
-        // Hancurkan instance lama jika ada sebelum membuat baru
-        if ($el.hasClass('note-editor') || $el.next('.note-editor').length) {
-            $el.summernote('destroy');
-        }
-
-        $el.summernote({
-            height: 300,
-            placeholder: 'Masukkan isi konten...',
-            tooltip: false, // MATIKAN TOOLTIP INTERNAL
-            dialogsInBody: true, // PENTING: Agar dialog summernote muncul di atas modal
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['fontname', ['fontname']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ],
-            callbacks: {
-                onInit: function() {
-                    // FIX: Konversi dropdown ke Bootstrap 5 & Hapus Title Penyelamat
-                    $('.note-btn').each(function() {
-                        $(this).removeAttr('title'); 
-                        $(this).removeAttr('data-original-title');
-                        if ($(this).attr('data-toggle') === 'dropdown') {
-                            $(this).attr('data-bs-toggle', 'dropdown');
-                        }
-                    });
-
-                    // Isi konten awal
-                    $el.summernote('code', content);
-                },
-                onChange: function(contents) {
-                    // Sinkronisasi ke Livewire dengan Debounce agar tidak berat
-                    clearTimeout(window.summernoteTimeout);
-                    window.summernoteTimeout = setTimeout(() => {
-                        // Pastikan nama property 'content' sesuai dengan yang ada di Class Livewire Anda
-                        $wire.set('content', contents); 
-                    }, 500);
-                }
+            // Hancurkan instance lama jika ada sebelum membuat baru
+            if ($el.hasClass('note-editor') || $el.next('.note-editor').length) {
+                $el.summernote('destroy');
             }
-        });
-    }
 
-    function destroySummernote(selector) {
-        if ($(selector).next('.note-editor').length) {
-            $(selector).summernote('destroy');
-            $('.tooltip').remove(); // Bersihkan sisa tooltip yang mungkin tertinggal
+            $el.summernote({
+                height: 300,
+                placeholder: 'Masukkan isi konten...',
+                tooltip: false, // MATIKAN TOOLTIP INTERNAL
+                dialogsInBody: true, // PENTING: Agar dialog summernote muncul di atas modal
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ],
+                callbacks: {
+                    onInit: function() {
+                        // FIX: Konversi dropdown ke Bootstrap 5 & Hapus Title Penyelamat
+                        $('.note-btn').each(function() {
+                            $(this).removeAttr('title');
+                            $(this).removeAttr('data-original-title');
+                            if ($(this).attr('data-toggle') === 'dropdown') {
+                                $(this).attr('data-bs-toggle', 'dropdown');
+                            }
+                        });
+
+                        // Isi konten awal
+                        $el.summernote('code', content);
+                    },
+                    onChange: function(contents) {
+                        // Sinkronisasi ke Livewire dengan Debounce agar tidak berat
+                        clearTimeout(window.summernoteTimeout);
+                        window.summernoteTimeout = setTimeout(() => {
+                            // Pastikan nama property 'content' sesuai dengan yang ada di Class Livewire Anda
+                            $wire.set('content', contents);
+                        }, 500);
+                    }
+                }
+            });
         }
-    }
 
-    // --- EVENT HANDLERS ---
+        function destroySummernote(selector) {
+            if ($(selector).next('.note-editor').length) {
+                $(selector).summernote('destroy');
+                $('.tooltip').remove(); // Bersihkan sisa tooltip yang mungkin tertinggal
+            }
+        }
 
-    // CREATE MODAL
-    Livewire.on('openCreateModal', () => {
-        $('#createModal').modal('show');
-    });
+        // --- EVENT HANDLERS ---
 
-    $('#createModal').on('shown.bs.modal', function() {
-        initSummernote('#createContent', '');
-    });
+        // CREATE MODAL
+        Livewire.on('openCreateModal', () => {
+            $('#createModal').modal('show');
+        });
 
-    // EDIT MODAL
-    Livewire.on('openEditModal', (data) => {
-        // Jika data dikirim dalam bentuk array/object, sesuaikan aksesnya (data[0].content atau data.content)
-        editContentValue = (Array.isArray(data) ? data[0].content : data.content) ?? '';
-        $('#editModal').modal('show');
-    });
+        $('#createModal').on('shown.bs.modal', function() {
+            initSummernote('#createContent', '');
+        });
 
-    $('#editModal').on('shown.bs.modal', function() {
-        initSummernote('#editContent', editContentValue);
-    });
+        // EDIT MODAL
+        Livewire.on('openEditModal', (data) => {
+            // Jika data dikirim dalam bentuk array/object, sesuaikan aksesnya (data[0].content atau data.content)
+            editContentValue = (Array.isArray(data) ? data[0].content : data.content) ?? '';
+            $('#editModal').modal('show');
+        });
 
-    // CLEANUP SAAT MODAL DITUTUP
-    $('#createModal, #editModal').on('hidden.bs.modal', function() {
-        destroySummernote('#createContent');
-        destroySummernote('#editContent');
-    });
+        $('#editModal').on('shown.bs.modal', function() {
+            initSummernote('#editContent', editContentValue);
+        });
 
-    // RESET DARI LIVEWIRE
-    Livewire.on('resetSummernote', () => {
-        destroySummernote('#createContent');
-        destroySummernote('#editContent');
-    });
-</script>
-@endscript
+        // CLEANUP SAAT MODAL DITUTUP
+        $('#createModal, #editModal').on('hidden.bs.modal', function() {
+            destroySummernote('#createContent');
+            destroySummernote('#editContent');
+        });
+
+        // RESET DARI LIVEWIRE
+        Livewire.on('resetSummernote', () => {
+            destroySummernote('#createContent');
+            destroySummernote('#editContent');
+        });
+    </script>
+    @endscript
 
 
 </div>

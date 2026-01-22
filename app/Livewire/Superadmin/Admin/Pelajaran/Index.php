@@ -57,22 +57,58 @@ public function render()
     public function store()
     {
         $this->validate([
-            'kd_pelajaran' => 'required|string|unique:pelajarans,kd_pelajaran',
+            'kd_pelajaran' => 'required|string',
             'nama' => 'required|string|max:255',
-            'jurusan_id' => 'required|exists:jurusans,id',
-            'tingkat_kelas_id' => 'required|exists:tingkat_kelas,id',
+            'jurusan_id' => 'required',
+            'tingkat_kelas_id' => 'required',
             'status' => 'required|boolean',
         ]);
 
-        Pelajaran::create([
-            'kd_pelajaran' => $this->kd_pelajaran,
-            'nama' => $this->nama,
-            'jurusan_id' => $this->jurusan_id,
-            'tingkat_kelas_id' => $this->tingkat_kelas_id,
-            'status' => $this->status,
-        ]);
+        // Resolve jurusan collection (single or all)
+        $jurusans = $this->jurusan_id === 'all' ? Jurusan::orderBy('nama')->get() : Jurusan::where('id', $this->jurusan_id)->get();
+        // Resolve tingkat collection (single or all)
+        $tingkat_kelas = $this->tingkat_kelas_id === 'all' ? TingkatKelas::orderByRaw('CAST(tingkat AS UNSIGNED)')->get() : TingkatKelas::where('id', $this->tingkat_kelas_id)->get();
 
-        session()->flash('message', 'Pelajaran berhasil ditambahkan.');
+        // Multiple or single create for combinations of jurusan x tingkat
+        $created = 0;
+        foreach ($jurusans as $j) {
+            foreach ($tingkat_kelas as $tk) {
+                // Build kode as input_kode + '_' + jurusan.kode + '_' + tingkat
+                $base = trim($this->kd_pelajaran);
+                $jurusanKode = isset($j->kode) ? $j->kode : $j->id;
+                $tingkatVal = isset($tk->tingkat) ? $tk->tingkat : $tk->id;
+
+                // sanitize: replace spaces with underscore and remove non-alphanumeric except underscore and dash
+                $parts = [
+                    preg_replace('/[^A-Za-z0-9-_]/', '', str_replace(' ', '_', $base)),
+                    preg_replace('/[^A-Za-z0-9-_]/', '', str_replace(' ', '_', $jurusanKode)),
+                    preg_replace('/[^A-Za-z0-9-_]/', '', str_replace(' ', '_', $tingkatVal)),
+                ];
+
+                $kd = strtoupper(implode('_', array_filter($parts)));
+
+                if (Pelajaran::where('kd_pelajaran', $kd)->exists()) {
+                    continue;
+                }
+
+                Pelajaran::create([
+                    'kd_pelajaran' => $kd,
+                    'nama' => $this->nama,
+                    'jurusan_id' => $j->id,
+                    'tingkat_kelas_id' => $tk->id,
+                    'status' => $this->status,
+                ]);
+
+                $created++;
+            }
+        }
+
+        if ($created === 0) {
+            $this->addError('kd_pelajaran', 'Tidak ada pelajaran baru yang dibuat (mungkin kode sudah ada).');
+            return;
+        }
+
+        session()->flash('message', $created . ' pelajaran berhasil ditambahkan.');
         $this->dispatch('closeCreateModal');
         $this->resetForm();
     }

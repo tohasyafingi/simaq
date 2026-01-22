@@ -15,7 +15,7 @@
                     <div class="text-center mb-4">
                         <img
                             src="{{ asset('storage/'.$sejarah->image) }}"
-                            alt="{{ $sejarah->judul }}"
+                            alt="{{ $sejarah->judul }}" loading="lazy"
                             class="img-fluid rounded">
                     </div>
                     @endif

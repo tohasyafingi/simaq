@@ -27,12 +27,13 @@ class Osis extends Component
     {
         $meta = [
             'title' => 'OSIS',
-            'description' => Str::limit(strip_tags(config('app.description', 'Kegiatan OSIS')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Kegiatan OSIS Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'
         ];
 
-        return view('livewire.portal.osis')->with('meta', $meta);
+        return view('livewire.portal.osis')
+            ->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -75,7 +77,26 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        /** @var User|null $user */
         $user = Auth::user();
+
+        // If user must verify email and hasn't done so, send verification on first login
+        // (do not send at registration). Keep user authenticated and redirect to notice.
+        if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {
+            // send only once: when verification_sent_at is null
+            if (is_null($user->verification_sent_at)) {
+                try {
+                    $user->sendEmailVerificationNotification();
+                    $user->verification_sent_at = now();
+                    $user->save();
+                } catch (\Exception $e) {
+                    // ignore send errors; user will still be redirected to notice
+                }
+            }
+
+            return redirect()->route('verification.notice')
+                ->with('error', 'Silakan verifikasi email Anda terlebih dahulu. Kami telah mengirim link verifikasi ke email Anda.');
+        }
         $route = $this->roleRoutes[$user->role] ?? null;
 
         if ($route && Route::has($route)) {

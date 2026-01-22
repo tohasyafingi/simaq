@@ -26,8 +26,8 @@ class Ppdb extends Component
     public function render()
     {
         $meta = [
-            'title' => 'PPDB',
-            'description' => Str::limit(strip_tags(config('app.description', 'Informasi PPDB')), 160),
+            'title' => 'SPMB',
+            'description' => Str::limit(strip_tags(config('app.description', 'Informasi Pendaftaran (SPMB) Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'

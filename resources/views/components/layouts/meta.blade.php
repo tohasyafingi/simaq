@@ -1,28 +1,31 @@
 @php
-    $meta = $meta ?? [];
-    $siteName = config('app.name');
-    $rawTitle = $meta['title'] ?? ($title ?? '');
+$meta = $meta ?? [];
+// Brand name required by request
+$brand = "MA TAKHASSUS AL-QUR'AN";
+$rawTitle = $meta['title'] ?? ($title ?? '');
 
-    $pageTitle = trim($rawTitle);
-    if (! empty($siteName)) {
-        $pattern = '/^' . preg_quote($siteName, '/') . '\s*\|?\s*/i';
-        $pageTitle = preg_replace($pattern, '', $pageTitle);
-        $patternEnd = '/\s*\|?\s*' . preg_quote($siteName, '/') . '$/i';
-        $pageTitle = preg_replace($patternEnd, '', $pageTitle);
-        $pageTitle = trim($pageTitle);
-    }
+$pageTitle = trim($rawTitle);
 
-    $fullTitle = $siteName . ($pageTitle !== '' ? ' | ' . $pageTitle : '');
+// Determine if current page is the homepage (beranda)
+// Use exact URL comparison to site's root URL
+if (url()->current() === url('/')) {
+	$fullTitle = $brand;
+	$metaTitle = $brand;
+} else {
+	// If a page title exists, use: "{title} | {BRAND}", otherwise fallback to brand
+	$metaTitle = $pageTitle !== '' ? $pageTitle : $brand;
+	$fullTitle = ($pageTitle !== '' ? $pageTitle : $brand) . ' | ' . $brand;
+}
 
-    $description = $meta['description'] ?? config('app.description', 'Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo merupakan lembaga pendidikan formal tingkat menengah atas dibawah naungan Yayasan Al-Asy`ariyyah Wonosobo.');
-    $canonical = $meta['canonical'] ?? url()->current();
-    $image = $meta['image'] ?? asset('assets/favicon.png');
-    $ogType = $meta['og_type'] ?? 'website';
-    $robots = $meta['robots'] ?? 'index, follow';
+$description = $meta['description'] ?? config('app.description', '');
+$canonical = $meta['canonical'] ?? url()->current();
+$image = $meta['image'] ?? asset('assets/favicon.png');
+$ogType = $meta['og_type'] ?? 'website';
+$robots = $meta['robots'] ?? 'index, follow';
 @endphp
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ $fullTitle }}</title>
-<meta name="title" content="{{ $pageTitle }}">
+<meta name="title" content="{{ $fullTitle }}">
 <meta name="description" content="{{ $description }}">
 <link rel="canonical" href="{{ $canonical }}">
 <meta property="og:type" content="{{ $ogType }}">

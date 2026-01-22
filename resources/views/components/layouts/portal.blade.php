@@ -42,4 +42,5 @@
   <script data-navigate-once src="{{ asset('code/assets/js/main.js') }}"></script>
   @livewireScripts
 </body>
+
 </html>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class KaryaIlmiah extends Model
 {
@@ -23,6 +24,12 @@ protected static function booted()
 
     static::updating(function ($karya_ilmiah) {
         $karya_ilmiah->slug = Str::slug($karya_ilmiah->judul);
+    });
+    static::saved(function ($karya) {
+        Cache::forget('seo:sitemap.xml');
+    });
+    static::deleted(function ($karya) {
+        Cache::forget('seo:sitemap.xml');
     });
 }
     public function kategori()

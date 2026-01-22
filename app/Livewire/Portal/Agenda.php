@@ -37,7 +37,7 @@ class Agenda extends Component
 
         $meta = [
             'title' => 'Berita',
-            'description' => Str::limit(strip_tags(config('app.description', 'Berita dan agenda')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Berita dan agenda Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => asset('assets/og-image.png'),
             'canonical' => url()->current(),
             'og_type' => 'website'

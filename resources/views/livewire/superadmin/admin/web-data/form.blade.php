@@ -13,7 +13,7 @@
                         <label>Type</label>
                         <select wire:model="type" class="form-select">
                             <option value="">Pilih type</option>
-                            <option value="tentang">tentang</option>
+                            <option value="tentang">about</option>
                             <option value="sejarah">sejarah</option>
                             <option value="visi">visi</option>
                             <option value="misi">misi</option>
@@ -22,7 +22,7 @@
                             <option value="osis">osis</option>
                             <option value="pramuka">pramuka</option>
                             <option value="tahfidz">tahfidz</option>
-                            <option value="ppdb">ppdb</option>
+                            <option value="ppdb">spmb</option>
                         </select>
                         @error('type') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
@@ -37,7 +37,7 @@
                         <label>Gambar</label>
                         <input type="file" wire:model="newImage" class="form-control" />
                         @include('components.upload-loading', ['target' => 'newImage'])
-                        @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '100px'])
+                        @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '80px'])
                         @if($image)
                         <div class="mt-2"><img src="{{ asset('storage/'.$image) }}" style="height:80px;" /></div>
                         @endif
@@ -47,8 +47,8 @@
                     <div class="mb-3">
                         <label>Content</label>
                         <div wire:ignore>
-    <textarea id="createContent" class="form-control"></textarea>
-</div>
+                            <textarea id="createContent" class="form-control"></textarea>
+                        </div>
 
                         @error('content') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>

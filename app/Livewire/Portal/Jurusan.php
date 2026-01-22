@@ -27,7 +27,7 @@ class Jurusan extends Component
     {
         $meta = [
             'title' => 'Jurusan',
-            'description' => Str::limit(strip_tags(config('app.description', 'Informasi jurusan')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Informasi jurusan Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'

@@ -37,6 +37,11 @@ class Index extends Component
         $rombels = collect();
 
         foreach ($guruPelajarans as $gp) {
+            // pastikan relasi pelajaran ada
+            if (! $gp->pelajaran) {
+                continue;
+            }
+
             $rombelsForPelajaran = Rombel::where('tingkat_kelas_id', $gp->pelajaran->tingkat_kelas_id)
                 ->when($gp->pelajaran->jurusan_id, fn($q) => $q->where('jurusan_id', $gp->pelajaran->jurusan_id))
                 ->when($tahunAjaranAktif, fn($q) => $q->where('tahun_ajaran_id', $tahunAjaranAktif->id))
@@ -51,10 +56,12 @@ class Index extends Component
         $this->jumlah_pelajaran = $jumlahPelajaran;
         $this->jumlah_rombel = $rombels->unique('id')->count();
 
-        // Status guru
-        $this->status_guru = $user->guru->status ? 'Aktif' : 'Tidak Aktif';
+        // Status guru (guard jika relasi guru belum tersedia)
+        $this->status_guru = ($user->guru && isset($user->guru->status) && $user->guru->status)
+            ? 'Aktif'
+            : 'Tidak Aktif';
         
-        if (auth()->check() && auth()->user()->password_changed_at === null) {
+        if (Auth::check() && optional(Auth::user())->password_changed_at === null) {
             $this->showPasswordModal = true;
         }
     }

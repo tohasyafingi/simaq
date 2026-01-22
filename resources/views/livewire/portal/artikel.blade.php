@@ -22,7 +22,7 @@
             @if($book->image)
             <img src="{{ asset('storage/'.$book->image) }}"
               class="card-img-top"
-              alt="{{ $book->judul }}"
+              alt="{{ $book->judul }}" loading="lazy"
               style="height: 300px; object-fit: cover;">
             @endif
             <div class="card-body d-flex flex-column">

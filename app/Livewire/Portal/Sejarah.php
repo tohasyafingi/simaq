@@ -26,12 +26,13 @@ class Sejarah extends Component
     {
         $meta = [
             'title' => 'Sejarah',
-            'description' => Str::limit(strip_tags(optional($this->sejarah)->content ?? config('app.description', 'Sejarah sekolah')), 160),
+            'description' => Str::limit(strip_tags(optional($this->sejarah)->content ?? config('app.description', 'Sejarah Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(optional($this->sejarah)->image ?? null),
             'canonical' => url()->current(),
             'og_type' => 'website'
         ];
 
-        return view('livewire.portal.sejarah')->with('meta', $meta);
+        return view('livewire.portal.sejarah')
+            ->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

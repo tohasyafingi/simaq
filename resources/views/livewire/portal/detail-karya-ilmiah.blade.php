@@ -11,7 +11,7 @@
                     </div>
                     <div class="news-thumbnail mb-4">
                         <img src="{{ $karyaIlmiah->thumbnail_url ?? asset('assets/karya.webp') }}"
-                            alt="{{ $karyaIlmiah->judul }}" class="w-100 rounded shadow-sm news-image">
+                            alt="{{ $karyaIlmiah->judul }}" loading="lazy" class="w-100 rounded shadow-sm news-image">
                     </div>
                     <div class="news-content mb-4">
                         {!! $karyaIlmiah->isi !!}
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="author-box d-flex align-items-center border rounded p-3 bg-light">
-                        <img src="{{ asset('assets/default-image.webp') }}" alt="Author" class="rounded-circle me-3"
+                        <img src="{{ asset('assets/default-image.webp') }}" alt="Author" loading="lazy" class="rounded-circle me-3"
                             style="width:60px; height:60px; object-fit:cover;">
                         <div>
                             <h6 class="mb-1">{{ $karyaIlmiah->author ?? 'Admin Sekolah' }}</h6>

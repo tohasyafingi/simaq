@@ -10,11 +10,11 @@
       <div class="row mb-5">
         @forelse($strukturs as $struktur)
         <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card text-center">
+            <div class="card text-center">
             <img
               src="{{ $struktur->user && $struktur->user->img ? asset('storage/' . $struktur->user->img) : asset('assets/default-image.webp') }}"
               class="card-img-top"
-              alt="{{ $struktur->jabatan }}">
+              alt="{{ $struktur->jabatan }}" loading="lazy">
             <div class="card-body">
               <h5 class="card-title">{{ $struktur->user->name }}</h5>
               <p class="card-text text-muted">{{ $struktur->jabatan }}</p>

@@ -24,7 +24,7 @@ class Contact extends Component
     {
         $meta = [
             'title' => 'Kontak',
-            'description' => Str::limit(strip_tags(optional($this->kontak)->alamat ?? config('app.description', 'Kontak')), 160),
+            'description' => Str::limit(strip_tags(optional($this->kontak)->alamat ?? config('app.description', 'Kontak Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(optional($this->kontak)->image ?? null),
             'canonical' => url()->current(),
             'og_type' => 'website'

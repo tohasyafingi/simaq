@@ -13,7 +13,7 @@
                 <div class="col-lg-4 mb-4">
                     <div class="card h-100">
                         @if($jurusan->image)
-                        <img src="{{ asset('storage/'.$jurusan->image) }}" class="card-img-top" alt="{{ $jurusan->judul }}">
+                        <img src="{{ asset('storage/'.$jurusan->image) }}" class="card-img-top" alt="{{ $jurusan->judul }}" loading="lazy">
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $jurusan->judul }}</h5>

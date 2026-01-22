@@ -38,7 +38,7 @@ class Download extends Component
 
         $meta = [
             'title' => 'Download',
-            'description' => Str::limit(strip_tags(config('app.description', 'Download file dan dokumen')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Download file dan dokumen Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'
@@ -46,7 +46,6 @@ class Download extends Component
 
         return view('livewire.portal.download', [
             'downloads' => $downloads,
-            'meta' => $meta,
-        ]);
+        ])->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

@@ -76,9 +76,9 @@
         </div>
 
         <div class="footer-bottom small">
+            Copyright &copy; {{ date('Y') }}&nbsp; All Rights Reserved by
             <strong>
-                Copyright &copy; {{ date('Y') }}&nbsp;
-                <a href="{{ route('beranda') }}" class="text-decoration-none">MATAQ WSB </a>
+                <a href="{{ route('beranda') }}" class="text-decoration-none">MATAQ WONOSOBO </a>
             </strong>
             {{-- | Support by <a href="#" class="text-decoration-none"> @tohasyafingi</a> --}}
         </div>

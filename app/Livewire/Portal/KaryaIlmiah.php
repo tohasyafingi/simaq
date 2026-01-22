@@ -36,7 +36,7 @@ class KaryaIlmiah extends Component
 
         $meta = [
             'title' => 'Karya Ilmiah',
-            'description' => Str::limit(strip_tags(config('app.description', 'Kumpulan karya ilmiah')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Kumpulan karya ilmiah Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo   ')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'

@@ -27,12 +27,13 @@ class ProgramTahfidz extends Component
     {
         $meta = [
             'title' => 'Program Tahfidz',
-            'description' => Str::limit(strip_tags(config('app.description', 'Program tahfidz sekolah')), 160),
+            'description' => Str::limit(strip_tags(config('app.description', 'Program tahfidz Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website'
         ];
 
-        return view('livewire.portal.program-tahfidz')->with('meta', $meta);
+        return view('livewire.portal.program-tahfidz')
+            ->layout('components.layouts.portal', ['meta' => $meta]);
     }
 }

@@ -12,7 +12,7 @@
 
                     @if($visi && $visi->image)
                     <div class="text-center mb-5">
-                        <img src="{{ asset('storage/'.$visi->image) }}" alt="Visi & Misi" class="img-fluid rounded">
+                        <img src="{{ asset('storage/'.$visi->image) }}" alt="Visi & Misi" loading="lazy" class="img-fluid rounded">
                     </div>
                     @endif
 
@@ -20,11 +20,11 @@
                         <h2 class="section-title text-center">Visi</h2>
                         @if($visi)
                         <div class="card border-0 shadow-sm h-100">
-                            <div class="card-body text-center">
-                                <p style="font-size: 1.25rem; line-height: 1.8;">
-                                    {!! $visi->content !!}
-                                </p>
-                            </div>
+                            <div class="card-body">
+                                    <div class="content-view">
+                                        {!! $visi->content !!}
+                                    </div>
+                                </div>
                         </div>
                         @else
                         <div class="alert alert-warning text-center">Konten visi belum tersedia.</div>
@@ -35,10 +35,10 @@
                         @if($misi)
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-body">
-                                <p style="font-size: 1.5rem; line-height: 2;">
-                                    {!! $misi->content !!}
-                                </p>
-                            </div>
+                                    <div class="content-view">
+                                        {!! $misi->content !!}
+                                    </div>
+                                </div>
                         </div>
                         @else
                         <div class="alert alert-warning text-center">Konten misi belum tersedia.</div>

@@ -19,14 +19,23 @@ class Index extends Component
 
     public function mount()
     {
-        $user = Auth::user()->name ?? 'Siswa';
-        $siswa = Siswa::with(['rombels.tahunAjaran'])->find(Auth::user()->siswa_id);
+        $user = optional(Auth::user());
+        $this->nama_rombel = 'Belum ada Rombel';
+        $this->status_siswa = 'Tidak Aktif';
 
-        // Ambil rombel aktif
-        $rombel_aktif = $siswa->rombels()->wherePivot('status', true)->first();
+        $siswa = null;
+        if ($user && $user->siswa_id) {
+            $siswa = Siswa::with(['rombels.tahunAjaran'])->find($user->siswa_id);
+        }
 
-        $this->nama_rombel = $rombel_aktif->nama ?? 'Belum ada Rombel';
-        $this->status_siswa = $siswa->status ? 'Aktif' : 'Tidak Aktif';
+        // Ambil rombel aktif jika siswa ada
+        $rombel_aktif = $siswa ? $siswa->rombels()->wherePivot('status', true)->first() : null;
+
+        if ($rombel_aktif) {
+            $this->nama_rombel = $rombel_aktif->nama ?? 'Belum ada Rombel';
+        }
+
+        $this->status_siswa = $siswa && isset($siswa->status) && $siswa->status ? 'Aktif' : 'Tidak Aktif';
 
         if ($rombel_aktif) {
             $pelajarans = Pelajaran::where('tingkat_kelas_id', $rombel_aktif->tingkat_kelas_id)
@@ -36,8 +45,7 @@ class Index extends Component
 
             $this->jumlah_pelajaran = $pelajarans->count();
         }
-
-        if (auth()->check() && auth()->user()->password_changed_at === null) {
+        if (Auth::check() && optional(Auth::user())->password_changed_at === null) {
             $this->showPasswordModal = true;
         }
     }

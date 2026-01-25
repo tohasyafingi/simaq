@@ -40,7 +40,7 @@ class Index extends Component
         return [
             'type'     => 'required|string|max:50',
             'judul'    => 'required|string|max:255',
-            'content'  => 'required|string',
+            'content'  => 'nullable|string',
             'link'     => 'nullable|string|max:255',
             'status'   => 'required|boolean',
             'newImage' => 'nullable|image|max:2048',

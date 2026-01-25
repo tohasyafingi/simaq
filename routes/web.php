@@ -86,7 +86,7 @@ Route::get('/jurusan', PortalJurusan::class)->name('jurusan');
 Route::get('/spmb', PortalPpdb::class)->name('ppdb');
 Route::get('/berita', PortalAgenda::class)->name('berita-agenda');
 Route::get('/berita/{slug}', PortalDetailAgenda::class)->name('detail-berita-agenda');
-Route::get('/galeri', PortalGallery::class)->name('galeri');
+Route::get('/gallery', PortalGallery::class)->name('galeri');
 Route::get('/sejarah', PortalSejarah::class)->name('sejarah');
 Route::get('/visi-misi', PortalVisiMisi::class)->name('visi-misi');
 Route::get('/struktur-organisasi', PortalStruktur::class)->name('struktur-organisasi');

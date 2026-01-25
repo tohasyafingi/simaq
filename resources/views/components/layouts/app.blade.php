@@ -3,15 +3,15 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{$title ?? config('app.name')}} | MA TAKHASSUS AL-QUR'AN</title>
+    <title>{{$title ?? config('app.name')}} | MA Takhassus Al-Qur’an Wonosobo</title>
     @include('components.layouts.meta')
 
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon.png')}}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon.png')}}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon.png')}}" />
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/favicon.png')}}" />
-    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('assets/favicon.png')}}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon-32.png')}}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon-16.png')}}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/apple-touch-icon.png')}}" />
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/icon-192.png')}}" />
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('assets/icon-512.png')}}" />
     <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -1,40 +1,74 @@
-<div class="d-flex flex-column min-vh-100">
-    <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
-        <div class="container text-center">
-            <h1>{{ $book->judul }}</h1>
-        </div>
-    </section>
+<div class="news-detail-page py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
 
-    @if($pdfUrl)
-    <section class="pdf-viewer-section flex-grow-1 bg-secondary d-flex">
-        <div class="container-fluid p-0 flex-grow-1 d-flex">
-            <iframe
-                id="pdfViewerIframe"
-                src="about:blank"
-                data-src="{{ asset('pdfjs/web/viewer.html') }}?file={{ urlencode($pdfUrl) }}"
-                loading="lazy"
-                style="border: none; width: 100%; height: 100%; flex-grow: 1;"></iframe>
+            {{-- Judul --}}
+            <h1 class="fw-bold mb-2 text-center">{{ $book->judul }}</h1>
 
-            <noscript>
+            @if($book->description)
+            <p class="text-center text-muted mb-4 small">
+                {{ $book->description }}
+            </p>
+            @endif
+
+            @if($pdfUrl)
+            <div class="pdf-wrapper rounded overflow-hidden border">
+
                 <iframe
-                    src="{{ asset('pdfjs/web/viewer.html') }}?file={{ urlencode($pdfUrl) }}"
-                    style="border: none; width: 100%; height: 100%; flex-grow: 1;"></iframe>
-            </noscript>
+                    id="pdfViewerIframe"
+                    src="about:blank"
+                    data-src="{{ asset('pdfjs/web/viewer.html') }}?file={{ urlencode($pdfUrl) }}#zoom=page-width"
+                    class="pdf-iframe"
+                    loading="lazy"
+                    title="PDF Viewer">
+                </iframe>
+
+                <noscript>
+                    <iframe
+                        src="{{ asset('pdfjs/web/viewer.html') }}?file={{ urlencode($pdfUrl) }}"
+                        class="pdf-iframe"
+                        title="PDF Viewer">
+                    </iframe>
+                </noscript>
+
+            </div>
+            @else
+            <div class="alert alert-warning text-center my-5">
+                File PDF belum tersedia.
+            </div>
+            @endif
 
         </div>
-        @else
-        <div class="alert alert-warning text-center m-5">
-            File PDF belum tersedia.
-        </div>
-        @endif
-    </section>
+    </div>
 
     <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
+        .pdf-wrapper {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background: #f8f9fa;
+        }
+
+        /* Desktop besar */
+        @media (min-width: 992px) {
+            .pdf-wrapper {
+                height: 85vh;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 576px) {
+            .pdf-wrapper {
+                height: 75vh;
+            }
+        }
+
+        .pdf-iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
             height: 100%;
+            border: none;
         }
     </style>
 
@@ -52,6 +86,7 @@
             }
 
             if ('IntersectionObserver' in window) {
+                // Lazy loading dengan IntersectionObserver
                 const io = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -59,15 +94,13 @@
                             observer.unobserve(entry.target);
                         }
                     });
-                }, { rootMargin: '200px' });
+                }, {
+                    rootMargin: '300px' // preload sedikit sebelum terlihat
+                });
                 io.observe(iframe);
             } else {
-                // fallback: load after DOM ready
-                if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                    loadIframe();
-                } else {
-                    document.addEventListener('DOMContentLoaded', loadIframe);
-                }
+                // fallback untuk browser lama
+                window.addEventListener('load', loadIframe);
             }
         })();
     </script>

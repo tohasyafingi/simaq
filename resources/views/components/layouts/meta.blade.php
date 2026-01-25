@@ -1,7 +1,7 @@
 @php
 $meta = $meta ?? [];
 // Brand name required by request
-$brand = "MA TAKHASSUS AL-QUR'AN";
+$brand = "MA Takhassus Al-Qur’an Wonosobo";
 $rawTitle = $meta['title'] ?? ($title ?? '');
 
 $pageTitle = trim($rawTitle);
@@ -14,12 +14,12 @@ if (url()->current() === url('/')) {
 } else {
 	// If a page title exists, use: "{title} | {BRAND}", otherwise fallback to brand
 	$metaTitle = $pageTitle !== '' ? $pageTitle : $brand;
-	$fullTitle = ($pageTitle !== '' ? $pageTitle : $brand) . ' | ' . $brand;
+	$fullTitle = ($pageTitle !== '' ? $pageTitle : $brand) . ' - ' . $brand;
 }
 
 $description = $meta['description'] ?? config('app.description', '');
 $canonical = $meta['canonical'] ?? url()->current();
-$image = $meta['image'] ?? asset('assets/favicon.png');
+$image = $meta['image'] ?? asset('assets/og-image.png');
 $ogType = $meta['og_type'] ?? 'website';
 $robots = $meta['robots'] ?? 'index, follow';
 @endphp
@@ -33,6 +33,9 @@ $robots = $meta['robots'] ?? 'index, follow';
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:url" content="{{ $canonical }}">
 <meta property="og:image" content="{{ $image }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $fullTitle }}">
 <meta name="twitter:description" content="{{ $description }}">

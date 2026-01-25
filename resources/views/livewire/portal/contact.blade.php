@@ -1,40 +1,40 @@
 <div>
     <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
         <div class="container text-center">
-            <h1>Kontak Kami</h1>
+            <h1 data-aos="fade-down" data-aos-duration="800">Kontak Kami</h1>
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" data-aos="fade-up" data-aos-duration="800">
         <div class="container">
-            <h2 class="section-title">Informasi Kontak</h2>
+            <h2 class="section-title" data-aos="fade-up">Informasi Kontak</h2>
 
             @if($kontak)
             <div class="row mb-5">
-                <div class="col-lg-4 mb-4">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="80">
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
+                            <i class="fas fa-map-marker-alt fa-2x" style="color: #1abc9c;"></i>
                             <h5 class="card-title">Alamat</h5>
                             <p class="card-text">{!! nl2br(e($kontak->alamat)) !!}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-4">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="160">
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-phone fa-2x text-primary mb-3"></i>
+                            <i class="fas fa-phone fa-2x" style="color: #1abc9c;"></i>
                             <h5 class="card-title">Telepon</h5>
                             <p class="card-text">{!! nl2br(e($kontak->telepon)) !!}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-4">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="240">
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                            <i class="fas fa-envelope fa-2x" style="color: #1abc9c;"></i>
                             <h5 class="card-title">Email</h5>
                             <p class="card-text">
                                 @if($kontak->email)
@@ -48,10 +48,10 @@
                 </div>
             </div>
 
-            <h2 class="section-title text-center mb-5">Kontak & Lokasi</h2>
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Kontak & Lokasi</h2>
 
             <div class="row mb-5 align-items-stretch">
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="120">
                     <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body p-0 h-100">
                             {!! $kontak->google_map_embed ?? '<p class="text-center my-3">Peta belum tersedia</p>' !!}
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body">
                             <form wire:submit.prevent="sendMessage">

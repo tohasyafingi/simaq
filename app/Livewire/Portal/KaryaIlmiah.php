@@ -29,7 +29,10 @@ class KaryaIlmiah extends Component
         $karya_ilmiahs = Karya::where('status', 1)
             ->where(function ($query) {
                 $query->where('judul', 'like', '%' . $this->search . '%')
-                    ->orWhere('isi', 'like', '%' . $this->search . '%');
+                    ->orWhere('isi', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('kategori', function ($q) {
+                        $q->where('nama', 'like', '%' . $this->search . '%');
+                    });
             })
             ->orderBy('created_at', 'desc')
             ->paginate(12);

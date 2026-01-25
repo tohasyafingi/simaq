@@ -69,7 +69,7 @@
                                             <th>Alamat</th>
                                             <th>Telepon</th>
                                             <th>Email</th>
-                                            <th>Media Sosial</th>
+                                            <th class="text-center">Media Sosial</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -80,11 +80,12 @@
                                             <td>{{ $item->alamat }}</td>
                                             <td>{{ $item->telepon }}</td>
                                             <td>{{ $item->email }}</td>
-                                            <td>
-                                                @if($item->facebook) <a href="{{ $item->facebook }}" target="_blank">FB</a> @endif
-                                                @if($item->twitter) <a href="{{ $item->twitter }}" target="_blank">TW</a> @endif
-                                                @if($item->instagram) <a href="{{ $item->instagram }}" target="_blank">IG</a> @endif
-                                                @if($item->youtube) <a href="{{ $item->youtube }}" target="_blank">YT</a> @endif
+                                            <td class="text-center">
+                                                @if($item->facebook) <a href="{{ $item->facebook }}" target="_blank"><i class="fab fa-facebook"></i></a> @endif
+                                                @if($item->instagram) <a href="{{ $item->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a> @endif
+                                                @if($item->tiktok) <a href="{{ $item->tiktok }}" target="_blank"><i class="fab fa-tiktok"></i></a> @endif
+                                                @if($item->twitter) <a href="{{ $item->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a> @endif
+                                                @if($item->youtube) <a href="{{ $item->youtube }}" target="_blank"><i class="fab fa-youtube"></i></a> @endif
                                             </td>
                                             <td class="text-center">
                                                 <button wire:click="edit({{ $item->id }})" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal">

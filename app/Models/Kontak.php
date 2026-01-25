@@ -20,6 +20,7 @@ class Kontak extends Model
         'facebook',
         'twitter',
         'instagram',
+        'tiktok',
         'youtube',
         'about',
         'copyright',

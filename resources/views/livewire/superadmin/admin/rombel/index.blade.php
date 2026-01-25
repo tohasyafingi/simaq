@@ -121,11 +121,9 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-outline-success">
-                                                    <a wire:navigate href="{{ route('superadmin.admin.detail-rombel.index', $rombel->id) }}" style="text-decoration: none; color: inherit;">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                </button>
+                                                <a class="btn btn-sm btn-outline-success" wire:navigate href="{{ route('superadmin.admin.detail-rombel.index', $rombel->id) }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
                                                 <button wire:click="edit({{ $rombel->id }})"
                                                     class="btn btn-sm btn-outline-primary" title="Edit"
                                                     data-bs-toggle="modal" data-bs-target="#editModal">

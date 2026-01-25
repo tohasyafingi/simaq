@@ -80,7 +80,7 @@
                                             <td>{{ $item->judul }}</td>
                                             <td class="text-center">
                                                 @if($item->status)
-                                                <span class="badge bg-success">Tersedia</span>
+                                                <span class="badge bg-success">Publik</span>
                                                 @else
                                                 <span class="badge bg-secondary">Draft</span>
                                                 @endif

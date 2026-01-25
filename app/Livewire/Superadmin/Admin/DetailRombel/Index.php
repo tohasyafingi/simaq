@@ -20,6 +20,12 @@ class Index extends Component
     public $searchSiswa = '';
     public $paginate = 10;
     public $paginateSiswa = 10;
+    public $siswa_ids = [];
+
+    public function updatedPaginateSiswa()
+    {
+        $this->resetPage();
+    }
 
     public function mount($rombelId)
     {
@@ -29,28 +35,28 @@ class Index extends Component
     public function addSiswa()
     {
         $this->validate([
-            'siswa_id' => 'required|exists:siswas,id',
+            'siswa_ids' => 'required|array|min:1',
+            'siswa_ids.*' => 'exists:siswas,id',
         ]);
 
-        $siswa = Siswa::where('id', $this->siswa_id)
+        $siswas = Siswa::whereIn('id', $this->siswa_ids)
             ->where('status', 'aktif')
-            ->first();
+            ->get();
 
-        if (!$siswa) {
-            session()->flash('message', 'Siswa tidak ditemukan atau tidak aktif.');
-            return;
+        foreach ($siswas as $siswa) {
+
+            if ($siswa->isInAnyRombel()) {
+                continue; // skip siswa yg sudah punya rombel
+            }
+
+            $this->rombel->siswa()->attach($siswa->id, [
+                'status' => 1
+            ]);
         }
-
-        if ($siswa->isInAnyRombel()) {
-            session()->flash('message', 'Siswa sudah tergabung di rombel lain.');
-            return;
-        }
-
-        $this->rombel->siswa()->attach($this->siswa_id, ['status' => 1]);
-
 
         $this->resetInputFields();
-        $this->dispatch('closeCreateModal');
+        $this->dispatch('resetSelect2Siswa');
+
         session()->flash('message', 'Siswa berhasil ditambahkan.');
     }
 
@@ -69,7 +75,7 @@ class Index extends Component
 
     private function resetInputFields()
     {
-        $this->siswa_id = '';
+        $this->siswa_ids = [];
         $this->status = '';
     }
 
@@ -82,11 +88,9 @@ class Index extends Component
     {
         $siswaList = Siswa::where('status', 'aktif')
             ->whereDoesntHave('rombels')
-            ->where(function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('nis', 'like', '%' . $this->search . '%');
-            })
-            ->paginate($this->paginate);
+            ->orderBy('name')
+            ->get();
+
 
         $siswaInRombel = $this->rombel->siswa()
             ->where(function ($query) {

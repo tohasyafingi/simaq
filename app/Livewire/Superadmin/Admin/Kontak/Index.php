@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Superadmin\Admin\Kontak;
 
+use App\Models\Kontak;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Kontak;
 use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\Cache;
 
 #[Title('Data Kontak')]
 class Index extends Component
@@ -24,6 +25,7 @@ class Index extends Component
     public $facebook;
     public $twitter;
     public $instagram;
+    public $tiktok;
     public $youtube;
     public $about;
     public $copyright;
@@ -81,6 +83,7 @@ class Index extends Component
             'google_map_embed' => 'nullable|string',
             'facebook' => 'nullable|string|max:255',
             'twitter' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
             'youtube' => 'nullable|string|max:255',
             'about' => 'nullable|string',
@@ -95,6 +98,7 @@ class Index extends Component
             'facebook' => $this->facebook,
             'twitter' => $this->twitter,
             'instagram' => $this->instagram,
+            'tiktok' => $this->tiktok,
             'youtube' => $this->youtube,
             'about' => $this->about,
             'copyright' => $this->copyright,
@@ -114,6 +118,7 @@ class Index extends Component
         $this->google_map_embed = $kontak->google_map_embed;
         $this->facebook = $kontak->facebook;
         $this->twitter = $kontak->twitter;
+        $this->tiktok = $kontak->tiktok;
         $this->instagram = $kontak->instagram;
         $this->youtube = $kontak->youtube;
         $this->about = $kontak->about;
@@ -121,38 +126,44 @@ class Index extends Component
         $this->isEdit = true;
     }
 
-    public function update()
-    {
-        $this->validate([
-            'alamat' => 'nullable|string',
-            'telepon' => 'nullable|string|max:50',
-            'email' => 'nullable|email|max:255',
-            'google_map_embed' => 'nullable|string',
-            'facebook' => 'nullable|string|max:255',
-            'twitter' => 'nullable|string|max:255',
-            'instagram' => 'nullable|string|max:255',
-            'youtube' => 'nullable|string|max:255',
-            'about' => 'nullable|string',
-            'copyright' => 'nullable|string|max:255',
-        ]);
+public function update()
+{
+    $this->validate([
+        'alamat' => 'nullable|string',
+        'telepon' => 'nullable|string|max:50',
+        'email' => 'nullable|email|max:255',
+        'google_map_embed' => 'nullable|string',
+        'facebook' => 'nullable|string|max:255',
+        'twitter' => 'nullable|string|max:255',
+        'tiktok' => 'nullable|string|max:255',
+        'instagram' => 'nullable|string|max:255',
+        'youtube' => 'nullable|string|max:255',
+        'about' => 'nullable|string',
+        'copyright' => 'nullable|string|max:255',
+    ]);
 
-        $kontak = Kontak::findOrFail($this->kontakId);
-        $kontak->update([
-            'alamat' => $this->alamat,
-            'telepon' => $this->telepon,
-            'email' => $this->email,
-            'google_map_embed' => $this->google_map_embed,
-            'facebook' => $this->facebook,
-            'twitter' => $this->twitter,
-            'instagram' => $this->instagram,
-            'youtube' => $this->youtube,
-            'about' => $this->about,
-            'copyright' => $this->copyright,
-        ]);
+    $kontak = Kontak::findOrFail($this->kontakId);
 
-        session()->flash('message', 'Data berhasil diperbarui!');
-        $this->dispatch('closeEditModal');
-    }
+    $kontak->update([
+        'alamat' => $this->alamat,
+        'telepon' => $this->telepon,
+        'email' => $this->email,
+        'google_map_embed' => $this->google_map_embed,
+        'facebook' => $this->facebook,
+        'twitter' => $this->twitter,
+        'tiktok' => $this->tiktok,
+        'instagram' => $this->instagram,
+        'youtube' => $this->youtube,
+        'about' => $this->about,
+        'copyright' => $this->copyright,
+    ]);
+
+    Cache::forget('footer_kontak');
+
+    session()->flash('message', 'Data berhasil diperbarui!');
+    $this->dispatch('closeEditModal');
+}
+
 
     public function confirmDelete($id)
     {

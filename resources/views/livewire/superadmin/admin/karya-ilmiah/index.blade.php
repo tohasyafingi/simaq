@@ -93,7 +93,7 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($karya->status)
-                                                <span class="badge bg-success">Aktif</span>
+                                                <span class="badge bg-success">Publik</span>
                                                 @else
                                                 <span class="badge bg-secondary">Draft</span>
                                                 @endif

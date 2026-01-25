@@ -26,12 +26,12 @@ body {
 .navbar {
     background-color: var(--primary-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 1rem 0;
+    /* padding: 1rem 0; */
 }
 
 .navbar .container-fluid {
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .navbar-brand {
@@ -111,12 +111,104 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Laptop kecil */
+@media (min-width: 992px) {
+    .navbar .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* Desktop besar */
+@media (min-width: 1200px) {
+    .navbar .container-fluid {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .nav-link {
+        margin: 0 0.25rem;
+        font-size: 0.95rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: var(--primary-color);
+        padding: 1rem;
+        border-radius: 0 0 12px 12px;
+        margin-top: 0.5rem;
+    }
+
+    .navbar-nav {
+        gap: 0.25rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        padding: 0.6rem 0.75rem;
+        border-radius: 6px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        border-bottom: none;
+        background-color: var(--primary-hover);
+    }
+}
+
+@media (max-width: 991.98px) {
+    .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        margin-top: 0.25rem;
+        background-color: rgba(0, 0, 0, 0.15);
+        box-shadow: none;
+        border-radius: 8px;
+        padding: 0.5rem 0;
+    }
+
+    .dropdown-item {
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item.active {
+        background-color: var(--primary-hover);
+    }
+}
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
+    .navbar-brand img {
+        height: 36px;
+    }
+}
+@media (max-width: 991.98px) {
+    .btn-login,
+    .btn-outline-light {
+        width: 100%;
+        margin: 0.5rem 0 0 0;
+        text-align: center;
+    }
+}
+
 /* ===== Hero Section Start ===== */
 .hero-section {
     background:
         linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
         url("/assets/landing.webp") center / cover;
-    height: 650px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,12 +217,21 @@ body {
     position: relative;
 }
 
-/* .hero-content h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-} */
+.page-section {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
+        url("/assets/landing.webp") center / cover;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
 .hero-content h1 {
     font-size: 3.5rem;
     font-weight: 700;
@@ -168,6 +269,171 @@ body {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ================================
+   Event Ticker Container
+================================ */
+.event-ticker {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    min-height: clamp(56px, 8vh, 80px); /* tinggi responsif */
+    padding: 0 1rem;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+    background: var(--primary-color);
+    backdrop-filter: blur(6px);
+    z-index: 5;
+}
+
+/* ================================
+   Track (viewport ticker)
+================================ */
+.ticker-track {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ================================
+   Running Content
+================================ */
+.ticker-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 3rem;
+
+    white-space: nowrap;
+    will-change: transform;
+
+    animation: ticker-scroll 10s linear infinite;
+}
+
+/* Pause on hover */
+.event-ticker:hover .ticker-inner {
+    animation-play-state: paused;
+}
+
+/* ================================
+   Item
+================================ */
+.ticker-item {
+    color: #ffffff;
+    font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+    line-height: 1.4;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.ticker-item:hover {
+    color: #0b3d34;
+}
+/* Separator antar judul */
+.ticker-item:not(:last-child)::after {
+    content: "|";
+    margin-left: 1.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+}
+
+/* ================================
+   Animation
+================================ */
+@keyframes ticker-scroll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* ================================
+   Gradient Fade (kiri & kanan)
+================================ */
+.event-ticker::before,
+.event-ticker::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.event-ticker::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.65), transparent);
+}
+
+.event-ticker::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.65), transparent);
+}
+
+/* ================================
+   Reduced Motion Support
+================================ */
+@media (prefers-reduced-motion: reduce) {
+    .ticker-inner {
+        animation: none;
+        justify-content: center;
+    }
+}
+
+/* ================================
+   Mobile Adjustment
+================================ */
+@media (max-width: 576px) {
+    .event-ticker {
+        min-height: 56px;
+        padding: 0 0.75rem;
+    }
+
+    .ticker-inner {
+        gap: 2rem;
+    }
+}
+
+/* Animation */
+@keyframes ticker-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+@media (max-width: 992px) {
+    .ticker-item {
+        font-size: 0.9rem;
+    }
+
+    .ticker-inner {
+        gap: 2rem;
+        animation-duration: 20s;
+    }
+}
+
+@media (max-width: 576px) {
+    .event-ticker {
+        padding: 10px 0;
+    }
+
+    .ticker-item {
+        font-size: 0.85rem;
+    }
+
+    .ticker-inner {
+        gap: 1.5rem;
+        animation-duration: 18s;
+    }
 }
 
 /* ===== Button Styles Start ===== */
@@ -273,7 +539,6 @@ footer {
     background-color: var(--primary-color);
     color: white;
     padding: 3rem 0 1rem;
-    margin-top: 4rem;
 }
 
 footer h5 {
@@ -461,7 +726,7 @@ footer a:hover {
 @media (max-width: 480px) {
     .hero-section {
         height: 300px;
-        margin-top: 45px;
+        margin-top: 0;
     }
 
     .hero-content h1 {
@@ -520,19 +785,19 @@ footer a:hover {
     margin: 0 auto;
 }
 
-        .badge-category {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #1abc9c;
-            color: white;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            border-radius: 3px;
-            font-weight: bold;
-            z-index: 10;
-        }
-        
+.badge-category {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #1abc9c;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    font-weight: bold;
+    z-index: 10;
+}
+
 .news-detail-page {
     background: #fafbfc;
 }
@@ -582,22 +847,44 @@ footer a:hover {
 }
 
 /* Default background */
-.btn-facebook { background: #3b5998; }
-.btn-twitter  { background: #1da1f2; }
-.btn-whatsapp { background: #25d366; }
-.btn-link     { background: #6c757d; }
+.btn-facebook {
+    background: #3b5998;
+}
+.btn-twitter {
+    background: #1da1f2;
+}
+.btn-whatsapp {
+    background: #25d366;
+}
+.btn-native {
+    background: #6c757d;
+}
+.btn-link {
+    background: #6c757d;
+}
 
 /* Hover effect */
 .btn-social:hover {
     transform: scale(1.15);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Hover warna sesuai brand */
-.btn-facebook:hover { background: #2d4373; }
-.btn-twitter:hover  { background: #0d95e8; }
-.btn-whatsapp:hover { background: #1ebea5; }
-.btn-link:hover     { background: #495057; }
+.btn-facebook:hover {
+    background: #2d4373;
+}
+.btn-twitter:hover {
+    background: #0d95e8;
+}
+.btn-whatsapp:hover {
+    background: #1ebea5;
+}
+.btn-native:hover {
+    background: #495057;
+}
+.btn-link:hover {
+    background: #495057;
+}
 
 /* Author box */
 .author-box {
@@ -615,4 +902,89 @@ footer a:hover {
         height: 36px;
         font-size: 14px;
     }
+}
+
+/* Carousel spacing */
+#quoteCarousel .carousel-item {
+    padding: 30px 0;
+}
+
+/* Header anchor (foto + nama) */
+.quote-header {
+    position: relative;
+}
+
+/* Kontrol carousel */
+.quote-control {
+    position: absolute;
+    top: 90px;
+    /* sejajar antara foto & nama */
+    transform: translateY(-50%);
+    width: auto;
+    opacity: 1;
+    z-index: 10;
+}
+
+.carousel-control-prev.quote-control {
+    left: 8%;
+}
+
+.carousel-control-next.quote-control {
+    right: 8%;
+}
+
+/* Icon styling */
+.quote-control i {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 14px;
+    border-radius: 50%;
+    color: #0000004d;
+    transition: transform 0.2s ease;
+}
+
+.quote-control i:hover {
+    transform: scale(1.15);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .quote-control {
+        top: 80px;
+    }
+
+    .carousel-control-prev.quote-control {
+        left: 4%;
+    }
+
+    .carousel-control-next.quote-control {
+        right: 4%;
+    }
+}
+
+.quote-text {
+    position: relative;
+    line-height: 1.7;
+}
+
+/* Quote icons */
+.quote-text .quote-icon-left,
+.quote-text .quote-icon-right {
+    color: #1abc9c;
+    opacity: 0.5;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+/* Spacing kiri dan kanan */
+.quote-text .quote-icon-left {
+    margin-right: 8px;
+    position: relative;
+    top: -6px;
+}
+
+.quote-text .quote-icon-right {
+    margin-left: 8px;
+    position: relative;
+    bottom: -6px;
 }

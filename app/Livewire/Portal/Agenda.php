@@ -30,13 +30,16 @@ class Agenda extends Component
             ->where('status', 1)
             ->where(function ($query) {
                 $query->where('judul', 'like', '%' . $this->search . '%')
-                    ->orWhere('isi', 'like', '%' . $this->search . '%');
+                    ->orWhere('isi', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('kategori', function ($q) {
+                        $q->where('nama', 'like', '%' . $this->search . '%');
+                    });
             })
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
         $meta = [
-            'title' => 'Berita',
+            'title' => 'Berita & Agenda',
             'description' => Str::limit(strip_tags(config('app.description', 'Berita dan agenda Madrasah Aliyah (MA) Takhassus Al-Qur`an Wonosobo')), 160),
             'image' => asset('assets/og-image.png'),
             'canonical' => url()->current(),

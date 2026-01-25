@@ -22,28 +22,21 @@
         </div>
         <div class="card-body">
             <form wire:submit.prevent="addSiswa">
-                <div class="row mb-3 align-items-end">
-                    <!-- Pencarian Siswa -->
-                    <div class="col-12 col-md-3 mb-3 mb-md-0">
-                        <label for="search_siswa" class="form-label">Cari Siswa (Nama atau NIS)</label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-search"></i>
-                            </span>
-                            <input wire:model.live="search" type="text" class="form-control" id="search_siswa" placeholder="Cari siswa berdasarkan nama atau NIS">
-                        </div>
-                    </div>
+                <div class="row mb-3 align-items-start">
 
                     <!-- Dropdown Pilih Siswa -->
-                    <div class="col-12 col-md-4 mb-3 mb-md-0">
-                        <label for="siswa_id" class="form-label">Pilih Siswa</label>
-                        <select wire:model.live="siswa_id" class="form-select" id="siswa_id">
-                            <option value="">-- Pilih Siswa --</option> Agar menampilkan nama siswa ketika user mengetikkan di pencarian
-                            @foreach($siswaList as $siswa)
-                            <option value="{{ $siswa->id }}">{{ $siswa->nis }} - {{ $siswa->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('siswa_id') <span class="text-danger">{{ $message }}</span> @enderror
+                    <label class="form-label">Pilih Siswa</label>
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="form-group local-forms" wire:ignore>
+                            <select id="select-siswa" class="form-control" multiple>
+                                @foreach($siswaList as $siswa)
+                                <option value="{{ $siswa->id }}">
+                                    {{ $siswa->nis }} - {{ $siswa->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('siswa_ids') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Tombol Tambah Siswa -->
@@ -65,13 +58,14 @@
                 <div class="row mb-3 align-items-end">
                     <div class="col-12 col-md-2 mb-3 mb-md-0">
                         <label for="paginate" class="form-label">Tampilkan</label>
-                        <select wire:model.live="paginate" id="paginate" class="form-select">
+                        <select wire:model.live="paginateSiswa" id="paginate" class="form-select">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
                         </select>
                     </div>
+
                     <div class="col-12 col-md-4">
                         <div class="input-group">
                             <span class="input-group-text">
@@ -109,8 +103,8 @@
                             <td class="text-center">
                                 <div class="d-flex justify-content-center">
                                     <button wire:click="updateStatus({{ $siswa->id }}, {{ $siswa->pivot->status ? '0' : '1' }})"
-                                        class="btn btn-sm btn-outline-warning me-2">
-                                        <i class="fa fa-refresh"></i> Update Status
+                                        class="btn btn-sm btn-outline-success me-2">
+                                        <i class="fa fa-refresh"></i> Update
                                     </button>
                                     <button wire:click="deleteSiswa({{ $siswa->id }})"
                                         class="btn btn-sm btn-outline-danger">
@@ -127,34 +121,29 @@
             {{ $siswaInRombel->links() }}
         </div>
     </div>
-
-    @push('scripts')
+    @script
     <script>
-        $wire.on('closeCreateModal', () => {
-            Swal.fire({
-                title: "Sukses",
-                text: "Data Berhasil Ditambah!",
-                icon: "success"
-            });
+        document.addEventListener('livewire:navigated', () => {
+            initSelect2Siswa();
         });
-        $wire.on('openDeleteModal', () => {
-            const modalElement = document.getElementById('deleteModal');
-            const modal = new bootstrap.Modal(modalElement);
-            modal.show();
-        });
-        $wire.on('closeDeleteModal', () => {
-            const modalElement = document.getElementById('deleteModal');
-            const modal = bootstrap.Modal.getInstance(modalElement);
-            if (modal) {
-                modal.hide();
-            }
-            Swal.fire({
-                title: "Sukses",
-                text: "Data Berhasil Dihapus!",
-                icon: "success"
+
+        function initSelect2Siswa() {
+            $('#select-siswa').select2({
+                placeholder: "Pilih Siswa",
+                allowClear: true,
+                width: '100%',
+
             });
+
+            $('#select-siswa').on('change', function() {
+                @this.set('siswa_ids', $(this).val());
+            });
+        }
+
+        $wire.on('resetSelect2Siswa', () => {
+            $('#select-siswa').val(null).trigger('change');
         });
     </script>
-    @endpush
+    @endscript
 
 </div>

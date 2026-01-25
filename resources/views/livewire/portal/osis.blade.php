@@ -1,7 +1,7 @@
 <div>
     <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
         <div class="container text-center">
-            <h1>OSIS</h1>
+            <h1 data-aos="fade-down" data-aos-duration="800">OSIS</h1>
         </div>
     </section>
 
@@ -9,17 +9,17 @@
         <div class="container">
             @forelse($activities as $activity)
                 <div class="row align-items-start justify-content-center">
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-                        <h2 class="section-title">{{ $activity->judul }}</h2>
-                        <div class="content-text">
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
+                        <h2 class="section-title" data-aos="fade-up">{{ $activity->judul }}</h2>
+                        <div class="content-text" data-aos="fade-up" data-aos-delay="80">
                             {!! $activity->content !!}
                         </div>
                         @if($activity->link)
-                        <a href="{{ $activity->link }}" target="_blank" class="btn btn-primary mt-3">Learn More</a>
+                        <a href="{{ $activity->link }}" target="_blank" class="btn btn-primary mt-3" data-aos="fade-up" data-aos-delay="160">Learn More</a>
                         @endif
                     </div>
                     @if($activity->image)
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" data-aos="zoom-in">
                         <img src="{{ asset('storage/'.$activity->image) }}" 
                              alt="{{ $activity->judul }}" loading="lazy"
                              class="img-fluid rounded">

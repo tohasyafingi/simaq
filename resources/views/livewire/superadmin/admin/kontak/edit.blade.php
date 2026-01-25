@@ -57,17 +57,25 @@
 
                         <div class="col-12 col-sm-6 py-2">
                             <div class="form-group local-forms">
-                                <label>Twitter</label>
-                                <input wire:model="twitter" type="text" class="form-control" placeholder="Masukkan link Twitter">
-                                @error('twitter') <small class="text-danger">{{ $message }}</small> @enderror
+                                <label>Instagram</label>
+                                <input wire:model="instagram" type="text" class="form-control" placeholder="Masukkan link Instagram">
+                                @error('instagram') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
                         </div>
 
                         <div class="col-12 col-sm-6 py-2">
                             <div class="form-group local-forms">
-                                <label>Instagram</label>
-                                <input wire:model="instagram" type="text" class="form-control" placeholder="Masukkan link Instagram">
-                                @error('instagram') <small class="text-danger">{{ $message }}</small> @enderror
+                                <label>Tiktok</label>
+                                <input wire:model="tiktok" type="text" class="form-control" placeholder="Masukkan link Tiktok">
+                                @error('tiktok') <small class="text-danger">{{ $message }}</small> @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 py-2">
+                            <div class="form-group local-forms">
+                                <label>Twitter</label>
+                                <input wire:model="twitter" type="text" class="form-control" placeholder="Masukkan link Twitter">
+                                @error('twitter') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
                         </div>
 

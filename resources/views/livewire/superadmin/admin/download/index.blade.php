@@ -78,9 +78,11 @@
                                             </td>
                                             <td>{{ $item->judul }}</td>
                                             <td class="text-center">
-                                                <span class="badge {{ $item->status ? 'bg-success':'bg-secondary' }}">
-                                                    {{ $item->status ? 'Aktif':'Nonaktif' }}
-                                                </span>
+                                                @if($item->status)
+                                                <span class="badge bg-success">Publik</span>
+                                                @else
+                                                <span class="badge bg-secondary">Draft</span>
+                                                @endif
                                             </td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-1">

@@ -25,15 +25,13 @@
 
                         <!-- Pelajaran -->
                         <div class="col-12 col-sm-6 py-2">
-                            <div class="form-group local-forms">
+                            <div class="form-group local-forms" wire:ignore>
                                 <label>Pelajaran <span class="text-danger">*</span></label>
-                                <select wire:model="pelajaran_id" class="form-control">
-                                    <option value="">Pilih Pelajaran</option>
+                                <select id="select-pelajaran-edit" class="form-control select2-cat" multiple>
                                     @foreach($pelajarans as $p)
-                                    <option value="{{ $p->id }}">
-                                        {{ $p->nama }}
+                                    <option value="{{ $p->id }}">{{ $p->nama }}
                                         @if($p->tingkatKelas) - {{ $p->tingkatKelas->tingkat }} @endif
-                                        @if($p->jurusan) - {{ $p->jurusan->nama }} @endif
+                                        @if($p->jurusan) - {{ $p->jurusan->kode }} @endif
                                     </option>
                                     @endforeach
                                 </select>

@@ -108,44 +108,51 @@
                                             <th class="text-center">No</th>
                                             <th>Guru</th>
                                             <th>Pelajaran</th>
-                                            <th>Tingkat Kelas</th>
-                                            <th>Jurusan</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
-                                        @forelse($guru_pelajarans as $index => $item)
+                                        @forelse($guru_pelajarans as $index => $guru)
                                         <tr>
                                             <td class="text-center">{{ $guru_pelajarans->firstItem() + $index }}</td>
-                                            <td>{{ $item->guru->name ?? '-' }}</td>
-                                            <td>{{ $item->pelajaran->nama ?? '-' }}</td>
-                                            <td>{{ $item->pelajaran->tingkatKelas->tingkat ?? '-' }}</td>
-                                            <td>{{ $item->pelajaran->jurusan->nama ?? '-' }}</td>
+
+                                            <td>{{ $guru->name ?? '-' }}</td>
+
+                                            <td>
+                                                <ul class="mb-0">
+                                                    @foreach($guru->guruPelajarans as $gp)
+                                                    <li>
+                                                        {{ $gp->pelajaran->nama ?? '-' }}
+                                                        @if($gp->pelajaran->tingkatKelas) - {{ $gp->pelajaran->tingkatKelas->tingkat }} @endif
+                                                        @if($gp->pelajaran->jurusan) - {{ $gp->pelajaran->jurusan->kode }} @endif
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
 
                                             <td class="text-center">
-                                                @if($item->tahun_ajaran_id == ($tahunAjaranAktif->id ?? null))
-                                                <span class="badge {{ $item->status ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ $item->status ? 'Aktif' : 'Tidak Aktif' }}
-                                                </span>
+                                                @if($guru->guruPelajarans->where('status',1)->count())
+                                                <span class="badge bg-success">Aktif</span>
                                                 @else
-                                                <span class="badge bg-secondary">Riwayat</span>
+                                                <span class="badge bg-secondary">Nonaktif</span>
                                                 @endif
                                             </td>
 
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit({{ $item->id }})"
-                                                        class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#editModal" title="Edit">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button wire:click="confirmDelete({{ $item->id }})"
-                                                        class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal" title="Hapus">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
+                                                <button wire:click="edit({{ $guru->id }})"
+                                                    class="btn btn-sm btn-outline-primary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editModal">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+
+                                                <button wire:click="confirmDelete({{ $guru->id }})"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                         @empty
@@ -232,4 +239,60 @@
     </script>
     @endscript
     <!--end::App Content-->
+    @script
+    <script>
+        document.addEventListener('livewire:navigated', () => {
+            initCreateSelect2();
+            initEditSelect2();
+        });
+
+        /* ================= CREATE ================= */
+        function initCreateSelect2() {
+            $('#select-pelajaran-create').select2({
+                placeholder: "Pilih Pelajaran",
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#createModal')
+            });
+
+            $('#select-pelajaran-create').on('change', function() {
+                @this.set('pelajaran_id', $(this).val());
+            });
+        }
+
+        /* ================= EDIT ================= */
+        function initEditSelect2() {
+            $('#select-pelajaran-edit').select2({
+                placeholder: "Pilih Pelajaran",
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#editModal')
+            });
+
+            $('#select-pelajaran-edit').on('change', function() {
+                @this.set('pelajaran_id', $(this).val());
+            });
+        }
+
+        /* ================= RESET ================= */
+        $wire.on('resetSelect2Create', () => {
+            $('#select-pelajaran-create').val(null).trigger('change');
+        });
+
+        $wire.on('resetSelect2Edit', () => {
+            $('#select-pelajaran-edit').val(null).trigger('change');
+        });
+
+
+        /* ========== SET DATA SAAT EDIT ========== */
+        $wire.on('editModalOpen', (payload) => {
+            setTimeout(() => {
+                $('#select-pelajaran-edit')
+                    .val(payload.pelajaran_ids ?? payload[0]?.pelajaran_ids ?? [])
+                    .trigger('change');
+            }, 100);
+        });
+    </script>
+    @endscript
+
 </div>

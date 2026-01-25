@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand" href="{{ route('beranda') }}">
       <img src="{{ asset('assets/logo.webp') }}" alt="MATAQ WSB" style="height: 45px; width: auto;"> MATAQ WSB
     </a>

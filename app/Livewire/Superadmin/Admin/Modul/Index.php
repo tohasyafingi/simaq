@@ -24,6 +24,7 @@ class Index extends Component
     public $modul_id, $nama, $pelajaran_id, $link, $file, $status = 1;
     public $pelajarans, $pelajaran_nama, $tingkat_nama, $jurusan_nama;
     public $tahunAjarans, $tahunAjaranAktif;
+    public $tahun_ajaran_id;
 
     // Initializing values on component mount
     public function mount()
@@ -31,6 +32,9 @@ class Index extends Component
         $this->pelajarans = Pelajaran::where('status', 1)->get();
         $this->tahunAjarans = TahunAjaran::orderBy('tahun', 'desc')->get();
         $this->tahunAjaranAktif = TahunAjaran::where('status', true)->first();
+        if ($this->tahunAjaranAktif) {
+            $this->tahun_ajaran_id = $this->tahunAjaranAktif->id;
+        }
         if ($this->modul_id) {
             $modul = Modul::find($this->modul_id);
             $this->existingFile = $modul->file;

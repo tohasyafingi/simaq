@@ -18,7 +18,7 @@ class Index extends Component
 
     public $title    = 'Data Berita';
     public $search   = '';
-    public $paginate = 10;
+    public $paginate = 12;
 
     public $deleteId = null;
 

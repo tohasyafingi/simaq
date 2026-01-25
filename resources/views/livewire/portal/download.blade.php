@@ -1,23 +1,29 @@
 <div>
     <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
         <div class="container text-center">
-            <h1>Downloads</h1>
+            <h1 data-aos="fade-down" data-aos-duration="800">Downloads</h1>
         </div>
     </section>
 
     <section class="section pt-3 pb-4">
         <div class="container">
-            <div class="d-flex justify-content-end mb-3">
-                <input type="text" class="form-control w-25" placeholder="Search downloads..." wire:model.live="search">
+            <div class="row justify-content-end">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search downloads..."
+                        wire:model.live="search">
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" data-aos="fade-up" data-aos-duration="800">
         <div class="container">
             <div class="row mb-5">
                 @forelse($downloads as $item)
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="120">
                     <div class="card h-100">
                         @if($item->image)
                         <img src="{{ asset('storage/'.$item->image) }}"
@@ -31,11 +37,12 @@
                             <p class="card-text">{{ $item->description }}</p>
                             @endif
                             @if($item->file)
-                            <a href="{{ asset('storage/'.$item->file) }}"
-                                target="_blank"
+                            <button
+                                wire:click="downloadFile({{ $item->id }})"
+                                wire:loading.attr="disabled"
                                 class="btn btn-primary btn-sm mt-auto">
                                 <i class="fas fa-download"></i> Unduh
-                            </a>
+                            </button>
                             @endif
                         </div>
                     </div>

@@ -92,14 +92,14 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($item->status)
-                                                <span class="badge bg-success">Published</span>
+                                                <span class="badge bg-success">Publik</span>
                                                 @else
                                                 <span class="badge bg-secondary">Draft</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-1">
-                                                    <button wire:click="edit({{$item->id}})" class="btn btn-sm btn-outline-primary">
+                                                    <button wire:click="edit({{$item->id}})" class="btn btn-sm btn-outline-primary" title="Edit">
 
                                                         <i class="fa fa-edit"></i>
                                                     </button>

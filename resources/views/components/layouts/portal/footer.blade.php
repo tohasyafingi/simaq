@@ -3,7 +3,7 @@
         <div class="row">
 
             <div class="col-md-3 mb-4">
-                <h5>Tentang Kami</h5>
+                <h5>MA Takhassus Al-Qur'an Wonosobo</h5>
                 <p>
                     {{ $kontak->about ?? 'Informasi belum tersedia.' }}
                 </p>
@@ -37,10 +37,10 @@
             <div class="col-md-3 mb-4">
                 <h5>Quick Links</h5>
                 <ul style="list-style: none; padding: 0">
-                    <li><a href="{{ route('beranda') }}">Home</a></li>
-                    <li><a href="{{ route('berita-agenda') }}">Berita</a></li>
-                    <li><a href="{{ route('ppdb') }}">SPMB</a></li>
-                    <li><a href="{{ route('kontak') }}">Contact</a></li>
+                    <li><a wire:navigate href="{{ route('beranda') }}">Home</a></li>
+                    <li><a wire:navigate href="{{ route('berita-agenda') }}">Berita</a></li>
+                    <li><a wire:navigate href="{{ route('ppdb') }}">SPMB</a></li>
+                    <li><a wire:navigate href="{{ route('kontak') }}">Contact</a></li>
                 </ul>
             </div>
 
@@ -53,15 +53,21 @@
                     </a>
                     @endif
 
-                    @if($kontak?->twitter)
-                    <a href="{{ $kontak->twitter }}" target="_blank">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    @endif
-
                     @if($kontak?->instagram)
                     <a href="{{ $kontak->instagram }}" target="_blank">
                         <i class="fab fa-instagram"></i>
+                    </a>
+                    @endif
+
+                    @if($kontak?->tiktok)
+                    <a href="{{ $kontak->tiktok }}" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    @endif
+
+                    @if($kontak?->twitter)
+                    <a href="{{ $kontak->twitter }}" target="_blank">
+                        <i class="fab fa-twitter"></i>
                     </a>
                     @endif
 

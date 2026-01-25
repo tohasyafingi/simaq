@@ -88,7 +88,7 @@
                                             <td>{{ Str::limit(strip_tags($berita->isi), 50) }}</td>
                                             <td class="text-center">
                                                 @if($berita->status)
-                                                <span class="badge bg-success">Aktif</span>
+                                                <span class="badge bg-success">Publik</span>
                                                 @else
                                                 <span class="badge bg-secondary">Draft</span>
                                                 @endif

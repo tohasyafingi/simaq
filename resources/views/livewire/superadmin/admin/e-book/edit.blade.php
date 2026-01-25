@@ -69,6 +69,14 @@
                             <input wire:model="newFile" type="file"
                                 class="form-control"
                                 accept="application/pdf">
+                            @if($file)
+                            <div class="mb-2 small text-muted">
+                                <strong>File saat ini:</strong>
+                                <a href="{{ Storage::url($file) }}" target="_blank" class="text-decoration-none">
+                                    {{ basename($file) }}
+                                </a>
+                            </div>
+                            @endif
                             @include('components.upload-loading', ['target' => 'newFile', 'label' => 'Mengunggah file...'])
                             @include('components.upload-preview', ['file' => $newFile])
 

@@ -20,8 +20,10 @@ class Index extends Component
     public $karya_ilmiahs;
     public $ppdb;
     public $tentang;
-    public $galleryImages = [];
     public $kontak;
+    public $galleryImages = [];
+    public $selectedGallery = null;
+
     public function mount()
     {
         $this->ppdb = Profiles::where('type', 'ppdb')
@@ -42,16 +44,19 @@ class Index extends Component
             ->get();
         $this->kontak = Kontak::latest()->first();
     }
+
     public function selectGallery($id)
     {
         $gallery = PhotoGallery::with('details')->findOrFail($id);
         $this->galleryImages = $gallery->details->pluck('image_path')->toArray();
         $this->dispatch('openGalleryModal');
     }
+
     public function render()
     {
+
         $galleries = PhotoGallery::withCount('details')
-            ->where('status', true) 
+            ->where('status', true)
             ->latest()
             ->take(3)
             ->get();
@@ -59,7 +64,7 @@ class Index extends Component
             'title' => 'Beranda',
             // 'description' => Str::limit(strip_tags(optional($this->tentang->first())->content ?? config('app.description', 'MA Takhassus Al-Qur’an Wonosobo berdiri atas kepedulian Yayasan Al-Asy’ariyyah terhadap perkembangan pendidikan di Kabupaten Wonosobo. Atas prakarsa KH. Achmad Faqih Muntaha, pada tahun 2007 dirintislah lembaga pendidikan menengah berbasis pesantren yang terbuka bagi seluruh lapisan masyarakat tanpa membedakan latar belakang ekonomi maupun sosial.')), 160),
             'description' => Str::limit(strip_tags(config('app.description', 'MA Takhassus Al-Qur’an Wonosobo berdiri atas kepedulian Yayasan Al-Asy’ariyyah terhadap perkembangan pendidikan di Kabupaten Wonosobo.')), 160),
-            
+
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website',

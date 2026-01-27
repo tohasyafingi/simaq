@@ -42,7 +42,16 @@ class Index extends Component
             ->orderBy('urutan', 'asc')
             ->paginate($this->paginate);
 
-        $users = User::whereIn('role', ['admin', 'guru', 'bendahara', 'karyawan'])->get();
+        // Exclude users already assigned to struktur (but allow current selected user during edit)
+        $assignedIds = Struktur::whereNotNull('user_id')->pluck('user_id')->toArray();
+        // If editing, allow the current user_id to appear in the list
+        if ($this->isEdit && $this->user_id) {
+            $assignedIds = array_diff($assignedIds, [$this->user_id]);
+        }
+
+        $users = User::whereIn('role', ['admin', 'guru', 'bendahara', 'karyawan'])
+            ->when(!empty($assignedIds), fn($q) => $q->whereNotIn('id', $assignedIds))
+            ->get();
 
         return view('livewire.superadmin.admin.struktur.index', [
             'strukturs' => $strukturs,

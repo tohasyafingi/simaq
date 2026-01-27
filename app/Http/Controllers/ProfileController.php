@@ -14,11 +14,9 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request): RedirectResponse|View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        return Redirect::route('beranda');
     }
 
     /**
@@ -34,7 +32,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('beranda')->with('status', 'profile-updated');
     }
 
     /**

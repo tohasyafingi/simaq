@@ -56,11 +56,9 @@
         }
       };
     }
-    window.handlePreloader?.(true);
     window.initAOS?.();
 
     document.addEventListener('livewire:navigated', () => {
-      window.handlePreloader?.(false);
       window.initAOS?.();
 
       window.scrollTo(0, 0);
@@ -83,6 +81,16 @@
       if (e.target.tagName === 'IMG') e.preventDefault();
     });
   </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll(
+        'iframe[src*="youtube.com"], iframe[src*="youtu.be"]'
+    ).forEach(iframe => {
+        iframe.setAttribute('loading', 'lazy');
+    });
+});
+</script>
+
   @livewireScripts
 </body>
 

@@ -240,59 +240,75 @@
     @endscript
     <!--end::App Content-->
     @script
-    <script>
-        document.addEventListener('livewire:navigated', () => {
-            initCreateSelect2();
-            initEditSelect2();
-        });
-
-        /* ================= CREATE ================= */
-        function initCreateSelect2() {
-            $('#select-pelajaran-create').select2({
-                placeholder: "Pilih Pelajaran",
-                allowClear: true,
-                width: '100%',
-                dropdownParent: $('#createModal')
+        <script>
+            document.addEventListener('livewire:navigated', () => {
+                initCreateSelect2();
+                initEditSelect2();
             });
 
-            $('#select-pelajaran-create').on('change', function() {
-                @this.set('pelajaran_id', $(this).val());
+            // Helper: find the closest Livewire component id and set a property safely
+            function _setLivewirePropertyFromElement(element, prop, value) {
+                try {
+                    var wrapper = element.closest('[wire\\:id]');
+                    if (!wrapper) return;
+                    var id = wrapper.getAttribute('wire:id') || wrapper.getAttribute('wire:id');
+                    if (!id) return;
+                    if (window.Livewire && typeof window.Livewire.find === 'function') {
+                        window.Livewire.find(id).set(prop, value);
+                    }
+                } catch (e) {
+                    // swallow errors to avoid breaking UI navigation
+                    console.warn('Livewire set failed', e);
+                }
+            }
+
+            /* ================= CREATE ================= */
+            function initCreateSelect2() {
+                $('#select-pelajaran-create').select2({
+                    placeholder: "Pilih Pelajaran",
+                    allowClear: true,
+                    width: '100%',
+                    dropdownParent: $('#createModal')
+                });
+
+                $('#select-pelajaran-create').on('change', function() {
+                    _setLivewirePropertyFromElement(this, 'pelajaran_id', $(this).val());
+                });
+            }
+
+            /* ================= EDIT ================= */
+            function initEditSelect2() {
+                $('#select-pelajaran-edit').select2({
+                    placeholder: "Pilih Pelajaran",
+                    allowClear: true,
+                    width: '100%',
+                    dropdownParent: $('#editModal')
+                });
+
+                $('#select-pelajaran-edit').on('change', function() {
+                    _setLivewirePropertyFromElement(this, 'pelajaran_id', $(this).val());
+                });
+            }
+
+            /* ================= RESET ================= */
+            $wire.on('resetSelect2Create', () => {
+                $('#select-pelajaran-create').val(null).trigger('change');
             });
-        }
 
-        /* ================= EDIT ================= */
-        function initEditSelect2() {
-            $('#select-pelajaran-edit').select2({
-                placeholder: "Pilih Pelajaran",
-                allowClear: true,
-                width: '100%',
-                dropdownParent: $('#editModal')
+            $wire.on('resetSelect2Edit', () => {
+                $('#select-pelajaran-edit').val(null).trigger('change');
             });
 
-            $('#select-pelajaran-edit').on('change', function() {
-                @this.set('pelajaran_id', $(this).val());
+
+            /* ========== SET DATA SAAT EDIT ========== */
+            $wire.on('editModalOpen', (payload) => {
+                setTimeout(() => {
+                    $('#select-pelajaran-edit')
+                        .val(payload.pelajaran_ids ?? payload[0]?.pelajaran_ids ?? [])
+                        .trigger('change');
+                }, 100);
             });
-        }
-
-        /* ================= RESET ================= */
-        $wire.on('resetSelect2Create', () => {
-            $('#select-pelajaran-create').val(null).trigger('change');
-        });
-
-        $wire.on('resetSelect2Edit', () => {
-            $('#select-pelajaran-edit').val(null).trigger('change');
-        });
-
-
-        /* ========== SET DATA SAAT EDIT ========== */
-        $wire.on('editModalOpen', (payload) => {
-            setTimeout(() => {
-                $('#select-pelajaran-edit')
-                    .val(payload.pelajaran_ids ?? payload[0]?.pelajaran_ids ?? [])
-                    .trigger('change');
-            }, 100);
-        });
-    </script>
-    @endscript
+        </script>
+        @endscript
 
 </div>

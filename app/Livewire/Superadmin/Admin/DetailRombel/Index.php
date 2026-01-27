@@ -44,18 +44,17 @@ class Index extends Component
             ->get();
 
         foreach ($siswas as $siswa) {
-
             if ($siswa->isInAnyRombel()) {
-                continue; // skip siswa yg sudah punya rombel
+                continue;
             }
-
-            $this->rombel->siswa()->attach($siswa->id, [
-                'status' => 1
-            ]);
+            $this->rombel->siswa()->attach($siswa->id, ['status' => 1]);
         }
 
         $this->resetInputFields();
+
         $this->dispatch('resetSelect2Siswa');
+
+        $this->dispatch('refreshSelect2');
 
         session()->flash('message', 'Siswa berhasil ditambahkan.');
     }
@@ -69,6 +68,7 @@ class Index extends Component
     public function deleteSiswa($siswaId)
     {
         $this->rombel->siswa()->detach($siswaId);
+        $this->dispatch('refreshSelect2');
         $this->dispatch('closeDeleteModal');
         session()->flash('message', 'Siswa berhasil dihapus.');
     }

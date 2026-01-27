@@ -20,14 +20,14 @@
             <div class="row align-items-center">
 
                 <div class="col-lg-8">
-                    <div class="home-text" data-aos="fade-up" data-aos-delay="100">
+                    <div class="home-text" data-aos="fade-right" data-aos-delay="100">
 
                         <span class="tagline">Selamat Datang!</span>
 
                         @php
                         $homeTitle = $homeContent->judul
                         ?? 'MA Takhassus Al-Qur\'an Wonosobo';
-                        $homeDescription = $homeContent->description
+                        $homeDescription = $homeContent->link
                         ?? 'Terwujudnya Insan Madrasah yang Unggul dalam Kualitas dan Berjiwa Agamis.';
                         @endphp
                         <h1 class="home-title">
@@ -37,12 +37,12 @@
                             {{ $homeDescription }}
                         </p>
 
-                        <div class="home-actions" data-aos="fade-up" data-aos-delay="200">
-                            <a wire:navigate href="{{ route('ppdb') }}" class="btn btn-primary">Pendaftaran</a>
+                        <div class="home-actions" data-aos="fade-right" data-aos-delay="200">
+                            <a wire:navigate href="{{ route('ppdb') }}" class="btn btn-primary">SPMB</a>
                             <a href="#about" class="btn btn-outline">Learn More</a>
                         </div>
 
-                        <div class="home-features" data-aos="fade-up" data-aos-delay="300">
+                        <div class="home-features" data-aos="fade-right" data-aos-delay="300">
                             @if($kontak?->instagram)
                             <a href="{{ $kontak->instagram }}" class="feature-item" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                                 <i class="bi bi-instagram"></i>

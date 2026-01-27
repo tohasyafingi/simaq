@@ -22,12 +22,15 @@
         </div>
         <div class="card-body">
             <form wire:submit.prevent="addSiswa">
-                <div class="row mb-3 align-items-start">
 
+                <div class="row mb-3 align-items-start">
                     <!-- Dropdown Pilih Siswa -->
                     <label class="form-label">Pilih Siswa</label>
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="form-group local-forms" wire:ignore>
+                        <div class="form-group local-forms"
+                            wire:ignore
+                            wire:key="container-select-siswa-{{ count($siswaList) }}"
+                            id="select-siswa-container">
                             <select id="select-siswa" class="form-control" multiple>
                                 @foreach($siswaList as $siswa)
                                 <option value="{{ $siswa->id }}">
@@ -36,9 +39,9 @@
                                 @endforeach
                             </select>
                         </div>
+
                         @error('siswa_ids') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-
                     <!-- Tombol Tambah Siswa -->
                     <div class="col-12 col-md-2 d-flex justify-content-md-start justify-content-center">
                         <button type="submit" class="btn btn-primary w-100 w-md-auto">Tambah Siswa</button>
@@ -127,21 +130,47 @@
             initSelect2Siswa();
         });
 
+        function _setLivewirePropertyFromElement(element, prop, value) {
+            try {
+                var wrapper = element.closest('[wire\\:id]');
+                if (!wrapper) return;
+                var id = wrapper.getAttribute('wire:id');
+                if (!id) return;
+                if (window.Livewire && typeof window.Livewire.find === 'function') {
+                    window.Livewire.find(id).set(prop, value);
+                }
+            } catch (e) {
+                console.warn('Livewire set failed', e);
+            }
+        }
+
         function initSelect2Siswa() {
+            // Hancurkan instance lama sebelum membuat yang baru
+            if ($('#select-siswa').hasClass("select2-hidden-accessible")) {
+                $('#select-siswa').select2('destroy');
+            }
+
             $('#select-siswa').select2({
                 placeholder: "Pilih Siswa",
                 allowClear: true,
-                width: '100%',
-
+                width: '100%'
             });
 
             $('#select-siswa').on('change', function() {
-                @this.set('siswa_ids', $(this).val());
+                _setLivewirePropertyFromElement(this, 'siswa_ids', $(this).val());
             });
         }
 
         $wire.on('resetSelect2Siswa', () => {
             $('#select-siswa').val(null).trigger('change');
+        });
+
+        /* === TAMBAHKAN BAGIAN INI AGAR REALTIME === */
+        $wire.on('refreshSelect2', () => {
+            // Beri jeda 100ms agar Livewire selesai update DOM sebelum Select2 membaca ulang <option>
+            setTimeout(() => {
+                initSelect2Siswa();
+            }, 100);
         });
     </script>
     @endscript

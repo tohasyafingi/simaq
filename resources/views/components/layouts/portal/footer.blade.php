@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="d-flex align-items-start mb-2">
-                    <i class="bi bi-telephone fs-5 me-3 "></i>
+                    <i class="bi bi-whatsapp fs-5 me-3 "></i>
                     <span>
                         {{ $kontak->telepon ?? '-' }}
                     </span>
@@ -29,7 +29,11 @@
                 <div class="d-flex align-items-start">
                     <i class="bi bi-envelope fs-5 me-3 "></i>
                     <span class="text-break">
-                        {{ $kontak->email ?? '-' }}
+                        @if($kontak->email)
+                        @foreach(explode("\n", $kontak->email) as $email)
+                        <a href="mailto:{{ trim($email) }}" class="contact-link">{{ trim($email) }}</a><br>
+                        @endforeach
+                        @endif
                     </span>
                 </div>
             </div>
@@ -48,31 +52,31 @@
                 <h5>Follow Us</h5>
                 <div class="social-links">
                     @if($kontak?->facebook)
-                    <a href="{{ $kontak->facebook }}" target="_blank">
+                    <a href="{{ $kontak->facebook }}" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     @endif
 
                     @if($kontak?->instagram)
-                    <a href="{{ $kontak->instagram }}" target="_blank">
+                    <a href="{{ $kontak->instagram }}" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-instagram"></i>
                     </a>
                     @endif
 
                     @if($kontak?->tiktok)
-                    <a href="{{ $kontak->tiktok }}" target="_blank">
+                    <a href="{{ $kontak->tiktok }}" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-tiktok"></i>
                     </a>
                     @endif
 
                     @if($kontak?->twitter)
-                    <a href="{{ $kontak->twitter }}" target="_blank">
+                    <a href="{{ $kontak->twitter }}" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-twitter"></i>
                     </a>
                     @endif
 
                     @if($kontak?->youtube)
-                    <a href="{{ $kontak->youtube }}" target="_blank">
+                    <a href="{{ $kontak->youtube }}" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-youtube"></i>
                     </a>
                     @endif

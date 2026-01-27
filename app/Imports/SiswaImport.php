@@ -17,6 +17,7 @@ use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
+// use App\Notifications\WelcomeNotification;
 
 class SiswaImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnError, SkipsOnFailure, WithBatchInserts
 {
@@ -42,14 +43,22 @@ class SiswaImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnErr
                     'status' => $row['status'],
                 ]);
 
-                User::create([
+                $plainPassword = $row['nis'];
+
+                $user = User::create([
                     'name' => $row['nama'],
                     'email' => $row['email'],
-                    'password' => Hash::make($row['nis']),
+                    'password' => Hash::make($plainPassword),
                     'role' => 'siswa',
                     'siswa_id' => $siswa->id,
                     'status' => strtolower($row['status']) === 'aktif',
                 ]);
+
+                // try {
+                //     $user->notify(new WelcomeNotification($plainPassword));
+                // } catch (\Exception $e) {
+                //     Log::error('Gagal mengirim WelcomeNotification (siswa import): ' . $e->getMessage());
+                // }
 
                 return $siswa;
             });

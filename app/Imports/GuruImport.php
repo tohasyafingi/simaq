@@ -17,6 +17,7 @@ use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\WithBatchInserts; // Tambahkan untuk batch insert
+// use App\Notifications\WelcomeNotification;
 
 class GuruImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnError, SkipsOnFailure, WithBatchInserts
 {
@@ -42,15 +43,23 @@ class GuruImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnErro
                     'status'  => strtolower($row['status']) === 'aktif' ? true : false,
                 ]);
 
-                // Buat User terkait
-                User::create([
+                // Buat User terkait (simpan hash di DB, kirim password plain sekali)
+                $plainPassword = $row['kode_guru'];
+
+                $user = User::create([
                     'name'      => $row['nama'],
                     'email'     => $row['email'],
-                    'password'  => Hash::make($row['kode_guru']),
+                    'password'  => Hash::make($plainPassword),
                     'role'      => 'guru',
                     'guru_id'   => $guru->id,
                     'status'    => strtolower($row['status']) === 'aktif' ? true : false,
                 ]);
+
+                // try {
+                //     $user->notify(new WelcomeNotification($plainPassword));
+                // } catch (\Exception $e) {
+                //     Log::error('Gagal mengirim WelcomeNotification (guru import): ' . $e->getMessage());
+                // }
 
                 Log::info("Berhasil simpan baris: kd_guru={$row['kode_guru']}"); // Logging sukses
                 return $guru;

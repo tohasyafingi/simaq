@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use App\Notifications\PasswordChangedNotification;
 
 class PasswordController extends Controller
 {
@@ -23,6 +24,12 @@ class PasswordController extends Controller
         $request->user()->update([
             'password' => Hash::make($validated['password']),
         ]);
+
+        try {
+            $request->user()->notify(new PasswordChangedNotification());
+        } catch (\Exception $e) {
+            // don't fail the request if email sending fails
+        }
 
         return back()->with('status', 'password-updated');
     }

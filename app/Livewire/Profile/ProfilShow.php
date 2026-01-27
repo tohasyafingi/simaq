@@ -10,6 +10,8 @@ use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\Bendahara;
 use App\Models\TataUsaha;
+use App\Notifications\PasswordChangedNotification;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
 
 #[Title('Profil')]
@@ -87,6 +89,7 @@ class ProfilShow extends Component
         }
 
         // Update password in the database
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         $user->password = Hash::make($this->password);
         $user->password_changed_at = now();
@@ -95,6 +98,13 @@ class ProfilShow extends Component
 
         // Set success state
         $this->passwordUpdated = true;
+
+        // Send notification about password change (do not break flow on failure)
+        try {
+            $user->notify(new PasswordChangedNotification());
+        } catch (\Exception $e) {
+            Log::error('Password change notification failed (ProfilShow): ' . $e->getMessage(), ['exception' => $e, 'user_id' => $user->id]);
+        }
 
         // Clear password fields
         $this->reset(['current_password', 'password', 'password_confirmation']);

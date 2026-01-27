@@ -17,6 +17,7 @@ use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
+// use App\Notifications\WelcomeNotification;
 
 class TataUsahaImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnError, SkipsOnFailure, WithBatchInserts
 {
@@ -49,14 +50,22 @@ class TataUsahaImport implements ToModel, WithHeadingRow, WithValidation, SkipsO
                     'status'  => strtolower($row['status']) === 'aktif',
                 ]);
 
-                User::create([
+                $plainPassword = $row['kode_tu'];
+
+                $user = User::create([
                     'name'      => $row['nama'],
                     'email'     => $row['email'],
-                    'password'  => Hash::make($row['kode_tu']),
+                    'password'  => Hash::make($plainPassword),
                     'role'      => 'karyawan',
                     'tata_usaha_id'   => $tata_usaha->id,
                     'status'    => strtolower($row['status']) === 'aktif',
                 ]);
+
+                // try {
+                //     $user->notify(new WelcomeNotification($plainPassword));
+                // } catch (\Exception $e) {
+                //     Log::error('Gagal mengirim WelcomeNotification (tata usaha import): ' . $e->getMessage());
+                // }
 
                 Log::info("Berhasil simpan: {$row['kode_tu']}");
                 return $tata_usaha;

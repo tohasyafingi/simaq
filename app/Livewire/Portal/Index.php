@@ -16,6 +16,7 @@ use App\Models\Gallery as PhotoGallery;
 #[Layout('components.layouts.portal')]
 class Index extends Component
 {
+    public $homeContent;
     public $beritas;
     public $karya_ilmiahs;
     public $ppdb;
@@ -26,6 +27,10 @@ class Index extends Component
 
     public function mount()
     {
+        $this->homeContent = Profiles::where('type', 'home')
+            ->where('status', 1)
+            ->latest()
+            ->first();
         $this->ppdb = Profiles::where('type', 'ppdb')
             ->where('status', 1)
             ->latest()

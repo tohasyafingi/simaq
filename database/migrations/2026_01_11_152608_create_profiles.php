@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['tentang','sejarah', 'visi', 'misi', 'jurusan', 'ekstrakurikuler', 'osis', 'pramuka', 'tahfidz', 'ppdb']);
+            $table->enum('type', ['tentang','sejarah', 'visi', 'misi', 'jurusan', 'ekstrakurikuler', 'osis', 'pramuka', 'tahfidz', 'ppdb', 'home']);
             $table->string('judul')->nullable();
             $table->string('image')->nullable();
             $table->longText('content')->nullable();

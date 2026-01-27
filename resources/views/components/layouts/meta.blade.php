@@ -1,7 +1,7 @@
 @php
 $meta = $meta ?? [];
 // Brand name required by request
-$brand = "MA Takhassus Al-Qur’an Wonosobo";
+$brand = "MA Takhassus Al-Qur'an Wonosobo";
 $rawTitle = $meta['title'] ?? ($title ?? '');
 
 $pageTitle = trim($rawTitle);

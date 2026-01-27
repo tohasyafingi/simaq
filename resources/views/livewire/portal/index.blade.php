@@ -1,12 +1,84 @@
 <div>
-    <section class="page-section">
-        <div class="hero-content text-center" data-aos="fade-down" data-aos-duration="800">
-            <h3>Selamat Datang di</h3>
-            <h1>MA Takhassus Al-Qur'an Wonosobo</h1>
-            <p>Terwujudnya Insan Madrasah yang Unggul dalam Kualitas dan Berjiwa Agamis</p>
-            <a href="#about" class="btn btn-primary">Learn More</a>
+    <section id="home" class="home section dark-background">
+        <!-- Background Video -->
+        <div class="home-background">
+            @php
+            $heroImage = $homeContent && $homeContent->image
+            ? asset('storage/' . $homeContent->image)
+            : asset('assets/landing.webp');
+            @endphp
+            <img
+                src="{{ $heroImage }}"
+                alt="{{ $homeContent->image_alt ?? 'Lingkungan MA Takhassus Al-Qur\'an Wonosobo' }}"
+                class="home-bg-image"
+                loading="lazy">
+
+            <div class="overlay"></div>
         </div>
 
+        <div class="container home-content">
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+                    <div class="home-text" data-aos="fade-up" data-aos-delay="100">
+
+                        <span class="tagline">Selamat Datang!</span>
+
+                        @php
+                        $homeTitle = $homeContent->judul
+                        ?? 'MA Takhassus Al-Qur\'an Wonosobo';
+                        $homeDescription = $homeContent->description
+                        ?? 'Terwujudnya Insan Madrasah yang Unggul dalam Kualitas dan Berjiwa Agamis.';
+                        @endphp
+                        <h1 class="home-title">
+                            {{ $homeTitle }}
+                        </h1>
+                        <p class="home-description">
+                            {{ $homeDescription }}
+                        </p>
+
+                        <div class="home-actions" data-aos="fade-up" data-aos-delay="200">
+                            <a wire:navigate href="{{ route('ppdb') }}" class="btn btn-primary">Pendaftaran</a>
+                            <a href="#about" class="btn btn-outline">Learn More</a>
+                        </div>
+
+                        <div class="home-features" data-aos="fade-up" data-aos-delay="300">
+                            @if($kontak?->instagram)
+                            <a href="{{ $kontak->instagram }}" class="feature-item" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            @endif
+                            @if($kontak?->tiktok)
+                            <a href="{{ $kontak->tiktok }}" class="feature-item" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-tiktok"></i>
+                            </a>
+                            @endif
+                            @if($kontak?->youtube)
+                            <a href="{{ $kontak->youtube }}" class="feature-item" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-youtube"></i>
+                            </a>
+                            @endif
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card booking-card" data-aos="fade-left" data-aos-delay="200">
+
+                        @if ($homeContent)
+                        {!! $homeContent->content !!}
+                        @else
+                        <p>Konten belum tersedia.</p>
+                        @endif
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="event-ticker-anchor" class="event-ticker-anchor"></div>
         @if ($beritas->isNotEmpty())
         <div class="event-ticker" data-aos="fade-up">
             <div class="ticker-track">
@@ -295,7 +367,12 @@
             </div>
             @if($activity->link)
             <div class="text-center">
-                <a wire:navigate href="{{ $activity->link }}" class="btn btn-primary">Daftar Sekarang</a>
+                <a href="{{ $activity->link }}"
+                    class="btn btn-primary"
+                    target="_blank"
+                    rel="noopener">
+                    Daftar Sekarang
+                </a>
             </div>
             @endif
             @endforeach
@@ -310,34 +387,34 @@
             @if($kontak)
             <div class="row mb-5">
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="80">
-                    <div class="card text-center shadow-sm" data-aos="fade-in">
+                    <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
+                            <i class="fas fa-map-marker-alt fa-2x" style="color: #1abc9c;"></i>
                             <h5 class="card-title">Alamat</h5>
-                            <p class="card-text">{!! nl2br(e($kontak->alamat)) !!}</p>
+                            <p class="card-text contact-text">{!! nl2br(e($kontak->alamat)) !!}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card text-center shadow-sm" data-aos="fade-in">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="160">
+                    <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-phone fa-2x text-primary mb-3"></i>
-                            <h5 class="card-title">Telepon</h5>
-                            <p class="card-text">{!! nl2br(e($kontak->telepon)) !!}</p>
+                            <i class="fab fa-whatsapp fa-2x" style="color: #1abc9c;"></i>
+                            <h5 class="card-title">WhatsApp</h5>
+                            <p class="card-text contact-text">{!! nl2br(e($kontak->telepon)) !!}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="120">
-                    <div class="card text-center shadow-sm" data-aos="fade-in">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="240">
+                    <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                            <i class="fas fa-envelope fa-2x" style="color: #1abc9c;"></i>
                             <h5 class="card-title">Email</h5>
-                            <p class="card-text">
+                            <p class="card-text contact-text">
                                 @if($kontak->email)
                                 @foreach(explode("\n", $kontak->email) as $email)
-                                <a href="mailto:{{ trim($email) }}" style="color: inherit; text-decoration: none;">{{ trim($email) }}</a><br>
+                                <a href="mailto:{{ trim($email) }}" class="contact-link">{{ trim($email) }}</a><br>
                                 @endforeach
                                 @endif
                             </p>
@@ -398,11 +475,11 @@
             @endif
         </div>
     </section>
-    <style>
+    <!-- <style>
         .card {
             position: relative;
         }
-    </style>
+    </style> -->
     @script
     <script>
         (function() {

@@ -20,12 +20,12 @@
                 <div
                     class="share-section d-flex align-items-center justify-content-between border-top border-bottom py-3 my-4">
                     <span class="fw-bold text-uppercase text-secondary small">Bagikan Artikel:</span>
-
                     <div class="d-flex gap-2 flex-wrap justify-content-end">
 
                         <a
                             href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($canonical ?? request()->fullUrl()) }}"
                             target="_blank"
+                            rel="noopener noreferrer"
                             class="btn btn-sm btn-social btn-facebook"
                             title="Bagikan ke Facebook">
                             <i class="bi bi-facebook"></i>
@@ -34,6 +34,7 @@
                         <a
                             href="https://twitter.com/intent/tweet?text={{ urlencode($berita->judul) }}&url={{ urlencode($canonical ?? request()->fullUrl()) }}"
                             target="_blank"
+                            rel="noopener noreferrer"
                             class="btn btn-sm btn-social btn-twitter"
                             title="Bagikan ke Twitter">
                             <i class="bi bi-twitter"></i>
@@ -42,6 +43,7 @@
                         <a
                             href="https://api.whatsapp.com/send?text={{ urlencode($berita->judul . ' ' . ($canonical ?? request()->fullUrl())) }}"
                             target="_blank"
+                            rel="noopener noreferrer"
                             class="btn btn-sm btn-social btn-whatsapp"
                             title="Bagikan ke WhatsApp">
                             <i class="bi bi-whatsapp"></i>
@@ -68,11 +70,10 @@
                     <img src="{{ asset('assets/default-image.webp') }}" alt="Author" loading="lazy" class="rounded-circle me-3"
                         style="width:40px; height:40px; object-fit:cover;">
                     <div>
-                        <h6 class="mb-1">{{ $berita->author_name ?? 'Admin MATAQ' }}</h6>
-                        <!-- <small class="text-muted">Official news and updates from our school administration</small> -->
+                        <h6 class="mb-1">{{ $berita->author ?? 'Admin Sekolah' }}</h6>
+                        <!-- <small class="text-muted">Official student research and innovation</small> -->
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

@@ -82,7 +82,7 @@
                                                 <strong>{{ $item->judul }}</strong><br>
                                                 <small class="text-muted">{{ Str::limit(strip_tags($item->content ?? ''), 60) }}</small>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <span class="badge bg-info">{{ $item->type }}</span>
                                             </td>
                                             <td class="text-center">

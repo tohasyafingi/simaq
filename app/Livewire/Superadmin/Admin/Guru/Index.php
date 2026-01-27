@@ -33,7 +33,11 @@ class Index extends Component
     protected function rules()
     {
         return [
-            'kd_guru' => 'required|string|unique:gurus,kd_guru,' . $this->guru_id,
+            'kd_guru' => [
+                'required',
+                'string',
+                Rule::unique('gurus', 'kd_guru')->ignore($this->guru_id),
+            ],
             'name' => 'required|string',
             'email' => [
                 'required',
@@ -161,7 +165,9 @@ class Index extends Component
             session()->flash('message', 'Guru berhasil ditambahkan dan akun guru dibuat.');
             $this->resetInputFields();
         } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menyimpan guru.');
+            Log::error('Gagal menyimpan guru: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            session()->flash('error', 'Terjadi kesalahan saat menyimpan guru. Silakan periksa log untuk detail.');
         }
     }
 

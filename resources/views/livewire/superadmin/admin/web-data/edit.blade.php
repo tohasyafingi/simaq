@@ -12,6 +12,7 @@
                         <label>Type</label>
                         <select wire:model="type" class="form-select">
                             <option value="">Pilih type</option>
+                            <option value="home">home</option>
                             <option value="tentang">tentang</option>
                             <option value="sejarah">sejarah</option>
                             <option value="visi">visi</option>

@@ -1,5 +1,5 @@
 <div class="news-page">
-    <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
+  <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
     <div class="container text-center">
       <h1 data-aos="fade-down" data-aos-duration="800">Berita & Agenda</h1>
     </div>
@@ -21,47 +21,72 @@
 
   <section class="section" data-aos="fade-up" data-aos-duration="800">
     <div class="container">
-      @forelse($beritas->chunk(3) as $chunk)
-      <div class="row mb-5">
-        @foreach($chunk as $berita)
-        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card position-relative">
-            <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}" class="card-img-top"
-              alt="{{ $berita->judul }}" loading="lazy">
 
+      @if ($beritas->count())
+      <div class="row g-4">
+
+        @foreach ($beritas as $berita)
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+
+          <article class="card h-100 position-relative" data-aos="zoom-in">
+
+            {{-- Thumbnail --}}
+            <img
+              src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}"
+              class="card-img-top"
+              alt="{{ $berita->judul }}"
+              loading="lazy">
+
+            {{-- Kategori --}}
             <span class="badge-category">
               {{ $berita->kategori->nama ?? 'Umum' }}
             </span>
 
+            {{-- Body --}}
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title">{{ $berita->judul }}</h5>
-              <p class="card-text text-muted">
-                <small><i class="fas fa-calendar"></i> {{ $berita->created_at->format('d/m/Y') }}</small>
+
+              <h5 class="card-title">
+                {{ $berita->judul }}
+              </h5>
+
+              <p class="card-text text-muted mb-2">
+                <small>
+                  <i class="fas fa-calendar"></i>
+                  {{ $berita->created_at->format('d/m/Y') }}
+                </small>
               </p>
-              <p class="card-text">{!! \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120, '...') !!}</p>
-              <a wire:navigate href="{{ route('detail-berita-agenda', ['slug' => $berita->slug]) }}"
-                class="btn btn-primary btn-sm">Baca Selengkapnya</a>
+
+              <p class="card-text flex-grow-1">
+                {{ \Illuminate\Support\Str::limit(strip_tags($berita->isi), 120) }}
+              </p>
+
+              <a
+                wire:navigate
+                href="{{ route('detail-berita-agenda', $berita->slug) }}"
+                class="btn btn-primary btn-sm mt-auto"
+                aria-label="Baca berita {{ $berita->judul }}">
+                Baca Selengkapnya
+              </a>
+
             </div>
-          </div>
+          </article>
+
         </div>
         @endforeach
-      </div>
-      @empty
-      <div class="alert alert-warning text-center">
-        Konten berita belum tersedia.
-      </div>
-      @endforelse
 
-      <div class="d-flex justify-content-center">
+      </div>
+
+      {{-- PAGINATION --}}
+      <div class="d-flex justify-content-center mt-5">
         {{ $beritas->links() }}
       </div>
 
+      @else
+      <div class="alert alert-warning text-center">
+        Konten berita belum tersedia.
+      </div>
+      @endif
+
     </div>
   </section>
-
-  <style>
-    .card {
-      position: relative;
-    }
-  </style>
 </div>

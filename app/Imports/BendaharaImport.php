@@ -17,6 +17,7 @@ use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
+// use App\Notifications\WelcomeNotification;
 
 class BendaharaImport implements 
     ToModel, 
@@ -46,14 +47,22 @@ class BendaharaImport implements
                     'status'       => strtolower($row['status']) === 'aktif',
                 ]);
 
-                User::create([
+                $plainPassword = $row['kode_bendahara'];
+
+                $user = User::create([
                     'name'          => $row['nama'],
                     'email'         => $row['email'],
-                    'password'      => Hash::make($row['kode_bendahara']),
+                    'password'      => Hash::make($plainPassword),
                     'role'          => 'bendahara',
                     'bendahara_id'  => $bendahara->id,
                     'status'        => strtolower($row['status']) === 'aktif',
                 ]);
+
+                // try {
+                //     $user->notify(new WelcomeNotification($plainPassword));
+                // } catch (\Exception $e) {
+                //     Log::error('Gagal mengirim WelcomeNotification (bendahara import): ' . $e->getMessage());
+                // }
 
                 Log::info("Berhasil simpan: {$row['kode_bendahara']}");
                 return $bendahara;

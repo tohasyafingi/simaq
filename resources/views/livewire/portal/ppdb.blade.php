@@ -26,7 +26,12 @@
 
             @if($activity->link)
             <div class="text-center">
-                <a wire:navigate href="{{ $activity->link }}" class="btn btn-primary">Daftar Sekarang</a>
+                <a href="{{ $activity->link }}"
+                    class="btn btn-primary"
+                    target="_blank"
+                    rel="noopener">
+                    Daftar Sekarang
+                </a>
             </div>
             @endif
 

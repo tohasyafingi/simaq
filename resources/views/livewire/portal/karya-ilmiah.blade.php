@@ -21,43 +21,73 @@
 
   <section class="section" data-aos="fade-up" data-aos-duration="800">
     <div class="container">
-      @forelse($karya_ilmiahs->chunk(3) as $chunk)
-      <div class="row mb-5">
-        @foreach($chunk as $karya_ilmiah)
-        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="120">
-          <div class="card position-relative">
-            <img src="{{ $karya_ilmiah->thumbnail_url ?? asset('assets/karya.webp') }}" class="card-img-top"
-              alt="{{ $karya_ilmiah->judul }}" loading="lazy">
-            <span class="badge-category">{{ $karya_ilmiah->kategori->nama ?? 'Umum' }}</span>
+
+      @if ($karya_ilmiahs->count())
+      <div class="row g-4">
+
+        @foreach ($karya_ilmiahs as $karya)
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+
+          <article class="card h-100 position-relative" data-aos="zoom-in">
+
+            {{-- Thumbnail --}}
+            <img
+              src="{{ $karya->thumbnail_url ?? asset('assets/karya.webp') }}"
+              class="card-img-top"
+              alt="{{ $karya->judul }}"
+              loading="lazy">
+
+            {{-- Kategori --}}
+            <span class="badge-category">
+              {{ $karya->kategori->nama ?? 'Umum' }}
+            </span>
+
+            {{-- Body --}}
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title">{{ $karya_ilmiah->judul }}</h5>
-              <p class="card-text text-muted"><small><i class="fas fa-calendar"></i>
-                  {{ $karya_ilmiah->created_at->format('d/m/Y') }}</small></p>
-              <p class="card-text">{!! \Illuminate\Support\Str::limit(strip_tags($karya_ilmiah->isi), 120, '...') !!}
+
+              <h5 class="card-title">
+                {{ $karya->judul }}
+              </h5>
+
+              <p class="card-text text-muted mb-2">
+                <small>
+                  <i class="fas fa-calendar"></i>
+                  {{ $karya->created_at->format('d/m/Y') }}
+                </small>
               </p>
-              <a wire:navigate href="{{ route('detail-karya-ilmiah', ['slug' => $karya_ilmiah->slug]) }}"
-                class="btn btn-primary btn-sm">Baca Selengkapnya</a>
+
+              <p class="card-text flex-grow-1">
+                {{ \Illuminate\Support\Str::limit(strip_tags($karya->isi), 120) }}
+              </p>
+
+              <a
+                wire:navigate
+                href="{{ route('detail-karya-ilmiah', $karya->slug) }}"
+                class="btn btn-primary btn-sm mt-auto"
+                aria-label="Baca karya ilmiah {{ $karya->judul }}">
+                Baca Selengkapnya
+              </a>
+
             </div>
-          </div>
+          </article>
+
         </div>
         @endforeach
+
       </div>
-      @empty
+
+      {{-- PAGINATION --}}
+      <div class="d-flex justify-content-center mt-5">
+        {{ $karya_ilmiahs->links() }}
+      </div>
+
+      @else
       <div class="alert alert-warning text-center">
         Konten karya ilmiah belum tersedia.
       </div>
-      @endforelse
-
-      <div class="d-flex justify-content-center">
-        {{ $karya_ilmiahs->links() }}
-      </div>
+      @endif
 
     </div>
   </section>
 
-  <style>
-    .card {
-      position: relative;
-    }
-  </style>
 </div>

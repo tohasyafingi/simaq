@@ -12,11 +12,11 @@
         <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="80">
           <div class="card text-center">
             <img
-              src="{{ $struktur->user && $struktur->user->img ? asset('storage/' . $struktur->user->img) : asset('assets/default-image.webp') }}"
+              src="{{ optional($struktur->user)->img ? asset('storage/' . optional($struktur->user)->img) : asset('assets/default-image.webp') }}"
               class="card-img-top"
               alt="{{ $struktur->jabatan }}" loading="lazy" data-aos="zoom-in">
             <div class="card-body">
-              <h5 class="card-title">{{ $struktur->user->name }}</h5>
+              <h5 class="card-title">{{ optional($struktur->user)->name ?? '-' }}</h5>
               <p class="card-text text-muted">{{ $struktur->jabatan }}</p>
               @if(!empty($struktur->deskripsi))
               <p class="card-text" style="font-size: 0.9rem;">{{ $struktur->deskripsi }}</p>

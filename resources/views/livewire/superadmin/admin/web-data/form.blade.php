@@ -13,17 +13,17 @@
                         <label>Type</label>
                         <select wire:model="type" class="form-select">
                             <option value="">Pilih type</option>
-                            <option value="home">home</option>
-                            <option value="tentang">about</option>
-                            <option value="sejarah">sejarah</option>
-                            <option value="visi">visi</option>
-                            <option value="misi">misi</option>
-                            <option value="jurusan">jurusan</option>
-                            <option value="ekstrakurikuler">ekstrakurikuler</option>
-                            <option value="osis">osis</option>
-                            <option value="pramuka">pramuka</option>
-                            <option value="tahfidz">tahfidz</option>
-                            <option value="ppdb">spmb</option>
+                            <option value="home">Home</option>
+                            <option value="tentang">About</option>
+                            <option value="sejarah">Sejarah</option>
+                            <option value="visi">Visi</option>
+                            <option value="misi">Misi</option>
+                            <option value="jurusan">Jurusan</option>
+                            <option value="ekstrakurikuler">Ekstrakurikuler</option>
+                            <option value="osis">Osis</option>
+                            <option value="pramuka">Pramuka</option>
+                            <option value="tahfidz">Tahfidz</option>
+                            <option value="ppdb">Spmb</option>
                         </select>
                         @error('type') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label>Link</label>
+                        <label>Link <small>(Pendaftaran)</small>/Sub Judul<small>(Home)</small> </label>
                         <input wire:model="link" class="form-control" />
                         @error('link') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
@@ -63,7 +63,7 @@
                     <div class="mb-3">
                         <label>Status</label>
                         <select wire:model="status" class="form-select">
-                            <option value="1">Published</option>
+                            <option value="1">Publik</option>
                             <option value="0">Draft</option>
                         </select>
                         @error('status') <small class="text-danger">{{ $message }}</small> @enderror

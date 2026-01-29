@@ -18,12 +18,12 @@
 
                     <!-- Header -->
                     <tr>
-                        <td align="center" style="padding:24px; background:#1abc9c;">
+                        <td align="center" style="padding:10px 24px; background:#1abc9c;">
                             <img
-                                src="{{ url('assets/logo.webp') }}"
+                                src="{{ url('assets/icon-512.png') }}"
                                 alt="{{ config('app.name') }}"
-                                width="120"
-                                style="max-height:56px; display:block;">
+                                height="56"
+                                style="height:56px; width:auto; max-width:100%; display:block;">
                         </td>
                     </tr>
 

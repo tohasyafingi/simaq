@@ -22,10 +22,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // generate sitemap daily at 02:00
-        $schedule->command('sitemap:generate')->dailyAt('02:00')->withoutOverlapping();
+        // $schedule->command('sitemap:generate')->dailyAt('02:00')->withoutOverlapping();
 
-        // Example: run a custom command every 5 minutes (useful for short tasks)
-        // $schedule->command('your:command')->everyFiveMinutes()->withoutOverlapping()->timezone('Asia/Jakarta')->sendOutputTo(storage_path('logs/your-command.log'));
+        // Example: run a custom command every minutes (useful for short tasks)
+        $schedule->command('sitemap:generate')->everyMinutes()->withoutOverlapping()->timezone('Asia/Jakarta')->sendOutputTo(storage_path('logs/cron.log'));
 
         // Example: schedule a Closure hourly
         // $schedule->call(function () {

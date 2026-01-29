@@ -68,8 +68,7 @@ class Index extends Component
         $meta = [
             'title' => 'Beranda',
             // 'description' => Str::limit(strip_tags(optional($this->tentang->first())->content ?? config('app.description', 'MA Takhassus Al-Qur’an Wonosobo berdiri atas kepedulian Yayasan Al-Asy’ariyyah terhadap perkembangan pendidikan di Kabupaten Wonosobo. Atas prakarsa KH. Achmad Faqih Muntaha, pada tahun 2007 dirintislah lembaga pendidikan menengah berbasis pesantren yang terbuka bagi seluruh lapisan masyarakat tanpa membedakan latar belakang ekonomi maupun sosial.')), 160),
-            'description' => Str::limit(strip_tags(config('app.description', 'MA Takhassus Al-Qur’an Wonosobo berdiri atas kepedulian Yayasan Al-Asy’ariyyah terhadap perkembangan pendidikan di Kabupaten Wonosobo.')), 160),
-
+            'description' => Str::limit(strip_tags(config('app.description', 'MA Takhassus Al-Qur\'an Wonosobo berdiri atas kepedulian Yayasan Al-Asy\'ariyyah terhadap perkembangan pendidikan di Kabupaten Wonosobo.')), 160),
             'image' => \App\Helpers\SeoHelper::image(null),
             'canonical' => url()->current(),
             'og_type' => 'website',

@@ -1,6 +1,5 @@
 <div>
     <section id="home" class="home section dark-background">
-        <!-- Background Video -->
         <div class="home-background">
             @php
             $heroImage = $homeContent && $homeContent->image
@@ -95,45 +94,31 @@
         @endif
     </section>
 
-    <section id="about" class="section bg-light" data-aos="fade-up" data-aos-duration="800">
+    <section class="section bg-light">
         <div class="container">
-            @forelse($tentang as $about)
-            <h2 class="section-title mb-4 text-center">{{ $about->judul }}</h2>
 
-            @php
-            $allowedTags = '<iframe>
-                <p><br><a><strong><em>
-                                <ul>
-                                    <li>
-                                        <ol><b><i>';
-                                                    $hasContent = !empty(trim(strip_tags($about->content, $allowedTags)));
-                                                    $hasImage = !empty($about->image);
-                                                    @endphp
+            @forelse($tentang as $activity)
+            <h2 class="section-title" data-aos="fade-up">{{ $activity->judul }}</h2>
+            <div class="row align-items-start justify-content-center">
+                @if($activity->image)
+                <div class="col-lg-6" data-aos="zoom-in">
+                    <img src="{{ asset('storage/'.$activity->image) }}"
+                        alt="{{ $activity->judul }}" loading="lazy"
+                        class="img-fluid rounded mb-3 mb-lg-0" />
+                </div>
+                @endif
 
-                                                    <div class="row align-items-start justify-content-center">
-                                                        {{-- Kolom konten --}}
-                                                        @if($hasContent)
-                                                        <div class="{{ $hasImage ? 'col-lg-6' : 'col-lg-8 text-center' }} mb-4 mb-lg-0" data-aos="fade-right">
-                                                            <div class="content-text">
-                                                                {!! $about->content !!}
-                                                            </div>
-                                                        </div>
-                                                        @endif
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+                    <div class="content-text">{!! $activity->content !!}</div>
+                </div>
+            </div>
 
-                                                        {{-- Kolom gambar --}}
-                                                        @if($hasImage)
-                                                        <div class="{{ $hasContent ? 'col-lg-6' : 'col-lg-8 text-center' }}" data-aos="fade-left">
-                                                            <img src="{{ asset('storage/'.$about->image) }}"
-                                                                alt="{{ $about->judul }}" loading="lazy"
-                                                                class="img-fluid rounded mb-3 mb-lg-0" />
-                                                        </div>
-                                                        @endif
-                                                    </div>
-                                                    @empty
-                                                    <div class="alert alert-warning text-center">
-                                                        Konten Tentang belum tersedia.
-                                                    </div>
-                                                    @endforelse
+            @empty
+            <div class="alert alert-warning text-center">
+                Konten Tentang belum tersedia.
+            </div>
+            @endforelse
+
         </div>
     </section>
 
@@ -292,7 +277,6 @@
         </div>
     </section>
 
-    <!-- Modal Livewire dengan slider -->
     <div class="modal fade" id="gallerySliderModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content bg-transparent border-0">
@@ -301,7 +285,6 @@
                     @if($galleryImages)
                     <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
 
-                        {{-- INDICATORS --}}
                         <div class="carousel-indicators">
                             @foreach($galleryImages as $key => $img)
                             <button type="button"
@@ -314,7 +297,6 @@
                             @endforeach
                         </div>
 
-                        {{-- SLIDES --}}
                         <div class="carousel-inner">
                             @foreach($galleryImages as $key => $img)
                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
@@ -326,13 +308,11 @@
                             @endforeach
                         </div>
 
-                        {{-- CAPTION STATIS --}}
                         <div class="carousel-caption d-none d-md-block">
                             <h5>{{ $gallery->judul ?? '' }}</h5>
                             <p>{{ $gallery->deskripsi ?? '' }}</p>
                         </div>
 
-                        {{-- CONTROLS --}}
                         <button class="carousel-control-prev" type="button"
                             data-bs-target="#galleryCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon"></span>
@@ -350,23 +330,27 @@
         </div>
     </div>
 
-    <section class="section bg-light" data-aos="fade-up">
+    <section class="section bg-light">
         <div class="container">
-            @foreach($ppdb as $activity)
-            <h2 class="section-title">{{ $activity->judul }}</h2>
+
+            @forelse($ppdb as $activity)
+            <h2 class="section-title" data-aos="fade-up">{{ $activity->judul }}</h2>
             <div class="row align-items-start justify-content-center">
                 @if($activity->image)
-                <div class="col-lg-6" data-aos="fade-right">
-                    <img src="{{ asset('storage/'.$activity->image) }}" alt="{{ $activity->judul }}" loading="lazy" class="img-fluid rounded mb-3 mb-lg-0" />
+                <div class="col-lg-6" data-aos="zoom-in">
+                    <img src="{{ asset('storage/'.$activity->image) }}"
+                        alt="{{ $activity->judul }}" loading="lazy"
+                        class="img-fluid rounded mb-3 mb-lg-0" />
                 </div>
                 @endif
-                <div class="col-lg-6" data-aos="fade-left">
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
                     <div class="content-text">{!! $activity->content !!}</div>
                 </div>
-
             </div>
+
             @if($activity->link)
-            <div class="text-center">
+            <div class="text-center mt-4">
                 <a href="{{ $activity->link }}"
                     class="btn btn-primary"
                     target="_blank"
@@ -375,12 +359,17 @@
                 </a>
             </div>
             @endif
-            @endforeach
+
+            @empty
+            <div class="alert alert-warning text-center">
+                Konten PPDB belum tersedia.
+            </div>
+            @endforelse
+
         </div>
     </section>
 
-
-    <section class="section">
+    <section class="section" data-aos="fade-up" data-aos-duration="800">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Informasi Kontak</h2>
 
@@ -423,29 +412,29 @@
                 </div>
             </div>
 
-            <h2 class="section-title text-center mb-5">Kontak & Lokasi</h2>
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Kontak & Lokasi</h2>
 
             <div class="row mb-5 align-items-stretch">
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="card shadow-sm h-100" style="height: 350px;" data-aos="fade-in">
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="120">
+                    <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body p-0 h-100">
                             {!! $kontak->google_map_embed ?? '<p class="text-center my-3">Peta belum tersedia</p>' !!}
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="card shadow-sm h-100" style="height: 350px;" data-aos="fade-in">
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card shadow-sm h-100" style="height: 350px;">
                         <div class="card-body">
                             <form wire:submit.prevent="sendMessage">
                                 <div class="mb-2">
                                     <label for="name" class="form-label">Nama Lengkap</label>
-                                    <input type="text" class="form-control form-control-sm" id="name" placeholder="Nama lengkap Anda" required>
+                                    <input type="text" class="form-control form-control-sm" id="name" placeholder="Nama lengkap" required>
                                 </div>
 
                                 <div class="mb-2">
                                     <label for="email" class="form-label">Alamat Email</label>
-                                    <input type="email" class="form-control form-control-sm" id="email" placeholder="alamat.email@contoh.com" required>
+                                    <input type="email" class="form-control form-control-sm" id="email" placeholder="email@example.com" required>
                                 </div>
 
                                 <div class="mb-2">
@@ -475,195 +464,185 @@
             @endif
         </div>
     </section>
-    <!-- <style>
-        .card {
-            position: relative;
+</div>
+@script
+<script>
+    (function() {
+        function showModalAndInitCarousel() {
+            const modalEl = document.getElementById('gallerySliderModal');
+            if (!modalEl) return;
+            try {
+                disableTransformedAncestors(modalEl);
+                if (window.AOS) AOS.refresh();
+            } catch (e) {}
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modal.show();
+            modalEl.addEventListener('shown.bs.modal', () => {
+                const carouselEl = document.getElementById('galleryCarousel');
+                if (carouselEl) {
+                    try {
+                        const c = bootstrap.Carousel.getInstance(carouselEl) || new bootstrap.Carousel(carouselEl, {
+                            ride: false
+                        });
+                        c.to(0);
+                    } catch (e) {}
+                }
+            }, {
+                once: true
+            });
         }
-    </style> -->
-    @script
-    <script>
-        (function() {
-            function showModalAndInitCarousel() {
-                const modalEl = document.getElementById('gallerySliderModal');
-                if (!modalEl) return;
-                // Temporarily remove transforms that break modal fixed positioning
-                try {
-                    disableTransformedAncestors(modalEl);
-                    if (window.AOS) AOS.refresh();
-                } catch (e) {}
-                const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-                modal.show();
-                modalEl.addEventListener('shown.bs.modal', () => {
-                    const carouselEl = document.getElementById('galleryCarousel');
-                    if (carouselEl) {
-                        try {
-                            const c = bootstrap.Carousel.getInstance(carouselEl) || new bootstrap.Carousel(carouselEl, {
-                                ride: false
-                            });
-                            c.to(0);
-                        } catch (e) {}
-                    }
-                }, {
-                    once: true
+
+        function hideModalCleanup() {
+            const modalEl = document.getElementById('gallerySliderModal');
+            if (!modalEl) return;
+            const modal = bootstrap.Modal.getInstance(modalEl) || bootstrap.Modal.getOrCreateInstance(modalEl);
+            if (modal) modal.hide();
+            document.querySelectorAll('.modal-backdrop').forEach(e => e.remove());
+            document.body.classList.remove('modal-open');
+            try {
+                restoreTransformedAncestors();
+                if (window.AOS) AOS.refresh();
+            } catch (e) {}
+        }
+        try {
+            if (typeof $wire !== 'undefined' && $wire.on) {
+                $wire.on('openGalleryModal', () => {
+                    console.debug('Livewire event received: openGalleryModal');
+                    showModalAndInitCarousel();
+                    try {
+                        if (window.AOS) AOS.refresh();
+                    } catch (e) {}
+                });
+                $wire.on('hideGalleryModal', () => {
+                    console.debug('Livewire event received: hideGalleryModal');
+                    hideModalCleanup();
+                    try {
+                        if (window.AOS) AOS.refresh();
+                    } catch (e) {}
                 });
             }
+        } catch (e) {}
 
-            function hideModalCleanup() {
-                const modalEl = document.getElementById('gallerySliderModal');
-                if (!modalEl) return;
-                const modal = bootstrap.Modal.getInstance(modalEl) || bootstrap.Modal.getOrCreateInstance(modalEl);
-                if (modal) modal.hide();
-                document.querySelectorAll('.modal-backdrop').forEach(e => e.remove());
-                document.body.classList.remove('modal-open');
-                // Restore transforms after modal is hidden
-                try {
-                    restoreTransformedAncestors();
-                    if (window.AOS) AOS.refresh();
-                } catch (e) {}
+        function loadAOS(cb) {
+            if (window.AOS) {
+                cb();
+                return;
             }
+            var s = document.createElement('script');
+            s.src = 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js';
+            s.async = true;
+            s.onload = function() {
+                cb();
+            };
+            document.head.appendChild(s);
+        }
+
+        function initAOS() {
             try {
-                if (typeof $wire !== 'undefined' && $wire.on) {
-                    $wire.on('openGalleryModal', () => {
-                        console.debug('Livewire event received: openGalleryModal');
-                        showModalAndInitCarousel();
-                        try {
-                            if (window.AOS) AOS.refresh();
-                        } catch (e) {}
-                    });
-                    $wire.on('hideGalleryModal', () => {
-                        console.debug('Livewire event received: hideGalleryModal');
-                        hideModalCleanup();
-                        try {
-                            if (window.AOS) AOS.refresh();
-                        } catch (e) {}
+                if (window.AOS) {
+                    AOS.init({
+                        once: false,
+                        disableMutationObserver: false,
+                        duration: 800,
+                        easing: 'ease-in-out'
                     });
                 }
             } catch (e) {}
+        }
 
-            // AOS integration: load library and initialize, refresh on Livewire updates
-            function loadAOS(cb) {
-                if (window.AOS) {
-                    cb();
-                    return;
-                }
-                var s = document.createElement('script');
-                s.src = 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js';
-                s.async = true;
-                s.onload = function() {
-                    cb();
-                };
-                document.head.appendChild(s);
-            }
-
-            function initAOS() {
-                try {
-                    if (window.AOS) {
-                        AOS.init({
-                            once: false,
-                            disableMutationObserver: false,
-                            duration: 800,
-                            easing: 'ease-in-out'
+        function disableTransformedAncestors(modalEl) {
+            try {
+                var backups = [];
+                var all = document.querySelectorAll('*');
+                all.forEach(function(el) {
+                    if (!el || el === document.documentElement || el === document.body) return;
+                    if (modalEl && (modalEl === el || modalEl.contains(el))) return;
+                    var cs = window.getComputedStyle(el);
+                    if (cs && cs.transform && cs.transform !== 'none') {
+                        backups.push({
+                            el: el,
+                            transform: el.style.transform || '',
+                            transition: el.style.transition || '',
+                            opacity: el.style.opacity || ''
                         });
+                        el.style.transform = 'none';
+                        el.style.transition = 'none';
+                        el.style.opacity = '1';
                     }
-                } catch (e) {}
+                });
+                window._disabledTransformedAncestors = backups;
+            } catch (e) {
+                console.error(e);
             }
+        }
 
-            // Utilities to temporarily remove transforms on page elements (except modal descendants)
-            function disableTransformedAncestors(modalEl) {
-                try {
-                    var backups = [];
-                    var all = document.querySelectorAll('*');
-                    all.forEach(function(el) {
-                        if (!el || el === document.documentElement || el === document.body) return;
-                        if (modalEl && (modalEl === el || modalEl.contains(el))) return;
-                        var cs = window.getComputedStyle(el);
-                        if (cs && cs.transform && cs.transform !== 'none') {
-                            backups.push({
-                                el: el,
-                                transform: el.style.transform || '',
-                                transition: el.style.transition || '',
-                                opacity: el.style.opacity || ''
-                            });
-                            el.style.transform = 'none';
-                            el.style.transition = 'none';
-                            el.style.opacity = '1';
-                        }
-                    });
-                    window._disabledTransformedAncestors = backups;
-                } catch (e) {
-                    console.error(e);
-                }
+        function restoreTransformedAncestors() {
+            try {
+                var backups = window._disabledTransformedAncestors || [];
+                backups.forEach(function(b) {
+                    try {
+                        b.el.style.transform = b.transform;
+                        b.el.style.transition = b.transition;
+                        b.el.style.opacity = b.opacity;
+                    } catch (e) {}
+                });
+                window._disabledTransformedAncestors = null;
+            } catch (e) {
+                console.error(e);
             }
+        }
 
-            function restoreTransformedAncestors() {
-                try {
-                    var backups = window._disabledTransformedAncestors || [];
-                    backups.forEach(function(b) {
-                        try {
-                            b.el.style.transform = b.transform;
-                            b.el.style.transition = b.transition;
-                            b.el.style.opacity = b.opacity;
-                        } catch (e) {}
-                    });
-                    window._disabledTransformedAncestors = null;
-                } catch (e) {
-                    console.error(e);
-                }
+        window.addEventListener('load', function() {
+            loadAOS(initAOS);
+        });
+        window.addEventListener('livewire:load', function() {
+            loadAOS(initAOS);
+        });
+        document.addEventListener('livewire:update', function() {
+            try {
+                if (window.AOS) AOS.refresh();
+            } catch (e) {}
+        });
+
+        window.addEventListener('livewire:load', function() {
+            if (typeof $wire !== 'undefined' && $wire.on) {
+                $wire.on('openGalleryModal', () => {
+                    console.debug('Livewire (post-load) event: openGalleryModal');
+                    showModalAndInitCarousel();
+                });
+                $wire.on('hideGalleryModal', () => {
+                    console.debug('Livewire (post-load) event: hideGalleryModal');
+                    hideModalCleanup();
+                });
             }
+        });
 
-            // Initialize AOS after load and refresh on Livewire updates
-            window.addEventListener('load', function() {
-                loadAOS(initAOS);
-            });
-            window.addEventListener('livewire:load', function() {
-                loadAOS(initAOS);
-            });
-            document.addEventListener('livewire:update', function() {
-                try {
-                    if (window.AOS) AOS.refresh();
-                } catch (e) {}
-            });
+        window.addEventListener('openGalleryModal', function() {
+            console.debug('Window event: openGalleryModal');
+            showModalAndInitCarousel();
+        });
+        window.addEventListener('hideGalleryModal', function() {
+            console.debug('Window event: hideGalleryModal');
+            hideModalCleanup();
+        });
+        document.addEventListener('keydown', function(e) {
+            const modalEl = document.getElementById('gallerySliderModal');
+            const carouselEl = document.getElementById('galleryCarousel');
+            if (!modalEl || !carouselEl) return;
 
-            window.addEventListener('livewire:load', function() {
-                if (typeof $wire !== 'undefined' && $wire.on) {
-                    $wire.on('openGalleryModal', () => {
-                        console.debug('Livewire (post-load) event: openGalleryModal');
-                        showModalAndInitCarousel();
-                    });
-                    $wire.on('hideGalleryModal', () => {
-                        console.debug('Livewire (post-load) event: hideGalleryModal');
-                        hideModalCleanup();
-                    });
-                }
-            });
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+            if (!modalInstance || !modalEl.classList.contains('show')) return;
 
-            window.addEventListener('openGalleryModal', function() {
-                console.debug('Window event: openGalleryModal');
-                showModalAndInitCarousel();
-            });
-            window.addEventListener('hideGalleryModal', function() {
-                console.debug('Window event: hideGalleryModal');
-                hideModalCleanup();
-            });
-            document.addEventListener('keydown', function(e) {
-                const modalEl = document.getElementById('gallerySliderModal');
-                const carouselEl = document.getElementById('galleryCarousel');
-                if (!modalEl || !carouselEl) return;
+            const carouselInstance = bootstrap.Carousel.getInstance(carouselEl);
+            if (!carouselInstance) return;
 
-                const modalInstance = bootstrap.Modal.getInstance(modalEl);
-                if (!modalInstance || !modalEl.classList.contains('show')) return;
+            if (e.key === 'ArrowRight') {
+                carouselInstance.next();
+            } else if (e.key === 'ArrowLeft') {
+                carouselInstance.prev();
+            }
+        });
 
-                const carouselInstance = bootstrap.Carousel.getInstance(carouselEl);
-                if (!carouselInstance) return;
-
-                if (e.key === 'ArrowRight') {
-                    carouselInstance.next();
-                } else if (e.key === 'ArrowLeft') {
-                    carouselInstance.prev();
-                }
-            });
-
-        })();
-    </script>
-    @endscript
-</div>
+    })();
+</script>
+@endscript

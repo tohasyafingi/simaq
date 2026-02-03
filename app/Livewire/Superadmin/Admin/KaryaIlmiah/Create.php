@@ -50,7 +50,7 @@ class Create extends Component
             'kat_karya_ilmiah_id' => 'required|exists:kat_karya_ilmiahs,id',
             'isi' => 'required|string',
             'status' => 'required|boolean',
-            'thumbnail' => $this->karya_ilmiahId ? 'nullable|image|max:5120' : 'required|image|max:5120',
+            'thumbnail' => $this->karya_ilmiahId ? 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120' : 'required|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
         ]);
 
         $existingThumbnail = $this->karya_ilmiahId ? KaryaIlmiah::find($this->karya_ilmiahId)->thumbnail : null;

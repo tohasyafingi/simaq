@@ -18,19 +18,17 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Judul</label>
                             <input wire:model.defer="judul" type="text" class="form-control">
-                            @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="judul" />
                         </div>
 
                         <!-- Thumbnail -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Thumbnail</label>
-                            <input wire:model="newThumbnail" type="file" class="form-control" accept="image/*">
+                            <input wire:model="newThumbnail" type="file" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newThumbnail'])
                             @include('components.upload-preview', ['file' => $newThumbnail, 'maxHeight' => '150px'])
 
-                            @error('newThumbnail')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="newThumbnail" />
                         </div>
 
                         <div class="col-md-4 mb-3">
@@ -49,7 +47,7 @@
                         <!-- Foto Gallery -->
                         <div class="col-12 mb-3">
                             <label class="form-label">Foto Galeri</label>
-                            <input wire:model="images" type="file" class="form-control" multiple accept="image/*">
+                            <input wire:model="images" type="file" class="form-control" multiple accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'images', 'label' => 'Mengunggah gambar...'])
 
                             <div class="row mt-2">
@@ -68,9 +66,7 @@
                                 @endforeach
                             </div>
 
-                            @error('images.*')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="images" />
                         </div>
 
                     </div>

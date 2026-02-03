@@ -42,3 +42,25 @@ $robots = $meta['robots'] ?? 'index, follow';
 <meta name="twitter:image" content="{{ $image }}">
 
 <meta name="robots" content="{{ $robots }}">
+@php
+$ld = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'WebSite',
+            'name' => config('app.name', $brand),
+            'alternateName' => config('app.short_name', 'MATAQ Wonosobo'),
+            'url' => config('app.url', url('/')),
+        ],
+        [
+            '@type' => 'EducationalOrganization',
+            'name' => config('app.name', $brand),
+            'alternateName' => config('app.short_name', 'MATAQ Wonosobo'),
+            'url' => config('app.url', url('/')),
+        ]
+    ]
+];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($ld, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+</script>

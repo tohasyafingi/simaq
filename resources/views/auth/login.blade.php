@@ -163,16 +163,12 @@
                 <div class="mb-3 text-start">
                     <input type="email" name="email" class="form-control" placeholder="Email Address"
                         value="{{ old('email') }}" required autofocus>
-                    @error('email')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                    <x-form-error field='' />
                 </div>
 
                 <div class="mb-3 text-start">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
-                    @error('password')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                    <x-form-error field='' />
                 </div>
 
                 <div class="mb-3 text-center">
@@ -180,9 +176,7 @@
                         <span class="captcha-text">{{ $num1 }} {{ $operator }} {{ $num2 }}</span>
                     </div>
                     <input type="text" name="captcha" class="form-control mt-2" placeholder="Masukkan jawaban" required>
-                    @error('captcha')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                    <x-form-error field='' />
                 </div>
 
                 <div class="form-check mb-3 text-start">

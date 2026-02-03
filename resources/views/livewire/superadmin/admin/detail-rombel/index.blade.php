@@ -40,7 +40,7 @@
                             </select>
                         </div>
 
-                        @error('siswa_ids') <span class="text-danger">{{ $message }}</span> @enderror
+                        <x-form-error field="siswa_ids" />
                     </div>
                     <!-- Tombol Tambah Siswa -->
                     <div class="col-12 col-md-2 d-flex justify-content-md-start justify-content-center">

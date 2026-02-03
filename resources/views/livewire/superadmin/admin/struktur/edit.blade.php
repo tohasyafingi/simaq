@@ -20,7 +20,7 @@
                                     <option value="{{ $user->id }}">{{ $user->name }} ({{ ucfirst($user->role) }})</option>
                                     @endforeach
                                 </select>
-                                @error('user_id') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="user_id" />
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@
                                 <label>Jabatan <span class="text-danger">*</span></label>
                                 <input wire:model="jabatan" type="text" class="form-control"
                                     placeholder="Masukkan jabatan">
-                                @error('jabatan') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="jabatan" />
                             </div>
                         </div>
 
@@ -40,7 +40,7 @@
                                 <label>Urutan <span class="text-danger">*</span></label>
                                 <input wire:model="urutan" type="number" class="form-control"
                                     placeholder="Masukkan urutan">
-                                @error('urutan') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="urutan" />
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="status" />
                             </div>
                         </div>
 

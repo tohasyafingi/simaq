@@ -16,7 +16,7 @@
                                 <label>Tingkat Kelas <span class="text-danger">*</span></label>
                                 <input wire:model="tingkat" type="text" class="form-control"
                                     placeholder="Masukkan tingkat (contoh: 10)">
-                                @error('tingkat') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="tingkat" />
                             </div>
                         </div>
 
@@ -26,7 +26,7 @@
                                 <label>Urutan <span class="text-danger">*</span></label>
                                 <input wire:model="urutan" type="number" class="form-control"
                                     placeholder="Masukkan urutan">
-                                @error('urutan') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="urutan" />
                             </div>
                         </div>
 
@@ -39,7 +39,7 @@
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="status" />
                             </div>
                         </div>
 

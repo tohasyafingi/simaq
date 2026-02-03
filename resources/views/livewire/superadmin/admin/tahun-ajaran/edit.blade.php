@@ -15,7 +15,7 @@
                     <label>Tahun Ajaran <span class="text-danger">*</span></label>
                     <input wire:model="tahun" class="form-control" type="text"
                         placeholder="Masukkan Tahun Ajaran (contoh: 2025/2026)" />
-                    @error('tahun') <small class="text-danger">{{ $message }}</small> @enderror
+                    <x-form-error field="tahun" />
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                         <option value="Ganjil">Ganjil</option>
                         <option value="Genap">Genap</option>
                     </select>
-                    @error('semester') <small class="text-danger">{{ $message }}</small> @enderror
+                    <x-form-error field="semester" />
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                         <option value="1">Aktif</option>
                         <option value="0">Tidak Aktif</option>
                     </select>
-                    @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                    <x-form-error field="status" />
                 </div>
             </div>
         </div>

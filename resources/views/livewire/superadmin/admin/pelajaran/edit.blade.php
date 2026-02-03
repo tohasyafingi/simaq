@@ -16,7 +16,7 @@
                                 <label>Nama Pelajaran <span class="text-danger">*</span></label>
                                 <input wire:model="nama" class="form-control" type="text"
                                     placeholder="Masukkan nama pelajaran" />
-                                @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="nama" />
                             </div>
                         </div>
 
@@ -26,7 +26,7 @@
                                 <label>Kode Pelajaran <span class="text-danger">*</span></label>
                                 <input wire:model="kd_pelajaran" class="form-control" type="text"
                                     placeholder="Masukkan kode pelajaran" />
-                                @error('kd_pelajaran') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="kd_pelajaran" />
                             </div>
                         </div>
 
@@ -42,7 +42,7 @@
                                     @endforeach
                                 </select>
 
-                                @error('jurusan_id') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="jurusan_id" />
                             </div>
                         </div>
                         <!-- Tingkat Kelas -->
@@ -56,7 +56,7 @@
                                         <option value="{{ $tk->id }}">{{ $tk->tingkat }}</option>
                                     @endforeach
                                 </select>
-                                @error('tingkat_kelas_id') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="tingkat_kelas_id" />
                             </div>
                         </div>
                         <!-- Status -->
@@ -68,7 +68,7 @@
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="status" />
                             </div>
                         </div>
 

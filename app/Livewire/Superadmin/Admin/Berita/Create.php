@@ -40,36 +40,36 @@ class Create extends Component
         }
     }
 
-public function store()
-{
-    $this->validate([
-        'judul' => 'required|string|max:255',
-        'kat_berita_id' => 'required|exists:kat_beritas,id',
-        'isi' => 'required|string',
-        'status' => 'required|in:0,1',
-        'thumbnail' => $this->beritaId
-            ? 'nullable|image|max:5120'
-            : 'required|image|max:5120',
-    ]);
+    public function store()
+    {
+        $this->validate([
+            'judul' => 'required|string|max:255',
+            'kat_berita_id' => 'required|exists:kat_beritas,id',
+            'isi' => 'required|string',
+            'status' => 'required|in:0,1',
+            'thumbnail' => $this->beritaId
+                ? 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120'
+                : 'required|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
+        ]);
 
-    $berita = $this->beritaId
-        ? Berita::findOrFail($this->beritaId)
-        : new Berita();
+        $berita = $this->beritaId
+            ? Berita::findOrFail($this->beritaId)
+            : new Berita();
 
-    // Thumbnail
-    if ($this->thumbnail) {
-        $berita->thumbnail = $this->thumbnail->store('berita', 'public');
+        // Thumbnail
+        if ($this->thumbnail) {
+            $berita->thumbnail = $this->thumbnail->store('berita', 'public');
+        }
+
+        $berita->judul = $this->judul;
+        $berita->slug  = Str::slug($this->judul); // 🔥 WAJIB
+        $berita->kat_berita_id = $this->kat_berita_id;
+        $berita->status = (int) $this->status;
+        $berita->isi = $this->isi;
+        $berita->save();
+
+        return redirect()->route('superadmin.admin.berita.index');
     }
-
-    $berita->judul = $this->judul;
-    $berita->slug  = Str::slug($this->judul); // 🔥 WAJIB
-    $berita->kat_berita_id = $this->kat_berita_id;
-    $berita->status = (int) $this->status;
-    $berita->isi = $this->isi;
-    $berita->save();
-
-    return redirect()->route('superadmin.admin.berita.index');
-}
 
 
     public function render()

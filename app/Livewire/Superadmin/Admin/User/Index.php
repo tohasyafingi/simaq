@@ -31,7 +31,7 @@ class Index extends Component
             'password_confirmation' => $this->user_id ? 'nullable' : 'required',
             'role' => 'required|string|max:50',
             'status' => 'required|boolean',
-            'img' => 'nullable|image|max:2048', // Image validation
+            'img' => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120', // Image validation (5MB)
         ];
     }
 

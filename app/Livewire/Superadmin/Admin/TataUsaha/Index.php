@@ -43,7 +43,7 @@ class Index extends Component
                 Rule::unique('users', 'email')->ignore($this->tata_usaha_id ? User::where('tata_usaha_id', $this->tata_usaha_id)->value('id') : null),
             ],
             'no_hp' => 'required|string',
-            'img' => 'nullable|image|max:2048',
+            'img' => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
             'status' => 'required|boolean',
         ];
     }
@@ -133,38 +133,34 @@ class Index extends Component
 
     public function store()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            if ($this->img) {
-                $validatedData['img'] = $this->img->store('tata_usaha', 'public');
-            }
-
-            $tata_usaha = TataUsaha::create($validatedData);
-
-            // Cek jika email sudah ada di users
-            if (User::where('email', $validatedData['email'])->exists()) {
-                session()->flash('error', 'Email sudah digunakan oleh akun lain.');
-                $tata_usaha->delete();
-                return;
-            }
-
-            User::create([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'img' => $validatedData['img'] ?? null,
-                'password' => Hash::make($validatedData['kd_tu']),
-                'role' => 'karyawan',
-                'tata_usaha_id' => $tata_usaha->id,
-                'status' => $validatedData['status'] ? true : false,
-            ]);
-
-            $this->dispatch('closeCreateModal');
-            session()->flash('message', 'Tata Usaha berhasil ditambahkan dan akun karyawan dibuat.');
-            $this->resetInputFields();
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menyimpan tata usaha.');
+        if ($this->img) {
+            $validatedData['img'] = $this->img->store('tata_usaha', 'public');
         }
+
+        $tata_usaha = TataUsaha::create($validatedData);
+
+        // Cek jika email sudah ada di users
+        if (User::where('email', $validatedData['email'])->exists()) {
+            session()->flash('error', 'Email sudah digunakan oleh akun lain.');
+            $tata_usaha->delete();
+            return;
+        }
+
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'img' => $validatedData['img'] ?? null,
+            'password' => Hash::make($validatedData['kd_tu']),
+            'role' => 'karyawan',
+            'tata_usaha_id' => $tata_usaha->id,
+            'status' => $validatedData['status'] ? true : false,
+        ]);
+
+        $this->dispatch('closeCreateModal');
+        session()->flash('message', 'Tata Usaha berhasil ditambahkan dan akun karyawan dibuat.');
+        $this->resetInputFields();
     }
 
     public function edit($id)
@@ -182,39 +178,35 @@ class Index extends Component
 
     public function update()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            $tata_usaha = TataUsaha::findOrFail($this->tata_usaha_id);
+        $tata_usaha = TataUsaha::findOrFail($this->tata_usaha_id);
 
-            if ($this->img) {
-                if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
-                    Storage::disk('public')->delete($tata_usaha->img);
-                }
-                $validatedData['img'] = $this->img->store('tata_usaha', 'public');
-            } else {
-                $validatedData['img'] = $tata_usaha->img;
+        if ($this->img) {
+            if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
+                Storage::disk('public')->delete($tata_usaha->img);
             }
-
-            $tata_usaha->update($validatedData);
-
-            // Update user jika ada
-            $user = User::where('tata_usaha_id', $tata_usaha->id)->first();
-            if ($user) {
-                $user->update([
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'img' => $validatedData['img'],
-                    'status' => $validatedData['status'] ? true : false,
-                ]);
-            }
-
-            $this->dispatch('closeEditModal');
-            session()->flash('message', 'Data tata usaha berhasil diperbarui.');
-            $this->resetInputFields();
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat memperbarui tata usaha.');
+            $validatedData['img'] = $this->img->store('tata_usaha', 'public');
+        } else {
+            $validatedData['img'] = $tata_usaha->img;
         }
+
+        $tata_usaha->update($validatedData);
+
+        // Update user jika ada
+        $user = User::where('tata_usaha_id', $tata_usaha->id)->first();
+        if ($user) {
+            $user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'img' => $validatedData['img'],
+                'status' => $validatedData['status'] ? true : false,
+            ]);
+        }
+
+        $this->dispatch('closeEditModal');
+        session()->flash('message', 'Data tata usaha berhasil diperbarui.');
+        $this->resetInputFields();
     }
 
     public function confirmDelete($id)
@@ -224,27 +216,23 @@ class Index extends Component
 
     public function destroy()
     {
-        try {
-            $tata_usaha = TataUsaha::findOrFail($this->deleteId);
+        $tata_usaha = TataUsaha::findOrFail($this->deleteId);
 
-            // Hapus foto jika ada
-            if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
-                Storage::disk('public')->delete($tata_usaha->img);
-            }
-
-            // Hapus user terkait
-            $user = User::where('tata_usaha_id', $tata_usaha->id)->first();
-            if ($user) {
-                $user->delete();
-            }
-
-            $tata_usaha->delete();
-
-            $this->dispatch('closeDeleteModal');
-            session()->flash('message', 'Tata Usaha dan akun user berhasil dihapus.');
-            $this->deleteId = null;
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menghapus tata usaha.');
+        // Hapus foto jika ada
+        if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
+            Storage::disk('public')->delete($tata_usaha->img);
         }
+
+        // Hapus user terkait
+        $user = User::where('tata_usaha_id', $tata_usaha->id)->first();
+        if ($user) {
+            $user->delete();
+        }
+
+        $tata_usaha->delete();
+
+        $this->dispatch('closeDeleteModal');
+        session()->flash('message', 'Tata Usaha dan akun user berhasil dihapus.');
+        $this->deleteId = null;
     }
 }

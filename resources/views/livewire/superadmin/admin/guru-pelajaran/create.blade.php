@@ -19,7 +19,7 @@
                                     <option value="{{ $guru->id }}">{{ $guru->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('guru_id') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="guru_id" />
                             </div>
                         </div>
 
@@ -62,7 +62,7 @@
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="status" />
                             </div>
                         </div>
                     </div>

@@ -40,13 +40,13 @@
                                     <label class="form-label">Nama Kategori</label>
                                     <input type="text" class="form-control" wire:model.defer="nama"
                                         placeholder="Masukkan nama kategori">
-                                    @error('nama') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <x-form-error field="nama" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Slug</label>
                                     <input type="text" class="form-control" wire:model.defer="slug"
                                         placeholder="Slug kategori">
-                                    @error('slug') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <x-form-error field="slug" />
                                 </div>
                                 <button type="submit" class="btn btn-primary">
                                     {{ $editMode ? 'Update' : 'Simpan' }}

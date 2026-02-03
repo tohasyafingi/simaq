@@ -142,29 +142,23 @@
 
                 <!-- Email Address -->
                 <div class="mb-3 text-start">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                    <input id="email" type="email" class="form-control <x-form-error field='' />"
                         name="email" value="{{ old('email', $request->email) }}" required autofocus placeholder="Email" />
-                    @error('email')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
+                    <x-form-error field='' />
                 </div>
 
                 <!-- Password -->
                 <div class="mb-3 text-start">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                    <input id="password" type="password" class="form-control <x-form-error field='' />"
                         name="password" required placeholder="Password Baru" />
-                    @error('password')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
+                    <x-form-error field='' />
                 </div>
 
                 <!-- Confirm Password -->
                 <div class="mb-3 text-start">
-                    <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                    <input id="password_confirmation" type="password" class="form-control <x-form-error field='' />"
                         name="password_confirmation" required placeholder="Konfirmasi Password" />
-                    @error('password_confirmation')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
+                    <x-form-error field='' />
                 </div>
 
                 <div class="d-grid mb-3">

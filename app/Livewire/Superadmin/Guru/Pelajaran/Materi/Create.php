@@ -32,7 +32,7 @@ class Create extends Component
         'deskripsi' => 'nullable|string',
         'tanggal' => 'required|date',
         'jam' => 'required',
-        'file' => 'nullable|file|mimes:pdf,doc,docx,pptx,jpg,png|max:5120', // max 5MB
+        'file' => 'nullable|file|mimes:pdf,doc,docx,pptx,jpg,png|max:12288', 
         'status' => 'boolean',
     ];
 
@@ -97,7 +97,7 @@ class Create extends Component
             $this->successMessage = 'Materi berhasil dibuat!';
             $this->reset(['judul', 'deskripsi', 'jam', 'file', 'absensi']);
         } catch (\Exception $e) {
-            $this->addError('general', 'Gagal menyimpan: ' . $e->getMessage());
+            $this->addError('general', 'Gagal menyimpan data. Silakan coba lagi.');
         }
     }
 

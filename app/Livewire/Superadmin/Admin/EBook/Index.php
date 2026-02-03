@@ -42,8 +42,8 @@ class Index extends Component
             'description' => 'nullable|string',
             'link'        => 'nullable|string|max:255',
             'status'      => 'required|boolean',
-            'newImage'    => 'nullable|image|max:2048',
-            'newFile'     => 'nullable|file|mimes:pdf|max:10240',
+            'newImage'    => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
+            'newFile'     => 'nullable|file|mimes:pdf|max:12288',
         ];
     }
 

@@ -40,8 +40,8 @@ class Index extends Component
             'judul'        => 'required|string|max:255',
             'deskripsi'    => 'nullable|string',
             'status'       => 'required|boolean',
-            'newThumbnail' => 'nullable|image|max:2048',
-            'images.*'     => 'nullable|image|max:2048',
+            'newThumbnail' => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
+            'images.*'     => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
         ];
     }
 

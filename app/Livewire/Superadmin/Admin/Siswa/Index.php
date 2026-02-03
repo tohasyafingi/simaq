@@ -44,10 +44,10 @@ class Index extends Component
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
-            'kk' => 'nullable|file|max:2048',
-            'akta' => 'nullable|file|max:2048',
-            'ijazah_terakhir' => 'nullable|file|max:2048',
-            'img' => 'nullable|image|max:2048',
+            'kk' => 'nullable|file|mimes:pdf|max:12288',
+            'akta' => 'nullable|file|mimes:pdf|max:12288',
+            'ijazah_terakhir' => 'nullable|file|mimes:pdf|max:12288',
+            'img' => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
             'status' => 'required|in:aktif,tidak_aktif,lulus',
         ];
     }
@@ -116,7 +116,7 @@ class Index extends Component
             $this->dispatch('closeImportModal');
         } catch (\Exception $e) {
             Log::error("Exception di import siswa: " . $e->getMessage());
-            session()->flash('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
+            session()->flash('message', 'Terjadi kesalahan saat import: ' . $e->getMessage());
         }
     }
 
@@ -133,61 +133,57 @@ class Index extends Component
 
     public function store()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            $data = [
-                'nis' => $validatedData['nis'],
+        $data = [
+            'nis' => $validatedData['nis'],
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'no_hp' => $validatedData['no_hp'],
+            'jenis_kelamin' => $validatedData['jenis_kelamin'],
+            'tempat_lahir' => $validatedData['tempat_lahir'],
+            'tanggal_lahir' => $validatedData['tanggal_lahir'],
+            'alamat' => $validatedData['alamat'],
+            'status' => $validatedData['status'],
+        ];
+
+        // Upload files
+        if ($this->kk) $data['kk'] = $this->kk->store('kk', 'public');
+        if ($this->akta) $data['akta'] = $this->akta->store('akta', 'public');
+        if ($this->ijazah_terakhir) $data['ijazah_terakhir'] = $this->ijazah_terakhir->store('ijazah', 'public');
+        if ($this->img) $data['img'] = $this->img->store('siswa_img', 'public');
+
+        // Membuat siswa
+        $siswa = Siswa::create($data);
+
+        // Cek jika email sudah ada di users
+        if (User::where('email', $validatedData['email'])->exists()) {
+            session()->flash('message', 'Email sudah digunakan oleh akun lain.');
+            $siswa->delete();
+            return;
+        }
+
+        // Membuat akun user dengan siswa_id
+        try {
+            User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
-                'no_hp' => $validatedData['no_hp'],
-                'jenis_kelamin' => $validatedData['jenis_kelamin'],
-                'tempat_lahir' => $validatedData['tempat_lahir'],
-                'tanggal_lahir' => $validatedData['tanggal_lahir'],
-                'alamat' => $validatedData['alamat'],
-                'status' => $validatedData['status'],
-            ];
-
-            // Upload files
-            if ($this->kk) $data['kk'] = $this->kk->store('kk', 'public');
-            if ($this->akta) $data['akta'] = $this->akta->store('akta', 'public');
-            if ($this->ijazah_terakhir) $data['ijazah_terakhir'] = $this->ijazah_terakhir->store('ijazah', 'public');
-            if ($this->img) $data['img'] = $this->img->store('siswa_img', 'public');
-
-            // Membuat siswa
-            $siswa = Siswa::create($data);
-
-            // Cek jika email sudah ada di users
-            if (User::where('email', $validatedData['email'])->exists()) {
-                session()->flash('error', 'Email sudah digunakan oleh akun lain.');
-                $siswa->delete();
-                return;
-            }
-
-            // Membuat akun user dengan siswa_id
-            try {
-                User::create([
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'img' => $data['img'] ?? null,
-                    'password' => Hash::make($validatedData['nis']),
-                    'role' => 'siswa',
-                    'siswa_id' => $siswa->id,
-                    'status' => $validatedData['status'] === 'aktif',
-                ]);
-            } catch (\Exception $e) {
-                // Jika User gagal dibuat, hapus Siswa untuk konsistensi
-                $siswa->delete();
-                session()->flash('error', 'Gagal membuat akun user: ' . $e->getMessage());
-                return;
-            }
-
-            $this->dispatch('closeCreateModal');
-            session()->flash('message', 'Siswa berhasil ditambahkan dan akun siswa dibuat.');
-            $this->create();  // Reset form
+                'img' => $data['img'] ?? null,
+                'password' => Hash::make($validatedData['nis']),
+                'role' => 'siswa',
+                'siswa_id' => $siswa->id,
+                'status' => $validatedData['status'] === 'aktif',
+            ]);
         } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menyimpan siswa: ' . $e->getMessage());
+            // Jika User gagal dibuat, hapus Siswa untuk konsistensi
+            $siswa->delete();
+            session()->flash('message', 'Gagal membuat akun user: ' . $e->getMessage());
+            return;
         }
+
+        $this->dispatch('closeCreateModal');
+        session()->flash('message', 'Siswa berhasil ditambahkan dan akun siswa dibuat.');
+        $this->create();
     }
 
     public function edit($id)
@@ -213,58 +209,54 @@ class Index extends Component
 
     public function update()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            $siswa = Siswa::findOrFail($this->siswa_id);
+        $siswa = Siswa::findOrFail($this->siswa_id);
 
-            // Update data siswa
-            $siswa->update($validatedData);
+        // Update data siswa
+        $siswa->update($validatedData);
 
-            // Handle file uploads (hapus lama jika ada, upload baru)
-            if ($this->kk) {
-                if ($siswa->kk && Storage::disk('public')->exists($siswa->kk)) {
-                    Storage::disk('public')->delete($siswa->kk);
-                }
-                $siswa->kk = $this->kk->store('kk', 'public');
+        // Handle file uploads (hapus lama jika ada, upload baru)
+        if ($this->kk) {
+            if ($siswa->kk && Storage::disk('public')->exists($siswa->kk)) {
+                Storage::disk('public')->delete($siswa->kk);
             }
-            if ($this->akta) {
-                if ($siswa->akta && Storage::disk('public')->exists($siswa->akta)) {
-                    Storage::disk('public')->delete($siswa->akta);
-                }
-                $siswa->akta = $this->akta->store('akta', 'public');
-            }
-            if ($this->ijazah_terakhir) {
-                if ($siswa->ijazah_terakhir && Storage::disk('public')->exists($siswa->ijazah_terakhir)) {
-                    Storage::disk('public')->delete($siswa->ijazah_terakhir);
-                }
-                $siswa->ijazah_terakhir = $this->ijazah_terakhir->store('ijazah', 'public');
-            }
-            if ($this->img) {
-                if ($siswa->img && Storage::disk('public')->exists($siswa->img)) {
-                    Storage::disk('public')->delete($siswa->img);
-                }
-                $siswa->img = $this->img->store('siswa_img', 'public');
-            }
-            $siswa->save();
-
-            // Update user terkait (pastikan siswa_id tetap)
-            $user = User::where('siswa_id', $siswa->id)->first();
-            if ($user) {
-                $user->update([
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'img' => $siswa->img,
-                    'status' => $validatedData['status'] === 'aktif',
-                ]);
-            }
-
-            $this->dispatch('closeEditModal');
-            session()->flash('message', 'Data siswa berhasil diperbarui.');
-            $this->create();
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat memperbarui siswa: ' . $e->getMessage());
+            $siswa->kk = $this->kk->store('kk', 'public');
         }
+        if ($this->akta) {
+            if ($siswa->akta && Storage::disk('public')->exists($siswa->akta)) {
+                Storage::disk('public')->delete($siswa->akta);
+            }
+            $siswa->akta = $this->akta->store('akta', 'public');
+        }
+        if ($this->ijazah_terakhir) {
+            if ($siswa->ijazah_terakhir && Storage::disk('public')->exists($siswa->ijazah_terakhir)) {
+                Storage::disk('public')->delete($siswa->ijazah_terakhir);
+            }
+            $siswa->ijazah_terakhir = $this->ijazah_terakhir->store('ijazah', 'public');
+        }
+        if ($this->img) {
+            if ($siswa->img && Storage::disk('public')->exists($siswa->img)) {
+                Storage::disk('public')->delete($siswa->img);
+            }
+            $siswa->img = $this->img->store('siswa_img', 'public');
+        }
+        $siswa->save();
+
+        // Update user terkait (pastikan siswa_id tetap)
+        $user = User::where('siswa_id', $siswa->id)->first();
+        if ($user) {
+            $user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'img' => $siswa->img,
+                'status' => $validatedData['status'] === 'aktif',
+            ]);
+        }
+
+        $this->dispatch('closeEditModal');
+        session()->flash('message', 'Data siswa berhasil diperbarui.');
+        $this->create();
     }
 
     public function render()
@@ -296,28 +288,24 @@ class Index extends Component
 
     public function destroy()
     {
-        try {
-            $siswa = Siswa::findOrFail($this->siswa_id_delete);
+        $siswa = Siswa::findOrFail($this->siswa_id_delete);
 
-            // Hapus file
-            if ($siswa->kk && Storage::disk('public')->exists($siswa->kk)) Storage::disk('public')->delete($siswa->kk);
-            if ($siswa->akta && Storage::disk('public')->exists($siswa->akta)) Storage::disk('public')->delete($siswa->akta);
-            if ($siswa->ijazah_terakhir && Storage::disk('public')->exists($siswa->ijazah_terakhir)) Storage::disk('public')->delete($siswa->ijazah_terakhir);
-            if ($siswa->img && Storage::disk('public')->exists($siswa->img)) Storage::disk('public')->delete($siswa->img);
+        // Hapus file
+        if ($siswa->kk && Storage::disk('public')->exists($siswa->kk)) Storage::disk('public')->delete($siswa->kk);
+        if ($siswa->akta && Storage::disk('public')->exists($siswa->akta)) Storage::disk('public')->delete($siswa->akta);
+        if ($siswa->ijazah_terakhir && Storage::disk('public')->exists($siswa->ijazah_terakhir)) Storage::disk('public')->delete($siswa->ijazah_terakhir);
+        if ($siswa->img && Storage::disk('public')->exists($siswa->img)) Storage::disk('public')->delete($siswa->img);
 
-            // Hapus user terkait dulu
-            $user = User::where('siswa_id', $siswa->id)->first();
-            if ($user) {
-                $user->delete();
-            }
-
-            $siswa->delete();
-
-            session()->flash('message', 'Siswa dan akun user berhasil dihapus.');
-            $this->dispatch('closeDeleteModal');
-            $this->reset(['siswa_id_delete', 'siswa_name_delete']);
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menghapus siswa: ' . $e->getMessage());
+        // Hapus user terkait dulu
+        $user = User::where('siswa_id', $siswa->id)->first();
+        if ($user) {
+            $user->delete();
         }
+
+        $siswa->delete();
+
+        session()->flash('message', 'Siswa dan akun user berhasil dihapus.');
+        $this->dispatch('closeDeleteModal');
+        $this->reset(['siswa_id_delete', 'siswa_name_delete']);
     }
 }

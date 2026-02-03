@@ -33,24 +33,24 @@
                                 <div class="mb-3">
                                     <label class="form-label">Judul Karya Ilmiah</label>
                                     <input type="text" class="form-control" wire:model.defer="judul" placeholder="Masukkan judul karya ilmiah">
-                                    @error('judul') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <x-form-error field="judul" />
                                 </div>
 
                                 <!-- Author -->
                                 <div class="mb-3">
                                     <label class="form-label">Author</label>
                                     <input type="text" class="form-control" wire:model.defer="author" placeholder="Masukkan nama author">
-                                    @error('author') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <x-form-error field="author" />
                                 </div>
 
                                 <!-- Thumbnail, Kategori, Status -->
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label class="form-label">Upload Thumbnail</label>
-                                        <input type="file" class="form-control" wire:model="thumbnail" accept="image/*">
+                                        <input type="file" class="form-control" wire:model="thumbnail" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                                         @include('components.upload-loading', ['target' => 'thumbnail'])
                                         @include('components.upload-preview', ['file' => $thumbnail ?? $thumbnailUrl, 'maxHeight' => '120px'])
-                                        @error('thumbnail') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <x-form-error field="thumbnail" />
                                     </div>
 
                                     <div class="col-md-4">
@@ -61,7 +61,7 @@
                                                 <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
                                             @endforeach
                                         </select>
-                                        @error('kat_karya_ilmiah_id') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <x-form-error field="kat_karya_ilmiah_id" />
                                     </div>
 
                                     <div class="col-md-4">
@@ -70,7 +70,7 @@
                                             <option value="0">Draft</option>
                                             <option value="1">Publik</option>
                                         </select>
-                                        @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <x-form-error field="status" />
                                     </div>
                                 </div>
 
@@ -80,7 +80,7 @@
                                     <div wire:ignore>
                                         <textarea id="isi" class="form-control summernote" wire:model.defer="isi"></textarea>
                                     </div>
-                                    @error('isi') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <x-form-error field="isi" />
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">{{ $karya_ilmiahId ? 'Update' : 'Simpan' }}</button>
@@ -160,3 +160,4 @@
     </script>
     @endscript
 </div>
+

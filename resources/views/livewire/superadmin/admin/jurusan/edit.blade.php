@@ -16,7 +16,7 @@
                                 <label>Kode Jurusan <span class="text-danger">*</span></label>
                                 <input wire:model="kode" type="text" class="form-control"
                                     placeholder="Masukkan kode jurusan">
-                                @error('kode') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="kode" />
                             </div>
                         </div>
 
@@ -26,7 +26,7 @@
                                 <label>Nama Jurusan <span class="text-danger">*</span></label>
                                 <input wire:model="nama" class="form-control" type="text"
                                     placeholder="Masukkan nama jurusan" />
-                                @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="nama" />
                             </div>
                         </div>
                         
@@ -39,7 +39,7 @@
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="status" />
                             </div>
                         </div>
 

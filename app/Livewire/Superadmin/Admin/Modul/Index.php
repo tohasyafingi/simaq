@@ -94,7 +94,7 @@ class Index extends Component
             'nama' => 'required',
             'pelajaran_id' => 'required',
             'link' => 'nullable|url|max:255',
-            'file' => 'nullable|file|max:10240',
+            'file' => 'nullable|file|mimes:pdf|max:12288',
             'status' => 'required|in:0,1',
         ]);
 

@@ -152,11 +152,9 @@
                 <div class="mb-3 text-start">
                     <label for="email" class="form-label">Email</label>
                     <input id="email" type="email"
-                        class="form-control @error('email') is-invalid @enderror"
+                        class="form-control <x-form-error field='' />"
                         name="email" value="{{ old('email') }}" required autofocus>
-                    @error('email')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
+                    <x-form-error field='' />
                 </div>
 
                 <div class="d-grid mb-3">

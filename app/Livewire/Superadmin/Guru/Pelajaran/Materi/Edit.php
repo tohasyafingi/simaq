@@ -32,7 +32,7 @@ class Edit extends Component
         'deskripsi' => 'nullable|string',
         'tanggal' => 'required|date',
         'jam' => 'required',
-        'file' => 'nullable|file|mimes:pdf,doc,docx,pptx,jpg,png|max:5120', // max 5MB
+        'file' => 'nullable|file|mimes:pdf,doc,docx,pptx,jpg,png|max:12288',
         'status' => 'boolean',
     ];
 
@@ -84,7 +84,7 @@ class Edit extends Component
 
             $this->successMessage = 'Materi berhasil diperbarui!';
         } catch (\Exception $e) {
-            $this->addError('general', 'Gagal memperbarui: ' . $e->getMessage());
+            $this->addError('general', 'Gagal memperbarui data. Silakan coba lagi.');
         }
     }
 

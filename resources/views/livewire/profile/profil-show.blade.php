@@ -144,13 +144,13 @@
                                     <div class="col-12">
                                         <label class="form-label">Password Lama</label>
                                         <input type="password" class="form-control" wire:model="current_password" required>
-                                        @error('current_password') <small class="text-danger">{{ $message }}</small> @enderror
+                                        <x-form-error field='' />
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form-label">Password Baru</label>
                                         <input type="password" class="form-control" wire:model="password" required>
-                                        @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+                                        <x-form-error field='' />
                                     </div>
 
                                     <div class="col-12">
@@ -176,3 +176,4 @@
         </div>
     </div>
 </div>
+

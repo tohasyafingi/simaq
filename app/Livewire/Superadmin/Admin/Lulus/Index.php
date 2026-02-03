@@ -44,10 +44,10 @@ class Index extends Component
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
-            'kk' => 'nullable|file|max:2048',
-            'akta' => 'nullable|file|max:2048',
-            'ijazah_terakhir' => 'nullable|file|max:2048',
-            'img' => 'nullable|image|max:2048',
+            'kk' => 'nullable|file|mimes:pdf|max:12288',
+            'akta' => 'nullable|file|mimes:pdf|max:12288',
+            'ijazah_terakhir' => 'nullable|file|mimes:pdf|max:12288',
+            'img' => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
             'status' => 'required|in:aktif,tidak_aktif,lulus',
         ];
     }

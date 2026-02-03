@@ -16,7 +16,7 @@
                                 <label>Kode Bendahara <span class="text-danger">*</span></label>
                                 <input wire:model="kd_bendahara" type="text" class="form-control"
                                     placeholder="Masukkan kode bendahara">
-                                @error('kd_bendahara') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="kd_bendahara" />
                             </div>
                         </div>
 
@@ -26,7 +26,7 @@
                                 <label>Nama Bendahara <span class="text-danger">*</span></label>
                                 <input wire:model="name" type="text" class="form-control"
                                     placeholder="Masukkan nama bendahara">
-                                @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="name" />
                             </div>
                         </div>
 
@@ -36,7 +36,7 @@
                                 <label>Email <span class="text-danger">*</span></label>
                                 <input wire:model="email" type="email" class="form-control"
                                     placeholder="Masukkan email">
-                                @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="email" />
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@
                                 <label>No HP <span class="text-danger">*</span></label>
                                 <input wire:model="no_hp" type="text" class="form-control"
                                     placeholder="Masukkan nomor HP">
-                                @error('no_hp') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="no_hp" />
                             </div>
                         </div>
 
@@ -54,10 +54,10 @@
                         <div class="col-12 col-sm-6 py-2">
                             <div class="form-group local-forms">
                                 <label>Foto</label>
-                                <input wire:model="img" type="file" class="form-control">
+                                <input wire:model="img" type="file" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                                 @include('components.upload-loading', ['target' => 'img'])
                                 @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
-                                @error('img') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="img" />
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="status" />
                             </div>
                         </div>
 

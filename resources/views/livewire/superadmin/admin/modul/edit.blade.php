@@ -13,7 +13,7 @@
                         <div class="col-md-6 py-2">
                             <label class="form-label">Nama Modul <span class="text-danger">*</span></label>
                             <input wire:model="nama" type="text" class="form-control" placeholder="Masukkan nama modul">
-                            @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="nama" />
                         </div>
 
                         <!-- Pelajaran -->
@@ -28,23 +28,23 @@
                                     </option>
                                 @endforeach
                             </select>
-                            @error('pelajaran_id') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="pelajaran_id" />
                         </div>
 
                         <!-- Link -->
                         <div class="col-md-6 py-2">
                             <label class="form-label">Link Modul</label>
                             <input wire:model="link" type="url" class="form-control" placeholder="Masukkan link modul">
-                            @error('link') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="link" />
                         </div>
 
                         <!-- File -->
                         <div class="col-md-6 py-2">
                             <label class="form-label">File Modul</label>
-                            <input wire:model="file" type="file" class="form-control">
+                            <input wire:model="file" type="file" class="form-control" accept=".pdf,application/pdf">
                             @include('components.upload-loading', ['target' => 'file'])
                             @include('components.upload-preview', ['file' => $file])
-                            @error('file') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="file" />
 
                             @if (!$file && $modul_id && $existingFile)
                                 <small class="text-info">File Lama: {{ $existingFile }}</small>
@@ -59,7 +59,7 @@
                                 <option value="1">Aktif</option>
                                 <option value="0">Tidak Aktif</option>
                             </select>
-                            @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="status" />
                         </div>
 
                     </div>

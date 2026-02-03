@@ -14,7 +14,7 @@
                         <div class="col-md-6 py-2">
                             <label class="form-label">Nama Kelas <span class="text-danger">*</span></label>
                             <input wire:model="nama" type="text" class="form-control" placeholder="Masukkan nama kelas">
-                            @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="nama" />
                         </div>
 
                         <!-- Status -->
@@ -25,7 +25,7 @@
                                 <option value="1">Aktif</option>
                                 <option value="0">Tidak Aktif</option>
                             </select>
-                            @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="status" />
                         </div>
 
                     </div>

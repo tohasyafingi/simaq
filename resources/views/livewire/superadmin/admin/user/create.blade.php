@@ -13,27 +13,27 @@
                         <div class="col-12 col-sm-6 py-2">
                             <label>Nama <span class="text-danger">*</span></label>
                             <input type="text" wire:model="name" class="form-control">
-                            @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="name" />
                         </div>
 
                         <!-- Email -->
                         <div class="col-12 col-sm-6 py-2">
                             <label>Email <span class="text-danger">*</span></label>
                             <input type="email" wire:model="email" class="form-control">
-                            @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="email" />
                         </div>
 
                         <!-- Password -->
                         <div class="col-12 col-sm-6 py-2">
                             <label>Password <span class="text-danger">*</span></label>
                             <input type="password" wire:model="password" class="form-control">
-                            @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="password" />
                         </div>
 
                         <div class="col-12 col-sm-6 py-2">
                             <label>Konfirmasi Password <span class="text-danger">*</span></label>
                             <input type="password" wire:model="password_confirmation" class="form-control">
-                            @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="password" />
                         </div>
 
                         <!-- Role -->
@@ -47,7 +47,7 @@
                                 <option value="karyawan">Karyawan</option>
                                 <option value="siswa">Siswa</option>
                             </select>
-                            @error('role') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="role" />
                         </div>
 
                         <!-- Status -->
@@ -58,16 +58,16 @@
                                 <option value="1">Aktif</option>
                                 <option value="0">Tidak Aktif</option>
                             </select>
-                            @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="status" />
                         </div>
 
                         <!-- Image -->
                         <div class="col-12 col-sm-6 py-2">
                             <label>Foto Profil</label>
-                            <input type="file" wire:model="img" class="form-control">
+                            <input type="file" wire:model="img" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'img'])
                             @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
-                            @error('img') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="img" />
                         </div>
                     </div>
                 </div>

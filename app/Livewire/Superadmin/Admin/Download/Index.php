@@ -39,7 +39,7 @@ class Index extends Component
             'judul'       => 'required|string|max:255',
             'description' => 'nullable|string',
             'status'      => 'required|boolean',
-            'newImage'    => 'nullable|image|max:2048',
+            'newImage'    => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
             'newFile'     => $this->download_id
                 ? 'nullable|file|max:10240'
                 : 'required|file|max:10240',

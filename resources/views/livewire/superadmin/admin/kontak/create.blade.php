@@ -15,7 +15,7 @@
                             <div class="form-group local-forms">
                                 <label>Alamat</label>
                                 <textarea wire:model="alamat" class="form-control" rows="2" placeholder="Masukkan alamat"></textarea>
-                                @error('alamat') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="alamat" />
                             </div>
                         </div>
 
@@ -24,7 +24,7 @@
                             <div class="form-group local-forms">
                                 <label>Telepon</label>
                                 <input wire:model="telepon" type="text" class="form-control" placeholder="Masukkan telepon">
-                                @error('telepon') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="telepon" />
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                             <div class="form-group local-forms">
                                 <label>Email</label>
                                 <input wire:model="email" type="email" class="form-control" placeholder="Masukkan email">
-                                @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="email" />
                             </div>
                         </div>
 
@@ -42,7 +42,7 @@
                             <div class="form-group local-forms">
                                 <label>Google Map Embed</label>
                                 <textarea wire:model="google_map_embed" class="form-control" rows="2" placeholder="Masukkan embed map"></textarea>
-                                @error('google_map_embed') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="google_map_embed" />
                             </div>
                         </div>
 
@@ -51,7 +51,7 @@
                             <div class="form-group local-forms">
                                 <label>Facebook</label>
                                 <input wire:model="facebook" type="text" class="form-control" placeholder="Masukkan link Facebook">
-                                @error('facebook') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="facebook" />
                             </div>
                         </div>
 
@@ -59,7 +59,7 @@
                             <div class="form-group local-forms">
                                 <label>Instagram</label>
                                 <input wire:model="instagram" type="text" class="form-control" placeholder="Masukkan link Instagram">
-                                @error('instagram') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="instagram" />
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                             <div class="form-group local-forms">
                                 <label>Tiktok</label>
                                 <input wire:model="tiktok" type="text" class="form-control" placeholder="Masukkan link Tiktok">
-                                @error('tiktok') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="tiktok" />
                             </div>
                         </div>
 
@@ -75,7 +75,7 @@
                             <div class="form-group local-forms">
                                 <label>Twitter</label>
                                 <input wire:model="twitter" type="text" class="form-control" placeholder="Masukkan link Twitter">
-                                @error('twitter') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="twitter" />
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                             <div class="form-group local-forms">
                                 <label>Youtube</label>
                                 <input wire:model="youtube" type="text" class="form-control" placeholder="Masukkan link Youtube">
-                                @error('youtube') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="youtube" />
                             </div>
                         </div>
 
@@ -92,7 +92,7 @@
                             <div class="form-group local-forms">
                                 <label>Tentang</label>
                                 <textarea wire:model="about" class="form-control" rows="3" placeholder="Masukkan tentang"></textarea>
-                                @error('about') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="about" />
                             </div>
                         </div>
 
@@ -101,7 +101,7 @@
                             <div class="form-group local-forms">
                                 <label>Copyright</label>
                                 <input wire:model="copyright" type="text" class="form-control" placeholder="Masukkan copyright">
-                                @error('copyright') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="copyright" />
                             </div>
                         </div> --}}
 

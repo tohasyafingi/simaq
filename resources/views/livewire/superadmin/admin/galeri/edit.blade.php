@@ -35,7 +35,7 @@
                         <!-- Thumbnail -->
                         <div class="col-12 mb-4">
                             <label class="form-label">Thumbnail</label>
-                            <input wire:model="newThumbnail" type="file" class="form-control">
+                            <input wire:model="newThumbnail" type="file" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newThumbnail'])
                             @include('components.upload-preview', ['file' => $newThumbnail ?? $thumbnail, 'maxHeight' => '150px'])
                         </div>
@@ -63,7 +63,7 @@
                         <!-- TAMBAH FOTO BARU -->
                         <div class="col-12 mt-3">
                             <label class="form-label">Tambah Foto Baru</label>
-                            <input wire:model="images" type="file" class="form-control" multiple>
+                            <input wire:model="images" type="file" class="form-control" multiple accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'images', 'label' => 'Mengunggah gambar...'])
 
                             <div class="row mt-2">

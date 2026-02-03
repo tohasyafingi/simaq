@@ -46,7 +46,7 @@ class Index extends Component
                 Rule::unique('users', 'email')->ignore($this->guru_id ? User::where('guru_id', $this->guru_id)->value('id') : null),
             ],
             'no_hp' => 'required|string|max:15',
-            'img' => 'nullable|image|max:2048',
+            'img' => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
             'status' => 'required|boolean',
         ];
     }
@@ -136,39 +136,33 @@ class Index extends Component
 
     public function store()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            if ($this->img) {
-                $validatedData['img'] = $this->img->store('guru', 'public');
-            }
-
-            $guru = Guru::create($validatedData);
-
-            if (User::where('email', $validatedData['email'])->exists()) {
-                session()->flash('error', 'Email sudah digunakan oleh akun lain.');
-                $guru->delete();
-                return;
-            }
-
-            User::create([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'img' => $validatedData['img'] ?? null,
-                'password' => Hash::make($validatedData['kd_guru']),
-                'role' => 'guru',
-                'guru_id' => $guru->id,
-                'status' => $validatedData['status'] ? true : false,
-            ]);
-
-            $this->dispatch('closeCreateModal');
-            session()->flash('message', 'Guru berhasil ditambahkan dan akun guru dibuat.');
-            $this->resetInputFields();
-        } catch (\Exception $e) {
-            Log::error('Gagal menyimpan guru: ' . $e->getMessage());
-            Log::error($e->getTraceAsString());
-            session()->flash('error', 'Terjadi kesalahan saat menyimpan guru. Silakan periksa log untuk detail.');
+        if ($this->img) {
+            $validatedData['img'] = $this->img->store('guru', 'public');
         }
+
+        $guru = Guru::create($validatedData);
+
+        if (User::where('email', $validatedData['email'])->exists()) {
+            session()->flash('error', 'Email sudah digunakan oleh akun lain.');
+            $guru->delete();
+            return;
+        }
+
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'img' => $validatedData['img'] ?? null,
+            'password' => Hash::make($validatedData['kd_guru']),
+            'role' => 'guru',
+            'guru_id' => $guru->id,
+            'status' => $validatedData['status'] ? true : false,
+        ]);
+
+        $this->dispatch('closeCreateModal');
+        session()->flash('message', 'Guru berhasil ditambahkan dan akun guru dibuat.');
+        $this->resetInputFields();
     }
 
     public function edit($id)
@@ -186,38 +180,34 @@ class Index extends Component
 
     public function update()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            $guru = Guru::findOrFail($this->guru_id);
+        $guru = Guru::findOrFail($this->guru_id);
 
-            if ($this->img) {
-                if ($guru->img && Storage::disk('public')->exists($guru->img)) {
-                    Storage::disk('public')->delete($guru->img);
-                }
-                $validatedData['img'] = $this->img->store('guru', 'public');
-            } else {
-                $validatedData['img'] = $guru->img;
+        if ($this->img) {
+            if ($guru->img && Storage::disk('public')->exists($guru->img)) {
+                Storage::disk('public')->delete($guru->img);
             }
-
-            $guru->update($validatedData);
-
-            $user = User::where('guru_id', $guru->id)->first();
-            if ($user) {
-                $user->update([
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'img' => $validatedData['img'],
-                    'status' => $validatedData['status'] ? true : false,
-                ]);
-            }
-
-            $this->dispatch('closeEditModal');
-            session()->flash('message', 'Data guru berhasil diperbarui.');
-            $this->resetInputFields();
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat memperbarui guru.');
+            $validatedData['img'] = $this->img->store('guru', 'public');
+        } else {
+            $validatedData['img'] = $guru->img;
         }
+
+        $guru->update($validatedData);
+
+        $user = User::where('guru_id', $guru->id)->first();
+        if ($user) {
+            $user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'img' => $validatedData['img'],
+                'status' => $validatedData['status'] ? true : false,
+            ]);
+        }
+
+        $this->dispatch('closeEditModal');
+        session()->flash('message', 'Data guru berhasil diperbarui.');
+        $this->resetInputFields();
     }
 
     public function confirmDelete($id)
@@ -227,25 +217,21 @@ class Index extends Component
 
     public function destroy()
     {
-        try {
-            $guru = Guru::findOrFail($this->deleteId);
+        $guru = Guru::findOrFail($this->deleteId);
 
-            if ($guru->img && Storage::disk('public')->exists($guru->img)) {
-                Storage::disk('public')->delete($guru->img);
-            }
-
-            $user = User::where('guru_id', $guru->id)->first();
-            if ($user) {
-                $user->delete();
-            }
-
-            $guru->delete();
-
-            $this->dispatch('closeDeleteModal');
-            session()->flash('message', 'Guru dan akun user berhasil dihapus.');
-            $this->deleteId = null;
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menghapus guru.');
+        if ($guru->img && Storage::disk('public')->exists($guru->img)) {
+            Storage::disk('public')->delete($guru->img);
         }
+
+        $user = User::where('guru_id', $guru->id)->first();
+        if ($user) {
+            $user->delete();
+        }
+
+        $guru->delete();
+
+        $this->dispatch('closeDeleteModal');
+        session()->flash('message', 'Guru dan akun user berhasil dihapus.');
+        $this->deleteId = null;
     }
 }

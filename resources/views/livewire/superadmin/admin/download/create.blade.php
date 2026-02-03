@@ -16,7 +16,7 @@
                                 Judul <span class="text-danger">*</span>
                             </label>
                             <input wire:model.defer="judul" type="text" class="form-control">
-                            @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
+                            <x-form-error field="judul" />
                         </div>
 
                         <!-- Status -->
@@ -28,6 +28,7 @@
                                 <option value="1">Aktif</option>
                                 <option value="0">Nonaktif</option>
                             </select>
+                            <x-form-error field="status" />
                         </div>
 
                         <!-- Deskripsi -->
@@ -41,9 +42,10 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Thumbnail</label>
                             <input wire:model="newImage" type="file"
-                                class="form-control" accept="image/*">
+                                class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newImage'])
                             @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '120px'])
+                            <x-form-error field="newImage" />
                         </div>
 
                         <!-- File Download -->
@@ -51,14 +53,12 @@
                             <label class="form-label">
                                 File Download <span class="text-danger">*</span>
                             </label>
-                            <input wire:model="newFile" type="file" class="form-control">
+                            <input wire:model="newFile" type="file" class="form-control" accept=".pdf,application/pdf">
                             @include('components.upload-loading', ['target' => 'newFile', 'label' => 'Mengunggah file...'])
 
                             @include('components.upload-preview', ['file' => $newFile])
 
-                            @error('newFile')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="newFile" />
                         </div>
 
                     </div>

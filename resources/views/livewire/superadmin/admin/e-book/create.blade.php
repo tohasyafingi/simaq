@@ -22,9 +22,7 @@
                             <input wire:model.defer="judul" type="text"
                                 class="form-control"
                                 placeholder="Masukkan judul e-book">
-                            @error('judul')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="judul" />
                         </div>
 
                         <!-- Status -->
@@ -36,9 +34,7 @@
                                 <option value="1">Tersedia</option>
                                 <option value="0">Tidak Tersedia</option>
                             </select>
-                            @error('status')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="status" />
                         </div>
 
                         <!-- Deskripsi -->
@@ -48,9 +44,7 @@
                                 class="form-control"
                                 rows="4"
                                 placeholder="Deskripsi singkat e-book"></textarea>
-                            @error('description')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="description" />
                         </div>
 
                         <!-- Thumbnail -->
@@ -58,13 +52,11 @@
                             <label class="form-label">Thumbnail</label>
                             <input wire:model="newImage" type="file"
                                 class="form-control"
-                                accept="image/*">
+                                accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newImage'])
                             @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '150px'])
 
-                            @error('newImage')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="newImage" />
                         </div>
 
                         <!-- File E-Book -->
@@ -72,13 +64,11 @@
                             <label class="form-label">File E-Book (PDF)</label>
                             <input wire:model="newFile" type="file"
                                 class="form-control"
-                                accept="application/pdf">
+                                accept=".pdf,application/pdf">
                             @include('components.upload-loading', ['target' => 'newFile', 'label' => 'Mengunggah file...'])
                             @include('components.upload-preview', ['file' => $newFile])
 
-                            @error('newFile')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="newFile" />
                         </div>
 
                         <!-- Link -->
@@ -87,9 +77,7 @@
                             <input wire:model.defer="link" type="text"
                                 class="form-control"
                                 placeholder="Link download / Google Drive / Viewer">
-                            @error('link')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <x-form-error field="link" />
                         </div>
 
                     </div>

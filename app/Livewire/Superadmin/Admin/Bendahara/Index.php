@@ -43,7 +43,7 @@ class Index extends Component
                 Rule::unique('users', 'email')->ignore($this->bendahara_id ? User::where('bendahara_id', $this->bendahara_id)->value('id') : null),
             ],
             'no_hp' => 'required|string',
-            'img' => 'nullable|image|max:2048',
+            'img' => 'nullable|file|mimes:webp,jpg,jpeg,png,avif,svg,gif|max:5120',
             'status' => 'required|boolean',
         ];
     }
@@ -132,39 +132,35 @@ class Index extends Component
 
     public function store()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            if ($this->img) {
-                $validatedData['img'] = $this->img->store('bendahara', 'public');
-            }
-
-            $bendahara = Bendahara::create($validatedData);
-
-            // Cek jika email sudah ada di users
-            if (User::where('email', $validatedData['email'])->exists()) {
-                session()->flash('error', 'Email sudah digunakan oleh akun lain.');
-                $bendahara->delete();
-                return;
-            }
-
-            // Buat akun user dengan bendahara_id
-            User::create([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'img' => $validatedData['img'] ?? null,
-                'password' => Hash::make($validatedData['kd_bendahara']),
-                'role' => 'bendahara',
-                'bendahara_id' => $bendahara->id,
-                'status' => $validatedData['status'] ? true : false,
-            ]);
-
-            $this->dispatch('closeCreateModal');
-            session()->flash('message', 'Bendahara berhasil ditambahkan dan akun bendahara dibuat.');
-            $this->resetInputFields();
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menyimpan bendahara.');
+        if ($this->img) {
+            $validatedData['img'] = $this->img->store('bendahara', 'public');
         }
+
+        $bendahara = Bendahara::create($validatedData);
+
+        // Cek jika email sudah ada di users
+        if (User::where('email', $validatedData['email'])->exists()) {
+            session()->flash('error', 'Email sudah digunakan oleh akun lain.');
+            $bendahara->delete();
+            return;
+        }
+
+        // Buat akun user dengan bendahara_id
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'img' => $validatedData['img'] ?? null,
+            'password' => Hash::make($validatedData['kd_bendahara']),
+            'role' => 'bendahara',
+            'bendahara_id' => $bendahara->id,
+            'status' => $validatedData['status'] ? true : false,
+        ]);
+
+        $this->dispatch('closeCreateModal');
+        session()->flash('message', 'Bendahara berhasil ditambahkan dan akun bendahara dibuat.');
+        $this->resetInputFields();
     }
 
     public function edit($id)
@@ -182,39 +178,35 @@ class Index extends Component
 
     public function update()
     {
-        try {
-            $validatedData = $this->validate();
+        $validatedData = $this->validate();
 
-            $bendahara = Bendahara::findOrFail($this->bendahara_id);
+        $bendahara = Bendahara::findOrFail($this->bendahara_id);
 
-            if ($this->img) {
-                if ($bendahara->img && Storage::disk('public')->exists($bendahara->img)) {
-                    Storage::disk('public')->delete($bendahara->img);
-                }
-                $validatedData['img'] = $this->img->store('bendahara', 'public');
-            } else {
-                $validatedData['img'] = $bendahara->img;
+        if ($this->img) {
+            if ($bendahara->img && Storage::disk('public')->exists($bendahara->img)) {
+                Storage::disk('public')->delete($bendahara->img);
             }
-
-            $bendahara->update($validatedData);
-
-            // Update user jika ada
-            $user = User::where('bendahara_id', $bendahara->id)->first();
-            if ($user) {
-                $user->update([
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'img' => $validatedData['img'],
-                    'status' => $validatedData['status'] ? true : false,
-                ]);
-            }
-
-            $this->dispatch('closeEditModal');
-            session()->flash('message', 'Data bendahara berhasil diperbarui.');
-            $this->resetInputFields();
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat memperbarui bendahara.');
+            $validatedData['img'] = $this->img->store('bendahara', 'public');
+        } else {
+            $validatedData['img'] = $bendahara->img;
         }
+
+        $bendahara->update($validatedData);
+
+        // Update user jika ada
+        $user = User::where('bendahara_id', $bendahara->id)->first();
+        if ($user) {
+            $user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'img' => $validatedData['img'],
+                'status' => $validatedData['status'] ? true : false,
+            ]);
+        }
+
+        $this->dispatch('closeEditModal');
+        session()->flash('message', 'Data bendahara berhasil diperbarui.');
+        $this->resetInputFields();
     }
 
     public function confirmDelete($id)
@@ -224,27 +216,23 @@ class Index extends Component
 
     public function destroy()
     {
-        try {
-            $bendahara = Bendahara::findOrFail($this->deleteId);
+        $bendahara = Bendahara::findOrFail($this->deleteId);
 
-            // Hapus foto jika ada
-            if ($bendahara->img && Storage::disk('public')->exists($bendahara->img)) {
-                Storage::disk('public')->delete($bendahara->img);
-            }
-
-            // Hapus user terkait
-            $user = User::where('bendahara_id', $bendahara->id)->first();
-            if ($user) {
-                $user->delete();
-            }
-
-            $bendahara->delete();
-
-            $this->dispatch('closeDeleteModal');
-            session()->flash('message', 'Bendahara dan akun user berhasil dihapus.');
-            $this->deleteId = null;
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi kesalahan saat menghapus bendahara.');
+        // Hapus foto jika ada
+        if ($bendahara->img && Storage::disk('public')->exists($bendahara->img)) {
+            Storage::disk('public')->delete($bendahara->img);
         }
+
+        // Hapus user terkait
+        $user = User::where('bendahara_id', $bendahara->id)->first();
+        if ($user) {
+            $user->delete();
+        }
+
+        $bendahara->delete();
+
+        $this->dispatch('closeDeleteModal');
+        session()->flash('message', 'Bendahara dan akun user berhasil dihapus.');
+        $this->deleteId = null;
     }
 }

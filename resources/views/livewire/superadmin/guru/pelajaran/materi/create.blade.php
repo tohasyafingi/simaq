@@ -39,9 +39,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    @if($errors->has('general'))
-                        <div class="alert alert-danger">{{ $errors->first('general') }}</div>
-                    @endif
+                    <x-form-error field="general" />
 
                     <form wire:submit.prevent="store">
                         <div class="row g-3">
@@ -50,21 +48,21 @@
                                 <label class="form-label">Judul Materi <span class="text-danger">*</span></label>
                                 <input type="text" wire:model="judul" class="form-control"
                                     placeholder="Masukkan judul materi">
-                                @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
+                                @include('components.form-error', ['field' => 'judul'])
                             </div>
 
                             <!-- Tanggal -->
                             <div class="col-md-3">
                                 <label class="form-label">Tanggal <span class="text-danger">*</span></label>
                                 <input type="date" wire:model="tanggal" class="form-control">
-                                @error('tanggal') <small class="text-danger">{{ $message }}</small> @enderror
+                                @include('components.form-error', ['field' => 'tanggal'])
                             </div>
 
                             <!-- Jam -->
                             <div class="col-md-3">
                                 <label class="form-label">Jam <span class="text-danger">*</span></label>
                                 <input type="time" wire:model="jam" class="form-control">
-                                @error('jam') <small class="text-danger">{{ $message }}</small> @enderror
+                                @include('components.form-error', ['field' => 'jam'])
                             </div>
 
                             <!-- Deskripsi -->
@@ -72,15 +70,15 @@
                                 <label class="form-label">Deskripsi</label>
                                 <textarea wire:model="deskripsi" rows="4" class="form-control"
                                     placeholder="Tuliskan deskripsi materi (opsional)"></textarea>
-                                @error('deskripsi') <small class="text-danger">{{ $message }}</small> @enderror
+                                @include('components.form-error', ['field' => 'deskripsi'])
                             </div>
 
                             <!-- File -->
                             <!-- File Upload -->
                             <div class="col-md-6">
                                 <label class="form-label">File (opsional)</label>
-                                <input type="file" wire:model="file" class="form-control">
-                                @error('file') <small class="text-danger">{{ $message }}</small> @enderror
+                                <input type="file" wire:model="file" class="form-control" accept=".pdf,application/pdf">
+                                @include('components.form-error', ['field' => 'file'])
 
                                 <!-- Preview / status upload -->
                                 @include('components.upload-loading', ['target' => 'file'])
@@ -96,7 +94,7 @@
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                @include('components.form-error', ['field' => 'status'])
                             </div>
                         </div>
 

@@ -24,18 +24,18 @@
                             <option value="tahfidz">Tahfidz</option>
                             <option value="ppdb">Spmb</option>
                         </select>
-                        @error('type') <small class="text-danger">{{ $message }}</small> @enderror
+                        <x-form-error field="type" />
                     </div>
 
                     <div class="mb-3">
                         <label>Judul</label>
                         <input wire:model="judul" class="form-control" />
-                        @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
+                        <x-form-error field="judul" />
                     </div>
 
                     <div class="mb-3">
                         <label>Gambar</label>
-                        <input type="file" wire:model="newImage" class="form-control" />
+                        <input type="file" wire:model="newImage" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*" />
                         @include('components.upload-loading', ['target' => 'newImage'])
                         @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '80px'])
 
@@ -53,9 +53,7 @@
                         </div>
                         @endif
 
-                        @error('newImage')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                        <x-form-error field="newImage" />
                     </div>
 
                     <div class="mb-3">
@@ -64,13 +62,13 @@
                             <textarea id="editContent" wire:model.defer="content" class="form-control"></textarea>
                         </div>
 
-                        @error('content') <small class="text-danger">{{ $message }}</small> @enderror
+                        <x-form-error field="content" />
                     </div>
 
                     <div class="mb-3">
                         <label>Link <small>(Pendaftaran)</small>/Sub Judul<small>(Home)</small> </label>
                         <input wire:model="link" class="form-control" />
-                        @error('link') <small class="text-danger">{{ $message }}</small> @enderror
+                        <x-form-error field="link" />
                     </div>
 
                     <div class="mb-3">
@@ -79,7 +77,7 @@
                             <option value="1">Publik</option>
                             <option value="0">Draft</option>
                         </select>
-                        @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                        <x-form-error field="status" />
                     </div>
                 </div>
                 <div class="modal-footer">

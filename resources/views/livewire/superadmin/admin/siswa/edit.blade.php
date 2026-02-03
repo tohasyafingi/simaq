@@ -15,7 +15,7 @@
                             <div class="form-group local-forms">
                                 <label>NIS <span class="text-danger">*</span></label>
                                 <input wire:model="nis" class="form-control" type="text" placeholder="Masukkan NIS" />
-                                @error('nis') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="nis" />
                             </div>
                         </div>
 
@@ -25,7 +25,7 @@
                                 <label>Nama Lengkap <span class="text-danger">*</span></label>
                                 <input wire:model="name" class="form-control" type="text"
                                     placeholder="Masukkan nama lengkap" />
-                                @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="name" />
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                                     <option value="L">Laki-Laki</option>
                                     <option value="P">Perempuan</option>
                                 </select>
-                                @error('jenis_kelamin') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="jenis_kelamin" />
                             </div>
                         </div>
 
@@ -48,7 +48,7 @@
                                 <label>Tempat Lahir <span class="text-danger">*</span></label>
                                 <input wire:model="tempat_lahir" class="form-control" type="text"
                                     placeholder="Masukkan tempat lahir" />
-                                @error('tempat_lahir') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="tempat_lahir" />
                             </div>
                         </div>
 
@@ -57,7 +57,7 @@
                             <div class="form-group local-forms">
                                 <label>Tanggal Lahir <span class="text-danger">*</span></label>
                                 <input wire:model="tanggal_lahir" class="form-control" type="date" />
-                                @error('tanggal_lahir') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="tanggal_lahir" />
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                                 <label>Nomor HP <span class="text-danger">*</span></label>
                                 <input wire:model="no_hp" class="form-control" type="text"
                                     placeholder="Masukkan nomor HP" />
-                                @error('no_hp') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="no_hp" />
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@
                                 <label>Email <span class="text-danger">*</span></label>
                                 <input wire:model="email" class="form-control" type="email"
                                     placeholder="Masukkan email" />
-                                @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="email" />
                             </div>
                         </div>
 
@@ -85,10 +85,10 @@
                         <div class="col-12 col-sm-4 py-2">
                             <div class="form-group local-forms">
                                 <label>File KK</label>
-                                <input wire:model="kk" class="form-control" type="file" />
+                                <input wire:model="kk" class="form-control" type="file" accept=".pdf,application/pdf" />
                                 @include('components.upload-loading', ['target' => 'kk', 'label' => 'Mengunggah file...'])
                                 @include('components.upload-preview', ['file' => $kk])
-                                @error('kk') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="kk" />
                             </div>
                         </div>
                         @if ($kk && !is_object($kk))
@@ -99,10 +99,10 @@
                         <div class="col-12 col-sm-4 py-2">
                             <div class="form-group local-forms">
                                 <label>File Akta</label>
-                                <input wire:model="akta" class="form-control" type="file" />
+                                <input wire:model="akta" class="form-control" type="file" accept=".pdf,application/pdf" />
                                 @include('components.upload-loading', ['target' => 'akta', 'label' => 'Mengunggah file...'])
                                 @include('components.upload-preview', ['file' => $akta])
-                                @error('akta') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="akta" />
                             </div>
                         </div>
                         @if ($kk && !is_object($kk))
@@ -113,10 +113,10 @@
                         <div class="col-12 col-sm-4 py-2">
                             <div class="form-group local-forms">
                                 <label>File Ijazah Terakhir</label>
-                                <input wire:model="ijazah_terakhir" class="form-control" type="file" />
+                                <input wire:model="ijazah_terakhir" class="form-control" type="file" accept=".pdf,application/pdf" />
                                 @include('components.upload-loading', ['target' => 'ijazah_terakhir', 'label' => 'Mengunggah file...'])
                                 @include('components.upload-preview', ['file' => $ijazah_terakhir])
-                                @error('ijazah_terakhir') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="ijazah_terakhir" />
                             </div>
                         </div>
                         @if ($kk && !is_object($kk))
@@ -127,10 +127,10 @@
                         <div class="col-12 col-sm-4 py-2">
                             <div class="form-group local-forms">
                                 <label>Foto Profil</label>
-                                <input wire:model="img" class="form-control" type="file" />
+                                <input wire:model="img" class="form-control" type="file" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*" />
                                 @include('components.upload-loading', ['target' => 'img'])
                                 @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
-                                @error('img') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="img" />
                             </div>
                         </div>
                         @if ($kk && !is_object($kk))
@@ -147,7 +147,7 @@
                                     <option value="tidak_aktif">Tidak Aktif</option>
                                     <option value="lulus">Lulus</option>
                                 </select>
-                                @error('status') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="status" />
                             </div>
                         </div>
 
@@ -157,7 +157,7 @@
                                 <label>Alamat <span class="text-danger">*</span></label>
                                 <textarea wire:model="alamat" class="form-control"
                                     placeholder="Masukkan alamat"></textarea>
-                                @error('alamat') <small class="text-danger">{{ $message }}</small> @enderror
+                                <x-form-error field="alamat" />
                             </div>
                         </div>
 

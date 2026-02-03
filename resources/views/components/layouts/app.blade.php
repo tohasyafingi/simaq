@@ -36,7 +36,6 @@
         {{-- @include('layouts.sidebar') --}}
 
         <main class="app-main">
-            <x-alert />
             {{ $slot }}
         </main>
         @include('components.layouts.footer')

@@ -434,16 +434,6 @@ Apabila pengguna mengalami kendala teknis atau kesalahan sistem, silakan menghub
 
 ---
 
-## **Catatan Screenshot**
-
-> **Untuk Administrator/Dokumentasi:**
-> Dokumen ini sudah dilengkapi dengan placeholder screenshot. Untuk melengkapi manual book ini, silakan ambil screenshot sesuai panduan yang tersedia di file:
-> **`docs/screenshots/README.md`**
->
-> Terdapat 16 screenshot yang perlu diambil mencakup halaman Login, Lupa Password, Dashboard, dan fitur-fitur untuk Admin, Guru, dan Siswa.
-
----
-
 **Versi Dokumen**: 1.0  
 **Terakhir Diperbarui**: Februari 2026  
 **Penyusun**: Tim IT SIMAQ

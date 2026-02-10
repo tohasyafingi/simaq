@@ -86,11 +86,12 @@
         </div>
 
         <div class="footer-bottom small">
-            Copyright &copy; {{ date('Y') }}&nbsp; All Rights Reserved by
-            <strong>
-                <a href="{{ route('beranda') }}" class="text-decoration-none">MATAQ WONOSOBO </a>
-            </strong>
-            {{-- | Support by <a href="#" class="text-decoration-none"> @tohasyafingi</a> --}}
+            &copy; {{ date('Y') }} <strong>
+                <a href="{{ route('beranda') }}" class="text-decoration-none">MATAQ WONOSOBO</a>
+            </strong>. All Rights Reserved.
+            | <a href="https://www.instagram.com/toha_syafingi/" target="_blank" class="support-link text-decoration-none" rel="noopener noreferrer">
+                Supported by Toha Safingi
+            </a>
         </div>
     </div>
 </footer>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Portal;
 
+use App\Helpers\ImageHelper;
 use App\Models\Berita;
 use App\Models\Kontak;
 use Livewire\Component;
@@ -16,6 +17,7 @@ use App\Models\Gallery as PhotoGallery;
 #[Layout('components.layouts.portal')]
 class Index extends Component
 {
+    public $newImage;
     public $homeContent;
     public $beritas;
     public $karya_ilmiahs;
@@ -51,6 +53,11 @@ class Index extends Component
     }
 
     public function selectGallery($id)
+        // Example: Add image upload logic (if needed)
+        // if ($this->newImage) {
+        //     $imagePath = ImageHelper::storeOptimized($this->newImage, 'gallery', 'public');
+        //     // Save $imagePath to the gallery or details as needed
+        // }
     {
         $gallery = PhotoGallery::with('details')->findOrFail($id);
         $this->galleryImages = $gallery->details->pluck('image_path')->toArray();

@@ -82,9 +82,7 @@
 
                                 <!-- Preview / status upload -->
                                 @include('components.upload-loading', ['target' => 'file'])
-                                @if ($file)
-                                    <p class="mt-2">File terpilih: {{ $file->getClientOriginalName() }}</p>
-                                @endif
+                                @include('components.upload-preview', ['file' => $file])
                             </div>
 
                             <!-- Status -->

@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use App\Models\KaryaIlmiah;
 use App\Models\KatKaryaIlmiah;
 use Livewire\Attributes\Title;
+use App\Helpers\ImageHelper;
 
 #[Title('Karya Ilmiah')]
 class Create extends Component
@@ -56,7 +57,13 @@ class Create extends Component
         $existingThumbnail = $this->karya_ilmiahId ? KaryaIlmiah::find($this->karya_ilmiahId)->thumbnail : null;
 
         if ($this->thumbnail) {
-            $existingThumbnail = $this->thumbnail->store('karya_ilmiah', 'public');
+            $existingThumbnail = ImageHelper::replaceOptimized(
+                $existingThumbnail,
+                $this->thumbnail,
+                'karya_ilmiah',
+                $this->judul,
+                'public'
+            );
         }
 
         KaryaIlmiah::updateOrCreate(

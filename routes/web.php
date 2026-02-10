@@ -87,6 +87,7 @@ Route::get('/spmb', PortalPpdb::class)->name('ppdb');
 Route::get('/berita', PortalAgenda::class)->name('berita-agenda');
 Route::get('/berita/{slug}', PortalDetailAgenda::class)->name('detail-berita-agenda');
 Route::get('/gallery', PortalGallery::class)->name('galeri');
+Route::get('/gallery/{slug}', PortalGallery::class)->name('galeri-show');
 Route::get('/sejarah', PortalSejarah::class)->name('sejarah');
 Route::get('/visi-misi', PortalVisiMisi::class)->name('visi-misi');
 Route::get('/struktur-organisasi', PortalStruktur::class)->name('struktur-organisasi');
@@ -185,4 +186,12 @@ Route::middleware(['auth'])->group(function () {
 require __DIR__ . '/auth.php';
 
 // Sitemap
-Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+// Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+// Redirect legacy storage sitemap URLs to root sitemap paths (remove /storage/)
+Route::get('/storage/{sitemap}', function ($sitemap) {
+    return redirect('/' . $sitemap, 301);
+})->where('sitemap', 'sitemap-(home|static|berita|karya-ilmiah|download|ebook|gallery)\.xml');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+Route::get('/{sitemap}', [SitemapController::class, 'show'])
+    ->where('sitemap', 'sitemap-(home|static|berita|karya-ilmiah|download|ebook|gallery)\.xml');

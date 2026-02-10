@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\TahunAjaran;
 use Livewire\Attributes\Title;
+use App\Helpers\FileHelper;
+use Illuminate\Support\Facades\Storage;
 
 #[Title('Modul Pelajaran')]
 class Index extends Component
@@ -77,7 +79,7 @@ class Index extends Component
     // Reset form fields
     public function resetForm()
     {
-        $this->reset(['modul_id', 'nama', 'pelajaran_id', 'link', 'file']);
+        $this->reset(['modul_id', 'nama', 'pelajaran_id', 'link', 'file', 'existingFile']);
         $this->status = 1;
     }
 
@@ -98,7 +100,9 @@ class Index extends Component
             'status' => 'required|in:0,1',
         ]);
 
-        $filePath = $this->file ? $this->file->store('moduls', 'public') : null;
+        $filePath = $this->file
+            ? FileHelper::storeWithSlug($this->file, 'moduls', $this->nama, 'public')
+            : null;
 
         Modul::create([
             'nama' => $this->nama,
@@ -122,6 +126,8 @@ class Index extends Component
         $this->pelajaran_id = $modul->pelajaran_id;
         $this->link = $modul->link;
         $this->status = $modul->status;
+        $this->file = null;
+        $this->existingFile = $modul->file;
     }
 
     // Update Modul
@@ -136,7 +142,13 @@ class Index extends Component
         ]);
 
         $modul = Modul::findOrFail($this->modul_id);
-        $filePath = $this->file ? $this->file->store('moduls', 'public') : $modul->file;
+        $filePath = $modul->file;
+        if ($this->file) {
+            if ($modul->file && Storage::disk('public')->exists($modul->file)) {
+                Storage::disk('public')->delete($modul->file);
+            }
+            $filePath = FileHelper::storeWithSlug($this->file, 'moduls', $this->nama, 'public');
+        }
 
         $modul->update([
             'nama' => $this->nama,

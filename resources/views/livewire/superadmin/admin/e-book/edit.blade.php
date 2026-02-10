@@ -50,7 +50,7 @@
                                     class="form-control"
                                     accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newImage'])
-                            @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '150px'])
+                            @include('components.upload-preview', ['file' => $newImage ?: $image, 'maxHeight' => '150px'])
 
                             <x-form-error field="newImage" />
                         </div>
@@ -60,16 +60,8 @@
                             <label class="form-label">File E-Book (PDF)</label>
                                 <input wire:model="newFile" type="file"
                                     class="form-control" accept=".pdf,application/pdf">
-                            @if($file)
-                            <div class="mb-2 small text-muted">
-                                <strong>File saat ini:</strong>
-                                <a href="{{ Storage::url($file) }}" target="_blank" class="text-decoration-none">
-                                    {{ basename($file) }}
-                                </a>
-                            </div>
-                            @endif
                             @include('components.upload-loading', ['target' => 'newFile', 'label' => 'Mengunggah file...'])
-                            @include('components.upload-preview', ['file' => $newFile])
+                            @include('components.upload-preview', ['file' => $newFile ?: $file])
 
                             <x-form-error field="newFile" />
                         </div>

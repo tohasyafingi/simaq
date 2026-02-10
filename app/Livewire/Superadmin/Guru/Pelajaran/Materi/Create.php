@@ -10,6 +10,7 @@ use App\Models\Absensi;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use App\Helpers\FileHelper;
 
 #[Title('Tambah Materi')]
 class Create extends Component
@@ -67,7 +68,12 @@ class Create extends Component
             DB::transaction(function () {
                 $filePath = null;
                 if ($this->file) {
-                    $filePath = $this->file->store('materi', 'public'); 
+                    $filePath = FileHelper::storeWithSlug(
+                        $this->file,
+                        'materi',
+                        $this->judul,
+                        'public'
+                    );
                 }
 
                 $materi = Materi::create([

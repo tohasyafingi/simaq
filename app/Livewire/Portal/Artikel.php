@@ -26,6 +26,15 @@ class Artikel extends Component
         $this->resetPage();
     }
 
+    public function getBookBySlug($slug)
+    {
+        return Books::where('status', 1)
+            ->get()
+            ->first(function ($item) use ($slug) {
+                return Str::slug($item->judul) === $slug;
+            });
+    }
+
     public function render()
     {
         $books = Books::where('status', 1)

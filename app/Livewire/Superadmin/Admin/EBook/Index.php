@@ -8,6 +8,8 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\ImageHelper;
+use App\Helpers\FileHelper;
 
 #[Title('E-Book')]
 class Index extends Component
@@ -93,11 +95,21 @@ class Index extends Component
         $validated = $this->validate();
 
         if ($this->newImage) {
-            $validated['image'] = $this->newImage->store('books/images', 'public');
+            $validated['image'] = ImageHelper::storeOptimized(
+                $this->newImage,
+                'books/images',
+                $this->judul,
+                'public'
+            );
         }
 
         if ($this->newFile) {
-            $validated['file'] = $this->newFile->store('books/files', 'public');
+            $validated['file'] = FileHelper::storeWithSlug(
+                $this->newFile,
+                'books/files',
+                $this->judul,
+                'public'
+            );
         }
 
         Book::create($validated);
@@ -128,10 +140,13 @@ class Index extends Component
         $data = Book::findOrFail($this->book_id);
 
         if ($this->newImage) {
-            if ($data->image && Storage::disk('public')->exists($data->image)) {
-                Storage::disk('public')->delete($data->image);
-            }
-            $validated['image'] = $this->newImage->store('books/images', 'public');
+            $validated['image'] = ImageHelper::replaceOptimized(
+                $data->image,
+                $this->newImage,
+                'books/images',
+                $this->judul,
+                'public'
+            );
         } else {
             $validated['image'] = $data->image;
         }
@@ -140,7 +155,12 @@ class Index extends Component
             if ($data->file && Storage::disk('public')->exists($data->file)) {
                 Storage::disk('public')->delete($data->file);
             }
-            $validated['file'] = $this->newFile->store('books/files', 'public');
+            $validated['file'] = FileHelper::storeWithSlug(
+                $this->newFile,
+                'books/files',
+                $this->judul,
+                'public'
+            );
         } else {
             $validated['file'] = $data->file;
         }
@@ -163,7 +183,7 @@ class Index extends Component
         $data = Book::findOrFail($this->deleteId);
 
         if ($data->image) {
-            Storage::disk('public')->delete($data->image);
+            ImageHelper::deletePath($data->image, 'public');
         }
 
         if ($data->file) {

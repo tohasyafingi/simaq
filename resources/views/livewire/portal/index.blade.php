@@ -10,7 +10,10 @@
                 src="{{ $heroImage }}"
                 alt="{{ $homeContent->image_alt ?? 'Lingkungan MA Takhassus Al-Qur\'an Wonosobo' }}"
                 class="home-bg-image"
-                loading="lazy">
+                width="1920"
+                height="1080"
+                fetchpriority="high"
+                decoding="async">
 
             <div class="overlay"></div>
         </div>
@@ -77,8 +80,7 @@
             </div>
         </div>
 
-        <div id="event-ticker-anchor" class="event-ticker-anchor"></div>
-        @if ($beritas->isNotEmpty())
+        @if ($beritas->isNotEmpty() || $karya_ilmiahs->isNotEmpty() || $galleries->isNotEmpty())
         <div class="event-ticker" data-aos="fade-up">
             <div class="ticker-track">
                 <div class="ticker-inner">
@@ -86,6 +88,41 @@
                     <a href="{{ route('detail-berita-agenda', $berita->slug) }}"
                         class="ticker-item">
                         <i class="bi bi-newspaper"></i> {{ $berita->judul }}
+                    </a>
+                    @endforeach
+
+                    @foreach ($karya_ilmiahs->take(3) as $karya)
+                    <a href="{{ route('detail-karya-ilmiah', $karya->slug) }}"
+                        class="ticker-item">
+                        <i class="bi bi-journal-text"></i> {{ $karya->judul }}
+                    </a>
+                    @endforeach
+
+                    @foreach ($galleries->take(3) as $gallery)
+                    <a href="{{ route('galeri') }}"
+                        class="ticker-item">
+                        <i class="bi bi-images"></i> {{ $gallery->judul }}
+                    </a>
+                    @endforeach
+
+                    @foreach ($beritas as $berita)
+                    <a href="{{ route('detail-berita-agenda', $berita->slug) }}"
+                        class="ticker-item">
+                        <i class="bi bi-newspaper"></i> {{ $berita->judul }}
+                    </a>
+                    @endforeach
+
+                    @foreach ($karya_ilmiahs->take(3) as $karya)
+                    <a href="{{ route('detail-karya-ilmiah', $karya->slug) }}"
+                        class="ticker-item">
+                        <i class="bi bi-journal-text"></i> {{ $karya->judul }}
+                    </a>
+                    @endforeach
+
+                    @foreach ($galleries->take(3) as $gallery)
+                    <a href="{{ route('galeri') }}"
+                        class="ticker-item">
+                        <i class="bi bi-images"></i> {{ $gallery->judul }}
                     </a>
                     @endforeach
                 </div>
@@ -133,7 +170,7 @@
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card position-relative" data-aos="zoom-in">
                         <img
-                            src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}"
+                            src="{{ \App\Helpers\ImageHelper::url($berita->thumbnail) ?? asset('assets/berita.webp') }}"
                             class="card-img-top"
                             alt="{{ $berita->judul }}"
                             loading="lazy">
@@ -193,7 +230,7 @@
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card position-relative" data-aos="zoom-in">
                         <img
-                            src="{{ $karya->thumbnail_url ?? asset('assets/karya.webp') }}"
+                            src="{{ \App\Helpers\ImageHelper::url($karya->thumbnail) ?? asset('assets/karya.webp') }}"
                             class="card-img-top"
                             alt="{{ $karya->judul }}"
                             loading="lazy">
@@ -251,7 +288,7 @@
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="120">
                     <div class="card h-100">
                         <div class="gallery-item position-relative cursor-pointer" wire:click="selectGallery({{ $gallery->id }})">
-                            <img src="{{ asset('storage/'.$gallery->thumbnail) }}"
+                            <img src="{{ \App\Helpers\ImageHelper::url($gallery->thumbnail) }}"
                                 alt="{{ $gallery->judul }}" loading="lazy" class="img-fluid rounded">
                             <div class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center bg-dark bg-opacity-50 opacity-0 hover-opacity-100 transition">
                                 <h5>{{ $gallery->judul }}</h5>
@@ -268,7 +305,7 @@
                 @endif
             </div>
 
-            <div class="text-center">
+            <div class="text-center mt-4">
                 <a wire:navigate href="{{ route('galeri') }}" class="btn btn-primary">
                     Lihat Gallery Lainnya
                 </a>
@@ -300,7 +337,7 @@
                         <div class="carousel-inner">
                             @foreach($galleryImages as $key => $img)
                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img src="{{ asset('storage/'.$img) }}"
+                                <img src="{{ \App\Helpers\ImageHelper::url($img) }}"
                                     class="d-block w-100"
                                     alt="Gallery Image"
                                     loading="lazy">

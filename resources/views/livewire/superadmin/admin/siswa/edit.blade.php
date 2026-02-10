@@ -87,13 +87,10 @@
                                 <label>File KK</label>
                                 <input wire:model="kk" class="form-control" type="file" accept=".pdf,application/pdf" />
                                 @include('components.upload-loading', ['target' => 'kk', 'label' => 'Mengunggah file...'])
-                                @include('components.upload-preview', ['file' => $kk])
+                                @include('components.upload-preview', ['file' => $kk ?: $old_kk])
                                 <x-form-error field="kk" />
                             </div>
                         </div>
-                        @if ($kk && !is_object($kk))
-                            <a href="{{ Storage::url($kk) }}" target="_blank">Lihat KK Lama</a>
-                        @endif
 
                         <!-- Akta -->
                         <div class="col-12 col-sm-4 py-2">
@@ -101,13 +98,10 @@
                                 <label>File Akta</label>
                                 <input wire:model="akta" class="form-control" type="file" accept=".pdf,application/pdf" />
                                 @include('components.upload-loading', ['target' => 'akta', 'label' => 'Mengunggah file...'])
-                                @include('components.upload-preview', ['file' => $akta])
+                                @include('components.upload-preview', ['file' => $akta ?: $old_akta])
                                 <x-form-error field="akta" />
                             </div>
                         </div>
-                        @if ($kk && !is_object($kk))
-                            <a href="{{ Storage::url($kk) }}" target="_blank">Lihat KK Lama</a>
-                        @endif
 
                         <!-- Ijazah Terakhir -->
                         <div class="col-12 col-sm-4 py-2">
@@ -115,13 +109,11 @@
                                 <label>File Ijazah Terakhir</label>
                                 <input wire:model="ijazah_terakhir" class="form-control" type="file" accept=".pdf,application/pdf" />
                                 @include('components.upload-loading', ['target' => 'ijazah_terakhir', 'label' => 'Mengunggah file...'])
-                                @include('components.upload-preview', ['file' => $ijazah_terakhir])
+                                @include('components.upload-preview', ['file' => $ijazah_terakhir ?: $old_ijazah_terakhir])
                                 <x-form-error field="ijazah_terakhir" />
                             </div>
                         </div>
-                        @if ($kk && !is_object($kk))
-                            <a href="{{ Storage::url($kk) }}" target="_blank">Lihat KK Lama</a>
-                        @endif
+
 
                         <!-- Foto Profil -->
                         <div class="col-12 col-sm-4 py-2">
@@ -129,13 +121,10 @@
                                 <label>Foto Profil</label>
                                 <input wire:model="img" class="form-control" type="file" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*" />
                                 @include('components.upload-loading', ['target' => 'img'])
-                                @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
+                                @include('components.upload-preview', ['file' => $img ?: $old_img, 'maxHeight' => '100px'])
                                 <x-form-error field="img" />
                             </div>
                         </div>
-                        @if ($kk && !is_object($kk))
-                            <a href="{{ Storage::url($kk) }}" target="_blank">Lihat KK Lama</a>
-                        @endif
 
                         <!-- Status -->
                         <div class="col-12 col-sm-4 py-2">

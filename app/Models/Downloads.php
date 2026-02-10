@@ -10,7 +10,7 @@ class Downloads extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['judul', 'image', 'description', 'file', 'status'];
+    protected $fillable = ['judul', 'image', 'description', 'file', 'slug', 'status'];
 
     protected static function booted()
     {

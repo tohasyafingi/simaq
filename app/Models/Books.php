@@ -10,7 +10,7 @@ class Books extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['judul', 'image', 'description', 'file', 'status'];
+    protected $fillable = ['judul', 'image', 'description', 'file', 'link', 'slug', 'status'];
 
     protected static function booted()
     {

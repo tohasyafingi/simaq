@@ -8,6 +8,8 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use App\Models\Downloads as Download;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\ImageHelper;
+use App\Helpers\FileHelper;
 
 #[Title('Download')]
 class Index extends Component
@@ -26,6 +28,7 @@ class Index extends Component
     public $description;
     public $status = 1;
     public $image;
+    public $file;
     public $newImage;
     public $newFile;
 
@@ -70,6 +73,7 @@ class Index extends Component
             'description',
             'status',
             'image',
+            'file',
             'newImage',
             'newFile'
         ]);
@@ -90,10 +94,20 @@ class Index extends Component
         $data = $this->validate();
 
         if ($this->newImage) {
-            $data['image'] = $this->newImage->store('downloads/images', 'public');
+            $data['image'] = ImageHelper::storeOptimized(
+                $this->newImage,
+                'downloads/images',
+                $this->judul,
+                'public'
+            );
         }
 
-        $data['file'] = $this->newFile->store('downloads/files', 'public');
+        $data['file'] = FileHelper::storeWithSlug(
+            $this->newFile,
+            'downloads/files',
+            $this->judul,
+            'public'
+        );
 
         Download::create($data);
 
@@ -113,6 +127,7 @@ class Index extends Component
         $this->description = $download->description;
         $this->status      = $download->status;
         $this->image       = $download->image;
+        $this->file        = $download->file;
     }
 
     public function update()
@@ -123,10 +138,13 @@ class Index extends Component
 
         // Image
         if ($this->newImage) {
-            if ($download->image && Storage::disk('public')->exists($download->image)) {
-                Storage::disk('public')->delete($download->image);
-            }
-            $data['image'] = $this->newImage->store('downloads/images', 'public');
+            $data['image'] = ImageHelper::replaceOptimized(
+                $download->image,
+                $this->newImage,
+                'downloads/images',
+                $this->judul,
+                'public'
+            );
         } else {
             $data['image'] = $download->image;
         }
@@ -136,7 +154,12 @@ class Index extends Component
             if ($download->file && Storage::disk('public')->exists($download->file)) {
                 Storage::disk('public')->delete($download->file);
             }
-            $data['file'] = $this->newFile->store('downloads/files', 'public');
+            $data['file'] = FileHelper::storeWithSlug(
+                $this->newFile,
+                'downloads/files',
+                $this->judul,
+                'public'
+            );
         } else {
             $data['file'] = $download->file;
         }
@@ -159,8 +182,8 @@ class Index extends Component
     {
         $download = Download::findOrFail($this->deleteId);
 
-        if ($download->image && Storage::disk('public')->exists($download->image)) {
-            Storage::disk('public')->delete($download->image);
+        if ($download->image) {
+            ImageHelper::deletePath($download->image, 'public');
         }
 
         if ($download->file && Storage::disk('public')->exists($download->file)) {

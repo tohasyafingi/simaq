@@ -36,14 +36,26 @@
                             @if($item->description)
                             <p class="card-text">{{ $item->description }}</p>
                             @endif
-                            @if($item->file)
-                            <button
-                                wire:click="downloadFile({{ $item->id }})"
-                                wire:loading.attr="disabled"
-                                class="btn btn-primary btn-sm mt-auto">
-                                <i class="fas fa-download"></i> Unduh
-                            </button>
-                            @endif
+                            <div class="mt-auto">
+                                <div class="d-flex gap-2">
+                                    @if($item->file)
+                                    <button
+                                        wire:click="downloadFile({{ $item->id }})"
+                                        wire:loading.attr="disabled"
+                                        class="btn btn-primary btn-sm flex-grow-1">
+                                        <i class="fas fa-download"></i> Unduh
+                                    </button>
+                                    @endif
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-social btn-native"
+                                        title="Bagikan download"
+                                        x-on:click.stop="shareDownload('{{ Illuminate\Support\Str::slug($item->judul) }}')">
+                                        <i class="bi bi-share-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,3 +71,21 @@
         </div>
     </section>
 </div>
+
+@script
+<script>
+    window.shareDownload = function(slug) {
+        const url = `${window.location.origin}/download/${slug}`;
+
+        if (navigator.share) {
+            navigator.share({
+                title: 'Download',
+                url: url
+            });
+        } else {
+            navigator.clipboard.writeText(url)
+                .then(() => alert('Link download berhasil disalin'));
+        }
+    }
+</script>
+@endscript

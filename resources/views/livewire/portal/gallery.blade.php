@@ -10,18 +10,45 @@
             <div class="gallery-grid row g-3">
                 @foreach($galleries as $gallery)
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="120">
-                    <div class="card h-100">
-                        <div class="gallery-item position-relative cursor-pointer" wire:click="selectGallery({{ $gallery->id }})">
+                    <div class="card h-100 shadow-sm">
+
+                        {{-- IMAGE --}}
+                        <div class="gallery-item cursor-pointer"
+                            wire:click="selectGallery({{ $gallery->id }})">
                             <img src="{{ asset('storage/'.$gallery->thumbnail) }}"
-                                alt="{{ $gallery->judul }}" loading="lazy" class="img-fluid rounded">
-                            <div class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center bg-dark bg-opacity-50 opacity-0 hover-opacity-100 transition">
-                                <h5>{{ $gallery->judul }}</h5>
-                                <p class="mb-0">{{ $gallery->deskripsi }}</p>
+                                alt="{{ $gallery->judul }}"
+                                loading="lazy"
+                                class="img-fluid rounded-top">
+                        </div>
+
+                        {{-- CAPTION BELOW CARD --}}
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="card-title mb-1" wire:click="selectGallery({{ $gallery->id }})" style="cursor: pointer;">
+                                        {{ $gallery->judul }}
+                                    </h5>
+
+                                    <p class="card-text text-muted small mb-3">
+                                        {{ $gallery->deskripsi }}
+                                    </p>
+                                </div>
+                                {{-- SHARE --}}
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-social btn-native"
+                                    title="Bagikan galeri"
+                                    aria-label="Bagikan galeri {{ $gallery->judul }}"
+                                    x-on:click.stop="shareGallery('{{ str($gallery->judul)->slug() }}')">
+                                    <i class="bi bi-share-fill"></i>
+                                </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 @endforeach
+
                 @if($galleries->isEmpty())
                 <div class="alert alert-warning text-center">
                     Konten gallery belum tersedia.
@@ -66,8 +93,8 @@
 
                         {{-- CAPTION STATIS --}}
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>{{ $gallery->judul ?? '' }}</h5>
-                            <p>{{ $gallery->deskripsi ?? '' }}</p>
+                            <h5>{{ $selectedGallery->judul ?? '' }}</h5>
+                            <p>{{ $selectedGallery->deskripsi ?? '' }}</p>
                         </div>
 
                         {{-- CONTROLS --}}
@@ -144,6 +171,9 @@
                 } catch (e) {}
                 const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
                 modal.show();
+                modalEl.addEventListener('hidden.bs.modal', () => {
+                    finalizeClose();
+                }, { once: true });
                 modalEl.addEventListener('shown.bs.modal', () => {
                     const carouselEl = document.getElementById('galleryCarousel');
                     if (carouselEl) {
@@ -159,18 +189,24 @@
                 });
             }
 
+            function finalizeClose() {
+                document.querySelectorAll('.modal-backdrop').forEach(e => e.remove());
+                document.body.classList.remove('modal-open');
+                if (window.history && window.history.pushState) {
+                    window.history.pushState({}, '', '/gallery');
+                }
+                try {
+                    restoreTransformedAncestors();
+                    if (window.AOS) AOS.refresh();
+                } catch (e) {}
+            }
+
             function hideModalCleanup() {
                 const modalEl = document.getElementById('gallerySliderModal');
                 if (!modalEl) return;
                 const modal = bootstrap.Modal.getInstance(modalEl) || bootstrap.Modal.getOrCreateInstance(modalEl);
                 if (modal) modal.hide();
-                document.querySelectorAll('.modal-backdrop').forEach(e => e.remove());
-                document.body.classList.remove('modal-open');
-                // restore transforms removed earlier
-                try {
-                    restoreTransformedAncestors();
-                    if (window.AOS) AOS.refresh();
-                } catch (e) {}
+                finalizeClose();
             }
             try {
                 if (typeof $wire !== 'undefined' && $wire.on) {
@@ -225,6 +261,23 @@
             });
 
         })();
+    </script>
+    @endscript
+    @script
+    <script>
+        window.shareGallery = function(slug) {
+            const url = `${window.location.origin}/gallery/${slug}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Galeri Kegiatan',
+                    url: url
+                });
+            } else {
+                navigator.clipboard.writeText(url)
+                    .then(() => alert('Link galeri berhasil disalin'));
+            }
+        }
     </script>
     @endscript
 

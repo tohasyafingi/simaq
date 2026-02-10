@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->string('file')->nullable();  
-            $table->string('link')->nullable();          
+            $table->string('link')->nullable();
+            $table->string('slug')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

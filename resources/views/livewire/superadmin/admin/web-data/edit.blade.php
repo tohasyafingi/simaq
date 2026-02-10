@@ -37,21 +37,16 @@
                         <label>Gambar</label>
                         <input type="file" wire:model="newImage" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*" />
                         @include('components.upload-loading', ['target' => 'newImage'])
-                        @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '80px'])
-
-                        @if($image)
                         <div class="position-relative mt-2" style="width: 150px; height: 80px;">
-                            <img src="{{ asset('storage/'.$image) }}"
-                                class="img-fluid rounded"
-                                style="height: 80px; width: 150px; object-fit: cover;">
-
-                            <button type="button"
-                                wire:click="removeImage"
-                                class="btn btn-danger btn-sm position-absolute top-0 end-0">
-                                ✕
-                            </button>
+                            @include('components.upload-preview', ['file' => $newImage ?: $image, 'maxHeight' => '80px'])
+                            @if($image && !$newImage)
+                                <button type="button"
+                                    wire:click="removeImage"
+                                    class="btn btn-danger btn-sm position-absolute top-0 end-0">
+                                    ✕
+                                </button>
+                            @endif
                         </div>
-                        @endif
 
                         <x-form-error field="newImage" />
                     </div>

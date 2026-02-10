@@ -5,7 +5,6 @@ namespace App\Livewire\Superadmin\Admin\TataUsaha;
 use App\Models\TataUsaha;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Exports\TataUsahaExport;
 use App\Imports\TataUsahaImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Helpers\ImageHelper;
 
 #[Title('Data Tata Usaha')]
 class Index extends Component
@@ -28,6 +28,7 @@ class Index extends Component
     public $search = '';
 
     public $tata_usaha_id, $kd_tu, $name, $email, $no_hp, $img, $status;
+    public $old_img;
 
     public $deleteId = null;
 
@@ -124,6 +125,7 @@ class Index extends Component
         $this->no_hp = '';
         $this->img = null;
         $this->status = '';
+        $this->old_img = null;
     }
 
     public function create()
@@ -136,7 +138,12 @@ class Index extends Component
         $validatedData = $this->validate();
 
         if ($this->img) {
-            $validatedData['img'] = $this->img->store('tata_usaha', 'public');
+            $validatedData['img'] = ImageHelper::storeOptimized(
+                $this->img,
+                'tata_usaha',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         }
 
         $tata_usaha = TataUsaha::create($validatedData);
@@ -172,8 +179,9 @@ class Index extends Component
         $this->name = $tata_usaha->name;
         $this->email = $tata_usaha->email;
         $this->no_hp = $tata_usaha->no_hp;
-        $this->img = $tata_usaha->img;
+        $this->img = null;
         $this->status = $tata_usaha->status;
+        $this->old_img = $tata_usaha->img;
     }
 
     public function update()
@@ -183,10 +191,13 @@ class Index extends Component
         $tata_usaha = TataUsaha::findOrFail($this->tata_usaha_id);
 
         if ($this->img) {
-            if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
-                Storage::disk('public')->delete($tata_usaha->img);
-            }
-            $validatedData['img'] = $this->img->store('tata_usaha', 'public');
+            $validatedData['img'] = ImageHelper::replaceOptimized(
+                $tata_usaha->img,
+                $this->img,
+                'tata_usaha',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         } else {
             $validatedData['img'] = $tata_usaha->img;
         }
@@ -219,8 +230,8 @@ class Index extends Component
         $tata_usaha = TataUsaha::findOrFail($this->deleteId);
 
         // Hapus foto jika ada
-        if ($tata_usaha->img && Storage::disk('public')->exists($tata_usaha->img)) {
-            Storage::disk('public')->delete($tata_usaha->img);
+        if ($tata_usaha->img) {
+            ImageHelper::deletePath($tata_usaha->img, 'public');
         }
 
         // Hapus user terkait

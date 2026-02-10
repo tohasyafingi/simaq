@@ -26,7 +26,7 @@
                             <label class="form-label">Thumbnail</label>
                             <input wire:model="newThumbnail" type="file" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newThumbnail'])
-                            @include('components.upload-preview', ['file' => $newThumbnail, 'maxHeight' => '150px'])
+                            @include('components.upload-preview', ['file' => $newThumbnail, 'maxHeight' => '100px'])
 
                             <x-form-error field="newThumbnail" />
                         </div>

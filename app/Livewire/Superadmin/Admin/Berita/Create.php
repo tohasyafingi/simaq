@@ -8,6 +8,7 @@ use App\Models\Berita;
 use App\Models\KatBerita;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Str;
+use App\Helpers\ImageHelper;
 
 #[Title('Berita')]
 class Create extends Component
@@ -58,7 +59,13 @@ class Create extends Component
 
         // Thumbnail
         if ($this->thumbnail) {
-            $berita->thumbnail = $this->thumbnail->store('berita', 'public');
+            $berita->thumbnail = ImageHelper::replaceOptimized(
+                $berita->thumbnail,
+                $this->thumbnail,
+                'berita',
+                $this->judul,
+                'public'
+            );
         }
 
         $berita->judul = $this->judul;

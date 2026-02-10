@@ -33,18 +33,34 @@
             @endif
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ $book->judul }}</h5>
+
               @if($book->description)
               <p class="card-text">{{ $book->description }}</p>
               @endif
-              @if($book->link || $book->file)
-              <a wire:navigate href="{{ route('pdf-viewer', $book->id) }}" class="btn btn-primary btn-sm mt-auto">
-                Lihat Detail
-              </a>
-              {{-- <a href="{{ asset('storage/'.$book->file) }}" class="btn btn-primary btn-sm mt-auto" target="_blank" rel="noopener noreferrer">
-              Lihat Detail
-              </a> --}}
-              @endif
+
+              {{-- ACTIONS --}}
+              <div class="mt-auto">
+                <div class="d-flex gap-2">
+                  @if($book->link || $book->file)
+                  <a
+                    wire:navigate
+                    href="{{ route('pdf-viewer', Illuminate\Support\Str::slug($book->judul)) }}"
+                    class="btn btn-primary btn-sm flex-grow-1">
+                    Lihat Detail
+                  </a>
+                  @endif
+
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-social btn-native"
+                    title="Bagikan buku"
+                    x-on:click.stop="shareArtikel('{{ Illuminate\Support\Str::slug($book->judul) }}')">
+                    <i class="bi bi-share-fill"></i>
+                  </button>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
         @empty
@@ -60,3 +76,21 @@
     </div>
   </section>
 </div>
+
+@script
+<script>
+    window.shareArtikel = function(slug) {
+        const url = `${window.location.origin}/e-book/${slug}`;
+
+        if (navigator.share) {
+            navigator.share({
+                title: 'Perpustakaan Digital',
+                url: url
+            });
+        } else {
+            navigator.clipboard.writeText(url)
+                .then(() => alert('Link e-book berhasil disalin'));
+        }
+    }
+</script>
+@endscript

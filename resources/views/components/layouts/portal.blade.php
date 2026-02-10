@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQDCEZM26F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-SQDCEZM26F');
+    </script>
+    
   <meta charset="UTF-8">
   @include('components.layouts.meta')
 
@@ -36,6 +46,8 @@
   {{ $slot }}
 
   @include('components.layouts.portal.footer')
+  
+  <a href="#" id="scroll-top" wire:ignore class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script data-navigate-once src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script data-navigate-once src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

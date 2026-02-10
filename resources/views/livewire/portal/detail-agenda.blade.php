@@ -9,7 +9,7 @@
                     <i class="fas fa-tag"></i> {{ $berita->kategori->nama ?? 'Umum' }}
                 </div>
                 <div class="news-thumbnail mb-4" data-aos="zoom-in">
-                    <img src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}"
+                    <img src="{{ \App\Helpers\ImageHelper::url($berita->thumbnail) ?? asset('assets/berita.webp') }}"
                         alt="{{ $berita->judul }}" loading="lazy" class="w-100 rounded shadow-sm news-image">
                 </div>
                 <div class="news-content mb-4" data-aos="fade-up" data-aos-delay="80">
@@ -70,7 +70,7 @@
                     <img src="{{ asset('assets/default-image.webp') }}" alt="Author" loading="lazy" class="rounded-circle me-3"
                         style="width:40px; height:40px; object-fit:cover;">
                     <div>
-                        <h6 class="mb-1">{{ $berita->author ?? 'Admin Sekolah' }}</h6>
+                        <h6 class="mb-1">{{ $berita->author ?? 'Admin' }}</h6>
                         <!-- <small class="text-muted">Official student research and innovation</small> -->
                     </div>
                 </div>

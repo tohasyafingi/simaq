@@ -56,7 +56,7 @@
                                 <label>Foto</label>
                                 <input wire:model="img" type="file" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                                 @include('components.upload-loading', ['target' => 'img'])
-                                @include('components.upload-preview', ['file' => $img, 'maxHeight' => '100px'])
+                                @include('components.upload-preview', ['file' => $img ?: $old_img, 'maxHeight' => '100px'])
                                 <x-form-error field="img" />
                             </div>
                         </div>

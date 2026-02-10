@@ -45,14 +45,8 @@
                             <input wire:model="newImage" type="file"
                                 class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newImage'])
-                            @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '120px'])
+                            @include('components.upload-preview', ['file' => $newImage ?: $image, 'maxHeight' => '120px'])
                             <x-form-error field="newImage" />
-                            {{-- Preview gambar lama --}}
-                            @if (!$newImage && $image)
-                            <img src="{{ asset('storage/'.$image) }}"
-                                class="img-fluid mt-2 rounded"
-                                style="max-height:150px">
-                            @endif
                         </div>
 
                         <!-- File Download -->
@@ -63,15 +57,7 @@
                             <input wire:model="newFile" type="file" class="form-control" accept=".pdf,application/pdf">
                             @include('components.upload-loading', ['target' => 'newFile', 'label' => 'Mengunggah file...'])
 
-                            {{-- File baru --}}
-                            @include('components.upload-preview', ['file' => $newFile])
-
-                            {{-- File lama --}}
-                            @if (!$newFile && $download_id)
-                            <span class="badge bg-secondary mt-2">
-                                {{ basename($item->file ?? '') }}
-                            </span>
-                            @endif
+                            @include('components.upload-preview', ['file' => $newFile ?: $file])
 
                             <x-form-error field="newFile" />
                         </div>

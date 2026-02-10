@@ -13,6 +13,7 @@ class Gallery extends Model
         'judul',
         'deskripsi',
         'thumbnail',
+        'slug',
         'status',
     ];
 

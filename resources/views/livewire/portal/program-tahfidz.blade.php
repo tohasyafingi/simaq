@@ -1,7 +1,9 @@
 <div>
     <section class="hero-section bg-dark text-white d-flex align-items-center" style="height: 150px;">
         <div class="container text-center">
-            <h1 data-aos="fade-down" data-aos-duration="800">Program Tahfidz Al-Qur'an</h1>
+            <h1 data-aos="fade-down" data-aos-duration="800">
+            {{ $activities->first()->judul ?? 'Program Tahfidz' }}
+            </h1>
         </div>
     </section>
 
@@ -19,7 +21,6 @@
                 @endif
 
                 <div class="col-lg-6" data-aos="fade-up">
-                    <h2 class="section-title" data-aos="fade-up">{{ $activity->judul }}</h2>
                     <div class="content-text" data-aos="fade-up" data-aos-delay="80">
                         {!! $activity->content !!}
                     </div>

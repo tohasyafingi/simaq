@@ -9,6 +9,7 @@ use Livewire\Attributes\Title;
 use App\Models\Gallery;
 use App\Models\GalleryDetail;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\ImageHelper;
 
 #[Title('Galeri')]
 class Index extends Component
@@ -86,7 +87,12 @@ public function resetForm()
         $data = $this->validate();
 
         if ($this->newThumbnail) {
-            $data['thumbnail'] = $this->newThumbnail->store('gallery/thumbnail', 'public');
+            $data['thumbnail'] = ImageHelper::storeOptimized(
+                $this->newThumbnail,
+                'gallery/thumbnail',
+                $this->judul,
+                'public'
+            );
         }
 
         $gallery = Gallery::create($data);
@@ -94,7 +100,12 @@ public function resetForm()
         foreach ($this->images as $image) {
             GalleryDetail::create([
                 'gallery_id' => $gallery->id,
-                'image_path' => $image->store('gallery/images', 'public'),
+                'image_path' => ImageHelper::storeOptimized(
+                    $image,
+                    'gallery/images',
+                    $this->judul,
+                    'public'
+                ),
             ]);
         }
 
@@ -128,10 +139,13 @@ public function resetForm()
 
         // thumbnail
         if ($this->newThumbnail) {
-            if ($gallery->thumbnail) {
-                Storage::disk('public')->delete($gallery->thumbnail);
-            }
-            $data['thumbnail'] = $this->newThumbnail->store('gallery/thumbnail', 'public');
+            $data['thumbnail'] = ImageHelper::replaceOptimized(
+                $gallery->thumbnail,
+                $this->newThumbnail,
+                'gallery/thumbnail',
+                $this->judul,
+                'public'
+            );
         } else {
             $data['thumbnail'] = $gallery->thumbnail;
         }
@@ -143,7 +157,7 @@ public function resetForm()
             $details = GalleryDetail::whereIn('id', $this->removedImages)->get();
 
             foreach ($details as $detail) {
-                Storage::disk('public')->delete($detail->image_path);
+                ImageHelper::deletePath($detail->image_path, 'public');
                 $detail->delete();
             }
         }
@@ -152,7 +166,12 @@ public function resetForm()
         foreach ($this->images as $image) {
             GalleryDetail::create([
                 'gallery_id' => $gallery->id,
-                'image_path' => $image->store('gallery/images', 'public'),
+                'image_path' => ImageHelper::storeOptimized(
+                    $image,
+                    'gallery/images',
+                    $this->judul,
+                    'public'
+                ),
             ]);
         }
 
@@ -190,11 +209,11 @@ public function resetForm()
         $gallery = Gallery::with('details')->findOrFail($this->deleteId);
 
         if ($gallery->thumbnail) {
-            Storage::disk('public')->delete($gallery->thumbnail);
+            ImageHelper::deletePath($gallery->thumbnail, 'public');
         }
 
         foreach ($gallery->details as $detail) {
-            Storage::disk('public')->delete($detail->image_path);
+            ImageHelper::deletePath($detail->image_path, 'public');
         }
 
         $gallery->delete();

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,6 +16,8 @@ use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\Attributes\Title;
+use App\Helpers\ImageHelper;
+use App\Helpers\FileHelper;
 
 #[Title('Data Siswa')]
 class Index extends Component
@@ -25,6 +28,7 @@ class Index extends Component
     public $paginate = 10, $search = '';
     public $nis, $name, $email, $no_hp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $alamat;
     public $kk, $akta, $ijazah_terakhir, $img, $status, $siswa_id;
+    public $old_kk, $old_akta, $old_ijazah_terakhir, $old_img;
     public $siswa_id_delete, $siswa_name_delete;
     public $file;
 
@@ -52,6 +56,31 @@ class Index extends Component
         ];
     }
 
+    public function create()
+    {
+        $this->resetValidation();
+        $this->reset([
+            'siswa_id',
+            'nis',
+            'name',
+            'email',
+            'no_hp',
+            'jenis_kelamin',
+            'tempat_lahir',
+            'tanggal_lahir',
+            'alamat',
+            'kk',
+            'akta',
+            'ijazah_terakhir',
+            'img',
+            'status',
+            'old_kk',
+            'old_akta',
+            'old_ijazah_terakhir',
+            'old_img',
+        ]);
+    }
+
 
     public function export()
     {
@@ -77,10 +106,38 @@ class Index extends Component
             ];
 
             // Upload files
-            if ($this->kk) $data['kk'] = $this->kk->store('kk', 'public');
-            if ($this->akta) $data['akta'] = $this->akta->store('akta', 'public');
-            if ($this->ijazah_terakhir) $data['ijazah_terakhir'] = $this->ijazah_terakhir->store('ijazah', 'public');
-            if ($this->img) $data['img'] = $this->img->store('siswa_img', 'public');
+            if ($this->kk) {
+                $data['kk'] = FileHelper::storeWithSlug(
+                    $this->kk,
+                    'kk',
+                    ($validatedData['name'] ?? $this->name) . '-kk',
+                    'public'
+                );
+            }
+            if ($this->akta) {
+                $data['akta'] = FileHelper::storeWithSlug(
+                    $this->akta,
+                    'akta',
+                    ($validatedData['name'] ?? $this->name) . '-akta',
+                    'public'
+                );
+            }
+            if ($this->ijazah_terakhir) {
+                $data['ijazah_terakhir'] = FileHelper::storeWithSlug(
+                    $this->ijazah_terakhir,
+                    'ijazah',
+                    ($validatedData['name'] ?? $this->name) . '-ijazah',
+                    'public'
+                );
+            }
+            if ($this->img) {
+                $data['img'] = ImageHelper::storeOptimized(
+                    $this->img,
+                    'siswa_img',
+                    $validatedData['name'] ?? $this->name,
+                    'public'
+                );
+            }
 
             // Membuat siswa
             $siswa = Siswa::create($data);
@@ -137,6 +194,10 @@ class Index extends Component
         $this->ijazah_terakhir = null;
         $this->img = null;
         $this->status = $siswa->status;
+        $this->old_kk = $siswa->kk;
+        $this->old_akta = $siswa->akta;
+        $this->old_ijazah_terakhir = $siswa->ijazah_terakhir;
+        $this->old_img = $siswa->img;
     }
 
     public function update()
@@ -146,33 +207,51 @@ class Index extends Component
 
             $siswa = Siswa::findOrFail($this->siswa_id);
 
-            // Update data siswa
-            $siswa->update($validatedData);
+            // Update data siswa tanpa menimpa file lama saat tidak upload baru
+            $siswa->update(Arr::except($validatedData, ['kk', 'akta', 'ijazah_terakhir', 'img']));
 
             // Handle file uploads (hapus lama jika ada, upload baru)
             if ($this->kk) {
                 if ($siswa->kk && Storage::disk('public')->exists($siswa->kk)) {
                     Storage::disk('public')->delete($siswa->kk);
                 }
-                $siswa->kk = $this->kk->store('kk', 'public');
+                $siswa->kk = FileHelper::storeWithSlug(
+                    $this->kk,
+                    'kk',
+                    ($validatedData['name'] ?? $this->name) . '-kk',
+                    'public'
+                );
             }
             if ($this->akta) {
                 if ($siswa->akta && Storage::disk('public')->exists($siswa->akta)) {
                     Storage::disk('public')->delete($siswa->akta);
                 }
-                $siswa->akta = $this->akta->store('akta', 'public');
+                $siswa->akta = FileHelper::storeWithSlug(
+                    $this->akta,
+                    'akta',
+                    ($validatedData['name'] ?? $this->name) . '-akta',
+                    'public'
+                );
             }
             if ($this->ijazah_terakhir) {
                 if ($siswa->ijazah_terakhir && Storage::disk('public')->exists($siswa->ijazah_terakhir)) {
                     Storage::disk('public')->delete($siswa->ijazah_terakhir);
                 }
-                $siswa->ijazah_terakhir = $this->ijazah_terakhir->store('ijazah', 'public');
+                $siswa->ijazah_terakhir = FileHelper::storeWithSlug(
+                    $this->ijazah_terakhir,
+                    'ijazah',
+                    ($validatedData['name'] ?? $this->name) . '-ijazah',
+                    'public'
+                );
             }
             if ($this->img) {
-                if ($siswa->img && Storage::disk('public')->exists($siswa->img)) {
-                    Storage::disk('public')->delete($siswa->img);
-                }
-                $siswa->img = $this->img->store('siswa_img', 'public');
+                $siswa->img = ImageHelper::replaceOptimized(
+                    $siswa->img,
+                    $this->img,
+                    'siswa_img',
+                    $validatedData['name'] ?? $this->name,
+                    'public'
+                );
             }
             $siswa->save();
 
@@ -229,7 +308,7 @@ class Index extends Component
             if ($siswa->kk && Storage::disk('public')->exists($siswa->kk)) Storage::disk('public')->delete($siswa->kk);
             if ($siswa->akta && Storage::disk('public')->exists($siswa->akta)) Storage::disk('public')->delete($siswa->akta);
             if ($siswa->ijazah_terakhir && Storage::disk('public')->exists($siswa->ijazah_terakhir)) Storage::disk('public')->delete($siswa->ijazah_terakhir);
-            if ($siswa->img && Storage::disk('public')->exists($siswa->img)) Storage::disk('public')->delete($siswa->img);
+            if ($siswa->img) ImageHelper::deletePath($siswa->img, 'public');
 
             // Hapus user terkait dulu
             $user = User::where('siswa_id', $siswa->id)->first();

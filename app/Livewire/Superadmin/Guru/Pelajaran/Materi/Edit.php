@@ -7,7 +7,9 @@ use Livewire\WithFileUploads;
 use App\Models\Materi;
 use App\Models\Rombel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Title;
+use App\Helpers\FileHelper;
 
 #[Title('Edit Materi')]
 class Edit extends Component
@@ -67,7 +69,15 @@ class Edit extends Component
 
                 // Jika user upload file baru, simpan dan replace file lama
                 if ($this->file) {
-                    $filePath = $this->file->store('materi', 'public');
+                    if ($this->fileLama && Storage::disk('public')->exists($this->fileLama)) {
+                        Storage::disk('public')->delete($this->fileLama);
+                    }
+                    $filePath = FileHelper::storeWithSlug(
+                        $this->file,
+                        'materi',
+                        $this->judul,
+                        'public'
+                    );
                 }
 
                 $materi->update([

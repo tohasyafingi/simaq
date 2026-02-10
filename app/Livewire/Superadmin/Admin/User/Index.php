@@ -5,10 +5,10 @@ namespace App\Livewire\Superadmin\Admin\User;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
-use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use App\Helpers\ImageHelper;
 
 #[Title('Manajemen User')]  
 class Index extends Component
@@ -19,6 +19,7 @@ class Index extends Component
     public $paginate = 10;
     public $search = '';
     public $user_id, $name, $email, $password, $role, $status, $img, $password_confirmation;
+    public $old_img;
     public $deleteId = null;
 
     // Validation rules
@@ -62,6 +63,7 @@ class Index extends Component
         $this->role = '';
         $this->status = '';
         $this->img = null;
+        $this->old_img = null;
     }
 
     public function create()
@@ -75,7 +77,12 @@ class Index extends Component
 
         // Handle image upload
         if ($this->img) {
-            $validatedData['img'] = $this->img->store('users', 'public');
+            $validatedData['img'] = ImageHelper::storeOptimized(
+                $this->img,
+                'users',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         }
 
         // Hash password
@@ -98,8 +105,8 @@ class Index extends Component
         $this->email = $user->email;
         $this->role = $user->role;
         $this->status = $user->status;
-        // keep existing image path so preview can show stored avatar
-        $this->img = $user->img;
+        $this->img = null;
+        $this->old_img = $user->img;
     }
 
     public function update()
@@ -110,11 +117,13 @@ class Index extends Component
 
         // Handle image upload safely: only call ->store() on uploaded files
         if (is_object($this->img) && method_exists($this->img, 'store')) {
-            // new uploaded file: remove old file then store
-            if ($user->img && Storage::disk('public')->exists($user->img)) {
-                Storage::disk('public')->delete($user->img);
-            }
-            $validatedData['img'] = $this->img->store('users', 'public');
+            $validatedData['img'] = ImageHelper::replaceOptimized(
+                $user->img,
+                $this->img,
+                'users',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         } else {
             // no new upload; keep existing path
             $validatedData['img'] = $user->img;
@@ -145,8 +154,8 @@ class Index extends Component
         $user = User::findOrFail($this->deleteId);
 
         // Delete user's image if it exists
-        if ($user->img && Storage::disk('public')->exists($user->img)) {
-            Storage::disk('public')->delete($user->img);
+        if ($user->img) {
+            ImageHelper::deletePath($user->img, 'public');
         }
 
         // Delete user record

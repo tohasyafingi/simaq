@@ -80,19 +80,7 @@
                                 @include('components.form-error', ['field' => 'file'])
 
                                 @include('components.upload-loading', ['target' => 'file'])
-
-                                <!-- Preview file lama / file baru -->
-                                @if($file)
-                                    <p class="mt-2">File baru terpilih: {{ $file->getClientOriginalName() }}</p>
-                                @elseif($fileLama)
-                                    <p class="mt-2">
-                                        File sebelumnya:
-                                        <a href="{{ asset('storage/' . $fileLama) }}" target="_blank"
-                                            class="text-decoration-underline">
-                                            Lihat File
-                                        </a>
-                                    </p>
-                                @endif
+                                @include('components.upload-preview', ['file' => $file ?: $fileLama])
                             </div>
 
                             <!-- Status -->

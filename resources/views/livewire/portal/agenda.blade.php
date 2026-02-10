@@ -32,7 +32,7 @@
 
             {{-- Thumbnail --}}
             <img
-              src="{{ $berita->thumbnail_url ?? asset('assets/berita.webp') }}"
+              src="{{ \App\Helpers\ImageHelper::url($berita->thumbnail) ?? asset('assets/berita.webp') }}"
               class="card-img-top"
               alt="{{ $berita->judul }}"
               loading="lazy">

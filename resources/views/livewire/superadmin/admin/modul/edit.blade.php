@@ -43,7 +43,7 @@
                             <label class="form-label">File Modul</label>
                             <input wire:model="file" type="file" class="form-control" accept=".pdf,application/pdf">
                             @include('components.upload-loading', ['target' => 'file'])
-                            @include('components.upload-preview', ['file' => $file])
+                            @include('components.upload-preview', ['file' => $file ?: $existingFile])
                             <x-form-error field="file" />
 
                             @if (!$file && $modul_id && $existingFile)

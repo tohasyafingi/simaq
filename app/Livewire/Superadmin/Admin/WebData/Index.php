@@ -7,7 +7,7 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use App\Models\Profiles;
-use Illuminate\Support\Facades\Storage;
+use App\Helpers\ImageHelper;
 
 #[Title('Konten Portal')]
 class Index extends Component
@@ -105,7 +105,12 @@ class Index extends Component
         $validated = $this->validate();
 
         if ($this->newImage) {
-            $validated['image'] = $this->newImage->store('profiles', 'public');
+            $validated['image'] = ImageHelper::storeOptimized(
+                $this->newImage,
+                'profiles',
+                $this->judul,
+                'public'
+            );
         }
 
         Profiles::create($validated);
@@ -135,20 +140,20 @@ class Index extends Component
 
     public function removeImage()
     {
-        if ($this->image && Storage::disk('public')->exists($this->image)) {
-            Storage::disk('public')->delete($this->image);
+        if ($this->image) {
+            ImageHelper::deletePath($this->image, 'public');
+
+            // update database
+            Profiles::where('id', $this->profile_id)->update([
+                'image' => null,
+            ]);
+
+            // reset state
+            $this->image = null;
+            $this->newImage = null;
+
+            session()->flash('message', 'Gambar berhasil dihapus.');
         }
-
-        // update database
-        Profiles::where('id', $this->profile_id)->update([
-            'image' => null,
-        ]);
-
-        // reset state
-        $this->image = null;
-        $this->newImage = null;
-
-        session()->flash('message', 'Gambar berhasil dihapus.');
     }
 
     public function update()
@@ -158,11 +163,13 @@ class Index extends Component
         $data = Profiles::findOrFail($this->profile_id);
 
         if ($this->newImage) {
-            if ($data->image && Storage::disk('public')->exists($data->image)) {
-                Storage::disk('public')->delete($data->image);
-            }
-
-            $validated['image'] = $this->newImage->store('profiles', 'public');
+            $validated['image'] = ImageHelper::replaceOptimized(
+                $data->image,
+                $this->newImage,
+                'profiles',
+                $this->judul,
+                'public'
+            );
         } else {
             $validated['image'] = $data->image; // tetap pakai image lama
         }
@@ -186,8 +193,8 @@ class Index extends Component
     {
         $data = Profiles::findOrFail($this->deleteId);
 
-        if ($data->image && Storage::disk('public')->exists($data->image)) {
-            Storage::disk('public')->delete($data->image);
+        if ($data->image) {
+            ImageHelper::deletePath($data->image, 'public');
         }
 
         $data->delete();

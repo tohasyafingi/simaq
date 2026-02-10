@@ -23,12 +23,16 @@
             @php
                 try {
                     $ext = strtolower($file->getClientOriginalExtension() ?? '');
+                    $tempUrl = $file->temporaryUrl();
                 } catch (\Throwable $e) {
                     $ext = '';
+                    $tempUrl = null;
                 }
             @endphp
             @if(in_array($ext, $imageExts))
-                <img src="{{ $file->temporaryUrl() }}" class="img-fluid rounded" style="max-height:{{ $maxHeight }};" />
+                <img src="{{ $tempUrl }}" class="img-fluid rounded" style="max-height:{{ $maxHeight }};" />
+            @elseif($ext === 'pdf' && $tempUrl)
+                <a href="{{ $tempUrl }}" target="_blank" class="badge bg-info">Lihat PDF</a>
             @else
                 <span class="badge bg-info">{{ $file->getClientOriginalName() }}</span>
             @endif

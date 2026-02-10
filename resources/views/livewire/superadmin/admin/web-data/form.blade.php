@@ -38,10 +38,7 @@
                         <label>Gambar</label>
                         <input type="file" wire:model="newImage" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*" />
                         @include('components.upload-loading', ['target' => 'newImage'])
-                        @include('components.upload-preview', ['file' => $newImage, 'maxHeight' => '80px'])
-                        @if($image)
-                        <div class="mt-2"><img src="{{ asset('storage/'.$image) }}" style="height:80px;" /></div>
-                        @endif
+                        @include('components.upload-preview', ['file' => $newImage ?: $image, 'maxHeight' => '80px'])
                         <x-form-error field="newImage" />
                     </div>
 

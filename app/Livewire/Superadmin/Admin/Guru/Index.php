@@ -5,7 +5,6 @@ namespace App\Livewire\Superadmin\Admin\Guru;
 use App\Models\Guru;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -15,6 +14,7 @@ use Livewire\Attributes\Title;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\GuruExport;
 use App\Imports\GuruImport;
+use App\Helpers\ImageHelper;
 
 #[Title('Data Guru')]
 class Index extends Component
@@ -27,6 +27,7 @@ class Index extends Component
     public $search = '';
 
     public $guru_id, $kd_guru, $name, $email, $no_hp, $img, $status;
+    public $old_img;
 
     public $deleteId = null;
 
@@ -127,6 +128,7 @@ class Index extends Component
         $this->no_hp = '';
         $this->img = null;
         $this->status = '';
+        $this->old_img = null;
     }
 
     public function create()
@@ -139,7 +141,12 @@ class Index extends Component
         $validatedData = $this->validate();
 
         if ($this->img) {
-            $validatedData['img'] = $this->img->store('guru', 'public');
+            $validatedData['img'] = ImageHelper::storeOptimized(
+                $this->img,
+                'guru',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         }
 
         $guru = Guru::create($validatedData);
@@ -176,6 +183,7 @@ class Index extends Component
         $this->no_hp = $guru->no_hp;
         $this->img = null;
         $this->status = $guru->status;
+        $this->old_img = $guru->img;
     }
 
     public function update()
@@ -185,10 +193,13 @@ class Index extends Component
         $guru = Guru::findOrFail($this->guru_id);
 
         if ($this->img) {
-            if ($guru->img && Storage::disk('public')->exists($guru->img)) {
-                Storage::disk('public')->delete($guru->img);
-            }
-            $validatedData['img'] = $this->img->store('guru', 'public');
+            $validatedData['img'] = ImageHelper::replaceOptimized(
+                $guru->img,
+                $this->img,
+                'guru',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         } else {
             $validatedData['img'] = $guru->img;
         }
@@ -219,8 +230,8 @@ class Index extends Component
     {
         $guru = Guru::findOrFail($this->deleteId);
 
-        if ($guru->img && Storage::disk('public')->exists($guru->img)) {
-            Storage::disk('public')->delete($guru->img);
+        if ($guru->img) {
+            ImageHelper::deletePath($guru->img, 'public');
         }
 
         $user = User::where('guru_id', $guru->id)->first();

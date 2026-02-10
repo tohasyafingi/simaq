@@ -37,7 +37,7 @@
                             <label class="form-label">Thumbnail</label>
                             <input wire:model="newThumbnail" type="file" class="form-control" accept=".webp,.jpg,.jpeg,.png,.avif,.svg,.gif,image/*">
                             @include('components.upload-loading', ['target' => 'newThumbnail'])
-                            @include('components.upload-preview', ['file' => $newThumbnail ?? $thumbnail, 'maxHeight' => '150px'])
+                            @include('components.upload-preview', ['file' => $newThumbnail ?? $thumbnail, 'maxHeight' => '100px'])
                         </div>
 
                         <!-- FOTO LAMA -->

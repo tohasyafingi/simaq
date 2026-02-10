@@ -5,7 +5,6 @@ namespace App\Livewire\Superadmin\Admin\Bendahara;
 use App\Models\Bendahara;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BendaharaExport;
 use App\Imports\BendaharaImport;
 use Illuminate\Support\Facades\Log;
+use App\Helpers\ImageHelper;
 
 #[Title('Data Bendahara')]
 class Index extends Component
@@ -28,6 +28,7 @@ class Index extends Component
     public $search = '';
 
     public $bendahara_id, $kd_bendahara, $name, $email, $no_hp, $img, $status;
+    public $old_img;
 
     public $deleteId = null;
 
@@ -123,6 +124,7 @@ class Index extends Component
         $this->no_hp = '';
         $this->img = null;
         $this->status = '';
+        $this->old_img = null;
     }
 
     public function create()
@@ -135,7 +137,12 @@ class Index extends Component
         $validatedData = $this->validate();
 
         if ($this->img) {
-            $validatedData['img'] = $this->img->store('bendahara', 'public');
+            $validatedData['img'] = ImageHelper::storeOptimized(
+                $this->img,
+                'bendahara',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         }
 
         $bendahara = Bendahara::create($validatedData);
@@ -172,8 +179,9 @@ class Index extends Component
         $this->name = $bendahara->name;
         $this->email = $bendahara->email;
         $this->no_hp = $bendahara->no_hp;
-        $this->img = $bendahara->img;
+        $this->img = null;
         $this->status = $bendahara->status;
+        $this->old_img = $bendahara->img;
     }
 
     public function update()
@@ -183,10 +191,13 @@ class Index extends Component
         $bendahara = Bendahara::findOrFail($this->bendahara_id);
 
         if ($this->img) {
-            if ($bendahara->img && Storage::disk('public')->exists($bendahara->img)) {
-                Storage::disk('public')->delete($bendahara->img);
-            }
-            $validatedData['img'] = $this->img->store('bendahara', 'public');
+            $validatedData['img'] = ImageHelper::replaceOptimized(
+                $bendahara->img,
+                $this->img,
+                'bendahara',
+                $validatedData['name'] ?? $this->name,
+                'public'
+            );
         } else {
             $validatedData['img'] = $bendahara->img;
         }
@@ -219,8 +230,8 @@ class Index extends Component
         $bendahara = Bendahara::findOrFail($this->deleteId);
 
         // Hapus foto jika ada
-        if ($bendahara->img && Storage::disk('public')->exists($bendahara->img)) {
-            Storage::disk('public')->delete($bendahara->img);
+        if ($bendahara->img) {
+            ImageHelper::deletePath($bendahara->img, 'public');
         }
 
         // Hapus user terkait

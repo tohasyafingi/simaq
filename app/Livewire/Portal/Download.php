@@ -9,6 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\SeoHelper;
 
 #[Title('Downloads')]
 #[Layout('components.layouts.portal')]
@@ -20,12 +21,36 @@ class Download extends Component
 
     public $search = '';
     public $perPage = 6;
+    public $selectedDownload;
+
+    public function mount($slug = null)
+    {
+        if ($slug) {
+            $item = Downloads::where('status', 1)
+                ->get()
+                ->first(function ($download) use ($slug) {
+                    $itemSlug = $download->slug ?? Str::slug($download->judul);
+                    return $itemSlug === $slug;
+                });
+            abort_if(!$item, 404);
+            $this->selectedDownload = $item;
+        }
+    }
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    public function getDownloadBySlug($slug)
+    {
+        return Downloads::where('status', 1)
+            ->get()
+            ->first(function ($item) use ($slug) {
+                $itemSlug = $item->slug ?? Str::slug($item->judul);
+                return $itemSlug === $slug;
+            });
+    }
 
     public function downloadFile($id)
     {
@@ -59,15 +84,17 @@ class Download extends Component
             ->latest()
             ->paginate($this->perPage);
 
+        $title = $this->selectedDownload?->judul ?? 'Download';
+        $description = $this->selectedDownload?->description
+            ?? config('app.description', 'Download file dan dokumen MA Takhassus Al-Qur’an Wonosobo');
+        $image = SeoHelper::image($this->selectedDownload?->image ?? null);
+
         $meta = [
-            'title' => 'Download',
-            'description' => Str::limit(
-                strip_tags(config('app.description', 'Download file dan dokumen MA Takhassus Al-Qur’an Wonosobo')),
-                160
-            ),
-            'image' => \App\Helpers\SeoHelper::image(null),
+            'title' => $title,
+            'description' => Str::limit(strip_tags($description), 160),
+            'image' => $image,
             'canonical' => url()->current(),
-            'og_type' => 'website',
+            'og_type' => $this->selectedDownload ? 'article' : 'website',
         ];
 
         return view('livewire.portal.download', [

@@ -9,7 +9,7 @@
                     <i class="fas fa-tag"></i> {{ $karyaIlmiah->kategori->nama ?? 'Umum' }}
                 </div>
                 <div class="news-thumbnail mb-4" data-aos="zoom-in">
-                    <img src="{{ $karyaIlmiah->thumbnail_url ?? asset('assets/karya.webp') }}"
+                                      <img src="{{ \App\Helpers\ImageHelper::url($karyaIlmiah->thumbnail) ?? asset('assets/karya.webp') }}"
                         alt="{{ $karyaIlmiah->judul }}" loading="lazy" class="w-100 rounded shadow-sm news-image">
                 </div>
                 <div class="news-content mb-4" data-aos="fade-up" data-aos-delay="80">

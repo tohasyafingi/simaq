@@ -161,6 +161,7 @@ class Index extends Component
         $validated = $this->validate();
 
         $data = Profiles::findOrFail($this->profile_id);
+        $oldContent = $data->content;
 
         if ($this->newImage) {
             $validated['image'] = ImageHelper::replaceOptimized(
@@ -175,6 +176,8 @@ class Index extends Component
         }
 
         $data->update($validated);
+
+        ImageHelper::deleteUnusedFromHtml($oldContent, $validated['content'] ?? $this->content);
 
         $this->dispatch('closeEditModal');
         $this->dispatch('resetSummernote');
@@ -196,6 +199,8 @@ class Index extends Component
         if ($data->image) {
             ImageHelper::deletePath($data->image, 'public');
         }
+
+        ImageHelper::deleteUnusedFromHtml($data->content, null);
 
         $data->delete();
 

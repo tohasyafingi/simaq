@@ -22,6 +22,7 @@ use App\Livewire\Portal\Struktur as PortalStruktur;
 use App\Livewire\Portal\VisiMisi as PortalVisiMisi;
 use App\Livewire\Portal\PdfViewer as PdfViewer;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SummernoteController;
 use App\Livewire\Superadmin\Guru\Index as GuruDashboard;
 use App\Livewire\Portal\KaryaIlmiah as PortalKaryaIlmiah;
 use App\Livewire\Superadmin\Admin\Index as AdminDashboard;
@@ -100,6 +101,9 @@ Route::get('/e-book/{book}', PdfViewer::class)->name('pdf-viewer');
 Route::get('/karya-ilmiah', PortalKaryaIlmiah::class)->name('karya-ilmiah');
 Route::get('/karya-ilmiah/{slug}', PortalDetailKaryaIlmiah::class)->name('detail-karya-ilmiah');
 Route::get('/download', PortalDownload::class)->name('download');
+
+Route::middleware(['auth', 'role:admin'])->post('/admin/summernote/upload', [SummernoteController::class, 'upload'])
+    ->name('superadmin.admin.summernote.upload');
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('superadmin.admin.')->group(function () {
     Route::get('/dashboard', AdminDashboard::class)->name('dashboard');

@@ -55,6 +55,7 @@ class Create extends Component
         ]);
 
         $existingThumbnail = $this->karya_ilmiahId ? KaryaIlmiah::find($this->karya_ilmiahId)->thumbnail : null;
+        $oldContent = $this->karya_ilmiahId ? KaryaIlmiah::find($this->karya_ilmiahId)->isi : null;
 
         if ($this->thumbnail) {
             $existingThumbnail = ImageHelper::replaceOptimized(
@@ -77,6 +78,10 @@ class Create extends Component
                 'thumbnail' => $existingThumbnail,
             ]
         );
+
+        if ($this->karya_ilmiahId) {
+            ImageHelper::deleteUnusedFromHtml($oldContent, $this->isi);
+        }
 
         session()->flash('message', $this->karya_ilmiahId ? 'Karya Ilmiah diperbarui.' : 'Karya Ilmiah berhasil ditambahkan.');
 

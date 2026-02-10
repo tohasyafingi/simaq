@@ -97,6 +97,30 @@
     <script type="text/javascript">
         let summernoteElement = $('.summernote');
 
+        function uploadSummernoteImage(file, $editor) {
+            const data = new FormData();
+            data.append('file', file);
+
+            $.ajax({
+                url: '{{ route('superadmin.admin.summernote.upload') }}',
+                method: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                success: function(resp) {
+                    if (resp && resp.url) {
+                        $editor.summernote('insertImage', resp.url);
+                    }
+                },
+                error: function() {
+                    alert('Gagal mengunggah gambar.');
+                }
+            });
+        }
+
         function initSummernote() {
             $('.tooltip').remove();
 
@@ -136,6 +160,12 @@
                         window.summernoteTimeout = setTimeout(() => {
                             $wire.set('isi', contents);
                         }, 500);
+                    },
+                    onImageUpload: function(files) {
+                        const $editor = $(this);
+                        for (let i = 0; i < files.length; i++) {
+                            uploadSummernoteImage(files[i], $editor);
+                        }
                     }
                 }
             });

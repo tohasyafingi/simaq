@@ -70,4 +70,55 @@ class ImageHelper
     {
         return self::url($path, $disk);
     }
+
+    public static function deleteUnusedFromHtml(?string $oldHtml, ?string $newHtml, string $disk = 'public', string $prefix = 'summernote/'): void
+    {
+        $oldPaths = self::extractStoragePathsFromHtml($oldHtml, $prefix);
+        $newPaths = self::extractStoragePathsFromHtml($newHtml, $prefix);
+
+        $toDelete = array_diff($oldPaths, $newPaths);
+        if (empty($toDelete)) {
+            return;
+        }
+
+        foreach ($toDelete as $path) {
+            if (Storage::disk($disk)->exists($path)) {
+                Storage::disk($disk)->delete($path);
+            }
+        }
+    }
+
+    private static function extractStoragePathsFromHtml(?string $html, string $prefix): array
+    {
+        if (!$html) {
+            return [];
+        }
+
+        $matches = [];
+        preg_match_all('/<img[^>]+src=["\']([^"\']+)["\']/i', $html, $matches);
+
+        $paths = [];
+        foreach ($matches[1] ?? [] as $src) {
+            $path = $src;
+
+            $parsed = parse_url($src);
+            if (!empty($parsed['path'])) {
+                $path = $parsed['path'];
+            }
+
+            $path = ltrim($path, '/');
+            if (Str::startsWith($path, 'storage/')) {
+                $path = substr($path, strlen('storage/'));
+            }
+
+            $path = ltrim($path, '/');
+            if ($prefix && !Str::startsWith($path, $prefix)) {
+                continue;
+            }
+
+            $paths[] = $path;
+        }
+
+        return array_values(array_unique($paths));
+    }
 }

@@ -57,6 +57,8 @@ class Create extends Component
             ? Berita::findOrFail($this->beritaId)
             : new Berita();
 
+        $oldContent = $this->beritaId ? $berita->isi : null;
+
         // Thumbnail
         if ($this->thumbnail) {
             $berita->thumbnail = ImageHelper::replaceOptimized(
@@ -74,6 +76,10 @@ class Create extends Component
         $berita->status = (int) $this->status;
         $berita->isi = $this->isi;
         $berita->save();
+
+        if ($this->beritaId) {
+            ImageHelper::deleteUnusedFromHtml($oldContent, $this->isi);
+        }
 
         return redirect()->route('superadmin.admin.berita.index');
     }

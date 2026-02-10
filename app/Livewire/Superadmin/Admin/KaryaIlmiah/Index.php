@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Title;
 use App\Models\KaryaIlmiah;
+use App\Helpers\ImageHelper;
 
 #[Title('Karya Ilmiah')]
 class Index extends Component
@@ -64,6 +65,8 @@ class Index extends Component
     public function destroy()
     {
         $karya = KaryaIlmiah::findOrFail($this->deleteId);
+        ImageHelper::deletePath($karya->thumbnail, 'public');
+        ImageHelper::deleteUnusedFromHtml($karya->isi, null);
         $karya->delete();
 
         $this->dispatch('closeDeleteModal');

@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Title;
 use App\Models\Berita;
+use App\Helpers\ImageHelper;
 
 #[Title('Berita')]
 class Index extends Component
@@ -64,6 +65,8 @@ class Index extends Component
     public function destroy()
     {
         $berita = Berita::findOrFail($this->deleteId);
+        ImageHelper::deletePath($berita->thumbnail, 'public');
+        ImageHelper::deleteUnusedFromHtml($berita->isi, null);
         $berita->delete();
 
         $this->dispatch('closeDeleteModal');

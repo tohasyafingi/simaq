@@ -27,6 +27,9 @@ Dokumen ini merupakan panduan resmi penggunaan Website **SIMAQ** yang disusun se
 3. Tekan **Enter**.
 4. Halaman **Login SIMAQ** akan tampil.
 
+![Halaman Login SIMAQ](docs/screenshots/01-halaman-login.png)
+*Gambar 1: Tampilan Halaman Login*
+
 ---
 
 ## **3. Prosedur Login**
@@ -36,12 +39,43 @@ Dokumen ini merupakan panduan resmi penggunaan Website **SIMAQ** yang disusun se
 3. Klik tombol **Masuk**.
 4. Sistem akan mengarahkan pengguna ke **Dashboard** sesuai dengan peran (Admin, Guru, atau Siswa).
 
-> **Catatan:**
-> Jika pengguna lupa kata sandi, silakan menghubungi **Admin Sekolah** untuk proses reset akun.
+![Form Login](docs/screenshots/02-form-login.png)
+*Gambar 2: Formulir Login*
 
 ---
 
-## **4. Navigasi dan Struktur Menu**
+## **4. Prosedur Lupa Password**
+
+Jika pengguna lupa kata sandi, sistem menyediakan fitur reset password melalui email.
+
+### **Langkah Reset Password:**
+
+1. Pada halaman login, klik tautan **Lupa Password?**
+2. Sistem akan mengarahkan ke halaman:
+   **`https://mataqwsb.sch.id/forgot-password`**
+3. Masukkan **Email** yang terdaftar pada kolom yang tersedia.
+4. Klik tombol **Kirim Link Reset Password**.
+5. Periksa inbox email yang didaftarkan.
+6. Buka email dari sistem SIMAQ dan klik link reset password.
+7. Masukkan **Password Baru** dan **Konfirmasi Password**.
+8. Klik **Reset Password**.
+9. Sistem akan mengkonfirmasi perubahan password.
+10. Gunakan password baru untuk login.
+
+![Halaman Lupa Password](docs/screenshots/03-lupa-password.png)
+*Gambar 3: Halaman Lupa Password*
+
+![Form Reset Password](docs/screenshots/04-reset-password.png)
+*Gambar 4: Form Reset Password Baru*
+
+> **Catatan:**
+> - Link reset password berlaku dalam waktu terbatas (biasanya 60 menit).
+> - Jika tidak menerima email, periksa folder spam/junk.
+> - Jika masih mengalami kendala, hubungi **Admin Sekolah**.
+
+---
+
+## **5. Navigasi dan Struktur Menu**
 
 * Menu utama (Sidebar) terletak di sisi kiri layar.
 * Setiap menu dikelompokkan berdasarkan fungsi.
@@ -55,9 +89,12 @@ Dokumen ini merupakan panduan resmi penggunaan Website **SIMAQ** yang disusun se
   * **Detail**
 * Gunakan fitur **Pencarian** dan **Filter** untuk mempercepat pencarian data.
 
+![Menu Sidebar](docs/screenshots/05-sidebar-menu.png)
+*Gambar 5: Menu Sidebar (Navigasi Utama)*
+
 ---
 
-## **5. Prosedur Umum Pengelolaan Data**
+## **6. Prosedur Umum Pengelolaan Data**
 
 ### **A. Menambah Data**
 
@@ -66,6 +103,9 @@ Dokumen ini merupakan panduan resmi penggunaan Website **SIMAQ** yang disusun se
 3. Lengkapi formulir.
 4. Kolom bertanda (*) wajib diisi.
 5. Klik **Simpan**.
+
+![Form Tambah Data](docs/screenshots/07-form-tambah-data.png)
+*Gambar 7: Contoh Formulir Tambah Data*
 
 ### **B. Mengubah Data**
 
@@ -84,7 +124,7 @@ Dokumen ini merupakan panduan resmi penggunaan Website **SIMAQ** yang disusun se
 
 ---
 
-# **6. Panduan Berdasarkan Peran**
+# **7. Panduan Berdasarkan Peran**
 
 ---
 
@@ -106,6 +146,9 @@ Menampilkan ringkasan data:
 * Jumlah guru
 * Statistik e-learning
 * Informasi umum sistem
+
+![Dashboard Admin](docs/screenshots/06-dashboard-admin.png)
+*Gambar 6: Dashboard Admin*
 
 ---
 
@@ -129,6 +172,9 @@ Digunakan untuk pengelolaan data utama sekolah.
 
 * **Kelulusan**
   Mengelola data kelulusan siswa.
+
+![Halaman Data Siswa](docs/screenshots/08-data-siswa.png)
+*Gambar 8: Contoh Halaman Data Siswa*
 
 > **Informasi Penting:**
 > Setiap penambahan data **Siswa, Guru, Bendahara, dan Tata Usaha** akan otomatis membuat akun user.
@@ -273,6 +319,9 @@ Guru bertanggung jawab dalam pengelolaan pembelajaran dan materi ajar.
 * **Logout**
   Mengakhiri sesi pengguna.
 
+![Dashboard Guru](docs/screenshots/09-dashboard-guru.png)
+*Gambar 9: Dashboard Guru*
+
 ---
 
 ### **Prosedur Guru**
@@ -283,6 +332,9 @@ Guru bertanggung jawab dalam pengelolaan pembelajaran dan materi ajar.
 2. Buka menu **Mata Pelajaran**.
 3. Pilih rombel dan pelajaran.
 
+![Halaman Mata Pelajaran Guru](docs/screenshots/10-mata-pelajaran-guru.png)
+*Gambar 10: Halaman Mata Pelajaran Guru*
+
 #### **2. Mengelola Modul Pelajaran**
 
 1. Masuk ke menu **Modul Pelajaran**.
@@ -290,6 +342,9 @@ Guru bertanggung jawab dalam pengelolaan pembelajaran dan materi ajar.
 3. Isi judul dan deskripsi.
 4. Unggah file jika ada.
 5. Klik **Simpan**.
+
+![Halaman Modul Pelajaran](docs/screenshots/11-modul-pelajaran-guru.png)
+*Gambar 11: Halaman Modul Pelajaran Guru*
 
 #### **3. Mengedit atau Menghapus Modul**
 
@@ -302,6 +357,9 @@ Guru bertanggung jawab dalam pengelolaan pembelajaran dan materi ajar.
 2. Klik menu **Absensi** pada materi tersebut.
 3. Pilih status kehadiran setiap siswa.
 4. Pastikan data tersimpan.
+
+![Form Absensi](docs/screenshots/12-form-absensi-guru.png)
+*Gambar 12: Form Pengisian Absensi oleh Guru*
 
 ---
 
@@ -324,6 +382,9 @@ Siswa menggunakan sistem untuk mengakses materi pembelajaran.
 * **Logout**
   Mengakhiri sesi pengguna.
 
+![Dashboard Siswa](docs/screenshots/13-dashboard-siswa.png)
+*Gambar 13: Dashboard Siswa*
+
 ---
 
 ### **Prosedur Siswa**
@@ -334,20 +395,29 @@ Siswa menggunakan sistem untuk mengakses materi pembelajaran.
 2. Buka menu **Mata Pelajaran**.
 3. Pilih pelajaran.
 
+![Halaman Mata Pelajaran Siswa](docs/screenshots/14-mata-pelajaran-siswa.png)
+*Gambar 14: Halaman Mata Pelajaran Siswa*
+
 #### **2. Mengakses Modul**
 
 1. Masuk ke menu **Modul Pelajaran**.
 2. Klik modul yang tersedia.
 3. Unduh atau baca modul.
 
+![Halaman Modul Siswa](docs/screenshots/15-modul-pelajaran-siswa.png)
+*Gambar 15: Halaman Modul Pelajaran Siswa*
+
 #### **3. Melihat Absensi pada Materi**
 
 1. Buka materi mata pelajaran yang tersedia.
 2. Lihat status kehadiran pada bagian **Absensi** sebagai informasi.
 
+![Tampilan Absensi Siswa](docs/screenshots/16-absensi-siswa.png)
+*Gambar 16: Tampilan Absensi untuk Siswa*
+
 ---
 
-## **7. Prosedur Logout**
+## **8. Prosedur Logout**
 
 1. Klik menu **Logout** pada sidebar.
 2. Sistem akan mengakhiri sesi pengguna.
@@ -355,9 +425,25 @@ Siswa menggunakan sistem untuk mengakses materi pembelajaran.
 
 ---
 
-## **8. Bantuan dan Dukungan**
+## **9. Bantuan dan Dukungan**
 
 Apabila pengguna mengalami kendala teknis atau kesalahan sistem, silakan menghubungi:
 
 * **Admin Sekolah**
 * **Tim IT / Developer**
+
+---
+
+## **Catatan Screenshot**
+
+> **Untuk Administrator/Dokumentasi:**
+> Dokumen ini sudah dilengkapi dengan placeholder screenshot. Untuk melengkapi manual book ini, silakan ambil screenshot sesuai panduan yang tersedia di file:
+> **`docs/screenshots/README.md`**
+>
+> Terdapat 16 screenshot yang perlu diambil mencakup halaman Login, Lupa Password, Dashboard, dan fitur-fitur untuk Admin, Guru, dan Siswa.
+
+---
+
+**Versi Dokumen**: 1.0  
+**Terakhir Diperbarui**: Februari 2026  
+**Penyusun**: Tim IT SIMAQ

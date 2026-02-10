@@ -5,6 +5,7 @@
         </div>
     </section>
 
+    @if(!$slug)
     <section class="section pt-3 pb-4">
         <div class="container">
             <div class="row justify-content-end">
@@ -18,6 +19,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <section class="section" data-aos="fade-up" data-aos-duration="800">
         <div class="container">
@@ -51,7 +53,7 @@
                                         type="button"
                                         class="btn btn-sm btn-social btn-native"
                                         title="Bagikan download"
-                                        x-on:click.stop="shareDownload('{{ Illuminate\Support\Str::slug($item->judul) }}')">
+                                        x-on:click.stop="shareDownload('{{ $item->slug }}')">
                                         <i class="bi bi-share-fill"></i>
                                     </button>
                                 </div>
@@ -65,9 +67,11 @@
                 </div>
                 @endforelse
             </div>
+            @if(!$slug)
             <div class="d-flex justify-content-center">
                 {{ $downloads->links() }}
             </div>
+            @endif
         </div>
     </section>
 </div>

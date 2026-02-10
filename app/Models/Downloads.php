@@ -2,18 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Cache;
 
 class Downloads extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['judul', 'image', 'description', 'file', 'slug', 'status'];
 
     protected static function booted()
     {
+        static::saving(function ($model) {
+            if (empty($model->slug)) {
+                $model->slug = Str::slug($model->judul);
+            }
+        });
         static::saved(function ($model) {
             Cache::forget('seo:sitemap.xml');
         });

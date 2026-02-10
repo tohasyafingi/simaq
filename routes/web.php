@@ -101,6 +101,7 @@ Route::get('/e-book/{book}', PdfViewer::class)->name('pdf-viewer');
 Route::get('/karya-ilmiah', PortalKaryaIlmiah::class)->name('karya-ilmiah');
 Route::get('/karya-ilmiah/{slug}', PortalDetailKaryaIlmiah::class)->name('detail-karya-ilmiah');
 Route::get('/download', PortalDownload::class)->name('download');
+Route::get('/download/{slug}', PortalDownload::class)->name('download.show');
 
 Route::middleware(['auth', 'role:admin'])->post('/admin/summernote/upload', [SummernoteController::class, 'upload'])
     ->name('superadmin.admin.summernote.upload');

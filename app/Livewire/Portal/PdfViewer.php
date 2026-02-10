@@ -42,7 +42,7 @@ class PdfViewer extends Component
         $meta = [
             'title' => $this->book->judul ?? 'E-Book',
             'description' => Str::limit(strip_tags($this->book->description ?? ''), 160),
-            'image' => \App\Helpers\SeoHelper::image($this->book->cover ?? null),
+            'image' => \App\Helpers\SeoHelper::image($this->book->image ?? null),
             'canonical' => $canonical,
             'og_type' => 'book'
         ];

@@ -20,36 +20,19 @@ class Download extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $perPage = 6;
+    public $perPage = 9;
     public $selectedDownload;
+    public $slug = null;
 
     public function mount($slug = null)
     {
-        if ($slug) {
-            $item = Downloads::where('status', 1)
-                ->get()
-                ->first(function ($download) use ($slug) {
-                    $itemSlug = $download->slug ?? Str::slug($download->judul);
-                    return $itemSlug === $slug;
-                });
-            abort_if(!$item, 404);
-            $this->selectedDownload = $item;
-        }
+        $this->slug = $slug;
     }
+
 
     public function updatingSearch()
     {
         $this->resetPage();
-    }
-
-    public function getDownloadBySlug($slug)
-    {
-        return Downloads::where('status', 1)
-            ->get()
-            ->first(function ($item) use ($slug) {
-                $itemSlug = $item->slug ?? Str::slug($item->judul);
-                return $itemSlug === $slug;
-            });
     }
 
     public function downloadFile($id)
@@ -74,7 +57,12 @@ class Download extends Component
     {
         $downloads = Downloads::where('status', 1)
             ->when(
-                $this->search,
+                $this->slug,
+                fn($q) =>
+                $q->where('slug', $this->slug)
+            )
+            ->when(
+                $this->search && !$this->slug,
                 fn($q) =>
                 $q->where(function ($sub) {
                     $sub->where('judul', 'like', "%{$this->search}%")
@@ -82,19 +70,22 @@ class Download extends Component
                 })
             )
             ->latest()
-            ->paginate($this->perPage);
+            ->paginate($this->slug ? 1 : $this->perPage);
 
-        $title = $this->selectedDownload?->judul ?? 'Download';
-        $description = $this->selectedDownload?->description
-            ?? config('app.description', 'Download file dan dokumen MA Takhassus Al-Qur’an Wonosobo');
-        $image = SeoHelper::image($this->selectedDownload?->image ?? null);
+        if ($this->slug && $downloads->isEmpty()) {
+            abort(404);
+        }
+
+        $item = $this->slug ? $downloads->first() : null;
 
         $meta = [
-            'title' => $title,
-            'description' => Str::limit(strip_tags($description), 160),
-            'image' => $image,
+            'title' => $item?->judul ?? 'Download',
+            'description' => Str::limit(strip_tags(
+                $item?->description ?? config('app.description')
+            ), 160),
+            'image' => SeoHelper::image($item?->image ?? null),
             'canonical' => url()->current(),
-            'og_type' => $this->selectedDownload ? 'article' : 'website',
+            'og_type' => $item ? 'article' : 'website',
         ];
 
         return view('livewire.portal.download', [

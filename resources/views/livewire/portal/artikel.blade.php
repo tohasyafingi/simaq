@@ -44,7 +44,7 @@
                   @if($book->link || $book->file)
                   <a
                     wire:navigate
-                    href="{{ route('pdf-viewer', Illuminate\Support\Str::slug($book->judul)) }}"
+                    href="{{ route('pdf-viewer', ['book' => $book->slug ?? $book->id]) }}"
                     class="btn btn-primary btn-sm flex-grow-1">
                     Lihat Detail
                   </a>
@@ -54,7 +54,7 @@
                     type="button"
                     class="btn btn-sm btn-social btn-native"
                     title="Bagikan buku"
-                    x-on:click.stop="shareArtikel('{{ Illuminate\Support\Str::slug($book->judul) }}')">
+                    x-on:click.stop="shareArtikel('{{ $book->slug ?? $book->id }}')">
                     <i class="bi bi-share-fill"></i>
                   </button>
                 </div>
@@ -79,18 +79,18 @@
 
 @script
 <script>
-    window.shareArtikel = function(slug) {
-        const url = `${window.location.origin}/e-book/${slug}`;
+  window.shareArtikel = function(slug) {
+    const url = `${window.location.origin}/e-book/${slug}`;
 
-        if (navigator.share) {
-            navigator.share({
-                title: 'Perpustakaan Digital',
-                url: url
-            });
-        } else {
-            navigator.clipboard.writeText(url)
-                .then(() => alert('Link e-book berhasil disalin'));
-        }
+    if (navigator.share) {
+      navigator.share({
+        title: 'Perpustakaan Digital',
+        url: url
+      });
+    } else {
+      navigator.clipboard.writeText(url)
+        .then(() => alert('Link e-book berhasil disalin'));
     }
+  }
 </script>
 @endscript

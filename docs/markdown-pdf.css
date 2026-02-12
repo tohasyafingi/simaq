@@ -1,0 +1,145 @@
+/* docs/markdown-pdf.css */
+
+@page {
+  size: A4;
+  margin: 25mm 20mm 25mm 20mm;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #334155; /* Slate 700 */
+  text-align: justify;
+}
+
+/* --- Headings --- */
+h1, h2, h3, h4 {
+  font-family: "Segoe UI Semibold", "Segoe UI", sans-serif;
+  color: #0f172a; /* Slate 900 */
+  margin-top: 24pt;
+  margin-bottom: 12pt;
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 26pt;
+  text-align: center;
+  border-bottom: 3px solid #0f4c81;
+  padding-bottom: 12pt;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 18pt;
+  border-left: 5px solid #0f4c81;
+  padding-left: 10pt;
+  background: #f8fafc;
+  padding-top: 5pt;
+  padding-bottom: 5pt;
+}
+
+h3 {
+  font-size: 14pt;
+  color: #0f4c81;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4pt;
+}
+
+/* --- Layout Elemen --- */
+p {
+  margin-bottom: 12pt;
+}
+
+ul, ol {
+  margin-bottom: 12pt;
+  padding-left: 25pt;
+}
+
+li {
+  margin-bottom: 6pt;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #cbd5e1;
+  margin: 25pt 0;
+}
+
+/* --- Gambar (Penting untuk User Guide) --- */
+img {
+  display: block;
+  margin: 15pt auto;
+  max-width: 90%;
+  height: auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Gaya khusus untuk teks di bawah gambar (caption) */
+img + em {
+  display: block;
+  text-align: center;
+  font-size: 9pt;
+  color: #64748b;
+  margin-top: -10pt;
+  margin-bottom: 20pt;
+}
+
+/* --- Tabel --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15pt 0;
+  page-break-inside: avoid;
+}
+
+th {
+  background-color: #0f4c81;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  border: 1px solid #0f4c81;
+}
+
+td {
+  border: 1px solid #e2e8f0;
+  padding: 8pt 10pt;
+}
+
+tr:nth-child(even) {
+  background-color: #f1f5f9;
+}
+
+/* --- Blockquote & Catatan --- */
+blockquote {
+  margin: 15pt 0;
+  padding: 10pt 15pt;
+  background: #f0f9ff; /* Light Blue */
+  border-left: 5px solid #0ea5e9;
+  border-radius: 0 4px 4px 0;
+  color: #0369a1;
+  page-break-inside: avoid;
+}
+
+blockquote p {
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+/* --- Inline Code (Button/UI Look) --- */
+code {
+  font-family: "Consolas", monospace;
+  background: #f1f5f9;
+  color: #be123c; /* Rose 700 */
+  padding: 2pt 5pt;
+  border-radius: 4px;
+  font-size: 0.95em;
+  border: 1px solid #e2e8f0;
+}
+
+/* --- Page Breaks --- */
+.page-break {
+  page-break-before: always;
+}
